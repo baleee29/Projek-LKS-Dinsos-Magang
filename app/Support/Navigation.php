@@ -4,6 +4,7 @@ namespace App\Support;
 
 use App\Support\Demo\DemoMembers;
 use App\Support\Demo\DemoOrganizations;
+use App\Support\Demo\DemoPsmMembers;
 use App\Support\Demo\DemoRegistrations;
 
 /**
@@ -36,7 +37,7 @@ class Navigation
             return $pillar ? self::organizationPath($pillar) : '';
         }
         if ($key === 'member') {
-            $member = DemoMembers::find($id);
+            $member = DemoMembers::find($id) ?? DemoPsmMembers::find($id);
             $pillar = $member ? (DemoOrganizations::find($member['organizationId'])['pillar'] ?? null) : null;
 
             return $pillar ? self::organizationPath($pillar) : '';
