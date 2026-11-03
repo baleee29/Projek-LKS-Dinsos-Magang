@@ -1,0 +1,366 @@
+/* Semua kartu pilar memakai palet biru lembut yang sama dengan LKS. */
+.profile-pillar-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 36px;
+}
+.profile-pillar-heading .profile-section-heading {
+    max-width: 780px;
+}
+.profile-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    color: var(--brand-primary-hover);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+.profile-pillar-card {
+    --pillar-ink: #304a6b;
+    --pillar-soft: #f1f6fb;
+    --pillar-line: #d6e3f0;
+    display: flex;
+    flex-direction: column;
+    border-color: #d6e3f0;
+    background: #fff;
+}
+.profile-pillar-label,
+.profile-pillar-card .profile-icon-box {
+    color: var(--pillar-ink);
+    background: var(--pillar-soft);
+}
+.profile-pillar-label {
+    padding: 6px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+.profile-pillar-card h3 {
+    font-size: 21px;
+}
+.profile-pillar-subtitle {
+    margin-top: 6px;
+    color: var(--brand-primary-hover);
+    font-size: 13px;
+    font-weight: 500;
+}
+.profile-pillar-points {
+    display: grid;
+    gap: 10px;
+    margin: 24px 0;
+    padding: 16px;
+    border: 1px solid var(--pillar-line);
+    border-radius: 10px;
+    color: var(--pillar-ink);
+    background: var(--pillar-soft);
+    font-size: 12px;
+    list-style: none;
+}
+.profile-pillar-points li {
+    display: flex;
+    align-items: start;
+    gap: 8px;
+}
+.profile-pillar-points .profile-icon {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+}
+.profile-pillar-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    margin-top: auto;
+    padding: 10px 14px;
+    border: 1px solid var(--pillar-line);
+    border-radius: 8px;
+    color: var(--pillar-ink);
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.15s;
+}
+.profile-pillar-link:hover {
+    background: var(--pillar-soft);
+}
+
+/* Each pillar card follows its dashboard palette (docs/plans/palet-*.md). */
+.profile-pillar-card {
+    border-top: 4px solid var(--pillar-accent, #d6e3f0);
+}
+.profile-pillar-card h3,
+.profile-pillar-subtitle {
+    color: var(--pillar-ink);
+}
+.profile-pillar-lks {
+    --pillar-ink: #0b3c26;
+    --pillar-soft: #eaf4ef;
+    --pillar-line: #cfe6da;
+    --pillar-accent: #0b3c26;
+}
+.profile-pillar-psm {
+    --pillar-ink: #0b4f8a;
+    --pillar-soft: #e8f1fc;
+    --pillar-line: #cfe2f7;
+    --pillar-accent: #0b4f8a;
+}
+/* Gold is unreadable as text on white, so Karang Taruna text uses the dashboard's dark red. */
+.profile-pillar-youth {
+    --pillar-ink: #a91f1f;
+    --pillar-soft: #fff4d1;
+    --pillar-line: #f0d98a;
+    --pillar-accent: #f4c430;
+}
+
+/* Referensi dan ajakan penutup. */
+.profile-references {
+    padding-block: 48px;
+    border-bottom: 1px solid var(--brand-border);
+}
+.profile-reference-box {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 32px;
+    padding: 32px;
+    border: 1px solid #d6e3ef;
+    border-radius: 16px;
+    background: #f5f8fc;
+}
+.profile-reference-box h2 {
+    font-size: 20px;
+}
+.profile-reference-box p:not(.profile-eyebrow) {
+    max-width: 65ch;
+    margin-top: 12px;
+    color: var(--brand-muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+.profile-reference-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: end;
+}
+.profile-reference-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 14px;
+    border: 1px solid #cad7e7;
+    border-radius: 8px;
+    color: #304a6b;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+.profile-reference-link:hover {
+    background: #edf2f8;
+    border-color: #8ba2bc;
+}
+.profile-reference-link .profile-icon {
+    width: 16px;
+    height: 16px;
+}
+.profile-cta {
+    background: #f1f5f9;
+}
+.profile-cta-content {
+    max-width: 740px;
+    margin-inline: auto;
+    text-align: center;
+}
+.profile-cta-content > .profile-icon-box {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 24px;
+    border-radius: 12px;
+}
+.profile-cta-content p {
+    max-width: 60ch;
+    margin: 20px auto 0;
+    color: var(--brand-muted);
+}
+.profile-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 28px;
+}
+.profile-cta .button {
+    gap: 12px;
+    padding: 12px 24px;
+    border-radius: var(--brand-control-radius);
+    font-size: 14px;
+}
+.profile-cta .button-primary {
+    background: #304a6b;
+}
+.profile-cta .button-primary:hover {
+    background: #102a43;
+}
+.profile-button-secondary {
+    border: 1px solid #cad7e7;
+    color: #304a6b;
+    background: #fff;
+}
+.profile-button-secondary:hover {
+    background: #edf2f8;
+}
+.profile-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Tampilan tablet, ponsel, dan cetak. */
+@media (max-width: 1100px) {
+    .profile-hero-layout {
+        gap: 32px;
+    }
+    .profile-focus-card,
+    .profile-duty-card,
+    .profile-pillar-card {
+        padding: 24px;
+    }
+    .profile-functions-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .profile-pillar-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+@media (max-width: 900px) {
+    .profile-section {
+        padding-block: 56px;
+    }
+    .profile-hero-layout,
+    .profile-purpose-layout,
+    .profile-reference-box {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .profile-hero-visual {
+        max-width: 540px;
+    }
+    .profile-focus-grid,
+    .profile-duties-grid,
+    .profile-pillars-grid,
+    .profile-benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    .profile-duty-wide {
+        grid-column: auto;
+    }
+    .profile-support-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .profile-reference-links {
+        justify-content: start;
+    }
+}
+@media (max-width: 600px) {
+    .profile-main .container {
+        width: calc(100% - 40px);
+    }
+    .profile-hero {
+        padding-block: 24px 44px;
+    }
+    .profile-breadcrumbs ol {
+        margin-bottom: 28px;
+    }
+    .profile-intro {
+        font-size: 16px;
+    }
+    .profile-section {
+        padding-block: 44px;
+    }
+    .profile-heading-centered {
+        text-align: left;
+        margin-bottom: 28px;
+    }
+    .profile-support,
+    .profile-panel,
+    .profile-reference-box {
+        padding: 24px;
+    }
+    .profile-support-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .profile-support-note {
+        text-align: left;
+    }
+    .profile-support-panel {
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px;
+    }
+    .profile-sidaya-tabs {
+        flex-direction: column;
+    }
+    .profile-sidaya-tabs button {
+        justify-content: start;
+    }
+    .profile-functions-grid {
+        grid-template-columns: 1fr;
+    }
+    .profile-panel h3 {
+        font-size: 21px;
+    }
+    .profile-focus-card p,
+    .profile-duty-card > p:not(.profile-card-context),
+    .profile-pillar-card > p:not(.profile-pillar-subtitle),
+    .profile-support-panel p,
+    .profile-panel-copy > p:not(.profile-eyebrow),
+    .profile-functions-grid p,
+    .profile-benefits-grid p {
+        font-size: 16px;
+    }
+    .profile-highlights {
+        gap: 8px;
+    }
+    .profile-highlights li {
+        flex: 1 1 130px;
+    }
+    .profile-benefits-grid article {
+        flex-direction: column;
+    }
+    .profile-cta-actions {
+        flex-direction: column;
+    }
+}
+@media print {
+    .profile-tabs {
+        display: none;
+    }
+    .profile-panel[hidden] {
+        display: block !important;
+        margin-top: 24px;
+    }
+    .profile-support-panel[hidden] {
+        display: flex !important;
+    }
+    .profile-hero-visual {
+        box-shadow: none;
+    }
+}
+

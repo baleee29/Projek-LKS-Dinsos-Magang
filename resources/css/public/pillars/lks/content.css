@@ -1,0 +1,310 @@
+/* Definition, existing explanatory note, and a labeled illustrative photo. */
+.lks-about-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--lks-space-5);
+}
+
+.lks-about-copy {
+    min-width: 0;
+}
+
+.lks-about-copy > p:not(.eyebrow) {
+    max-width: var(--lks-reading-width);
+    margin-top: var(--lks-space-3);
+    color: var(--lks-muted);
+    font-size: var(--lks-text-body);
+    line-height: 1.7;
+}
+
+.lks-about-aside {
+    margin-top: var(--lks-space-4);
+    padding: var(--lks-space-4);
+    border-left: 0.1875rem solid var(--lks-primary);
+    border-radius: 0 0.75rem 0.75rem 0;
+    background: var(--lks-soft);
+}
+
+.lks-about-aside h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--lks-space-1);
+    color: var(--lks-primary-hover);
+    font-size: var(--lks-text-small);
+}
+
+.lks-about-aside p {
+    margin-top: var(--lks-space-1);
+    color: var(--lks-muted);
+    font-size: var(--lks-text-small);
+    line-height: 1.7;
+}
+
+.lks-about-copy > .lks-source,
+.lks-section > .container > .lks-source {
+    margin-top: var(--lks-space-4);
+    color: var(--lks-primary-hover);
+    font-size: 0.75rem;
+}
+
+.lks-source a {
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+}
+
+.lks-source a:hover {
+    color: var(--lks-ink);
+}
+
+.lks-about-image {
+    overflow: hidden;
+    min-width: 0;
+    border: 1px solid var(--lks-border);
+    border-radius: 0.75rem;
+    background: var(--lks-soft);
+}
+
+.lks-about-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+}
+
+.lks-about-image figcaption {
+    padding: var(--lks-space-2) var(--lks-space-3);
+    color: var(--lks-muted);
+    font-size: 0.75rem;
+    line-height: 1.6;
+}
+
+/* The numbered function cards mirror the supplied Stitch composition. */
+#fungsi-lks .lks-section-intro,
+.lks-access-layout .lks-section-intro,
+.lks-faq-layout .lks-section-intro {
+    margin-inline: auto;
+    text-align: center;
+}
+
+#fungsi-lks .lks-section-intro > p,
+.lks-access-layout .lks-section-intro > p,
+.lks-faq-layout .lks-section-intro > p {
+    text-align: center;
+}
+
+.lks-function-list,
+.lks-service-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--lks-space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lks-function-list li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-content: start;
+    gap: var(--lks-space-4);
+    min-width: 0;
+    padding: clamp(1.5rem, 2.5vw, 2rem);
+    border: 1px solid var(--lks-border);
+    border-radius: var(--lks-radius);
+    background: var(--lks-surface);
+}
+
+.lks-function-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: start;
+    align-self: center;
+    min-width: 3.25rem;
+    min-height: 2.75rem;
+    padding: 0.25rem var(--lks-space-2);
+    border-radius: 0.75rem;
+    background: var(--lks-soft);
+    color: var(--lks-primary-hover);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.lks-function-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background: var(--lks-soft);
+    color: var(--lks-primary-hover);
+}
+
+.lks-function-icon .lks-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.lks-function-copy {
+    grid-column: 1 / -1;
+}
+
+.lks-function-copy h3 {
+    max-width: 27ch;
+    font-weight: var(--lks-weight-heading);
+}
+
+.lks-function-copy p {
+    margin-top: var(--lks-space-2);
+    color: var(--lks-muted);
+    font-size: var(--lks-text-small);
+    line-height: 1.7;
+}
+
+/* Services use different photographs rather than repeated decorative icons. */
+.lks-service-list li {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--lks-border);
+    border-radius: var(--lks-radius);
+    background: var(--lks-surface);
+}
+
+.lks-service-image {
+    position: relative;
+    background: var(--lks-card-bg);
+}
+
+.lks-service-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+}
+
+.lks-service-image figcaption {
+    position: absolute;
+    right: var(--lks-space-2);
+    bottom: var(--lks-space-2);
+    padding: 0.125rem var(--lks-space-1);
+    border: 1px solid var(--lks-border);
+    border-radius: 3rem;
+    background: var(--lks-surface);
+    color: var(--lks-primary-hover);
+    font-size: 0.6875rem;
+    font-weight: var(--lks-weight-heading);
+}
+
+.lks-service-copy {
+    padding: var(--lks-space-4);
+}
+
+.lks-service-label {
+    display: inline-block;
+    margin-bottom: var(--lks-space-2);
+    color: var(--lks-primary-hover);
+    font-size: 0.75rem;
+    font-weight: var(--lks-weight-heading);
+}
+
+.lks-service-copy h3 {
+    font-weight: var(--lks-weight-heading);
+}
+
+.lks-service-copy > p:last-child {
+    margin-top: var(--lks-space-2);
+    color: var(--lks-muted);
+    font-size: var(--lks-text-small);
+    line-height: 1.7;
+}
+
+.lks-media-note {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--lks-space-2);
+    margin-top: var(--lks-space-4);
+    padding: var(--lks-space-3);
+    border: 1px solid var(--lks-border);
+    border-radius: 0.75rem;
+    background: var(--lks-soft);
+    color: var(--lks-muted);
+    font-size: 0.75rem;
+    line-height: 1.7;
+}
+
+.lks-media-note .lks-icon {
+    color: var(--lks-primary-hover);
+}
+
+/* Three sequential steps and familiar contact / registration actions. */
+.lks-access-layout {
+    display: block;
+}
+
+.lks-access-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--lks-space-4);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    counter-reset: lks-steps;
+}
+
+.lks-access-steps li {
+    min-width: 0;
+    padding: var(--lks-space-4);
+    border: 1px solid var(--lks-border);
+    border-radius: var(--lks-radius);
+    background: var(--lks-surface);
+    counter-increment: lks-steps;
+}
+
+.lks-access-steps li::before {
+    content: counter(lks-steps);
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-bottom: var(--lks-space-3);
+    border-radius: 50%;
+    background: var(--lks-primary);
+    color: var(--lks-surface);
+    font-size: var(--lks-text-body);
+    font-weight: var(--lks-weight-heading);
+    line-height: 1.5;
+}
+
+.lks-access-steps h3 {
+    font-weight: var(--lks-weight-heading);
+}
+
+.lks-access-steps p {
+    margin-top: var(--lks-space-2);
+    color: var(--lks-muted);
+    font-size: var(--lks-text-small);
+    line-height: 1.7;
+}
+
+.lks-access-steps a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-top: var(--lks-space-1);
+    color: var(--lks-primary-hover);
+    font-size: 0.75rem;
+    font-weight: var(--lks-weight-heading);
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+}
+
+.lks-access-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--lks-space-2);
+    margin-top: var(--lks-space-5);
+}
+

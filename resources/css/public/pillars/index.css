@@ -1,0 +1,949 @@
+/* Pilar Sosial directory — Stitch screen 47c5789aaa3d456cb72518e40d1d6d6e.
+   Main content only: the landing navbar and footer retain their shared styles. */
+.pillars-page main {
+    --pillar-primary: var(--brand-primary);
+    --pillar-primary-hover: var(--brand-primary-hover);
+    --pillar-ink: var(--brand-ink);
+    --pillar-muted: var(--brand-muted);
+    --pillar-border: var(--brand-border);
+    --pillar-soft: var(--brand-soft);
+    --pillar-filter-surface: #f0f4f8;
+    --pillar-white: #fff;
+    --pillar-radius: var(--brand-card-radius);
+    --pillar-gutter: clamp(1rem, 2.5vw, 2rem);
+    --pillar-motion: 180ms ease;
+    color: var(--pillar-ink);
+    background: var(--pillar-soft);
+    font-family: "Plus Jakarta Sans", Arial, sans-serif;
+}
+
+.pillars-page main .container {
+    width: calc(100% - var(--pillar-gutter) * 2);
+    max-width: 77.5rem;
+    margin-inline: auto;
+}
+
+.pillars-page main [hidden] {
+    display: none !important;
+}
+
+.pillars-page main :focus-visible {
+    outline: 0.1875rem solid var(--pillar-primary-hover);
+    outline-offset: 0.25rem;
+}
+
+.pillars-page main [id] {
+    scroll-margin-top: 1rem;
+}
+
+/* The reference uses a white heading area above the pale directory surface. */
+.pillars-page main .pillar-directory-hero {
+    padding-block: 1.5rem 2.5rem;
+    border-bottom: 1px solid var(--pillar-border);
+    background: var(--pillar-white);
+}
+
+.pillars-page main .breadcrumbs ol {
+    align-items: center;
+    gap: 0.625rem;
+    margin: 0 0 1.5rem;
+    color: var(--pillar-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.pillars-page main .breadcrumbs li + li::before {
+    margin-right: 0.625rem;
+    color: var(--brand-line);
+}
+
+.pillars-page main .breadcrumbs [aria-current="page"] {
+    color: var(--pillar-primary);
+    font-weight: 600;
+}
+
+.pillars-page main .breadcrumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    transition: color var(--pillar-motion);
+}
+
+.pillars-page main .breadcrumbs a:hover {
+    color: var(--pillar-primary-hover);
+    text-underline-offset: 0.25rem;
+}
+
+.pillars-page main .pillar-directory-heading {
+    max-width: 48rem;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.pillars-page main .pillar-directory-heading h1 {
+    color: var(--pillar-ink);
+    font-size: clamp(2rem, 3.6vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.035em;
+    overflow-wrap: break-word;
+}
+
+.pillars-page main .pillar-directory-heading > p {
+    max-width: 65ch;
+    margin: 0.875rem auto 0;
+    color: var(--pillar-muted);
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.65;
+}
+
+/* Real buttons retain their pressed state and wrap cleanly on small screens. */
+.pillars-page main .pillar-directory-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    width: fit-content;
+    max-width: 100%;
+    padding: 0.25rem;
+    margin: 2rem auto 0;
+    border: 1px solid var(--pillar-border);
+    border-radius: 0.875rem;
+    background: var(--pillar-filter-surface);
+}
+
+.pillars-page main .pillar-filter {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 2.75rem;
+    padding: 0.625rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.625rem;
+    background: transparent;
+    color: var(--pillar-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    transition:
+        color var(--pillar-motion),
+        background-color var(--pillar-motion),
+        transform var(--pillar-motion);
+}
+
+.pillars-page main .pillar-filter.is-active,
+.pillars-page main .pillar-filter[aria-pressed="true"] {
+    background: var(--pillar-white);
+    color: var(--pillar-primary-hover);
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgb(26 32 44 / 5%);
+}
+
+.pillars-page main .pillar-filter:active {
+    transform: translateY(1px);
+}
+
+.pillars-page main .pillar-filter-count {
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+/* All four destinations are visible together on a desktop; no carousel. */
+.pillars-page main .pillar-directory-section {
+    padding-block: clamp(2rem, 4vw, 3rem);
+    background: var(--pillar-soft);
+}
+
+.pillars-page main .pillar-directory-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pillars-page main .pillar-directory-item {
+    min-width: 0;
+    opacity: 0;
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideInFromLeftPillar {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRightPillar {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.pillars-page main .pillar-directory-item:nth-child(1),
+.pillars-page main .pillar-directory-item:nth-child(2) {
+    animation-name: slideInFromLeftPillar;
+}
+
+.pillars-page main .pillar-directory-item:nth-child(3),
+.pillars-page main .pillar-directory-item:nth-child(4) {
+    animation-name: slideInFromRightPillar;
+}
+
+.pillars-page main .pillar-directory-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.pillars-page main .pillar-directory-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.pillars-page main .pillar-directory-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+.pillars-page main .pillar-directory-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.pillars-page main .pillar-directory-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--pillar-border);
+    border-radius: var(--pillar-radius);
+    background: var(--pillar-white);
+    color: var(--pillar-ink);
+    text-decoration: none;
+    transition:
+        transform var(--pillar-motion),
+        border-color var(--pillar-motion),
+        box-shadow var(--pillar-motion);
+}
+
+.pillars-page main .pillar-directory-card:focus-visible {
+    border-color: var(--pillar-primary-hover);
+}
+
+.pillars-page main .pillar-directory-image {
+    position: relative;
+    height: 13rem;
+    overflow: hidden;
+    border-bottom: 1px solid var(--pillar-border);
+    border-radius: calc(var(--pillar-radius) - 1px)
+        calc(var(--pillar-radius) - 1px) 0 0;
+    background: var(--pillar-filter-surface);
+}
+
+.pillars-page main .pillar-directory-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--pillar-motion);
+}
+
+.pillars-page main .pillar-directory-badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    max-width: calc(100% - 1.5rem);
+    padding: 0.25rem 0.625rem;
+    border: 1px solid var(--pillar-border);
+    border-radius: 0.375rem;
+    background: var(--pillar-white);
+    color: var(--pillar-primary);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 1.65;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+}
+
+.pillars-page main .pillar-directory-badge-primary {
+    border-color: var(--pillar-primary);
+    background: var(--pillar-primary);
+    color: var(--pillar-white);
+}
+
+.pillars-page main .pillar-directory-copy {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+.pillars-page main .pillar-directory-copy h2 {
+    color: var(--pillar-ink);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.025em;
+    transition: color var(--pillar-motion);
+}
+
+.pillars-page main .pillar-directory-name {
+    margin-top: 0.25rem;
+    color: var(--pillar-primary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.pillars-page main .pillar-directory-description {
+    max-width: 65ch;
+    margin-top: 0.875rem;
+    margin-bottom: 1.125rem;
+    color: var(--pillar-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+    overflow-wrap: break-word;
+}
+
+.pillars-page main .pillar-directory-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    min-height: 2.75rem;
+    padding-top: 1.125rem;
+    margin-top: auto;
+    border-top: 1px solid var(--pillar-border);
+}
+
+.pillars-page main .pillar-directory-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--pillar-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.pillars-page main .pillar-directory-link svg {
+    flex-shrink: 0;
+    width: 1.125rem;
+    height: 1.125rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform var(--pillar-motion);
+}
+
+.pillars-page main .pillar-directory-number {
+    color: var(--pillar-muted);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+}
+
+.pillars-page main .pillar-directory-card:focus-visible h2,
+.pillars-page main .pillar-directory-card:focus-visible .pillar-directory-link {
+    color: var(--pillar-primary-hover);
+}
+
+.pillars-page main .pillar-directory-card:focus-visible .pillar-directory-link {
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+}
+
+.pillars-page main .pillar-directory-note {
+    max-width: 65ch;
+    margin-top: 1.25rem;
+    color: var(--pillar-muted);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .pillars-page main .pillar-directory-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .pillars-page main .pillar-directory-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 479px) {
+    .pillars-page main .pillar-directory-hero {
+        padding-block: 1rem 2rem;
+    }
+
+    .pillars-page main .pillar-directory-filters {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1.5rem;
+    }
+
+    .pillars-page main .pillar-filter {
+        width: 100%;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .pillars-page main .pillar-filter:hover {
+        color: var(--pillar-primary-hover);
+        background: var(--pillar-white);
+    }
+
+    .pillars-page main .pillar-directory-card:hover,
+    .pillars-page main .pillar-directory-card.is-interacting {
+        transform: translateY(-0.25rem);
+        border-color: var(--brand-line);
+        box-shadow: 0 8px 20px rgb(26 32 44 / 5%);
+    }
+
+    .pillars-page main .pillar-directory-card:is(:hover, .is-interacting) img {
+        transform: scale(1.035);
+    }
+
+    .pillars-page main .pillar-directory-card:is(:hover, .is-interacting) h2,
+    .pillars-page
+        main
+        .pillar-directory-card:is(:hover, .is-interacting)
+        .pillar-directory-link {
+        color: var(--pillar-primary-hover);
+    }
+
+    .pillars-page
+        main
+        .pillar-directory-card:is(:hover, .is-interacting)
+        .pillar-directory-link
+        svg {
+        transform: translateX(0.1875rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pillars-page main *,
+    .pillars-page main *::before,
+    .pillars-page main *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .pillars-page main .pillar-directory-item {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .pillars-page main .pillar-filter:active,
+    .pillars-page main .pillar-directory-card:is(:hover, .is-interacting),
+    .pillars-page main .pillar-directory-card:is(:hover, .is-interacting) img,
+    .pillars-page
+        main
+        .pillar-directory-card:is(:hover, .is-interacting)
+        .pillar-directory-link
+        svg {
+        transform: none;
+    }
+}
+
+/* ===== Redesain Pilar Sosial: hero biru (shared/page-hero.css), pencocok kebutuhan, panel yang melebar. ===== */
+.pillar-hub-hero {
+    padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.pillar-hub-hero .ph-layout {
+    align-items: center;
+}
+
+/* Kartu "Saya ingin…". */
+.pillar-match {
+    padding: 1.5rem;
+    border-radius: 18px;
+    background: #fff;
+    color: #1a202c;
+    box-shadow: 0 24px 48px rgb(8 16 28 / 30%);
+    animation: ph-rise 0.6s 0.2s ease both;
+}
+.pillar-match-title {
+    margin: 0 0 0.875rem;
+    color: #15253a;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+.pillar-match-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+.pillar-match-option {
+    min-height: 3.25rem;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid #dce4ec;
+    border-radius: 12px;
+    background: #f6f9fc;
+    color: #304a6b;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.pillar-match-option:hover {
+    border-color: #304a6b;
+    background: #fff;
+}
+.pillar-match-option[aria-pressed="true"] {
+    border-color: #304a6b;
+    background: #304a6b;
+    color: #fff;
+}
+.pillar-match-result {
+    min-height: 7rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dce4ec;
+}
+.pillar-match-result p {
+    margin: 0;
+    color: #596b80;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+.pillar-match-result .pillar-match-pick {
+    margin-bottom: 0.25rem;
+    color: #15253a;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+.pillar-match-go {
+    display: inline-flex;
+    margin-top: 0.75rem;
+    color: #304a6b;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-underline-offset: 0.25rem;
+}
+
+/* Panel pilar yang melebar. */
+.pillar-directory-section {
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+.pillar-panels {
+    display: flex;
+    gap: 0.875rem;
+    height: 30rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.pillar-panel-item {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    transition: flex-grow 0.45s ease;
+}
+.pillar-panels.has-active .pillar-panel-item.is-active {
+    flex-grow: 2.6;
+}
+.pillar-panel {
+    position: relative;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    color: #fff;
+    text-decoration: none;
+    isolation: isolate;
+}
+.pillar-panel-image {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.pillar-panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgb(21 37 58 / 10%) 0%, rgb(21 37 58 / 55%) 45%, rgb(21 37 58 / 94%) 100%);
+}
+.pillar-panel-item.is-active .pillar-panel-image {
+    transform: scale(1.05);
+}
+.pillar-panel-item.is-matched .pillar-panel {
+    outline: 3px solid #c3def2;
+    outline-offset: 3px;
+}
+.pillar-panel:focus-visible {
+    outline: 3px solid #304a6b;
+    outline-offset: 3px;
+}
+.pillar-panel-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 92%);
+    color: #15253a;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+.pillar-panel-number {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    color: rgb(255 255 255 / 75%);
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.pillar-panel-body {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    gap: 0.25rem;
+    padding: 1.5rem;
+}
+.pillar-panel-title {
+    font-size: clamp(1.375rem, 1rem + 1vw, 1.875rem);
+    font-weight: 700;
+    line-height: 1.15;
+}
+.pillar-panel-name {
+    color: #d3dfec;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+.pillar-panel-more {
+    display: grid;
+    gap: 0.75rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.45s ease, opacity 0.3s ease, margin 0.3s ease;
+}
+.pillar-panel-item.is-active .pillar-panel-more {
+    max-height: 16rem;
+    margin-top: 0.5rem;
+    opacity: 1;
+}
+.pillar-panel-desc {
+    max-width: 30rem;
+    color: #e3ebf4;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+.pillar-panel-facts {
+    display: grid;
+    gap: 0.375rem;
+}
+.pillar-panel-facts span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-size: 0.8125rem;
+}
+.pillar-panel-facts span::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    flex: none;
+    border-radius: 50%;
+    background: #c3def2;
+}
+.pillar-panel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-self: start;
+    padding: 0.5rem 0.875rem;
+    border-radius: 999px;
+    background: #fff;
+    color: #15253a;
+    font-size: 0.8125rem;
+    font-weight: 700;
+}
+.pillar-panel-link svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.2s;
+}
+.pillar-panel:hover .pillar-panel-link svg {
+    transform: translateX(3px);
+}
+
+@media (max-width: 900px) {
+    .pillar-panels {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        height: auto;
+    }
+    .pillar-panel {
+        height: 24rem;
+    }
+    .pillar-panel-more {
+        max-height: none;
+        margin-top: 0.5rem;
+        opacity: 1;
+    }
+    .pillar-panel-facts {
+        display: none;
+    }
+}
+@media (max-width: 600px) {
+    .pillar-match-options,
+    .pillar-panels {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .pillar-panel {
+        height: 20rem;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .pillar-panel-item,
+    .pillar-panel-image,
+    .pillar-panel-more,
+    .pillar-match {
+        transition: none;
+        animation: none;
+    }
+}
+
+.pillars-page .ph .breadcrumbs [aria-current] {
+    color: #fff;
+}
+
+/* ===== Hero Pilar Sosial: gaya "Accessible & Ethical" (ui-ux-pro-max) dalam palet SiDaya.
+ * Kontras tinggi, teks besar, target sentuh minimal 44px, fokus 3px, gerak secukupnya.
+ * Hanya hero halaman ini; pita sasirangan menyamakan dengan Beranda dan Profil. ===== */
+.pillars-page .pillar-hub-hero {
+    --ph-night: #102a43;
+    --ph-ink: #0f172a;
+    --ph-muted: #334155;
+    --ph-mist: #d7e1ec;
+    --ph-kunyit: #e0a526;
+    --ph-action: #0369a1;
+    padding-bottom: 28px;
+    background: var(--ph-night);
+}
+.pillars-page .pillar-hub-hero::after {
+    content: "";
+    inset: auto 0 0;
+    height: 28px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='28'%3E%3Cpath d='M0 28 16 6 32 28Z' fill='%23e0a526'/%3E%3Cpath d='M8 28 16 17 24 28Z' fill='%23102a43'/%3E%3Ccircle cx='16' cy='2' r='1.6' fill='%23cfd9e5'/%3E%3C/svg%3E");
+    background-size: 32px 28px;
+    background-repeat: repeat-x;
+}
+.pillars-page .pillar-hub-hero :is(a, button):focus-visible {
+    outline: 3px solid var(--ph-kunyit);
+    outline-offset: 3px;
+}
+
+/* Teks pembuka */
+.pillars-page .pillar-hub-hero .ph-kicker {
+    gap: 12px;
+    color: var(--ph-mist);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+}
+.pillars-page .pillar-hub-hero .ph-kicker span {
+    padding: 0 12px 0 0;
+    border-right: 2px solid var(--ph-kunyit);
+    border-radius: 0;
+    background: none;
+    color: #fff;
+    font-weight: 700;
+}
+.pillars-page .pillar-hub-hero .ph-copy h1 {
+    max-width: 13ch;
+    color: #fff;
+    font-size: clamp(2.5rem, 1.2rem + 3.6vw, 4.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+}
+.pillars-page .pillar-hub-hero .ph-copy h1 em {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    color: inherit;
+}
+.pillars-page .pillar-hub-hero .ph-lead {
+    max-width: 34rem;
+    color: var(--ph-mist);
+    font-size: 1.125rem;
+    line-height: 1.65;
+}
+.pillars-page .pillar-hub-hero .ph-actions .button {
+    min-height: 48px;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+/* Kartu "Saya ingin…" */
+.pillars-page .pillar-hub-hero .pillar-match {
+    padding: 32px;
+    border: 0;
+    border-top: 4px solid var(--ph-kunyit);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 24px 48px rgb(4 12 24 / 35%);
+    color: var(--ph-ink);
+}
+.pillars-page .pillar-hub-hero .pillar-match-title {
+    margin: 0 0 20px;
+    color: var(--ph-ink);
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+.pillars-page .pillar-hub-hero .pillar-match-options {
+    gap: 12px;
+}
+.pillars-page .pillar-hub-hero .pillar-match-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 56px;
+    padding: 12px 16px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ph-ink);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        border-color 0.2s,
+        background-color 0.2s,
+        color 0.2s;
+}
+.pillars-page .pillar-hub-hero .pillar-match-option::before {
+    content: "";
+    flex: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #64748b;
+    border-radius: 50%;
+    background: #fff;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+.pillars-page .pillar-hub-hero .pillar-match-option:hover {
+    border-color: var(--ph-night);
+    background: #f1f5f9;
+}
+.pillars-page .pillar-hub-hero .pillar-match-option[aria-pressed="true"] {
+    border-color: var(--ph-night);
+    background: var(--ph-night);
+    color: #fff;
+}
+.pillars-page .pillar-hub-hero .pillar-match-option[aria-pressed="true"]::before {
+    border-color: var(--ph-kunyit);
+    box-shadow: inset 0 0 0 4px #fff, inset 0 0 0 10px var(--ph-kunyit);
+}
+
+/* Hasil: tinggi tetap agar halaman tidak melompat saat isi berganti. */
+.pillars-page .pillar-hub-hero .pillar-match-result {
+    min-height: 168px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+.pillars-page .pillar-hub-hero .pillar-match-result p {
+    color: var(--ph-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+.pillars-page .pillar-hub-hero .pillar-match-hint {
+    margin: 0;
+}
+.pillars-page .pillar-hub-hero .pillar-match-result .pillar-match-pick {
+    margin: 0 0 6px;
+    color: var(--ph-ink);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+.pillars-page .pillar-hub-hero .pillar-match-go {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    margin-top: 12px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    background: var(--ph-action);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.pillars-page .pillar-hub-hero .pillar-match-go::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16m-6-6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16m-6-6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.pillars-page .pillar-hub-hero .pillar-match-go:hover {
+    background: #075985;
+}
+
+@media (max-width: 600px) {
+    .pillars-page .pillar-hub-hero .pillar-match {
+        padding: 24px 20px;
+    }
+    .pillars-page .pillar-hub-hero .pillar-match-result {
+        min-height: 0;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .pillars-page .pillar-hub-hero .pillar-match-option,
+    .pillars-page .pillar-hub-hero .pillar-match-option::before,
+    .pillars-page .pillar-hub-hero .pillar-match-go {
+        transition: none;
+    }
+}
+
+/* Hanya ada satu pilar (LKS): panelnya selalu satu kolom di layar kecil. */
+@media (max-width: 900px) {
+    .pillar-panels {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

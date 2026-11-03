@@ -1,0 +1,67 @@
+{
+  "project": {
+    "title": "Sidaya LKS Public Portal",
+    "id": "7946213390652083290",
+    "url": "https://stitch.withgoogle.com/projects/7946213390652083290"
+  },
+  "screen": {
+    "id": "47c5789aaa3d456cb72518e40d1d6d6e",
+    "title": "Generating Screen...",
+    "exportMethod": "ZIP exported from the exact screen selected in the user's existing Stitch browser session",
+    "codeSha256": "f32f870366fbde2df8eb2763292d36c8dab30cc5a35699ba55ea80ea6ea1ce72",
+    "screenshot": {
+      "width": 1600,
+      "height": 1545,
+      "bytes": 1118532,
+      "sha256": "5868f4d43fef98ce10965ecd50b5c5a3b9dd0e0dad1d464b72f53665397dbefe"
+    }
+  },
+  "downloadedAtUtc": "2026-10-06 02:10:04 UTC",
+  "downloadMethod": "curl.exe -L --fail",
+  "notes": [
+    "Original code.html and screen.png are held in OS temporary storage outside the project.",
+    "Images are illustrative assets from the requested Stitch screen, not documentary photos or factual evidence."
+  ],
+  "assets": [
+    {
+      "filename": "lks.jpg",
+      "sourceUrl": "https://lh3.googleusercontent.com/aida/AEtjO1VZ9bc3-dGu0TzDBKrnVcr0RfcKTvwwnwvh-MRsaCCXOrHh19So7teNsk3aBFf7nPNI7pru9c0PxeHFg4JeZdYeRCMqZeoTYkxw9411ye8fZQa0V89Czv-ibka9fFNBW_1_Ms6LBwRuRAdTTa1vam50ZFb865bdwdlMqBEr8Fu2sM8cJd_AVha6RWrcr-LhZ0SUy7bVjyPaNFeaJCQw9PjLiPmN8qHCMD53Zfwea0l9rixyvUCg_flTItk",
+      "width": 512,
+      "height": 382,
+      "bytes": 94514,
+      "sha256": "a7c0364607f53fc409c70062da72bf4f90116402209522282d9971715ea56cd8",
+      "context": "Illustration of volunteers and social service staff documenting and organizing donation boxes.",
+      "usage": "Pilar Sosial card: LKS"
+    },
+    {
+      "filename": "karang-taruna.jpg",
+      "sourceUrl": "https://lh3.googleusercontent.com/aida/AEtjO1UrIpOSbaXj1D9Sb_rVHMSCSjNHpxpyRVxmUtvqUtu3sPOsCZU2s2EzqypbLPfVN0ZdtDjHHSHXENuTTTA-DseDYJLYzj0MsPE2RW-Dm_tgl2ezr8BuYRwSxvp0D8udAnAdSpLIm5aHqV9XmfhstNdt_AgpgELO97aOwrycaCKXa1w9Klp9c1eRKQ_4vDozqyouAepVXxmGWhUEqD_20znjc9uXyozGv9SUbeeTnPH_5Hu017jmvipPSh8",
+      "width": 512,
+      "height": 382,
+      "bytes": 72714,
+      "sha256": "62af9ff4288eab103a07281fd6d5d22f4d9ece86f643e1e2da04f1297c245d80",
+      "context": "Illustration of young community volunteers organizing social assistance outdoors.",
+      "usage": "Pilar Sosial card: Karang Taruna"
+    },
+    {
+      "filename": "psm.jpg",
+      "sourceUrl": "https://lh3.googleusercontent.com/aida/AEtjO1VooIaYFLbjCE2SS6MObfRfk67mZp43PQEqeZ74QJP02lqTPxkW21QyEcZxRymRqAD7ToA8HU6LnAdpkBovPUi8edS6Mnke_NXXyEwtyH3C7K_Zqb_V8uwQQvY5EovmgZF7xJ3dxK7FI4RBb-TGpfpm_yQ_rafTpZ1TpTwqvY30joXuxJkN6H7jAq8pWXIGu7u_lJRr9AL7R4_dYlp3OTy5nxBFV_hG1-gnAlLuYfAEkficUrau0ewpEps",
+      "width": 512,
+      "height": 382,
+      "bytes": 86745,
+      "sha256": "bb15b52fae44ccf915f228584e246402bdde0bb899bc555a54d29691e11ee049",
+      "context": "Illustration of PSM volunteers visiting and assisting residents.",
+      "usage": "Pilar Sosial card: PSM"
+    },
+    {
+      "filename": "pub.jpg",
+      "sourceUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDuCPcNw8dwdAJZ_I9QVl-H-tewVNl7pTSCaWO-qVncwuddR7P2S-kySUyGEtiyc1TTqgjm5dV34I-3MqiCjBFgtJM1l8UeiQQkwpt3g1Z9pM1GItXi-e-9rqORGbzkson-neBtJzCqnt8P951naowuOjFIlgGCyUbG4TIR6u7_-vKDWte_9yQNz79MrZsT0Wwabp5nD9EH5j0y49yKKIz4XJjkqRDohTBdnB8BL1g622JXpXUYh2Ze",
+      "width": 512,
+      "height": 382,
+      "bytes": 79955,
+      "sha256": "cd93fd87aaf0cc987c1f259e9c3450591bcb306ffc5cb3f9b83fb55f87db0644",
+      "context": "Illustration of volunteers receiving and organizing money or goods donations.",
+      "usage": "Pilar Sosial card: PUB"
+    }
+  ]
+}

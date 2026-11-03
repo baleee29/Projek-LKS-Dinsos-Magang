@@ -1,0 +1,94 @@
+/* Content cards on the public pages share the home "Saya adalah…" card treatment: a gold top edge and a faint
+   sasirangan motif in the right corner that fades toward the text. Cards that already carry their own top colour
+   (profile pillars, pillar match, contact panels) keep it and only receive the motif. Cards nested inside another
+   card (PUB calculator and warning, contact detail tiles) are left plain so the motif never doubles up. */
+:is(
+        .pillar-match,
+        .profile-pillar-card,
+        .lks-service-list > li,
+        .lks-document-details,
+        .psm-values > li,
+        .psm-role-grid > article,
+        .psm-field-grid > article,
+        .psm-steps > li,
+        .kt-values > li,
+        .kt-role-grid > article,
+        .kt-activity-grid > article,
+        .kt-steps > li,
+        .pub-card,
+        .pub-quote,
+        .pub-support,
+        .pub-tracker,
+        .pub-faq-item,
+        .pub-finder,
+        .contact-panel
+    ) {
+    position: relative;
+    isolation: isolate;
+}
+
+:is(
+        .lks-service-list > li,
+        .lks-document-details,
+        .psm-values > li,
+        .psm-role-grid > article,
+        .psm-field-grid > article,
+        .psm-steps > li,
+        .kt-values > li,
+        .kt-role-grid > article,
+        .kt-activity-grid > article,
+        .kt-steps > li,
+        .pub-card,
+        .pub-quote,
+        .pub-support,
+        .pub-tracker,
+        .pub-faq-item,
+        .pub-finder
+    ) {
+    border-top: 3px solid #e0a526;
+}
+
+:is(
+        .pillar-match,
+        .profile-pillar-card,
+        .lks-service-list > li,
+        .lks-document-details,
+        .psm-values > li,
+        .psm-role-grid > article,
+        .psm-field-grid > article,
+        .psm-steps > li,
+        .kt-values > li,
+        .kt-role-grid > article,
+        .kt-activity-grid > article,
+        .kt-steps > li,
+        .pub-card,
+        .pub-quote,
+        .pub-support,
+        .pub-tracker,
+        .pub-faq-item,
+        .pub-finder,
+        .contact-panel
+    )::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 0 45%;
+    z-index: -1;
+    border-radius: inherit;
+    background: url("/assets/images/branding/sasirangan-motif.svg") 0 0 / 168px 120px repeat;
+    opacity: 0.16;
+    -webkit-mask-image: linear-gradient(to left, #000 15%, transparent 90%);
+    mask-image: linear-gradient(to left, #000 15%, transparent 90%);
+    pointer-events: none;
+}
+
+/* The PUB page styles its cards under ".pub-page main", so its edge needs the same reach. */
+.pub-page main :is(.pub-card, .pub-quote, .pub-support, .pub-tracker, .pub-faq-item, .pub-finder) {
+    position: relative;
+    isolation: isolate;
+    border-top: 3px solid #e0a526;
+}
+
+/* The contact location panel has no gold edge of its own, unlike the information panel above it. */
+.contact-panel.contact-location {
+    border-top: 3px solid #e0a526;
+}

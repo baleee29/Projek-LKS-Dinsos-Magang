@@ -9,9 +9,7 @@
 
 @php
     $crew = [
-        ['key' => 'psm', 'label' => 'PSM', 'body' => '#1565c0', 'accent' => '#38bdf8', 'greeting' => 'Halo, PSM siap membantu!'],
         ['key' => 'lks', 'label' => 'LKS', 'body' => '#00a86b', 'accent' => '#0b3c26', 'greeting' => 'LKS hadir untuk sesama!'],
-        ['key' => 'kt', 'label' => 'KT', 'body' => '#c62828', 'accent' => '#f5b400', 'greeting' => 'Karang Taruna, ayo berkarya!'],
     ];
 @endphp
 
@@ -41,19 +39,10 @@
                             <path class="crew-body" d="M28 160V112a32 32 0 0 1 64 0v48Z" />
                             <text class="crew-tag" x="60" y="140" text-anchor="middle">{{ $member['label'] }}</text>
                             <circle class="crew-head" cx="60" cy="62" r="34" />
-                            @if ($member['key'] === 'psm')
-<path class="crew-hat" d="M26 58a34 34 0 0 1 68 0c-10-8-22-12-34-12s-24 4-34 12Z" />
-                            @elseif ($member['key'] === 'lks')
-<g class="crew-hat">
+                            <g class="crew-hat">
                                 <path d="M28 52a34 34 0 0 1 64 0c-9-5-20-8-32-8s-23 3-32 8Z" />
                                 <path class="crew-leaf" d="M60 30c-2-10 4-18 14-20-1 10-6 17-14 20Z" />
                             </g>
-                            @else
-<g class="crew-hat">
-                                <path d="M27 50h66v10H27Z" />
-                                <path class="crew-star" d="m60 47 2.4 5 5.4.6-4 3.7 1 5.3-4.8-2.7-4.8 2.7 1-5.3-4-3.7 5.4-.6Z" />
-                            </g>
-@endif
                             <g class="crew-eyes">
                                 <g class="crew-eye">
                                     <ellipse cx="47" cy="68" rx="8.5" ry="9.5" />
@@ -81,8 +70,7 @@
 
             <section class="login-card" aria-labelledby="login-title" @if ($errors->any()) data-has-errors="1" @endif>
                 <header class="card-header">
-                    {{-- Halaman publik di luar cakupan Tahap 1, jadi tautan beranda kembali ke halaman ini. --}}
-                    <a class="login-brand" href="/login" aria-label="Beranda SiDaya">
+                                        <a class="login-brand" href="/" aria-label="Beranda SiDaya">
                         <img src="/assets/images/branding/sidaya-logo-480.webp" alt="" width="64" height="64">
                     </a>
                     <p class="form-eyebrow">AKUN SiDaya</p>
@@ -142,7 +130,7 @@
                         <svg class="submit-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                     </button>
                     <div class="login-return">
-                        <a class="back-link login-back-link" href="/login">
+                        <a class="back-link login-back-link" href="/">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h14" /></svg>
                             Kembali ke Beranda SiDaya
                         </a>
@@ -200,17 +188,16 @@
 
                     <div class="footer-column">
                         <h2><span class="brand-name-case">SiDaya</span></h2>
-                        <a href="/login">Kenali SiDaya</a>
-                        <a href="/login">Pilar sosial</a>
-                        <a href="/login">Hubungi Dinsos</a>
-                        <a href="/login">Galeri kegiatan</a>
+                        <a href="/index.html#profil">Kenali SiDaya</a>
+                        <a href="/pilar-sosial.html">Pilar sosial</a>
+                        <a href="/index.html#layanan">Hubungi Dinsos</a>
+                        <a href="/index.html#galeri">Galeri kegiatan</a>
                     </div>
                     <div class="footer-column">
                         <h2>Pilar Sosial</h2>
-                        <a href="/login">LKS</a>
-                        <a href="/login">PSM</a>
-                        <a href="/login">Karang Taruna</a>
-                        <a href="/login">Semua pilar sosial</a>
+                        <a href="/pilar/lks.html">LKS</a>
+                        <a href="/pilar/lks.html#pendaftaran">Panduan pendaftaran</a>
+                        <a href="/pilar-sosial.html">Semua pilar sosial</a>
                     </div>
                     <div class="footer-column">
                         <h2>Tautan</h2>
@@ -225,7 +212,7 @@
                         <a href="https://banjarbarukota.go.id/perangkat-daerah"
                             >Pemkot Banjarbaru</a
                         >
-                        <a href="/login">Halaman kontak</a>
+                        <a href="/kontak.html">Halaman kontak</a>
                     </div>
                 </div>
 

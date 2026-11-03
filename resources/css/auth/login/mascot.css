@@ -129,21 +129,12 @@
 
 .crew-member {
     position: relative;
-    width: clamp(88px, 9vw, 120px);
+    width: clamp(100px, 10.5vw, 136px);
     padding: 0;
     border: 0;
     background: none;
     cursor: pointer;
     animation: crew-bob 3.2s ease-in-out infinite;
-}
-
-.crew-member:nth-child(2) {
-    width: clamp(100px, 10.5vw, 136px);
-    animation-delay: -1s;
-}
-
-.crew-member:nth-child(3) {
-    animation-delay: -2s;
 }
 
 .crew-member svg {
@@ -181,18 +172,10 @@
     fill: var(--accent);
 }
 
-.crew-psm .crew-hat {
-    fill: #0d47a1;
-}
-
 .crew-lks .crew-leaf {
     fill: #34d399;
     transform-origin: 60px 30px;
     animation: crew-leaf 2.4s ease-in-out infinite;
-}
-
-.crew-kt .crew-star {
-    fill: #c62828;
 }
 
 .crew-arm path {
@@ -380,8 +363,7 @@
     .login-crew {
         padding-top: 8px;
     }
-    .crew-member,
-    .crew-member:nth-child(2) {
+    .crew-member {
         width: 84px;
     }
 }

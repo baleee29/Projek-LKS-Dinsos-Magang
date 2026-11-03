@@ -1,0 +1,235 @@
+/* Responsive presentation, aligned with the shared navbar breakpoint. */
+@media (max-width: 56.25rem) {
+    .lks-hero-layout,
+    .lks-about-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--lks-space-5);
+    }
+
+    .lks-hero-layout {
+        padding: var(--lks-space-5);
+    }
+
+    .lks-hero-copy h1 {
+        max-width: 23ch;
+    }
+
+    .lks-hero-note {
+        max-width: 100%;
+    }
+
+    .lks-section-nav .container {
+        gap: 0.25rem;
+    }
+
+    .lks-section-nav a {
+        padding-inline: var(--lks-space-2);
+    }
+
+    .lks-page .lks-nav-register {
+        margin-left: 0;
+    }
+
+    .lks-about-image {
+        max-width: 44rem;
+    }
+
+    .lks-about-image img {
+        aspect-ratio: 16 / 9;
+    }
+
+    .lks-function-list,
+    .lks-service-list,
+    .lks-access-steps {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 44rem;
+        margin-inline: auto;
+    }
+
+    .lks-function-list li {
+        grid-template-columns: 3.25rem minmax(0, 1fr) 3rem;
+        align-items: start;
+        gap: var(--lks-space-4);
+    }
+
+    .lks-function-copy {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .lks-function-icon {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    .lks-service-list li {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    }
+
+    .lks-service-image img {
+        height: 100%;
+        aspect-ratio: auto;
+        min-height: 15rem;
+    }
+
+    .lks-service-copy {
+        padding: var(--lks-space-4);
+    }
+
+    .lks-register-band-layout > div:first-child {
+        flex-basis: 100%;
+    }
+}
+
+@media (max-width: 37.5rem) {
+    .lks-page .lks-hero {
+        padding-block: var(--lks-space-3) var(--lks-space-4);
+    }
+
+    .lks-page .lks-hero .breadcrumbs ol {
+        margin-bottom: var(--lks-space-3);
+        gap: var(--lks-space-1);
+    }
+
+    .lks-hero-layout {
+        padding: var(--lks-space-4);
+        gap: var(--lks-space-4);
+    }
+
+    .lks-hero-copy h1 {
+        font-size: clamp(1.875rem, 7vw, 2.25rem);
+        line-height: 1.25;
+    }
+
+    .lks-lead {
+        margin-top: var(--lks-space-3);
+    }
+
+    .lks-actions .button {
+        flex: 1 1 12rem;
+    }
+
+    .lks-hero-note {
+        padding: var(--lks-space-3);
+    }
+
+    .lks-section-nav .container {
+        padding-block: var(--lks-space-1);
+    }
+
+    .lks-section-nav a {
+        padding-inline: 0.625rem;
+        font-size: 0.75rem;
+    }
+
+    .lks-page .lks-nav-register {
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 0.8125rem;
+    }
+
+    .lks-section {
+        padding-block: var(--lks-space-7);
+    }
+
+    .lks-about-layout {
+        gap: var(--lks-space-4);
+    }
+
+    .lks-about-aside {
+        padding: var(--lks-space-3);
+    }
+
+    .lks-section-intro {
+        margin-bottom: var(--lks-space-4);
+    }
+
+    .lks-function-list li {
+        grid-template-columns: 1fr auto;
+        gap: var(--lks-space-3);
+        padding: var(--lks-space-4);
+    }
+
+    .lks-function-copy {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .lks-function-icon {
+        grid-column: 2;
+    }
+
+    .lks-service-list li {
+        display: block;
+    }
+
+    .lks-service-image img {
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+    }
+
+    .lks-access-actions {
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: var(--lks-space-4);
+    }
+
+    .lks-access-actions .button {
+        width: 100%;
+    }
+
+    .lks-faq-list summary {
+        padding-left: var(--lks-space-3);
+        padding-right: 2.75rem;
+    }
+
+    .lks-faq-list summary::after {
+        right: var(--lks-space-3);
+    }
+
+    .lks-faq-list details > p {
+        padding-inline: var(--lks-space-3);
+    }
+
+    .lks-register-band {
+        padding: var(--lks-space-4);
+    }
+
+    .lks-register-band-layout > .lks-actions {
+        width: 100%;
+    }
+}
+
+@media (max-width: 25rem) {
+    .lks-hero-layout {
+        padding: 1.25rem;
+    }
+
+    .lks-hero-note h2 {
+        align-items: flex-start;
+        font-size: 0.9375rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lks-page main :is(a, button, summary) {
+        transition: none;
+    }
+}
+
+@media print {
+    .lks-page :is(.lks-nav-register, [data-open-lks-register]) {
+        display: none;
+    }
+
+    .lks-hero-layout,
+    .lks-about-layout,
+    .lks-function-list,
+    .lks-service-list,
+    .lks-access-steps {
+        break-inside: avoid;
+    }
+}
+

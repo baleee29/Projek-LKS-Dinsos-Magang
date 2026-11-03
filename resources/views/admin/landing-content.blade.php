@@ -28,8 +28,9 @@
                 </form>
                 <div class="landing-summary">
                     <span>{{ $total }} isian · {{ $changed }} diubah</span>
-                    {{-- Halaman publik di luar cakupan Tahap 1, jadi tautan pratinjau dinonaktifkan. --}}
-                    <a class="landing-button" aria-disabled="true" tabindex="-1" title="Halaman publik belum tersedia pada Tahap 1" style="opacity:.55;pointer-events:none;">Lihat halaman<span class="sr-only"> (belum tersedia)</span></a>
+                    @if ($current)
+                        <a class="landing-button" href="{{ $current['url'] }}" target="_blank" rel="noopener">Lihat halaman<span class="sr-only"> (tab baru)</span></a>
+                    @endif
                 </div>
             </div>
             <div>

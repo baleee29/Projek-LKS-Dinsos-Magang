@@ -1,6 +1,6 @@
 # SiDaya: Dashboard Admin dan LKS
 
-Dashboard **Admin** dan **LKS** SiDaya yang dibangun ulang dengan Laravel dan Blade, tanpa Vue dan Inertia. Dashboard Admin hanya mengelola LKS; fitur PSM dan Karang Taruna tidak disertakan.
+Dashboard **Admin** dan **LKS** serta halaman publik SiDaya yang dibangun ulang dengan Laravel dan Blade, tanpa Vue dan Inertia. Seluruh isi hanya menyangkut LKS; halaman Pilar Sosial hanya menampilkan LKS, sedangkan fitur dan penjelasan PSM, Karang Taruna, dan PUB tidak disertakan.
 
 Project ini ada di **Tahap 1**: tampilan dan interaksi lengkap dengan data dummy. Belum ada database, autentikasi sungguhan, penyimpanan, upload, notifikasi, maupun pembuatan berkas Excel/PDF. Rencana backend ada di [docs/tahap-2-backend.md](docs/tahap-2-backend.md).
 
@@ -21,7 +21,9 @@ npm run build
 php artisan serve
 ```
 
-Buka `http://127.0.0.1:8000/login`, lalu pilih tombol masuk cepat **Admin** atau **LKS**. Form login juga bisa dipakai dengan isian yang memuat kata `admin` atau `lks`; kata sandi tidak diperiksa.
+Halaman publik ada di `http://127.0.0.1:8000/` (Beranda), `/profil.html`, `/kontak.html`, `/pilar/lks.html`, dan `/pilar/pendaftaran-lks.html`. Formulir pendaftaran LKS hanya memeriksa isian di browser: tidak ada pengiriman ke server, database, maupun penyimpanan browser.
+
+Untuk dashboard, buka `/login`, lalu pilih tombol masuk cepat **Admin** atau **LKS**. Form login juga bisa dipakai dengan isian yang memuat kata `admin` atau `lks`; kata sandi tidak diperiksa.
 
 Masuk demo hanya aktif saat `APP_ENV=local`.
 

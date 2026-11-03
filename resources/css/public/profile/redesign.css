@@ -1,0 +1,415 @@
+/* ===== Redesain: struktur yang bermakna dan interaktif (bukan grid kartu berikon). ===== */
+
+/* Label kecil: teks dengan garis, bukan pil. */
+.profile-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+}
+.profile-label::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+}
+.profile-heading-centered {
+    margin: 0 0 40px;
+    text-align: left;
+}
+.profile-heading-centered > p:not(.profile-eyebrow) {
+    margin-inline: 0;
+}
+
+/* Hero: indeks halaman. */
+.profile-toc {
+    margin-top: 28px;
+    max-width: 460px;
+}
+.profile-toc-title {
+    margin: 0 0 8px;
+    color: var(--brand-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+.profile-toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgb(48 74 107 / 18%);
+}
+.profile-toc a {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 11px 2px;
+    border-bottom: 1px solid rgb(48 74 107 / 18%);
+    color: var(--brand-primary-hover);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: padding 0.2s, color 0.2s;
+}
+.profile-toc a span {
+    color: var(--brand-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+.profile-toc a:hover,
+.profile-toc a:focus-visible {
+    padding-left: 10px;
+    color: var(--brand-primary);
+}
+
+/* Bilah bagian yang lengket (dibuat oleh profile.js). */
+.profile-sectionbar {
+    position: sticky;
+    top: var(--profile-header-height, 0px);
+    z-index: 20;
+    border-bottom: 1px solid var(--brand-border);
+    background: rgb(255 255 255 / 92%);
+    backdrop-filter: blur(8px);
+    transform: translateY(-110%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s, opacity 0.25s;
+    /* Overlay the next section instead of pushing it down while hidden. */
+    margin-bottom: -53px;
+}
+.profile-sectionbar.is-visible {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+}
+.profile-sectionbar ol {
+    display: flex;
+    gap: 4px;
+    margin: 0;
+    padding: 8px 0;
+    overflow-x: auto;
+    list-style: none;
+    scrollbar-width: none;
+}
+.profile-sectionbar a {
+    display: block;
+    padding: 7px 12px;
+    border-radius: 8px;
+    color: var(--brand-muted);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.profile-sectionbar a :is(small, svg) {
+    display: none;
+}
+.profile-sectionbar a:hover {
+    color: var(--brand-primary-hover);
+    background: #f1f5fa;
+}
+.profile-sectionbar a[aria-current="true"] {
+    color: #fff;
+    background: var(--brand-primary-hover);
+}
+.profile-main section[id] {
+    scroll-margin-top: calc(var(--profile-header-height, 0px) + 64px);
+}
+
+/* Dayasos: tiga lapis pemberdayaan. */
+.profile-layers {
+    display: grid;
+    grid-template-columns: minmax(260px, 380px) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.profile-layers-diagram {
+    display: grid;
+    place-items: center;
+}
+.profile-ring {
+    position: relative;
+    display: grid;
+    place-items: center;
+    border: 2px solid #c9d6e6;
+    border-radius: 50%;
+    background: rgb(232 238 247 / 45%);
+    transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+.profile-ring-3 { width: 340px; height: 340px; }
+.profile-ring-2 { width: 230px; height: 230px; }
+.profile-ring-1 { width: 120px; height: 120px; }
+.profile-ring-label {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--brand-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.profile-ring-1 .profile-ring-label {
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.profile-ring.is-active {
+    border-color: var(--brand-primary-hover);
+    background: rgb(48 74 107 / 12%);
+    box-shadow: 0 0 0 6px rgb(48 74 107 / 8%);
+}
+.profile-ring.is-active > .profile-ring-label {
+    color: var(--brand-primary-hover);
+}
+.profile-layers-list {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.profile-layer {
+    display: block;
+    width: 100%;
+    padding: 18px 20px;
+    border: 1px solid transparent;
+    border-left: 3px solid var(--brand-border);
+    border-radius: 0 12px 12px 0;
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+.profile-layer h3 {
+    margin: 4px 0 6px;
+    font-size: 18px;
+}
+.profile-layer p {
+    margin: 0;
+    color: var(--brand-muted);
+    font-size: 14px;
+}
+.profile-layer-step {
+    color: var(--brand-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.profile-layer:hover,
+.profile-layer[aria-pressed="true"] {
+    border-color: var(--brand-border);
+    border-left-color: var(--brand-primary-hover);
+    background: #fff;
+}
+
+/* Bentuk dukungan: alur bernomor dengan garis penghubung. */
+.profile-support-tabs {
+    counter-reset: step;
+    position: relative;
+    gap: 0;
+}
+.profile-support-tabs::before {
+    content: "";
+    position: absolute;
+    top: 23px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 2px;
+    background: #d2dfec;
+}
+.profile-support-tabs button,
+.profile-support-tabs button[aria-selected="true"],
+.profile-support-tabs button:hover:not([aria-selected="true"]) {
+    position: relative;
+    flex-direction: column;
+    justify-content: start;
+    gap: 10px;
+    padding: 0 8px;
+    border: 0;
+    box-shadow: none;
+    color: var(--brand-muted);
+    background: transparent;
+    text-align: center;
+}
+.profile-support-tabs button::before {
+    counter-increment: step;
+    content: counter(step);
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 2px solid #d2dfec;
+    border-radius: 50%;
+    color: var(--brand-muted);
+    background: #fff;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.profile-support-tabs button:hover::before {
+    border-color: var(--brand-primary-hover);
+}
+.profile-support-tabs button[aria-selected="true"] {
+    color: var(--brand-primary-hover);
+}
+.profile-support-tabs button[aria-selected="true"]::before {
+    border-color: var(--brand-primary-hover);
+    color: #fff;
+    background: var(--brand-primary-hover);
+}
+.profile-support-panel {
+    display: block;
+    animation: profile-fade 0.25s ease;
+}
+
+/* Tugas dan fungsi: akordeon bernomor. */
+.profile-duties-list {
+    border-top: 1px solid var(--brand-border);
+}
+.profile-duty {
+    border-bottom: 1px solid var(--brand-border);
+}
+.profile-duty summary {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) 24px;
+    gap: 16px;
+    align-items: center;
+    padding: 20px 4px;
+    cursor: pointer;
+    list-style: none;
+}
+.profile-duty summary::-webkit-details-marker {
+    display: none;
+}
+.profile-duty-num {
+    color: #a6b4c3;
+    font-size: 28px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.2s;
+}
+.profile-duty-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+}
+.profile-duty-title {
+    color: var(--brand-primary-hover);
+    font-size: 19px;
+    font-weight: 700;
+}
+.profile-duty-context {
+    color: var(--brand-muted);
+    font-size: 13px;
+}
+.profile-duty-chevron {
+    width: 20px;
+    height: 20px;
+    color: var(--brand-muted);
+    transform: rotate(90deg);
+    transition: transform 0.25s;
+}
+.profile-duty[open] .profile-duty-chevron {
+    transform: rotate(-90deg);
+}
+.profile-duty[open] .profile-duty-num,
+.profile-duty summary:hover .profile-duty-num {
+    color: var(--brand-primary-hover);
+}
+.profile-duty > p {
+    margin: 0;
+    padding: 0 44px 22px 76px;
+    color: var(--brand-muted);
+    font-size: 15px;
+    line-height: 1.7;
+    animation: profile-fade 0.25s ease;
+}
+
+/* Kartu pilar: seluruh kartu dapat diklik. */
+.profile-pillar-card {
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.profile-pillar-card:hover,
+.profile-pillar-card:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgb(26 32 44 / 9%);
+}
+.profile-pillar-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+.profile-pillar-card:hover .profile-pillar-link {
+    background: var(--pillar-soft);
+}
+
+/* Fungsi dan manfaat: daftar bergaris, bukan kartu berikon. */
+.profile-functions-grid,
+.profile-benefits-grid {
+    gap: 0 32px;
+}
+.profile-functions-grid article,
+.profile-benefits-grid article {
+    padding: 18px 0;
+    border: 0;
+    border-top: 1px solid var(--brand-border);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+}
+
+@keyframes profile-fade {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 860px) {
+    .profile-layers {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .profile-ring-3 { width: 280px; height: 280px; }
+    .profile-ring-2 { width: 190px; height: 190px; }
+    .profile-ring-1 { width: 100px; height: 100px; }
+}
+@media (max-width: 600px) {
+    .profile-support-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 16px;
+    }
+    .profile-support-tabs::before {
+        display: none;
+    }
+    .profile-duty summary {
+        grid-template-columns: 40px minmax(0, 1fr) 20px;
+        gap: 12px;
+    }
+    .profile-duty-num { font-size: 22px; }
+    .profile-duty > p { padding: 0 8px 20px 52px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .profile-main *,
+    .profile-sectionbar {
+        transition: none !important;
+        animation: none !important;
+    }
+    .profile-pillar-card:hover,
+    .profile-pillar-card:focus-within {
+        transform: none;
+    }
+}
+
+.profile-sidaya-tabs {
+    justify-content: start;
+}
+

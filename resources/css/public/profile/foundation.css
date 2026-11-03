@@ -1,0 +1,433 @@
+/* Profil publik SIDAYA. Navbar dan footer memakai stylesheet bersama. */
+.profile-main {
+    --profile-heading: #102a43;
+}
+.profile-main .container {
+    width: calc(100% - 64px);
+    max-width: 1216px;
+}
+.profile-symbols {
+    position: absolute;
+    overflow: hidden;
+    pointer-events: none;
+}
+.profile-icon {
+    display: block;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.profile-icon-box {
+    display: inline-grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    color: #304a6b;
+    background: #e8eef7;
+}
+.profile-main h1,
+.profile-main h2,
+.profile-main h3,
+.profile-main h4 {
+    color: var(--profile-heading);
+    letter-spacing: -0.025em;
+}
+.profile-main h1 {
+    max-width: 720px;
+    font-size: clamp(32px, 3.4vw, 46px);
+    font-weight: 700;
+    line-height: 1.2;
+}
+.profile-main h2 {
+    font-size: clamp(26px, 2.5vw, 34px);
+    font-weight: 700;
+    line-height: 1.3;
+}
+.profile-main h3 {
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+.profile-main h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+.profile-eyebrow {
+    margin-bottom: 12px;
+    color: var(--brand-primary-hover);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+.profile-label {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #eef3f9;
+}
+
+/* Hero dan ilustrasi lokal. */
+.profile-hero {
+    padding-block: 32px 64px;
+    border-bottom: 1px solid #dce4ec;
+    background: linear-gradient(180deg, #cfd9e5 0%, #edf2f8 100%);
+}
+.profile-breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 32px;
+    padding: 0;
+    color: #3e5066;
+    font-size: 14px;
+    list-style: none;
+}
+.profile-breadcrumbs li + li::before {
+    content: "/";
+    margin-right: 10px;
+    color: var(--brand-muted);
+}
+.profile-breadcrumbs a:hover,
+.profile-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.profile-hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 48px;
+}
+.profile-intro {
+    max-width: 65ch;
+    margin-top: 24px;
+    color: #3e5066;
+    font-size: 17px;
+    line-height: 1.8;
+}
+.profile-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+}
+.profile-highlights li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border: 1px solid #dce4ec;
+    border-radius: 8px;
+    color: #304a6b;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+.profile-highlights .profile-icon {
+    width: 17px;
+    height: 17px;
+}
+.profile-hero-visual {
+    padding: 10px;
+    border: 1px solid #c9d7e5;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 10px 28px rgb(16 42 67 / 10%);
+}
+.profile-hero-visual img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 9px;
+    object-fit: cover;
+}
+.profile-hero-visual figcaption {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 8px 4px;
+    color: #304a6b;
+    font-size: 12px;
+    line-height: 1.6;
+}
+.profile-hero-visual figcaption strong,
+.profile-hero-visual figcaption span > span {
+    display: block;
+}
+.profile-hero-visual figcaption span > span {
+    margin-top: 2px;
+    color: var(--brand-muted);
+}
+
+/* Judul bagian dan kartu informasi. */
+.profile-section {
+    padding-block: 72px;
+}
+.profile-section-soft {
+    border-block: 1px solid #e8edf3;
+    background: var(--brand-soft);
+}
+.profile-section-heading > p:not(.profile-eyebrow) {
+    max-width: 65ch;
+    margin-top: 16px;
+    color: var(--brand-muted);
+}
+.profile-heading-wide {
+    max-width: 850px;
+    margin-bottom: 36px;
+}
+.profile-heading-centered {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+.profile-heading-centered > p:not(.profile-eyebrow) {
+    margin-inline: auto;
+}
+.profile-focus-grid,
+.profile-duties-grid,
+.profile-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+.profile-focus-card,
+.profile-duty-card,
+.profile-pillar-card {
+    min-width: 0;
+    padding: 28px;
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
+}
+.profile-focus-card {
+    background: var(--brand-soft);
+}
+.profile-focus-card h3 {
+    margin-top: 20px;
+}
+.profile-focus-card p,
+.profile-duty-card > p:not(.profile-card-context),
+.profile-pillar-card > p:not(.profile-pillar-subtitle) {
+    margin-top: 12px;
+    color: var(--brand-muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+.profile-duty-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+.profile-duty-wide {
+    grid-column: span 2;
+}
+.profile-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.profile-card-number {
+    color: var(--brand-primary);
+    font-size: 22px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+.profile-card-context {
+    margin-top: auto;
+    padding-top: 20px;
+    color: var(--brand-primary-hover);
+    font-size: 12px;
+    font-weight: 500;
+}
+.profile-card-context::before {
+    display: block;
+    height: 1px;
+    margin-bottom: 12px;
+    background: #edf1f6;
+    content: "";
+}
+
+/* Tab dukungan Dayasos dan tujuan/fungsi/manfaat SIDAYA. */
+.profile-support {
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid #d4e0ed;
+    border-radius: 16px;
+    background: #edf2f8;
+}
+.profile-support-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccd9e7;
+}
+.profile-support-heading p {
+    margin-top: 6px;
+    color: var(--brand-muted);
+    font-size: 13px;
+}
+.profile-support-note {
+    color: var(--brand-muted);
+    font-size: 12px;
+    text-align: right;
+}
+.profile-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+.profile-tabs button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 18px;
+    border: 1px solid #d2dfec;
+    border-radius: 10px;
+    color: #43474e;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    transition:
+        background 0.15s,
+        border-color 0.15s;
+}
+.profile-tabs button[aria-selected="true"] {
+    border-color: var(--profile-heading);
+    color: #fff;
+    background: var(--profile-heading);
+}
+.profile-tabs button:hover:not([aria-selected="true"]) {
+    color: var(--profile-heading);
+    background: #f1f5fa;
+    border-color: #8ba2bc;
+}
+.profile-support-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.profile-support-tabs button {
+    justify-content: start;
+    text-align: left;
+}
+.profile-support-tabs button[aria-selected="true"] {
+    border-color: #304a6b;
+    color: var(--profile-heading);
+    background: #fff;
+    box-shadow: inset 0 -3px 0 #304a6b;
+}
+.profile-sidaya-tabs {
+    justify-content: center;
+}
+.profile-panel {
+    padding: 36px;
+    border: 1px solid var(--brand-border);
+    border-radius: 18px;
+    background: #fff;
+}
+.profile-panel + .profile-panel {
+    margin-top: 24px;
+}
+.profile-tabs-ready .profile-panel {
+    margin-top: 0;
+}
+.profile-support-panel {
+    display: flex;
+    align-items: start;
+    gap: 16px;
+    padding: 24px;
+    border-radius: 12px;
+}
+.profile-support-panel p {
+    max-width: 80ch;
+    margin-top: 8px;
+    color: var(--brand-muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+.profile-panel h3 {
+    font-size: 24px;
+    line-height: 1.4;
+}
+.profile-purpose-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 40px;
+}
+.profile-panel-copy > p:not(.profile-eyebrow) {
+    max-width: 65ch;
+    margin-top: 20px;
+    color: var(--brand-muted);
+    font-size: 15px;
+    line-height: 1.8;
+}
+.profile-purpose-note {
+    padding: 24px;
+    border: 1px solid #dce6f2;
+    border-radius: 14px;
+    background: #f1f6fb;
+}
+.profile-purpose-note ul {
+    margin: 16px 0 0;
+    padding-left: 18px;
+    color: var(--brand-muted);
+    font-size: 14px;
+}
+.profile-purpose-note li + li {
+    margin-top: 12px;
+}
+.profile-functions-grid,
+.profile-benefits-grid {
+    display: grid;
+    gap: 20px;
+    margin-top: 28px;
+}
+.profile-functions-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.profile-benefits-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.profile-functions-grid article,
+.profile-benefits-grid article {
+    padding: 22px;
+    border: 1px solid #e0eaf4;
+    border-radius: 12px;
+    background: var(--brand-soft);
+}
+.profile-functions-grid h4 {
+    margin-top: 16px;
+}
+.profile-functions-grid p,
+.profile-benefits-grid p {
+    margin-top: 8px;
+    color: var(--brand-muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+.profile-benefits-grid article {
+    display: flex;
+    align-items: start;
+    gap: 16px;
+}
+

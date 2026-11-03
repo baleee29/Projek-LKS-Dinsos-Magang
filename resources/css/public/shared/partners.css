@@ -1,0 +1,230 @@
+/* Detail publik mitra memakai font, warna, navbar, dan footer Sidaya. */
+.mitra-page .page-hero {
+    padding-bottom: 48px;
+}
+
+.mitra-page .breadcrumbs ol {
+    margin-bottom: 30px;
+}
+
+.mitra-page-subtitle {
+    margin-top: 12px;
+    color: var(--color-heading);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.mitra-page .page-intro {
+    margin-top: 14px;
+    font-size: 16px;
+}
+
+.mitra-sample-note {
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    max-width: 900px;
+    margin-top: 24px;
+    padding: 16px 18px;
+    border: 1px solid var(--brand-line);
+    border-radius: var(--brand-control-radius);
+    background: #fff;
+    color: var(--color-muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.mitra-dummy-label {
+    flex-shrink: 0;
+    padding: 2px 10px;
+    border-radius: 5px;
+    background: var(--brand-pale);
+    color: var(--color-heading);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.mitra-page .pillar-links a {
+    min-height: 44px;
+}
+
+.mitra-page .pillar-links a[aria-current="page"] {
+    background: var(--color-heading);
+    color: #fff;
+}
+
+.mitra-page .detail-section {
+    padding-block: 52px;
+}
+
+.mitra-profile-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 48px;
+    align-items: start;
+}
+
+.mitra-profile-grid > *,
+.mitra-activity-grid > *,
+.mitra-partner-grid > * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.mitra-contact-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.mitra-profile-data {
+    margin: 0;
+    padding: 0 0 0 26px;
+    border-left: 2px solid var(--brand-line);
+}
+
+.mitra-profile-data > div + div {
+    margin-top: 20px;
+}
+
+.mitra-profile-data dt {
+    color: var(--color-heading);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.mitra-profile-data dd {
+    margin: 5px 0 0;
+    color: var(--color-muted);
+    font-size: 15px;
+}
+
+.mitra-activity-grid,
+.mitra-partner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.mitra-page .info-card {
+    padding: 26px;
+}
+
+.mitra-page .mitra-activity-date {
+    margin: 0 0 10px;
+    color: var(--color-heading);
+    font-size: 13px;
+}
+
+.mitra-page .mitra-result {
+    padding-top: 14px;
+    border-top: 1px solid var(--brand-border);
+}
+
+.mitra-result strong {
+    color: var(--color-heading);
+    font-weight: 600;
+}
+
+.mitra-partner-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mitra-partner {
+    padding: 24px;
+    border: 1px solid var(--brand-border);
+    border-radius: var(--brand-card-radius);
+}
+
+.mitra-partner h3 {
+    font-size: 19px;
+}
+
+.mitra-partner dl {
+    margin: 20px 0 0;
+}
+
+.mitra-partner dl > div {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 16px;
+    padding-block: 10px;
+    border-top: 1px solid var(--brand-border);
+    font-size: 14px;
+}
+
+.mitra-partner dt {
+    font-weight: 600;
+}
+
+.mitra-partner dd {
+    margin: 0;
+    color: var(--color-muted);
+}
+
+.mitra-page .footer-column > a {
+    white-space: normal;
+}
+
+.mitra-page .footer-brand .mitra-footer-note {
+    max-width: 290px;
+    margin-top: 0.5rem;
+    color: var(--color-muted);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.mitra-page .footer-bottom > a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .mitra-profile-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .mitra-profile-data {
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 680px) {
+    .mitra-page .page-hero {
+        padding-bottom: 36px;
+    }
+
+    .mitra-page-subtitle {
+        font-size: 18px;
+    }
+
+    .mitra-sample-note {
+        flex-direction: column;
+        gap: 8px;
+        padding: 14px;
+    }
+
+    .mitra-page .detail-section {
+        padding-block: 40px;
+    }
+
+    .mitra-activity-grid,
+    .mitra-partner-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .mitra-page .info-card,
+    .mitra-partner {
+        padding: 22px;
+    }
+
+    .mitra-partner dl > div {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+}

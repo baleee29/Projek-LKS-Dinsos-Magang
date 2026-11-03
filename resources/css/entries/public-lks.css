@@ -1,0 +1,16 @@
+/* Urutan mengikuti halaman public/pillars/lks.blade.php di sumber. Jangan diubah: urutan memengaruhi hasil. */
+@import "../shared/brand.css";
+@import "../public/shared/base.css";
+@import "../public/shared/navigation.css";
+@import "../public/shared/footer.css";
+@import "../public/shared/section-nav.css";
+@import "../public/shared/content.css";
+@import "../public/shared/partners.css";
+@import "../public/pillars/lks/hero.css";
+@import "../public/pillars/lks/content.css";
+@import "../public/pillars/lks/registration-guide.css";
+@import "../public/pillars/lks/responsive.css";
+@import "../public/pillars/lks/redesign.css";
+@import "../public/pillars/lks/hero-v2.css";
+@import "../public/shared/card-accent.css";
+@import "../public/shared/section-accent.css";

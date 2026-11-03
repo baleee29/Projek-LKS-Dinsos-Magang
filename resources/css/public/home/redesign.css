@@ -1,0 +1,263 @@
+/* ===== Desain ulang tampilan Beranda (susunan tiap bagian tetap) =====
+ * Navy polos, satu aksen kunyit (#e0a526) untuk penanda dan fokus, dan pita motif sasirangan
+ * "gigi haruan" (kain khas Banjar) di tepi bawah hero sebagai satu-satunya elemen yang menonjol. */
+#beranda {
+    --hm-night: #102a43;
+    --hm-indigo: #1e3a5f;
+    --hm-kunyit: #e0a526;
+    --hm-paper: #f8fafd;
+    --hm-rule: #dce4ec;
+}
+#beranda :is(a, button):focus-visible {
+    outline: 3px solid var(--hm-kunyit);
+    outline-offset: 3px;
+}
+
+/* Hero */
+#beranda .home-hero {
+    padding-bottom: 28px;
+    background: var(--hm-night);
+}
+#beranda .home-hero::after {
+    inset: auto 0 0;
+    height: 28px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='28'%3E%3Cpath d='M0 28 16 6 32 28Z' fill='%23e0a526'/%3E%3Cpath d='M8 28 16 17 24 28Z' fill='%23102a43'/%3E%3Ccircle cx='16' cy='2' r='1.6' fill='%23cfd9e5'/%3E%3C/svg%3E");
+    background-size: 32px 28px;
+    background-repeat: repeat-x;
+}
+#beranda .home-hero .ph-kicker {
+    gap: 12px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #cfd9e5;
+}
+#beranda .home-hero .ph-kicker span {
+    padding: 0 12px 0 0;
+    border-right: 2px solid var(--hm-kunyit);
+    border-radius: 0;
+    background: none;
+    font-weight: 700;
+}
+#beranda .home-hero .ph-copy h1 {
+    letter-spacing: -0.035em;
+}
+#beranda .home-hero .ph-copy h1 em {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    color: inherit;
+}
+#beranda .home-hero .ph-lead {
+    color: #cfd9e5;
+    font-size: 1.125rem;
+}
+#beranda .home-hero .ph-actions .button {
+    min-height: 48px;
+    border-radius: 4px;
+}
+#beranda .home-hero-info {
+    color: #cfd9e5;
+    font-size: 0.9375rem;
+}
+#beranda .home-hero-info .ph-icon {
+    color: var(--hm-kunyit);
+}
+#beranda .home-hero-photo {
+    border: 0;
+    border-radius: 4px;
+    box-shadow: none;
+}
+#beranda .home-hero-photo img {
+    border-radius: 4px;
+}
+#beranda .home-hero .ph-paths {
+    border-top-color: rgb(207 217 229 / 22%);
+}
+#beranda .home-hero .ph-paths li + li {
+    border-left-color: rgb(207 217 229 / 22%);
+}
+#beranda .home-hero .ph-paths a {
+    position: relative;
+}
+#beranda .home-hero .ph-paths a::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: transparent;
+}
+#beranda .home-hero .ph-paths li:not(:first-child) a::before {
+    left: 1.25rem;
+}
+#beranda .home-hero .ph-paths a:hover {
+    background: none;
+}
+#beranda .home-hero .ph-paths a:hover::before {
+    background: var(--hm-kunyit);
+}
+#beranda .home-hero .ph-paths a small {
+    color: #a9bdd4;
+}
+#beranda .home-hero .ph-paths a .ph-icon {
+    color: var(--hm-kunyit);
+}
+
+/* Judul bagian */
+#beranda .section-heading h2 {
+    color: var(--hm-night);
+    letter-spacing: -0.035em;
+}
+#beranda .section-heading > p {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Mengenal pemberdayaan sosial */
+#beranda .home-roles-label {
+    color: var(--hm-night);
+    font-size: 0.9375rem;
+    letter-spacing: 0;
+    text-transform: none;
+}
+#beranda .home-role-tabs {
+    gap: 0;
+    border-bottom: 1px solid var(--hm-rule);
+}
+#beranda .home-role-tab {
+    position: relative;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: #596b80;
+}
+#beranda .home-role-tab::after {
+    content: "";
+    position: absolute;
+    right: 1.125rem;
+    bottom: -1px;
+    left: 1.125rem;
+    height: 3px;
+    background: transparent;
+}
+#beranda .home-role-tab:hover {
+    color: var(--hm-night);
+}
+#beranda .home-role-tab[aria-selected="true"] {
+    background: none;
+    color: var(--hm-night);
+}
+#beranda .home-role-tab[aria-selected="true"]::after {
+    background: var(--hm-kunyit);
+}
+#beranda .home-role-panel {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 0;
+    border-top: 3px solid var(--hm-kunyit);
+    border-radius: 6px;
+    background: var(--hm-paper);
+}
+/* Faint sasirangan motif in the right corner, fading out toward the text. */
+#beranda .home-role-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 0 45%;
+    z-index: -1;
+    background: url("/assets/images/branding/sasirangan-motif.svg") 0 0 / 168px 120px repeat;
+    opacity: 0.16;
+    -webkit-mask-image: linear-gradient(to left, #000 15%, transparent 90%);
+    mask-image: linear-gradient(to left, #000 15%, transparent 90%);
+    pointer-events: none;
+}
+#beranda .home-role-num {
+    border: 2px solid var(--hm-night);
+    background: #fff;
+    color: var(--hm-night);
+}
+#beranda .home-role-steps::before {
+    background: var(--hm-rule);
+}
+#beranda .home-role-steps a {
+    color: var(--hm-indigo);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+#beranda .home-role-steps a::after {
+    content: none;
+}
+
+/* Hubungi Dinas Sosial */
+#beranda .location-map {
+    border-radius: 4px;
+}
+#beranda .home-open-status {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #596b80;
+    font-weight: 600;
+}
+#beranda .home-open-status.is-open {
+    background: none;
+    color: #1d6b45;
+}
+#beranda .service-list {
+    gap: 0;
+}
+#beranda .service-item {
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--hm-rule);
+}
+#beranda .service-icon {
+    border: 0;
+    background: none;
+    color: var(--hm-night);
+}
+#beranda .service-item h3 {
+    color: var(--hm-night);
+}
+#beranda .service-item a {
+    color: var(--hm-indigo);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+#beranda .home-copy {
+    border-radius: 4px;
+}
+
+/* Galeri */
+#beranda .gallery-grid img {
+    border: 1px solid var(--hm-rule);
+    border-radius: 4px;
+    background: var(--hm-paper);
+}
+#beranda .gallery-grid figcaption {
+    color: var(--hm-night);
+    font-weight: 600;
+}
+
+/* Section bands alternate white and paper below the hero (profile, services, gallery), so long white runs read as
+   separate parts. The profile stays white because its roles card is paper-coloured. */
+#beranda .services {
+    background: var(--hm-paper);
+}
+#beranda .gallery {
+    background: #fff;
+}
+/* Short gold rule above each section title, echoing the gold edge on the cards. */
+#beranda .section-heading h2::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 0 auto 18px;
+    border-radius: 2px;
+    background: var(--hm-kunyit);
+}
