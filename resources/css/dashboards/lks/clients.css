@@ -1,0 +1,100 @@
+/* LKS recipient records reuse the existing dashboard forms, tables and colors. */
+.quarterly-dashboard .q-resident-table {
+    table-layout: auto;
+}
+.quarterly-dashboard .q-resident-table th:nth-child(n) {
+    width: auto;
+}
+.quarterly-dashboard .q-resident-table td:first-child {
+    min-width: 160px;
+}
+.quarterly-dashboard .q-resident-summary {
+    margin: 20px 0;
+}
+.quarterly-dashboard .q-resident-demographics {
+    margin-bottom: 22px;
+}
+.quarterly-dashboard .q-resident-demographics .q-actions {
+    gap: 12px 26px;
+    font-size: 13px;
+}
+.quarterly-dashboard .q-resident-detail {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 20px;
+}
+.quarterly-dashboard .q-resident-detail .field-grid {
+    grid-template-columns: minmax(0, 1fr);
+}
+.quarterly-dashboard .q-resident-detail dd {
+    white-space: pre-wrap;
+}
+.quarterly-dashboard .q-resident-fieldset {
+    margin: 0;
+}
+.quarterly-dashboard .q-resident-fieldset legend {
+    padding: 0 6px;
+    color: var(--heading);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+.quarterly-dashboard .q-resident-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 0;
+}
+.quarterly-dashboard .q-resident-checkbox > input {
+    margin: 4px 0 0;
+}
+.quarterly-dashboard .q-resident-history {
+    margin-top: 22px;
+}
+@media (max-width: 700px) {
+    .quarterly-dashboard .q-resident-detail {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+    .quarterly-dashboard .q-resident-table td:first-child {
+        min-width: 0;
+    }
+}
+
+.quarterly-dashboard .stats-grid .stat-card,
+.stats-grid .stat-card,
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.quarterly-dashboard .stats-grid .stat-card h2,
+.stats-grid .stat-card h2,
+.stat-card h2 {
+    text-align: center;
+    padding-right: 0;
+}
+
+.quarterly-dashboard .stats-grid .stat-card p,
+.stats-grid .stat-card p,
+.stat-card p {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+    transform: translateY(-4px);
+}
+
+.quarterly-dashboard .stats-grid .stat-card .stat-caption,
+.stats-grid .stat-card .stat-caption,
+.stat-card .stat-caption {
+    text-align: center;
+}
+
+

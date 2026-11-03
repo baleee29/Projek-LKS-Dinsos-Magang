@@ -1,0 +1,212 @@
+﻿/* Institutional footer shared by every Sidaya page. */
+.site-footer {
+    background: #102a43;
+    color: #cbd5e1;
+    font:
+        400 14px/1.65 "Plus Jakarta Sans",
+        Arial,
+        sans-serif;
+    letter-spacing: 0;
+    color-scheme: dark;
+}
+.site-footer * {
+    box-sizing: border-box;
+}
+.site-footer .container {
+    width: calc(100% - 64px);
+    max-width: 1216px;
+    margin-inline: auto;
+}
+.site-footer a {
+    color: inherit;
+    text-decoration: none;
+}
+.site-footer button {
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+.site-footer p,
+.site-footer h2 {
+    margin: 0;
+}
+.site-footer .footer-main {
+    display: grid;
+    grid-template-columns: 1.7fr repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    padding-block: 56px 48px;
+}
+.site-footer .footer-brand,
+.site-footer .footer-column {
+    min-width: 0;
+}
+.site-footer .footer-brand .brand {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.025em;
+}
+.site-footer .footer-brand p {
+    max-width: 36ch;
+    margin-top: 12px;
+}
+.site-footer .social-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+.site-footer .social-icons a {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid rgb(255 255 255 / 30%);
+    border-radius: 50%;
+    background: rgb(255 255 255 / 8%);
+    color: #fff;
+}
+.site-footer .social-icons a:hover {
+    background: rgb(255 255 255 / 18%);
+}
+.site-footer .social-icons svg {
+    width: 17px;
+    height: 17px;
+}
+.site-footer .footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 4px;
+}
+.site-footer .footer-column h2 {
+    margin-bottom: 12px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.site-footer .footer-column > a,
+.site-footer .footer-column > button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+.site-footer .footer-column button,
+.site-footer .footer-bottom button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+}
+.site-footer :is(a, button):hover {
+    color: #fff;
+}
+.site-footer .footer-column > a:hover,
+.site-footer .footer-bottom button:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.site-footer .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    padding-block: 24px;
+    border-top: 1px solid rgb(255 255 255 / 12%);
+    color: #b2c3d5;
+    font-size: 12px;
+}
+.site-footer .footer-bottom > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+}
+.site-footer :is(a, button):focus-visible {
+    outline: 3px solid #c3def2;
+    outline-offset: 4px;
+}
+.site-chrome-dialog {
+    width: min(440px, calc(100% - 40px));
+    padding: 28px;
+    border: 1px solid #dce4ec;
+    border-radius: 12px;
+    background: #fff;
+    color: #102a43;
+    font:
+        400 14px/1.7 "Plus Jakarta Sans",
+        Arial,
+        sans-serif;
+    color-scheme: light;
+}
+.site-chrome-dialog::backdrop {
+    background: rgb(16 42 67 / 50%);
+}
+.site-chrome-dialog h2 {
+    margin: 0 0 12px;
+    font-size: 22px;
+}
+.site-chrome-dialog p {
+    margin: 0 0 24px;
+}
+.site-chrome-dialog form {
+    text-align: right;
+}
+.site-chrome-dialog button {
+    padding: 10px 24px;
+    border: 0;
+    border-radius: 8px;
+    background: #102a43;
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+}
+@media (max-width: 900px) {
+    .site-footer .footer-main {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+        padding-block: 40px 32px;
+    }
+    .site-footer .footer-brand {
+        grid-column: 1 / -1;
+    }
+    .site-footer .footer-bottom {
+        flex-direction: column;
+        align-items: start;
+    }
+}
+@media (max-width: 600px) {
+    .site-footer .container {
+        width: calc(100% - 40px);
+    }
+    .site-footer .footer-main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px 16px;
+    }
+    .site-footer .footer-column > a,
+    .site-footer .footer-bottom button {
+        min-height: 44px;
+    }
+    .site-footer .social-icons a {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* Footer placement on the login page. */
+.has-site-footer .site-footer {
+    position: relative;
+    z-index: 1;
+}
+.has-site-footer .site-footer .container {
+    padding: 0;
+}
+@media print {
+    .has-site-footer > .site-footer {
+        display: none;
+    }
+}

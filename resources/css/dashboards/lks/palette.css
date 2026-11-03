@@ -1,0 +1,233 @@
+/*
+ * LKS-only palette: emerald & white (docs/plans/palet-lks.md).
+ * Loaded only by the LKS dashboard manifest and scoped to body[data-role="lks"], so Admin
+ * (which also loads the LKS component styles) keeps the shared blue palette.
+ * 60% white content · 30% emerald #0B3C26 sidebar/primary · 10% mint #00A86B / amber #FFC107 accents.
+ * Mint carries dark text (#062417); green text on white uses #00875A; amber is never text on white.
+ */
+
+/* Base tokens (light). */
+body[data-role="lks"] {
+    --page: #f4f8f6;
+    --surface: #ffffff;
+    --soft: #eaf4ef;
+    --soft-2: #f6faf8;
+    --line: #d5e5dc;
+    --text: #14231b;
+    --muted: #4f6b5c;
+    --primary: #0b3c26;
+    --heading: #082d1c;
+    --brand-primary: #0b3c26;
+    --brand-primary-hover: #082d1c;
+    --brand-focus: #00a86b;
+    --brand-border: #d5e5dc;
+    --brand-soft: #f6faf8;
+    --brand-pale: #cfe6da;
+    --lks-accent: #00a86b;
+    --lks-accent-hover: #00b875;
+    --lks-accent-ink: #062417;
+    --lks-link: #00875a;
+    --lks-amber: #ffc107;
+    --lks-pale: #d9efe4;
+    --lks-pale-2: #e8f5ee;
+    background: var(--page);
+    color: var(--text);
+}
+
+/* Base tokens (dark). */
+.dark body[data-role="lks"] {
+    --page: #0a1a13;
+    --surface: #10271c;
+    --soft: #163626;
+    --soft-2: #122e20;
+    --line: #24503a;
+    --text: #e6f2ec;
+    --muted: #a6c4b4;
+    --primary: #7fd6b0;
+    --heading: #c9eedd;
+    --brand-primary: #0f5a39;
+    --brand-primary-hover: #137147;
+    --brand-border: #24503a;
+    --brand-soft: #122e20;
+    --brand-pale: #1d4632;
+    --lks-link: #5fd3a4;
+    --lks-pale: #1d4632;
+    --lks-pale-2: #163626;
+}
+
+/* Sidebar: emerald canvas, mint active marker, amber counters. */
+body[data-role="lks"] .sidebar {
+    --sidebar-canvas: #0b3c26;
+    --sidebar-active: rgb(0 168 107 / 18%);
+    --sidebar-counter: #ffc107;
+    --sidebar-hover: rgb(255 255 255 / 12%);
+}
+
+.dark body[data-role="lks"] .sidebar {
+    --sidebar-canvas: #082d1c;
+}
+
+body[data-role="lks"] .sidebar .nav-item.is-active,
+body[data-role="lks"] .sidebar-footer .q-account-link.is-active {
+    box-shadow: inset 3px 0 0 #00a86b;
+}
+
+body[data-role="lks"] .sidebar .nav-item.is-active .icon,
+body[data-role="lks"] .sidebar-footer .q-account-link.is-active .icon {
+    color: #00a86b;
+}
+
+body[data-role="lks"] .sidebar .psm-nav-count {
+    color: #0b3c26;
+    font-weight: 700;
+}
+
+body[data-role="lks"] .sidebar .avatar {
+    background: #00a86b;
+    color: #062417;
+}
+
+/* Workspace and component tokens already used by the LKS styles. */
+body[data-role="lks"] .lks-workspace {
+    --lks-soft: #eef7f2;
+    --lks-tint: #e3f2ea;
+    --lks-line: #d5e5dc;
+    --lks-primary: #0b3c26;
+    --lks-primary-container: #0b3c26;
+}
+
+.dark body[data-role="lks"] .lks-workspace {
+    --lks-soft: #163626;
+    --lks-tint: #1d4632;
+    --lks-line: var(--line);
+    --lks-primary: #7fd6b0;
+    --lks-primary-container: #0f5a39;
+}
+
+body[data-role="lks"] .lks-resident-form-page {
+    --lrf-canvas: #f6faf8;
+    --lrf-field: #eef7f2;
+    --lrf-soft: #e3f2ea;
+    --lrf-line: #d5e5dc;
+    --lrf-active: #b9e3cd;
+    --lrf-footer: #d9efe4;
+    --lrf-primary: #0b3c26;
+    --lrf-secondary: #1f6b47;
+    --lrf-ink: #14231b;
+    --lrf-muted: #4f6b5c;
+}
+
+.dark body[data-role="lks"] .lks-resident-form-page {
+    --lrf-canvas: #0d2118;
+    --lrf-surface: #10271c;
+    --lrf-field: #163626;
+    --lrf-soft: #1d4632;
+    --lrf-line: #2c5c44;
+    --lrf-active: #2f6b4d;
+    --lrf-footer: #1d4632;
+    --lrf-primary: #0f5a39;
+    --lrf-secondary: #9fe0c1;
+    --lrf-ink: #e6f2ec;
+    --lrf-muted: #a6c4b4;
+}
+
+/* Links and green text on white. */
+body[data-role="lks"] .lks-workspace a:not([class*="button"]):not(.lks-row-action) {
+    color: var(--lks-link);
+}
+
+/* Primary CTA: mint with dark ink (white on mint fails AA). */
+body[data-role="lks"] .lks-workspace .lks-button-primary,
+body[data-role="lks"] .lks-resident-form-page .lrf-primary,
+body[data-role="lks"] .lm-button-primary {
+    background: var(--lks-accent);
+    border-color: var(--lks-accent);
+    color: var(--lks-accent-ink);
+    font-weight: 700;
+}
+
+body[data-role="lks"] .lks-workspace .lks-button-primary:hover,
+body[data-role="lks"] .lks-resident-form-page .lrf-primary:hover,
+body[data-role="lks"] .lm-button-primary:hover {
+    background: var(--lks-accent-hover);
+    border-color: var(--lks-accent-hover);
+    color: var(--lks-accent-ink);
+}
+
+body[data-role="lks"] .lks-workspace .lks-button-primary .icon,
+body[data-role="lks"] .lks-resident-form-page .lrf-primary .icon,
+body[data-role="lks"] .lm-button-primary .icon {
+    color: var(--lks-accent-ink);
+}
+
+/* Former fixed blues in LKS components. */
+body[data-role="lks"] .lm-button-upload {
+    background: #0b3c26;
+    border-color: #0b3c26;
+}
+
+body[data-role="lks"] .lm-photo-placeholder {
+    color: #0b3c26;
+}
+
+body[data-role="lks"] :is(.lks-initials, .lks-client-detail-view .lcd-title-initials, .lm-avatar-initials) {
+    background: var(--lks-pale);
+    color: var(--primary);
+}
+
+body[data-role="lks"] .lks-table tr:nth-child(3n) .lks-initials {
+    background: var(--lks-pale-2);
+}
+
+body[data-role="lks"] .lks-avatar {
+    background: var(--lks-pale-2);
+}
+
+body[data-role="lks"] .lks-status-approved,
+body[data-role="lks"] .lks-chair-label,
+body[data-role="lks"] .lks-status-pending {
+    color: var(--primary);
+    background: var(--lks-pale);
+}
+
+body[data-role="lks"] .lks-status-pending {
+    background: #fff3cd;
+    color: #5c4300;
+}
+
+body[data-role="lks"] .status-pending {
+    background: #eaf4ef;
+    color: #0b3c26;
+    border-color: #cfe6da;
+}
+
+body[data-role="lks"] .lks-resident-form-page .lrf-preview-avatar,
+body[data-role="lks"] .lks-resident-form-page .lrf-footer-note > .icon {
+    color: #eaf4ef;
+}
+
+.dark body[data-role="lks"] :is(.status-pending, .lks-status-approved, .lks-chair-label) {
+    background: #1d4632;
+    color: #c9eedd;
+    border-color: #2c5c44;
+}
+
+.dark body[data-role="lks"] .lks-status-pending {
+    background: #4a3a00;
+    color: #ffe08a;
+}
+
+/* Focus ring follows the mint accent. */
+body[data-role="lks"] :is(button, a, input, select, textarea):focus-visible {
+    outline-color: #00a86b;
+}
+
+body[data-role="lks"] .lks-status-draft {
+    color: #2f4a3c;
+    background: #e3eee8;
+}
+
+.dark body[data-role="lks"] .lks-status-draft {
+    color: #c9eedd;
+    background: #1d4632;
+}

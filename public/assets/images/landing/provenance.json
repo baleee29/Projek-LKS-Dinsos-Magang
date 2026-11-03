@@ -1,0 +1,11 @@
+{
+    "asset": "foto-dinsos-584.webp, foto-dinsos-941.webp",
+    "source": "Foto dinsos.png in this folder (kept unchanged as the original)",
+    "created_on": "2026-10-26",
+    "usage": "Home hero photo; the browser picks 584w or 941w through srcset",
+    "modifications": "Downscaled with Lanczos to widths 584 and 941 (aspect ratio kept) and encoded as WebP quality 80. No crop or color change; CSS object-fit still crops for display.",
+    "sha256": {
+        "foto-dinsos-584.webp": "e6272624454b73753e1cf62f57df6a39568a632510f0433d3ef86f31eee87ab2",
+        "foto-dinsos-941.webp": "0e2d929f889dc5241fedb2ae0a0cffdc82aef8f432da2ed63391c11023e5c04f"
+    }
+}

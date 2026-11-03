@@ -1,0 +1,295 @@
+/* LKS semester report detail, shared by the LKS and Admin dashboards; colours follow each role's tokens. */
+.sr-detail {
+    display: grid;
+    gap: 18px;
+    min-width: 0;
+}
+.sr-detail-icon {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.sr-detail-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--muted);
+}
+.sr-detail-breadcrumb a {
+    color: var(--lks-link, var(--primary));
+    font-weight: 600;
+    text-decoration: none;
+}
+.sr-detail-breadcrumb a:hover {
+    text-decoration: underline;
+}
+.sr-detail-hero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+    padding: 22px 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: linear-gradient(
+        135deg,
+        var(--surface) 0%,
+        var(--soft-2, var(--soft)) 100%
+    );
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+}
+.sr-detail-hero-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--primary);
+    color: #fff;
+}
+.sr-detail-hero-icon .sr-detail-icon {
+    width: 26px;
+    height: 26px;
+}
+.sr-detail-hero-text {
+    flex: 1 1 260px;
+    min-width: 0;
+}
+.sr-detail-eyebrow {
+    margin: 0 0 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--lks-link, var(--muted));
+}
+.sr-detail-hero h1 {
+    margin: 0;
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.25;
+    color: var(--heading);
+    overflow-wrap: anywhere;
+}
+.sr-detail-hero-text > .sr-detail-subject {
+    margin: 6px 0 0;
+    font-weight: 600;
+    color: var(--text);
+    overflow-wrap: anywhere;
+}
+.sr-detail-hero-text > p:last-child {
+    margin: 6px 0 0;
+    color: var(--muted);
+}
+.sr-detail-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+.sr-detail-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+.sr-detail-stat {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+}
+.sr-detail-stat > .sr-detail-icon {
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    border-radius: 10px;
+    background: var(--lks-pale-2, var(--soft));
+    color: var(--primary);
+}
+.sr-detail-stat div {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+}
+.sr-detail-stat span {
+    font-size: 12px;
+    color: var(--muted);
+}
+.sr-detail-stat strong {
+    font-size: 15px;
+    color: var(--text);
+    overflow-wrap: anywhere;
+}
+.sr-detail-stat small {
+    font-size: 12px;
+    color: var(--muted);
+}
+.sr-detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+    gap: 18px;
+    align-items: start;
+}
+.sr-detail-main,
+.sr-detail-side {
+    display: grid;
+    gap: 18px;
+    min-width: 0;
+}
+.sr-detail-card {
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+}
+.sr-detail-card h2 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+    color: var(--heading);
+}
+.sr-detail-card h2 > .sr-detail-icon {
+    color: var(--lks-accent, var(--primary));
+}
+.sr-detail-count {
+    margin-left: auto;
+    min-width: 26px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--soft);
+    font-size: 12px;
+    text-align: center;
+    color: var(--text);
+}
+.sr-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 20px;
+    margin: 0;
+}
+.sr-detail-grid-single {
+    grid-template-columns: minmax(0, 1fr);
+}
+.sr-detail-grid .sr-detail-wide {
+    grid-column: 1 / -1;
+}
+.sr-detail-grid dt {
+    font-size: 12px;
+    color: var(--muted);
+}
+.sr-detail-grid dd {
+    margin: 3px 0 0;
+    font-weight: 600;
+    color: var(--text);
+    overflow-wrap: anywhere;
+}
+.sr-detail-files {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.sr-detail-files li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--soft-2, var(--soft));
+}
+.sr-detail-file-type {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border-radius: 10px;
+    background: var(--primary);
+    font-size: 11px;
+    font-weight: 800;
+    color: #fff;
+}
+.sr-detail-files li > div {
+    display: grid;
+    flex: 1;
+    gap: 2px;
+    min-width: 0;
+}
+.sr-detail-files strong {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--text);
+}
+.sr-detail-files small {
+    font-size: 12px;
+    color: var(--muted);
+}
+.sr-detail-button {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+}
+.sr-detail-button:hover {
+    border-color: var(--primary);
+}
+.sr-detail-empty,
+.sr-detail-note {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+.sr-detail-note {
+    margin-top: 14px;
+}
+.dark .sr-detail-hero-icon,
+.dark .sr-detail-file-type {
+    color: var(--page);
+}
+@media (max-width: 1100px) {
+    .sr-detail-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .sr-detail-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+@media (max-width: 560px) {
+    .sr-detail-hero,
+    .sr-detail-card {
+        padding: 16px;
+    }
+    .sr-detail-stats,
+    .sr-detail-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .sr-detail-files li {
+        flex-wrap: wrap;
+    }
+    .sr-detail-button {
+        width: 100%;
+        justify-content: center;
+    }
+}

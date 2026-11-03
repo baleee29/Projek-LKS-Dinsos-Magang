@@ -1,0 +1,444 @@
+/* Save actions and validation messages. */
+.lks-resident-form-page .lrf-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--lrf-footer);
+}
+
+.lks-resident-form-page .lrf-footer-note {
+    display: block;
+    align-items: center;
+    flex: 1 1 220px;
+    gap: 12px;
+    min-width: 0;
+    margin: 0;
+}
+
+.lks-resident-form-page .lrf-footer-note:has(> .icon) {
+    display: flex;
+}
+
+.lks-resident-form-page .lrf-footer-note > .icon {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 50%;
+    background: var(--lrf-secondary);
+    color: #fff;
+}
+
+.lks-resident-form-page .lrf-footer-note strong {
+    display: block;
+    color: var(--lrf-ink);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-footer-note p {
+    margin: 0;
+    color: var(--lrf-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.lks-resident-form-page .lrf-primary,
+.lks-resident-form-page .lrf-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: var(--lrf-primary);
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.lks-resident-form-page .lrf-primary:hover {
+    background: var(--lrf-secondary);
+}
+
+.lks-resident-form-page .lrf-secondary {
+    background: var(--lrf-surface);
+    color: var(--lrf-ink);
+    box-shadow: var(--lrf-shadow);
+}
+
+.lks-resident-form-page .lrf-secondary:hover {
+    background: var(--lrf-field);
+}
+
+.lks-resident-form-page .lrf-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid var(--lrf-danger);
+    border-radius: 8px;
+    background: var(--lrf-surface);
+    color: var(--lrf-danger);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.lks-resident-form-page .lrf-danger:hover {
+    background: var(--lrf-danger);
+    color: var(--lrf-surface);
+}
+
+.lks-resident-form-page .lrf-danger:disabled {
+    opacity: 0.6;
+    cursor: progress;
+}
+
+.lks-resident-form-page .lrf-dialog {
+    width: min(30rem, calc(100vw - 32px));
+    padding: 24px;
+    border: 1px solid var(--lrf-line);
+    border-radius: 12px;
+    background: var(--lrf-surface);
+    color: var(--lrf-ink);
+    box-shadow: 0 16px 40px rgb(0 0 0 / 20%);
+}
+
+.lks-resident-form-page .lrf-dialog::backdrop {
+    background: rgb(15 23 42 / 50%);
+}
+
+.lks-resident-form-page .lrf-dialog h2 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.lks-resident-form-page .lrf-dialog p {
+    margin: 0 0 12px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.lks-resident-form-page .lrf-dialog .lrf-dialog-note {
+    color: var(--lrf-muted);
+    font-size: 13px;
+}
+
+.lks-resident-form-page .lrf-dialog .lrf-dialog-error {
+    color: var(--lrf-danger);
+    font-weight: 600;
+}
+
+.lks-resident-form-page .lrf-dialog .lrf-actions {
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.lks-resident-form-page .lrf-actions .icon {
+    width: 17px;
+    height: 17px;
+}
+
+.lks-resident-form-page .q-errors {
+    margin: 0;
+    padding: 18px;
+    border: 1px solid #efc4c1;
+    border-radius: 12px;
+    background: #fff1ef;
+    color: var(--lrf-danger);
+    font-size: 13px;
+}
+
+.lks-resident-form-page .q-errors button {
+    min-height: 36px;
+    padding: 5px 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    text-decoration: underline;
+}
+
+/* The existing dashboard theme switch changes only this view's tokens. */
+.dark .lks-resident-form-page {
+    --lrf-canvas: #152237;
+    --lrf-surface: #1b2c40;
+    --lrf-field: #23364f;
+    --lrf-soft: #2b405c;
+    --lrf-line: #3d526d;
+    --lrf-active: #3d587c;
+    --lrf-footer: #294261;
+    --lrf-primary: #4e6f99;
+    --lrf-secondary: #b7d1f2;
+    --lrf-ink: #edf2fc;
+    --lrf-muted: #b1bfd2;
+    --lrf-danger: #ffb4ab;
+    --lrf-shadow: 0 1px 2px rgb(0 0 0 / 15%);
+    color-scheme: dark;
+}
+
+.dark .lks-resident-form-page .lrf-primary:hover {
+    background: #617fa6;
+}
+
+.dark .lks-resident-form-page .lrf-preview-avatar,
+.dark .lks-resident-form-page .lrf-footer-note > .icon {
+    background: var(--lrf-primary);
+}
+
+.dark .lks-resident-form-page .q-errors {
+    border-color: #704b48;
+    background: #49333a;
+}
+
+@media (max-width: 1200px) {
+    .lks-resident-form-page {
+        padding: 20px;
+    }
+
+    .lks-resident-form-page .lrf-heading h1 {
+        font-size: 28px;
+    }
+
+    .lks-resident-form-page .lrf-steps ol,
+    .lks-resident-form-page ol.lrf-steps {
+        gap: 8px;
+    }
+
+    .lks-resident-form-page .lrf-step {
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .lks-resident-form-page .lrf-step-copy > strong {
+        font-size: 13px;
+    }
+
+    .lks-resident-form-page .lrf-step-copy > span {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .lks-resident-form-page .lrf-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lks-resident-form-page .lrf-sidebar {
+        position: static;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+    }
+
+    .lks-resident-form-page .lrf-help-card {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 700px) {
+    .lks-resident-form-page {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .lks-resident-form-page .lrf-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .lks-resident-form-page .lrf-heading h1 {
+        font-size: 24px;
+    }
+
+    .lks-resident-form-page .lrf-description {
+        font-size: 13px;
+    }
+
+    .lks-resident-form-page .lrf-steps {
+        margin-bottom: 24px;
+        padding: 10px;
+    }
+
+    .lks-resident-form-page .lrf-steps ol,
+    .lks-resident-form-page ol.lrf-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+    }
+
+    .lks-resident-form-page .lrf-step {
+        min-height: 58px;
+        padding: 8px;
+    }
+
+    .lks-resident-form-page .lrf-step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .lks-resident-form-page .lrf-layout,
+    .lks-resident-form-page .lrf-form {
+        gap: 20px;
+    }
+
+    .lks-resident-form-page .lrf-card {
+        padding: 18px;
+        scroll-margin-top: 84px;
+    }
+
+    .lks-resident-form-page .lrf-card-heading {
+        display: grid;
+        grid-template-columns: 28px minmax(0, 1fr);
+        align-items: flex-start;
+        gap: 10px;
+        margin: -18px -18px 18px;
+        padding: 14px;
+    }
+
+    .lks-resident-form-page .lrf-section-copy h2 {
+        font-size: 16px;
+    }
+
+    .lks-resident-form-page .lrf-card-heading > .lrf-section-letter {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .lks-resident-form-page .lrf-card-heading > .lrf-section-copy {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .lks-resident-form-page .lrf-section-tag {
+        grid-column: 2;
+        justify-self: start;
+        margin-left: 0;
+        font-size: 11px;
+    }
+
+    .lks-resident-form-page .lrf-fields,
+    .lks-resident-form-page .lrf-sidebar {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lks-resident-form-page
+        .lrf-field
+        input:not([type="radio"]):not([type="checkbox"]),
+    .lks-resident-form-page .lrf-field select,
+    .lks-resident-form-page .lrf-field textarea {
+        font-size: 16px;
+    }
+
+    .lks-resident-form-page .lrf-options:has(input[type="checkbox"]) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lks-resident-form-page
+        .lrf-options:has(input[type="checkbox"])
+        .lrf-option {
+        min-height: 72px;
+    }
+
+    .lks-resident-form-page .lrf-bpjs > .lrf-label-row {
+        flex-wrap: wrap;
+    }
+
+    .lks-resident-form-page .lrf-footer {
+        align-items: stretch;
+        padding: 16px;
+    }
+
+    .lks-resident-form-page .lrf-actions {
+        width: 100%;
+    }
+
+    .lks-resident-form-page .lrf-actions > button,
+    .lks-resident-form-page .lrf-actions > a {
+        flex: 1 1 120px;
+        min-width: 0;
+        padding-inline: 12px;
+        font-size: 13px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lks-resident-form-page .lrf-step,
+    .lks-resident-form-page .lrf-option,
+    .lks-resident-form-page .lrf-field :is(input, select, textarea),
+    .lks-resident-form-page .lrf-progress-track > span {
+        transition: none;
+    }
+}
+
+/* Photo uploader in resident form */
+.lks-resident-form-page .lks-photo-upload-group {
+    margin-bottom: 8px;
+}
+.lks-resident-form-page .lks-photo-uploader {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px;
+    background: var(--lrf-soft);
+    border: 1px dashed var(--lrf-line);
+    border-radius: 14px;
+}
+.lks-resident-form-page .lks-photo-preview {
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    border-radius: 16px;
+    background: var(--lrf-surface);
+    border: 1px solid var(--lrf-line);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.lks-resident-form-page .lks-photo-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.lks-resident-form-page .lks-photo-placeholder {
+    color: var(--lrf-muted);
+    display: grid;
+    place-items: center;
+}
+.lks-resident-form-page .lks-photo-uploader-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+.lks-resident-form-page .lks-photo-btn-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.lks-resident-form-page .lks-button-upload {
+    cursor: pointer;
+}

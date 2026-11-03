@@ -1,0 +1,505 @@
+/* Shared editors and uploads (psm-* names match existing markup). */
+.psm-nav-count {
+    margin-left: auto;
+    min-width: 20px;
+    padding: 1px 5px;
+    text-align: center;
+    border-radius: 5px;
+    background: var(--soft);
+    color: var(--primary);
+    font-size: 10px;
+}
+
+.section-heading > .export-button {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.section-heading .panel-actions {
+    justify-content: flex-end;
+}
+
+.psm-preserve-text {
+    white-space: pre-wrap;
+}
+
+.psm-editor-layout {
+    grid-template-columns: minmax(0, 1.9fr) minmax(245px, 1fr);
+}
+
+.psm-form-aside {
+    position: sticky;
+    top: 92px;
+}
+
+.psm-form-card h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.psm-step {
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 29px;
+    height: 29px;
+    border-radius: 9px;
+    background: var(--soft);
+    color: var(--primary);
+    font-size: 10px;
+}
+
+.psm-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 18px;
+}
+
+.psm-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 8px;
+}
+
+.psm-field-wide {
+    grid-column: 1 / -1;
+}
+
+.psm-field label {
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.psm-field label > span {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.psm-field input,
+.psm-field select {
+    width: 100%;
+    min-width: 0;
+    min-height: 42px;
+    padding: 10px 12px;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: var(--brand-control-radius);
+    background: var(--soft-2);
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.psm-field textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 12px;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: var(--brand-control-radius);
+    background: var(--soft-2);
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1.65;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.psm-field input:focus,
+.psm-field textarea:focus,
+.psm-field select:focus {
+    border-color: var(--brand-focus);
+    background: var(--surface);
+}
+
+.psm-field [aria-invalid="true"] {
+    border-color: #b54c44;
+}
+
+.psm-field small {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.field-error {
+    margin: 0;
+    color: #a03d36;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.dark .field-error {
+    color: #f6bdb8;
+}
+
+.psm-form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--line);
+}
+
+.psm-form-actions > span {
+    flex: 1 1 220px;
+    margin-right: auto;
+    font-size: 10px;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+.psm-form-actions button {
+    min-height: 42px;
+    font-size: 12px;
+}
+
+.psm-checklist {
+    margin: 22px 0 16px;
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+}
+
+.psm-checklist li {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.psm-checklist li > span {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: var(--soft);
+    border-radius: 50%;
+}
+
+.psm-checklist .is-complete {
+    color: #356c53;
+}
+
+.psm-checklist .is-complete > span {
+    background: #eaf4ee;
+}
+
+.dark .psm-checklist .is-complete {
+    color: #b5d9c4;
+}
+
+.dark .psm-checklist .is-complete > span {
+    background: #294638;
+}
+
+.psm-text-link {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.psm-source-link {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 500;
+    display: block;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.psm-text-link:hover,
+.psm-source-link:hover {
+    text-decoration: underline;
+}
+
+.psm-member-context {
+    margin-bottom: 20px;
+}
+
+.psm-member-context h2 {
+    margin-bottom: 8px;
+}
+
+.psm-member-context p {
+    line-height: 1.7;
+}
+
+.psm-group-overview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.psm-group-overview h2 {
+    margin: 5px 0;
+}
+
+.psm-group-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.psm-group-actions strong {
+    margin-right: 6px;
+    color: var(--primary);
+    font-size: 12px;
+}
+
+#member-form .psm-form-card {
+    margin-bottom: 20px;
+}
+
+.psm-delete-button {
+    min-height: 36px;
+    padding: 8px 12px;
+    border: 1px solid #bc5c54;
+    border-radius: var(--brand-control-radius);
+    background: var(--surface);
+    color: #a03d36;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.psm-delete-confirm {
+    padding: 8px 12px;
+    border: 1px solid #bc5c54;
+    border-radius: var(--brand-control-radius);
+    font: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    min-height: 42px;
+    background: #a03d36;
+    color: #fff;
+}
+
+.psm-delete-button:hover {
+    background: #fff1ef;
+}
+
+.psm-delete-confirm:hover {
+    background: #842e28;
+}
+
+.psm-delete-button:focus-visible,
+.psm-delete-confirm:focus-visible {
+    outline: 2px solid var(--brand-focus);
+    outline-offset: 3px;
+}
+
+.psm-delete-dialog {
+    width: min(480px, calc(100% - 32px));
+}
+
+.psm-delete-dialog h2 {
+    color: var(--heading);
+    font-size: 20px;
+}
+
+.psm-delete-dialog p {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.psm-delete-dialog .psm-form-actions {
+    justify-content: flex-end;
+}
+
+.dark .psm-delete-button {
+    color: #f6bdb8;
+    border-color: #9e625c;
+}
+
+.psm-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 24px;
+    background: var(--soft-2);
+    border: 1px dashed var(--brand-focus);
+    border-radius: 12px;
+}
+
+.psm-upload .icon {
+    width: 24px;
+    height: 24px;
+    color: var(--primary);
+}
+
+.psm-upload strong {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.psm-upload > span {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.psm-upload input {
+    max-width: 100%;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.psm-upload input::file-selector-button {
+    margin: 6px 8px 0 0;
+    padding: 9px 12px;
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--primary);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    font-family: inherit;
+}
+
+#upload-error {
+    margin-top: 12px;
+}
+
+.psm-file-list {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+}
+
+.psm-file-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+}
+
+.psm-file-list .icon {
+    color: var(--primary);
+    width: 18px;
+    height: 18px;
+}
+
+.psm-file-list li > span {
+    flex: 1;
+    min-width: 0;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+.psm-file-list small {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.psm-file-list button {
+    padding-inline: 8px;
+    font-size: 10px;
+}
+
+.psm-error-summary {
+    margin-bottom: 22px;
+    border: 1px solid #ddb3af;
+    border-left: 3px solid #b54c44;
+    border-radius: 10px;
+    padding: 18px;
+    background: #fff5f4;
+    color: #933c35;
+    font-size: 12px;
+}
+
+.psm-error-summary ul {
+    margin: 10px 0 0;
+    padding-left: 20px;
+}
+
+.psm-error-summary button {
+    padding: 5px 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-decoration: underline;
+    text-align: left;
+    font-size: 11px;
+}
+
+.dark .psm-error-summary {
+    background: #49333a;
+    color: #f3c2be;
+    border-color: #704b48;
+}
+
+.psm-preview-dialog {
+    width: min(920px, calc(100% - 32px));
+    max-height: calc(100dvh - 40px);
+}
+
+.psm-preview-dialog h2 {
+    font-size: 21px;
+}
+
+#preview-content {
+    margin: 24px 0;
+    display: grid;
+    gap: 16px;
+}
+
+#preview-content > h3 {
+    margin: 0 0 2px;
+    color: var(--heading);
+    font-size: 17px;
+}
+
+#preview-content .detail-card {
+    padding: 20px;
+    box-shadow: none;
+}
+
+.psm-guide-steps {
+    padding-left: 20px;
+    margin: 0;
+    display: grid;
+    gap: 18px;
+}
+
+.psm-guide-steps li {
+    padding-left: 4px;
+    color: var(--primary);
+    font-size: 12px;
+}
+
+.psm-guide-steps strong {
+    font-weight: 600;
+}
+
+.psm-guide-steps p {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+

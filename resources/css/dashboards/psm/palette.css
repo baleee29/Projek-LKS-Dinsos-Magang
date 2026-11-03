@@ -1,0 +1,173 @@
+/*
+ * PSM palette (Ketua PSM and Anggota PSM share it): ocean & sky blue (docs/plans/palet-psm.md).
+ * Loaded only by the psm and psm-member manifests and scoped to their body[data-role], so Admin
+ * (which also loads psm/members.css, psm/member-accounts.css and psm-complaint-detail.css) keeps
+ * the shared palette.
+ * 60% white content · 30% ocean #0B4F8A sidebar · 10% button blue #1565C0 and sky #38BDF8 markers.
+ * Sky never carries white text and is never text on white.
+ */
+
+/* Base tokens (light). */
+body:is([data-role="psm"], [data-role="psm-member"]) {
+    --page: #f5f9ff;
+    --surface: #ffffff;
+    --soft: #e8f1fc;
+    --soft-2: #f2f7fe;
+    --line: #d3e2f4;
+    --text: #0f1f33;
+    --muted: #4b6280;
+    --primary: #1565c0;
+    --heading: #0b2f57;
+    --brand-primary: #1565c0;
+    --brand-primary-hover: #0d47a1;
+    --brand-focus: #38bdf8;
+    --brand-border: #d3e2f4;
+    --brand-soft: #f2f7fe;
+    --brand-pale: #cfe2f7;
+    --psm-accent: #1565c0;
+    --psm-accent-hover: #0d47a1;
+    --psm-accent-ink: #ffffff;
+    --psm-sky: #38bdf8;
+    --psm-sky-ink: #0b2540;
+    --psm-link: #1565c0;
+    --psm-tint: #dbeafe;
+    background: var(--page);
+    color: var(--text);
+}
+
+/* Base tokens (dark). */
+.dark body:is([data-role="psm"], [data-role="psm-member"]) {
+    --page: #0a1626;
+    --surface: #102236;
+    --soft: #163050;
+    --soft-2: #132a45;
+    --line: #24456b;
+    --text: #e6f0fb;
+    --muted: #a9c0dc;
+    --primary: #8cc8ff;
+    --heading: #d6e8fa;
+    --brand-primary: #1e74d6;
+    --brand-primary-hover: #3a8ae6;
+    --brand-border: #24456b;
+    --brand-soft: #132a45;
+    --brand-pale: #1d3d63;
+    --psm-accent: #1e74d6;
+    --psm-accent-hover: #3a8ae6;
+    --psm-link: #8cc8ff;
+    --psm-tint: #1d3d63;
+}
+
+/* Pages that pin their own near-white canvas use the PSM page tone. */
+body:is([data-role="psm"], [data-role="psm-member"]):is(.psm-members-active, .psm-overview-active) .main-area,
+body:is([data-role="psm"], [data-role="psm-member"]) :is(.psm-members-active, .psm-overview-active) .main-area {
+    background: var(--page);
+}
+
+/* Sidebar: ocean canvas, sky active marker and counters. */
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar {
+    --sidebar-canvas: #0b4f8a;
+    --sidebar-active: rgb(56 189 248 / 16%);
+    --sidebar-hover: rgb(255 255 255 / 12%);
+    --sidebar-counter: #38bdf8;
+    --muted: #d6e8fa;
+}
+
+.dark body:is([data-role="psm"], [data-role="psm-member"]) .sidebar {
+    --sidebar-canvas: #0a3a66;
+    --sidebar-active: rgb(56 189 248 / 18%);
+    --sidebar-hover: rgb(255 255 255 / 8%);
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar :is(.sidebar-brand > span, .nav-heading, .profile-role),
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar .sidebar-footer > span {
+    color: #d6e8fa;
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar .nav-item.is-active,
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar-footer .q-account-link.is-active {
+    font-weight: 700;
+    box-shadow: inset 3px 0 0 #38bdf8;
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar .nav-child.is-active {
+    box-shadow: none;
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar .nav-item.is-active .icon,
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar-footer .q-account-link.is-active .icon {
+    color: #38bdf8;
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar :is(.psm-nav-count, .avatar) {
+    color: #0b2540;
+    background: #38bdf8;
+    font-weight: 700;
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar :is(a, button):focus-visible {
+    outline-color: #38bdf8;
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .sidebar .side-nav {
+    scrollbar-color: #38bdf8 transparent;
+}
+
+/* Module tokens. Views that read --primary/--soft follow the base tokens automatically. */
+body:is([data-role="psm"], [data-role="psm-member"]) .psm-members-view {
+    --psm-surface: var(--surface);
+    --psm-soft: var(--soft);
+    --psm-line: var(--line);
+    --psm-ink: var(--text);
+    --psm-muted: var(--muted);
+    --psm-primary: var(--psm-accent);
+    --psm-hover: var(--psm-accent-hover);
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .psm-notifications-view {
+    --psm-primary: var(--psm-accent);
+    --psm-hover: var(--psm-accent-hover);
+    --notification-tag: #cfe2f7;
+    --notification-icon: #e8f1fc;
+}
+
+.dark body:is([data-role="psm"], [data-role="psm-member"]) .psm-notifications-view {
+    --psm-primary: #8cc8ff;
+    --psm-hover: #b3dbff;
+    --notification-tag: #1d3d63;
+    --notification-icon: #163050;
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .psm-overview-view {
+    --psm-ink: var(--text);
+    --psm-muted: var(--muted);
+    --psm-secondary-text: var(--muted);
+}
+
+/* Former fixed sky/slate blues in the PSM components. */
+body:is([data-role="psm"], [data-role="psm-member"]) .psm-btn-primary {
+    background: var(--psm-accent);
+    border-color: var(--psm-accent);
+    color: var(--psm-accent-ink);
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .psm-btn-primary:hover {
+    background: var(--psm-accent-hover);
+    border-color: var(--psm-accent-hover);
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) :is(.psm-btn-view, .psm-btn-view:hover, .psm-credentials-title, .psm-complaint-num, .psm-response-title, .psm-locality-badge, .psm-file-preview-icon, .psm-attachment-doc-icon, .psm-attachment-open-link, .psm-acc-stat-icon.is-primary, .psm-notification-locality, .psm-profile-tag) {
+    color: var(--psm-link);
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .psm-response-box {
+    border-left-color: var(--psm-accent);
+}
+
+body:is([data-role="psm"], [data-role="psm-member"]) .psm-attachment-card:hover {
+    border-color: var(--psm-accent);
+}
+
+/* Focus ring follows the sky accent. */
+body:is([data-role="psm"], [data-role="psm-member"]) :is(button, a, input, select, textarea):focus-visible {
+    outline-color: #38bdf8;
+}

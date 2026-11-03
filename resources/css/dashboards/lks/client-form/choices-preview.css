@@ -1,0 +1,433 @@
+/* Native radio and checkbox choices retain keyboard interactions. */
+.lks-resident-form-page .lrf-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.lks-resident-form-page .lrf-option {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: var(--lrf-field);
+    color: var(--lrf-ink);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: background 150ms ease;
+}
+
+.lks-resident-form-page .lrf-option:hover {
+    background: var(--lrf-soft);
+}
+
+.lks-resident-form-page .lrf-option.is-selected,
+.lks-resident-form-page .lrf-option:has(input:checked) {
+    background: var(--lrf-active);
+    color: var(--lrf-secondary);
+}
+
+.lks-resident-form-page .lrf-option input,
+.lks-resident-form-page .lrf-toggle input {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: var(--lrf-primary);
+}
+
+.lks-resident-form-page .lrf-options:has(input[type="checkbox"]) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lks-resident-form-page .lrf-options:has(input[type="checkbox"]) .lrf-option {
+    align-items: flex-start;
+    min-height: 112px;
+    padding: 14px;
+}
+
+.lks-resident-form-page .lrf-options:has(input[type="checkbox"]) input {
+    margin-top: 3px;
+}
+
+.lks-resident-form-page .lrf-choice-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 4px;
+}
+
+.lks-resident-form-page .lrf-choice-text strong {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-choice-text small {
+    color: var(--lrf-muted);
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.lks-resident-form-page .lrf-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin: 2px 0 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--lrf-field);
+    color: var(--lrf-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-note .icon {
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    color: var(--lrf-secondary);
+}
+
+.lks-resident-form-page .lrf-bpjs {
+    display: grid;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--lrf-field);
+}
+
+.lks-resident-form-page .lrf-bpjs > .lrf-label-row {
+    align-items: flex-start;
+}
+
+.lks-resident-form-page .lrf-bpjs strong {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.lks-resident-form-page .lrf-bpjs p {
+    margin: 0;
+    color: var(--lrf-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-bpjs .lrf-field input {
+    background: var(--lrf-surface);
+}
+
+.lks-resident-form-page .lrf-toggle {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 7px;
+    min-height: 36px;
+    flex-wrap: wrap;
+    padding: 0;
+    background: transparent;
+    color: var(--lrf-muted);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-toggle .lrf-option {
+    min-height: 36px;
+    padding: 8px 12px;
+    background: var(--lrf-line);
+    color: var(--lrf-muted);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.lks-resident-form-page .lrf-toggle .lrf-option.is-selected,
+.lks-resident-form-page .lrf-toggle .lrf-option:has(input:checked) {
+    background: var(--lrf-primary);
+    color: #fff;
+}
+
+/* Live preview, completion status, and contextual guidance. */
+.lks-resident-form-page .lrf-sidebar {
+    position: sticky;
+    top: 96px;
+    display: grid;
+    min-width: 0;
+    gap: 16px;
+}
+
+.lks-resident-form-page .lrf-preview-card,
+.lks-resident-form-page .lrf-progress-card,
+.lks-resident-form-page .lrf-help-card {
+    min-width: 0;
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--lrf-surface);
+    box-shadow: var(--lrf-shadow);
+}
+
+.lks-resident-form-page .lrf-panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.lks-resident-form-page .lrf-panel-heading h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: var(--lrf-ink);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: -0.02em;
+}
+
+.lks-resident-form-page .lrf-panel-heading .icon {
+    width: 19px;
+    height: 19px;
+    color: var(--lrf-secondary);
+}
+
+.lks-resident-form-page .lrf-panel-heading > span {
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: var(--lrf-active);
+    color: var(--lrf-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-preview-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 8px;
+    background: var(--lrf-field);
+}
+
+.lks-resident-form-page .lrf-preview-avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: var(--lrf-secondary);
+    color: #d3e4ff;
+}
+
+.lks-resident-form-page .lrf-preview-avatar .icon,
+.lks-resident-form-page .lrf-preview-avatar svg {
+    width: 28px;
+    height: 28px;
+}
+
+.lks-resident-form-page .lrf-preview-person {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.lks-resident-form-page .lrf-preview-person strong {
+    color: var(--lrf-ink);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.lks-resident-form-page .lrf-preview-person > span,
+.lks-resident-form-page .lrf-preview-person > small {
+    color: var(--lrf-muted);
+    font-family: ui-monospace, "Courier New", monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.lks-resident-form-page .lrf-preview-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.lks-resident-form-page .lrf-preview-details > div {
+    min-width: 0;
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--lrf-field);
+}
+
+.lks-resident-form-page .lrf-preview-details dt {
+    color: var(--lrf-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-preview-details dd {
+    margin: 4px 0 0;
+    color: var(--lrf-ink);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.lks-resident-form-page .lrf-preview-health {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--lrf-field);
+    color: var(--lrf-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-preview-health .icon {
+    width: 16px;
+    height: 16px;
+    color: var(--lrf-secondary);
+}
+
+.lks-resident-form-page .lrf-preview-health strong {
+    margin: 0;
+    color: var(--lrf-muted);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.lks-resident-form-page .lrf-preview-health > span:last-child {
+    margin-left: auto;
+    color: var(--lrf-secondary);
+    font-weight: 600;
+}
+
+.lks-resident-form-page .lrf-progress-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.lks-resident-form-page .lrf-progress-heading h2 {
+    margin: 0;
+    color: var(--lrf-ink);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-progress-heading > strong {
+    color: var(--lrf-secondary);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.lks-resident-form-page .lrf-progress-track {
+    height: 8px;
+    margin: 8px 0 16px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--lrf-line);
+}
+
+.lks-resident-form-page .lrf-progress-track > span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--lrf-primary);
+    transition: width 180ms ease;
+}
+
+.lks-resident-form-page .lrf-progress-list {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lks-resident-form-page .lrf-progress-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--lrf-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-progress-list .icon {
+    width: 15px;
+    height: 15px;
+    margin-top: 2px;
+    color: var(--lrf-muted);
+}
+
+.lks-resident-form-page .lrf-progress-list li.is-complete .icon {
+    color: var(--lrf-secondary);
+}
+
+.lks-resident-form-page [data-resident-progress-note] {
+    margin-bottom: 12px;
+}
+
+.lks-resident-form-page [data-resident-progress-mark] {
+    flex-shrink: 0;
+    width: 15px;
+    color: var(--lrf-muted);
+    font-weight: 700;
+    text-align: center;
+}
+
+.lks-resident-form-page
+    .lrf-progress-list
+    li.is-complete
+    [data-resident-progress-mark] {
+    color: var(--lrf-secondary);
+}
+
+.lks-resident-form-page .lrf-help-card {
+    background: var(--lrf-field);
+    box-shadow: none;
+}
+
+.lks-resident-form-page .lrf-help-card h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 8px;
+    color: var(--lrf-secondary);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.lks-resident-form-page .lrf-help-card h2 .icon {
+    width: 19px;
+    height: 19px;
+}
+
+.lks-resident-form-page .lrf-help-card p {
+    margin: 0;
+    color: var(--lrf-muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+

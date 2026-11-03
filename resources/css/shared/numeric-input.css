@@ -1,0 +1,71 @@
+/* Isian angka ramah ponsel (dashboards/shared/numeric-input.js): status NIK/KK, nomor HP, dan jumlah peserta.
+   Dipakai dashboard mitra, Admin, dan formulir pendaftaran publik. */
+.numeric-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    color: var(--muted, #596b80);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    font-variant-numeric: tabular-nums;
+}
+.numeric-status-icon {
+    display: none;
+    width: 16px;
+    height: 16px;
+    flex: none;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+.numeric-status[data-state="complete"] {
+    color: #1e6b3a;
+    font-weight: 600;
+}
+.numeric-status[data-state="complete"] .numeric-status-icon {
+    display: inline-block;
+    background-color: #1e6b3a;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 4 4L19 6'/%3E%3C/svg%3E");
+}
+.numeric-status[data-state="incomplete"] {
+    color: #b42318;
+    font-weight: 600;
+}
+.numeric-status[data-state="incomplete"] .numeric-status-icon {
+    display: inline-block;
+    background-color: #b42318;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round'%3E%3Cpath d='M12 6v8m0 4h.01'/%3E%3C/svg%3E");
+}
+input.is-numeric-complete {
+    padding-right: 40px !important;
+    border-color: #1e6b3a !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e6b3a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 4 4L19 6'/%3E%3C/svg%3E") !important;
+    background-position: right 12px center !important;
+    background-repeat: no-repeat !important;
+    background-size: 18px !important;
+}
+input.is-numeric-incomplete {
+    border-color: #b42318 !important;
+}
+.numeric-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+.dark .numeric-status[data-state="complete"],
+.dark .numeric-status[data-state="incomplete"] {
+    filter: brightness(1.6);
+}
+.dark input.is-numeric-complete {
+    border-color: #5fd39a !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235fd39a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 4 4L19 6'/%3E%3C/svg%3E") !important;
+}
+.dark input.is-numeric-incomplete {
+    border-color: #ff8a80 !important;
+}

@@ -1,0 +1,290 @@
+/* Responsive component layouts. */
+@media (max-width: 1200px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat-card {
+        min-height: 140px;
+    }
+
+    .status-counts {
+        flex-basis: 100%;
+    }
+
+    .detail-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .detail-secondary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+    }
+
+    .detail-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .psm-editor-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .psm-form-aside {
+        position: static;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 980px) {
+    .detail-layout {
+        grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr);
+    }
+
+    .detail-secondary {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 850px) {
+    .filter-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .demo-banner {
+        margin-bottom: 22px;
+        font-size: 10px;
+    }
+
+    .section-heading {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .section-heading h1 {
+        font-size: 23px;
+    }
+
+    .sample-tag {
+        display: none;
+    }
+
+    .view-description {
+        font-size: 11px;
+    }
+
+    .report-controls {
+        padding: 14px;
+    }
+
+    .search-row {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .list-search {
+        flex-basis: 100%;
+    }
+
+    .sort-control {
+        margin-left: auto;
+    }
+
+    .workspace-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .workspace-filters .filter-field:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+    }
+
+    .filter-field {
+        font-size: 10px;
+    }
+
+    .filter-field select {
+        padding-inline: 8px;
+    }
+
+    .filter-actions p {
+        max-width: 70%;
+    }
+
+    .date-range {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stats-grid {
+        gap: 12px;
+    }
+
+    .stat-card {
+        min-height: 150px;
+        padding: 17px 14px;
+    }
+
+    .stat-card h2 {
+        font-size: 11px;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .stat-caption {
+        font-size: 9px;
+        text-align: center;
+    }
+
+    .status-overview {
+        padding: 18px;
+        gap: 16px;
+    }
+
+    .status-counts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px 10px;
+    }
+
+    .status-count {
+        font-size: 9px;
+        gap: 5px;
+    }
+
+    .reports-panel {
+        padding: 18px 14px;
+    }
+
+    .panel-heading {
+        align-items: flex-start;
+    }
+
+    .panel-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .panel-actions .see-all {
+        margin-right: auto;
+    }
+
+    .table-scroll {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+    }
+
+    .reports-table td {
+        padding-block: 14px;
+    }
+
+    .row-action {
+        width: 40px;
+        height: 40px;
+    }
+
+    .pagination > div {
+        width: 100%;
+        justify-content: space-between;
+        gap: 6px;
+    }
+
+    .pagination button {
+        padding-inline: 8px;
+    }
+
+    .detail-layout,
+    .detail-secondary {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .detail-card {
+        padding: 20px;
+    }
+
+    .detail-meta {
+        gap: 10px;
+        font-size: 10px;
+    }
+
+    .detail-metrics {
+        gap: 10px;
+    }
+
+    .detail-metrics article {
+        padding: 15px;
+    }
+
+    .detail-metrics strong {
+        font-size: 16px;
+    }
+
+    .field-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .attachment-dialog {
+        padding: 20px;
+    }
+
+    .attachment-dialog h2 {
+        font-size: 17px;
+    }
+
+    .section-heading > .export-button {
+        margin-top: 3px;
+    }
+
+    .section-heading > .panel-actions {
+        justify-content: flex-start;
+    }
+
+    .psm-form-grid,
+    .psm-form-aside {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .psm-field input,
+    .psm-field select,
+    .psm-field textarea {
+        font-size: 16px;
+    }
+
+    .psm-upload {
+        padding: 20px 14px;
+    }
+
+    .psm-form-actions > span {
+        flex-basis: 100%;
+    }
+
+    .psm-form-actions > button {
+        flex: 1;
+        padding-inline: 10px;
+        font-size: 11px;
+    }
+
+    .psm-preview-dialog {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 650px) {
+    .filter-grid {
+        gap: 10px;
+    }
+
+    .filter-actions,
+    .pagination {
+        align-items: flex-start;
+    }
+
+    .pagination > div {
+        flex-wrap: wrap;
+    }
+
+    .detail-dialog {
+        padding: 24px;
+    }
+}
+

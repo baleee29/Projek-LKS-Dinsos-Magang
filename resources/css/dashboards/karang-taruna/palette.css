@@ -1,0 +1,272 @@
+/*
+ * Karang Taruna-only palette: gold & red after the Karang Taruna logo (docs/plans/palet-karang-taruna.md).
+ * Loaded only by the karang-taruna dashboard manifest and scoped to body[data-role="karang-taruna"],
+ * so Admin (which also loads the KT profile/member-detail styles) keeps the shared blue palette.
+ * 60% white content · 30% gold #F4C430 sidebar with dark ink #2B1D00 · 10% red #C62828 accents.
+ * White text never sits on gold; red on gold is only used for markers and icons (not small text).
+ */
+
+/* Base tokens (light). */
+body[data-role="karang-taruna"] {
+    --page: #fffbef;
+    --surface: #ffffff;
+    --soft: #fff4d1;
+    --soft-2: #fffaeb;
+    --line: #efe2b8;
+    --text: #2b1d00;
+    --muted: #6b5a2e;
+    --primary: #a91f1f;
+    --heading: #2b1d00;
+    --brand-primary: #c62828;
+    --brand-primary-hover: #a91f1f;
+    --brand-focus: #c62828;
+    --brand-border: #efe2b8;
+    --brand-soft: #fffaeb;
+    --brand-pale: #fbe7a8;
+    --kt-accent: #c62828;
+    --kt-accent-hover: #a91f1f;
+    --kt-accent-ink: #ffffff;
+    --kt-link: #a91f1f;
+    --kt-gold: #f4c430;
+    --kt-cream: #fff4d1;
+    --kt-cream-2: #fdecb6;
+    background: var(--page);
+    color: var(--text);
+}
+
+/* Base tokens (dark). */
+.dark body[data-role="karang-taruna"] {
+    --page: #1a1404;
+    --surface: #241c08;
+    --soft: #33280c;
+    --soft-2: #2b220a;
+    --line: #4a3b14;
+    --text: #f7efd9;
+    --muted: #cdbd94;
+    --primary: #ff8a80;
+    --heading: #fff3cf;
+    --brand-primary: #c62828;
+    --brand-primary-hover: #e04343;
+    --brand-focus: #ff8a80;
+    --brand-border: #4a3b14;
+    --brand-soft: #2b220a;
+    --brand-pale: #4a3b14;
+    --kt-accent-hover: #e04343;
+    --kt-link: #ff8a80;
+    --kt-cream: #33280c;
+    --kt-cream-2: #4a3b14;
+}
+
+/* Sidebar: gold canvas, dark ink, red active marker and counters. */
+body[data-role="karang-taruna"] .sidebar {
+    --sidebar-canvas: #f4c430;
+    --sidebar-ink: #2b1d00;
+    --sidebar-ink-muted: #5a4300;
+    --sidebar-active: rgb(43 29 0 / 10%);
+    --sidebar-hover: rgb(43 29 0 / 7%);
+    --sidebar-counter: #c62828;
+    --text: var(--sidebar-ink);
+    --muted: var(--sidebar-ink-muted);
+    --primary: var(--sidebar-ink);
+    --heading: var(--sidebar-ink);
+    --line: rgb(43 29 0 / 18%);
+    --brand-line: rgb(43 29 0 / 22%);
+    --surface: rgb(255 255 255 / 45%);
+    --soft: var(--sidebar-hover);
+    color: var(--sidebar-ink);
+    color-scheme: light;
+}
+
+.dark body[data-role="karang-taruna"] .sidebar {
+    --sidebar-canvas: #3a2d08;
+    --sidebar-ink: #fff3cf;
+    --sidebar-ink-muted: #e2cf9b;
+    --sidebar-active: rgb(244 196 48 / 16%);
+    --sidebar-hover: rgb(255 255 255 / 8%);
+    --line: rgb(244 196 48 / 22%);
+    --brand-line: rgb(244 196 48 / 28%);
+    --surface: rgb(255 255 255 / 6%);
+    color-scheme: dark;
+}
+
+body[data-role="karang-taruna"] .sidebar :is(
+    .sidebar-brand strong,
+    .brand-dot,
+    .profile-name,
+    .nav-item,
+    .nav-item:hover,
+    .group-current,
+    .sidebar-close,
+    .sidebar-close:hover
+),
+body[data-role="karang-taruna"] .sidebar-footer :is(.q-account-link, .q-account-link:hover, .logout-button) {
+    color: var(--sidebar-ink);
+}
+
+body[data-role="karang-taruna"] .sidebar :is(.sidebar-brand > span, .nav-heading, .profile-role),
+body[data-role="karang-taruna"] .sidebar .sidebar-footer > span {
+    color: var(--sidebar-ink-muted);
+}
+
+body[data-role="karang-taruna"] .sidebar .profile {
+    background: var(--surface);
+    border-color: var(--line);
+}
+
+body[data-role="karang-taruna"] .sidebar .avatar {
+    background: #c62828;
+    border-color: rgb(43 29 0 / 15%);
+    color: #ffffff;
+}
+
+body[data-role="karang-taruna"] .sidebar .nav-item.is-active,
+body[data-role="karang-taruna"] .sidebar-footer .q-account-link.is-active {
+    color: var(--sidebar-ink);
+    font-weight: 700;
+    box-shadow: inset 3px 0 0 #c62828;
+}
+
+body[data-role="karang-taruna"] .sidebar .nav-child.is-active {
+    box-shadow: none;
+}
+
+body[data-role="karang-taruna"] .sidebar .nav-item.is-active .icon,
+body[data-role="karang-taruna"] .sidebar-footer .q-account-link.is-active .icon {
+    color: #c62828;
+}
+
+.dark body[data-role="karang-taruna"] .sidebar .nav-item.is-active .icon,
+.dark body[data-role="karang-taruna"] .sidebar-footer .q-account-link.is-active .icon {
+    color: #ff8a80;
+}
+
+body[data-role="karang-taruna"] .sidebar .psm-nav-count {
+    color: #ffffff;
+    background: var(--sidebar-counter);
+}
+
+body[data-role="karang-taruna"] .sidebar :is(a, button):focus-visible {
+    outline-color: #c62828;
+}
+
+body[data-role="karang-taruna"] .sidebar .side-nav {
+    scrollbar-color: rgb(43 29 0 / 35%) transparent;
+}
+
+/* Module tokens: primary becomes red, soft/tint become gold cream. */
+body[data-role="karang-taruna"] :is(.kt-activities-view, .kt-activity-replies-view, .kt-member-detail-view, .kt-member-form-view, .kt-members-view, .kt-profile-view) {
+    --kt-activity-soft: var(--kt-cream);
+    --kt-activity-tint: var(--kt-cream-2);
+    --kt-activity-primary: #c62828;
+    --kt-activity-on-primary: #ffffff;
+    --kt-reply-soft: var(--kt-cream);
+    --kt-reply-tint: var(--kt-cream-2);
+    --kt-reply-primary: #c62828;
+    --kt-member-detail-soft: var(--kt-cream);
+    --kt-member-detail-tint: var(--kt-cream-2);
+    --kt-member-detail-primary: #c62828;
+    --kt-member-detail-secondary: #a91f1f;
+    --kt-member-detail-on-primary: #ffffff;
+    --kt-member-detail-pending: #fff3cd;
+    --kt-member-form-soft: var(--kt-cream);
+    --kt-member-form-primary: #c62828;
+    --kt-member-form-secondary: #a91f1f;
+    --kt-member-form-on-primary: #ffffff;
+    --kt-members-soft: var(--kt-cream);
+    --kt-members-tint: var(--kt-cream-2);
+    --kt-members-primary: #c62828;
+    --kt-members-secondary: #a91f1f;
+    --kt-members-on-primary: #ffffff;
+    --kt-profile-soft: var(--kt-cream);
+    --kt-profile-tint: var(--kt-cream-2);
+    --kt-profile-accent-soft: #fbe7a8;
+    --kt-profile-primary: #c62828;
+    --kt-profile-secondary: #a91f1f;
+    --kt-profile-on-primary: #ffffff;
+}
+
+body[data-role="karang-taruna"] .kt-overview-view {
+    --kt-overview-line: var(--line);
+    --kt-overview-ink: var(--text);
+    --kt-overview-muted: var(--muted);
+    --kt-overview-soft: var(--kt-cream);
+    --kt-overview-tint: var(--kt-cream-2);
+    --kt-overview-primary: #2b1d00;
+    --kt-overview-link: #a91f1f;
+}
+
+.dark body[data-role="karang-taruna"] :is(.kt-activities-view, .kt-activity-replies-view, .kt-member-detail-view, .kt-member-form-view, .kt-members-view, .kt-profile-view) {
+    --kt-activity-primary: #ff8a80;
+    --kt-activity-on-primary: #2b0a08;
+    --kt-reply-primary: #ff8a80;
+    --kt-member-detail-primary: #ff8a80;
+    --kt-member-detail-secondary: #ffb4ab;
+    --kt-member-detail-on-primary: #2b0a08;
+    --kt-member-detail-pending: #4a3a00;
+    --kt-member-form-primary: #ff8a80;
+    --kt-member-form-secondary: #ffb4ab;
+    --kt-member-form-on-primary: #2b0a08;
+    --kt-members-primary: #ff8a80;
+    --kt-members-secondary: #ffb4ab;
+    --kt-members-on-primary: #2b0a08;
+    --kt-profile-accent-soft: #4a3b14;
+    --kt-profile-primary: #ff8a80;
+    --kt-profile-secondary: #ffb4ab;
+    --kt-profile-on-primary: #2b0a08;
+}
+
+.dark body[data-role="karang-taruna"] .kt-overview-view {
+    --kt-overview-primary: #fff3cf;
+    --kt-overview-link: #ff8a80;
+}
+
+/* Focus ring follows the red accent. */
+body[data-role="karang-taruna"] :is(button, a, input, select, textarea):focus-visible {
+    outline-color: #c62828;
+}
+
+/* Overview primary buttons use the red accent. */
+body[data-role="karang-taruna"] .kt-overview-button.is-primary {
+    color: #ffffff;
+    background: #c62828;
+    border-color: #c62828;
+}
+
+body[data-role="karang-taruna"] .kt-overview-button.is-primary:hover {
+    background: #a91f1f;
+    border-color: #a91f1f;
+}
+
+/* Activity statuses stay distinguishable from gold and the red buttons (text plus colour). */
+body[data-role="karang-taruna"] .kt-activities-status[data-status="Disetujui"] {
+    background: #e6f4ea;
+    color: #1e6b3a;
+}
+
+body[data-role="karang-taruna"] .kt-activities-status[data-status="Ditolak"] {
+    background: #fdecea;
+    color: #9b1c1c;
+    box-shadow: inset 0 0 0 1px #f3b8b3;
+}
+
+body[data-role="karang-taruna"] .kt-activities-status:is([data-status="Diajukan"], [data-status="Menunggu Pemeriksaan"], [data-status="Sedang Ditinjau"], [data-status="Ditinjau"], [data-status="Perlu Perbaikan"]) {
+    background: #fff3cd;
+    color: #5c4300;
+}
+
+.dark body[data-role="karang-taruna"] .kt-activities-status[data-status="Disetujui"] {
+    background: #17402a;
+    color: #a8e6be;
+}
+
+.dark body[data-role="karang-taruna"] .kt-activities-status[data-status="Ditolak"] {
+    background: #4a1d1a;
+    color: #ffb4ab;
+    box-shadow: none;
+}
+
+/* Overview pins its own near-white canvas; use the cream page like the other KT pages. */
+body[data-role="karang-taruna"].kt-overview-active .main-area,
+body[data-role="karang-taruna"] .kt-overview-active .main-area {
+    background: var(--page);
+}

@@ -1,0 +1,282 @@
+/* Compact blue login: denser spacing on a blue-only palette; the submit button keeps its gradient. */
+.sidaya-login .login-page {
+    padding: 20px 32px 28px;
+    background:
+        radial-gradient(circle at 8% 10%, rgb(37 99 235 / 10%), transparent 40%),
+        radial-gradient(circle at 92% 90%, rgb(30 58 138 / 8%), transparent 40%),
+        radial-gradient(circle at 90% 8%, rgb(59 130 246 / 10%), transparent 40%),
+        var(--brand-soft);
+}
+
+.sidaya-login .login-layout {
+    width: min(1040px, 100%);
+    gap: clamp(20px, 3vw, 36px);
+}
+
+.sidaya-login .login-intro {
+    min-height: 470px;
+    padding: 28px;
+    border: 0;
+    color: #fff;
+    background: linear-gradient(
+        135deg,
+        #1e3a8a 0%,
+        #2563eb 35%,
+        #1d4ed8 70%,
+        #3b82f6 100%
+    );
+    background-size: 200% 200%;
+    box-shadow: 0 20px 50px rgb(30 58 138 / 28%);
+    animation:
+        login-rise 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both,
+        login-gradient 14s ease-in-out infinite;
+}
+
+.sidaya-login .intro-eyebrow {
+    color: #bfdbfe;
+}
+
+.sidaya-login .login-intro h2 {
+    margin-top: 12px;
+    color: #fff;
+    font-size: clamp(26px, 2.8vw, 34px);
+}
+
+.sidaya-login .intro-description,
+.sidaya-login .intro-footnote,
+.sidaya-login .intro-roles {
+    color: rgb(255 255 255 / 82%);
+}
+
+.sidaya-login .intro-description {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.sidaya-login .intro-glow {
+    background: radial-gradient(
+        360px circle at calc(var(--px) * 100%) calc(var(--py) * 100%),
+        rgb(255 255 255 / 20%),
+        transparent 65%
+    );
+}
+
+.sidaya-login .orb-a {
+    background: #60a5fa;
+    opacity: 0.5;
+}
+
+.sidaya-login .orb-b {
+    background: #93c5fd;
+    opacity: 0.4;
+}
+
+.sidaya-login .intro-role {
+    color: #1e3a8a;
+    background: #dbeafe;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+}
+
+.sidaya-login .illustration-ring {
+    border-color: rgb(255 255 255 / 25%);
+}
+
+.sidaya-login .illustration-card {
+    background: rgb(255 255 255 / 95%);
+}
+
+.sidaya-login .illustration-icon {
+    color: #fff;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+}
+
+.sidaya-login .illustration-bars span {
+    background: #bfdbfe;
+}
+
+.sidaya-login .illustration-bars span:nth-child(2) {
+    background: #60a5fa;
+}
+
+.sidaya-login .illustration-bars span:nth-child(3) {
+    background: #93c5fd;
+}
+
+.sidaya-login .illustration-bars span:nth-child(4) {
+    background: #1d4ed8;
+}
+
+.sidaya-login .illustration-check {
+    border-color: #fff;
+    background: #2563eb;
+}
+
+.sidaya-login .login-card {
+    padding: 26px 28px;
+    border-top: 4px solid transparent;
+    border-image: linear-gradient(90deg, #1e3a8a, #2563eb, #60a5fa) 1;
+    border-image-slice: 1 0 0;
+    border-radius: 18px;
+}
+
+.sidaya-login .form-eyebrow {
+    color: #2563eb;
+}
+
+.sidaya-login .card-header h1 {
+    margin-top: 6px;
+    font-size: 24px;
+    background: linear-gradient(90deg, #1e3a8a, #2563eb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.sidaya-login .login-description {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.sidaya-login #login-form {
+    margin-top: 18px;
+}
+
+.sidaya-login .field input {
+    height: 46px;
+    margin-top: 6px;
+}
+
+.sidaya-login .email-field .input-icon {
+    margin-top: 3px;
+}
+
+.sidaya-login .password-field {
+    margin-top: 14px;
+}
+
+.sidaya-login .password-input {
+    margin-top: 6px;
+}
+
+.sidaya-login .input-shell:focus-within .input-icon {
+    color: #2563eb;
+}
+
+.sidaya-login .field input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgb(37 99 235 / 15%);
+}
+
+.sidaya-login .password-rules {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 12px;
+    margin-top: 6px;
+    font-size: 11px;
+}
+
+.sidaya-login .submit-button {
+    min-height: 46px;
+    margin-top: 16px;
+    background: linear-gradient(90deg, #2563eb, #0d9488);
+    background-size: 150% 100%;
+    background-position: 0 0;
+    transition:
+        background-position 300ms ease,
+        box-shadow 150ms ease,
+        transform 150ms ease;
+}
+
+.sidaya-login .submit-button:hover:not(:disabled) {
+    background: linear-gradient(90deg, #2563eb, #0d9488);
+    background-size: 150% 100%;
+    background-position: 100% 0;
+    box-shadow: 0 10px 22px rgb(13 148 136 / 30%);
+}
+
+.sidaya-login .login-return {
+    margin-top: 10px;
+}
+
+.sidaya-login .login-page .login-back-link {
+    min-height: 42px;
+    padding: 8px 16px;
+}
+
+.sidaya-login .demo-accounts {
+    margin-top: 16px;
+    padding: 12px;
+}
+
+.sidaya-login .demo-account-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.sidaya-login .demo-account {
+    padding: 8px 10px;
+    border-left: 3px solid #2563eb;
+}
+
+.sidaya-login .demo-account:nth-child(4n + 2) {
+    border-left-color: #1e3a8a;
+}
+
+.sidaya-login .demo-account:nth-child(4n + 3) {
+    border-left-color: #60a5fa;
+}
+
+.sidaya-login .demo-account:nth-child(4n + 4) {
+    border-left-color: #93c5fd;
+}
+
+@keyframes login-gradient {
+    50% {
+        background-position: 100% 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .sidaya-login .login-intro {
+        min-height: 0;
+        padding: 22px 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidaya-login .login-page {
+        padding: 14px 16px 24px;
+    }
+    .sidaya-login .login-card {
+        padding: 22px 18px;
+    }
+    .sidaya-login .demo-account-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* SiDaya logo above the login heading. */
+.login-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    color: #1e3a8a;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.login-brand img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    transition: transform 200ms ease;
+}
+
+.login-brand:hover img {
+    transform: rotate(-6deg) scale(1.06);
+}
+

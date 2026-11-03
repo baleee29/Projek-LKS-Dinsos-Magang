@@ -1,0 +1,157 @@
+/* Personnel metrics, category filters, roster, and explanatory notes. */
+.lks-staff-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+.lks-staff-metric {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+}
+.lks-staff-metric > div {
+    min-width: 0;
+}
+.lks-staff-metric h2 {
+    color: var(--lks-muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    font-weight: 500;
+}
+.lks-staff-metric strong {
+    display: block;
+    font-size: 17px;
+    line-height: 1.4;
+    margin-top: 4px;
+    font-weight: 600;
+}
+.lks-staff-metric:first-child strong,
+.lks-staff-metric:last-child strong {
+    font-size: 28px;
+}
+.lks-staff-metric small {
+    display: block;
+    color: var(--lks-muted);
+    font-size: 10px;
+}
+.lks-staff-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 18px;
+    margin: 24px 0;
+}
+.lks-staff-controls .lks-search {
+    flex: 1 1 180px;
+    max-width: 250px;
+}
+.lks-category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.lks-filter {
+    min-height: 38px;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 22px;
+    font-size: 11px;
+    color: var(--lks-primary);
+    background: var(--lks-tint);
+}
+.lks-filter:hover {
+    border-color: var(--lks-primary-container);
+}
+.lks-filter.is-active {
+    background: var(--lks-primary-container);
+    color: #fff;
+}
+.lks-roster-count {
+    background: var(--lks-tint);
+    border-radius: 20px;
+    padding: 7px 12px;
+    font-size: 11px;
+    margin-left: auto;
+}
+.lks-staff-table {
+    min-width: 820px;
+}
+.lks-staff-table th:first-child {
+    width: 29%;
+}
+.lks-staff-table td:first-child {
+    min-width: 260px;
+}
+.lks-staff-table td:nth-child(3) {
+    white-space: nowrap;
+}
+.lks-chair-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 7px;
+    padding: 3px 8px;
+    font-size: 9px;
+    border-radius: 14px;
+    background: #bcd6fe;
+    color: #304a6b;
+    font-weight: 500;
+}
+.lks-staff-notes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    padding: 24px;
+    margin-top: 26px;
+}
+.lks-staff-notes article {
+    display: flex;
+    align-items: start;
+    gap: 12px;
+}
+.lks-staff-notes .lks-icon-tile {
+    width: 34px;
+    height: 34px;
+}
+.lks-staff-notes .icon {
+    width: 18px;
+    height: 18px;
+}
+.lks-staff-notes h2 {
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+.lks-staff-notes p {
+    color: var(--lks-muted);
+    font-size: 12px;
+}
+@media (max-width: 1200px) {
+    .lks-staff-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 800px) {
+    .lks-staff-notes {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 500px) {
+    .lks-staff-metrics {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .lks-staff-metric {
+        padding: 16px 20px;
+    }
+    .lks-staff-controls .lks-search {
+        max-width: none;
+        flex-basis: 100%;
+    }
+    .lks-roster-count {
+        margin-left: 0;
+    }
+}

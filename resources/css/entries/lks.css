@@ -1,0 +1,33 @@
+/* Urutan mengikuti key styles role lks di manifest.json sumber. brand.css lebih dulu, sama seperti
+   app.blade.php sumber yang memuatnya sebelum CSS role. Jangan diubah: urutan memengaruhi hasil. */
+@import "../shared/brand.css";
+@import "../dashboards/shared/layout.css";
+@import "../dashboards/shared/components/summary.css";
+@import "../dashboards/shared/components/filters.css";
+@import "../dashboards/shared/components/workspace.css";
+@import "../dashboards/shared/components/detail-content.css";
+@import "../dashboards/shared/components/editors.css";
+@import "../dashboards/shared/components/dialogs.css";
+@import "../dashboards/shared/components/responsive.css";
+@import "../dashboards/shared/components/tables-print.css";
+@import "../shared/numeric-input.css";
+@import "../dashboards/shared/reports/base.css";
+@import "../dashboards/shared/reports/responsive.css";
+@import "../dashboards/shared/reports/detail-extras.css";
+@import "../dashboards/shared/report-detail.css";
+@import "../dashboards/lks/clients.css";
+@import "../dashboards/lks/client-form/fields.css";
+@import "../dashboards/lks/client-form/choices-preview.css";
+@import "../dashboards/lks/client-form/actions-theme.css";
+@import "../dashboards/lks/workspace.css";
+@import "../dashboards/lks/reports.css";
+@import "../dashboards/lks/report-editor.css";
+@import "../dashboards/lks/profile.css";
+@import "../dashboards/lks/staff.css";
+@import "../dashboards/lks/client-lists.css";
+@import "../dashboards/lks/client-detail.css";
+@import "../dashboards/shared/sidebar.css";
+@import "../dashboards/lks/letters.css";
+@import "../dashboards/lks/overview.css";
+@import "../dashboards/lks/member-form.css";
+@import "../dashboards/lks/palette.css";

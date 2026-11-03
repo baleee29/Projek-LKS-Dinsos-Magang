@@ -1,0 +1,253 @@
+/* Admin hierarchy from the approved sidebar proposal. Shared palette stays authoritative. */
+.sidebar.admin-sidebar .side-nav {
+    padding-top: 2px;
+}
+.sidebar.admin-sidebar .admin-sidebar-group {
+    margin-top: 14px;
+}
+.sidebar.admin-sidebar .admin-sidebar-section-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    min-height: 36px;
+    padding: 7px 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #b6c5da;
+    font: inherit;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.065em;
+    line-height: 1.5;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.sidebar.admin-sidebar .admin-sidebar-section-toggle:hover {
+    background: var(--sidebar-hover);
+}
+.sidebar.admin-sidebar .admin-sidebar-section-toggle.is-current {
+    color: #e4edf5;
+}
+.sidebar.admin-sidebar .admin-sidebar-section-toggle .icon {
+    flex: none;
+    width: 13px;
+    height: 13px;
+    transition: transform 140ms ease;
+}
+.sidebar.admin-sidebar
+    .admin-sidebar-section-toggle[aria-expanded="false"]
+    .icon {
+    transform: rotate(-90deg);
+}
+.sidebar.admin-sidebar .admin-sidebar-group-items {
+    display: grid;
+    gap: 3px;
+}
+.sidebar.admin-sidebar .nav-item {
+    margin-top: 0;
+    margin-bottom: 0;
+    gap: 9px;
+}
+.sidebar.admin-sidebar .nav-item > span:not(.nav-dot):not(.psm-nav-count) {
+    flex: 1;
+    overflow-wrap: anywhere;
+}
+.sidebar.admin-sidebar .nav-children {
+    display: grid;
+    gap: 3px;
+    margin: 2px 0 6px 21px;
+    border-color: var(--brand-line);
+}
+.sidebar.admin-sidebar .nav-child {
+    color: #b6c5da;
+}
+.sidebar.admin-sidebar .nav-child.is-active {
+    color: #fff;
+}
+.sidebar.admin-sidebar [hidden] {
+    display: none !important;
+}
+.sidebar.admin-sidebar .admin-sidebar-section-toggle:focus-visible {
+    outline: 2px solid #c3def2;
+    outline-offset: 2px;
+}
+
+/* Pillar Cards (LKS, PSM, Karang Taruna) styled with bordered container matching mockups */
+.sidebar.admin-sidebar .admin-pillar-group {
+    margin-top: 14px;
+}
+
+.sidebar.admin-sidebar .admin-pillar-card-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 60px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    background: #1c2636;
+    color: #f1f5f9;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.sidebar.admin-sidebar .admin-pillar-card-toggle:hover {
+    background: #233146;
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.sidebar.admin-sidebar .admin-pillar-card-toggle:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+.sidebar.admin-sidebar .admin-pillar-card-toggle.is-current {
+    border-color: rgba(96, 165, 250, 0.35);
+    background: #1e2c3e;
+}
+
+.sidebar.admin-sidebar .pillar-toggle-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #334a66;
+    color: #f8fafc;
+    flex-shrink: 0;
+}
+
+.sidebar.admin-sidebar .pillar-toggle-icon.has-logo img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.sidebar.admin-sidebar .pillar-toggle-icon .icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 1.8;
+}
+
+.sidebar.admin-sidebar .pillar-toggle-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 2px;
+}
+
+.sidebar.admin-sidebar .pillar-toggle-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+.sidebar.admin-sidebar .pillar-toggle-desc {
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #94a3b8;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar.admin-sidebar .pillar-toggle-chevron {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    color: #94a3b8;
+    transition: transform 180ms ease;
+}
+
+.sidebar.admin-sidebar .admin-pillar-card-toggle[aria-expanded="false"] .pillar-toggle-chevron {
+    transform: rotate(-90deg);
+}
+
+.sidebar.admin-sidebar .admin-pillar-card-toggle[aria-expanded="true"] .pillar-toggle-chevron {
+    transform: rotate(0deg);
+}
+
+/* Pillar Subitems with vertical guide line */
+.sidebar.admin-sidebar .admin-pillar-subitems {
+    display: grid;
+    gap: 4px;
+    margin-top: 8px;
+    margin-left: 10px;
+    padding-left: 12px;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar.admin-sidebar .admin-pillar-subitems .nav-item {
+    font-size: 14px;
+    font-weight: 500;
+    color: #cbd5e1;
+    min-height: 42px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    gap: 12px;
+}
+
+.sidebar.admin-sidebar .admin-pillar-subitems .nav-item:hover {
+    background: var(--sidebar-hover);
+    color: #ffffff;
+}
+
+.sidebar.admin-sidebar .admin-pillar-subitems .nav-item.is-active {
+    background: #2a3a50;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.sidebar.admin-sidebar .admin-pillar-subitems .nav-item .icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.sidebar.admin-sidebar .admin-pillar-subitems .psm-nav-count {
+    background: #354a65;
+    color: #ffffff;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 6px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.sidebar.admin-sidebar .admin-pillar-subitems .nav-children {
+    display: grid;
+    gap: 3px;
+    margin: 4px 0 6px 12px;
+    padding-left: 12px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 420px) {
+    .sidebar.admin-sidebar .admin-sidebar-section-toggle {
+        min-height: 44px;
+    }
+    .sidebar.admin-sidebar .admin-pillar-card-toggle {
+        min-height: 54px;
+        padding: 8px 12px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .sidebar.admin-sidebar .admin-sidebar-section-toggle .icon,
+    .sidebar.admin-sidebar .pillar-toggle-chevron {
+        transition: none;
+    }
+}

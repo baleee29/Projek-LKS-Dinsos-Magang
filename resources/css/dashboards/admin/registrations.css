@@ -1,0 +1,313 @@
+/* Admin review of temporary IndexedDB public partner registrations. */
+.admin-registration-view {
+    color: var(--text, #24364c);
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.admin-registration-view :is(h1, h2, p) {
+    margin: 0;
+}
+.admin-registration-heading,
+.admin-registration-card-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.admin-registration-heading small {
+    display: block;
+    color: var(--muted, #667085);
+    margin-bottom: 8px;
+    font-size: 11px;
+}
+.admin-registration-heading h1 {
+    font-size: clamp(24px, 2.2vw, 31px);
+    line-height: 1.35;
+    margin-bottom: 8px;
+    color: var(--heading, var(--text));
+}
+.admin-registration-heading p,
+.admin-registration-card p {
+    color: var(--muted, #667085);
+    line-height: 1.75;
+    font-size: 13px;
+}
+.admin-registration-badge,
+.admin-registration-status {
+    display: inline-flex;
+    border: 1px solid var(--line, #dce3ee);
+    background: var(--soft, #edf2f8);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+}
+.admin-registration-status[data-status="Disetujui"] {
+    color: #18704a;
+    background: #e7f5ed;
+}
+.admin-registration-status[data-status="Ditolak"] {
+    color: #a33d3d;
+    background: #fff0f0;
+}
+.admin-registration-note {
+    padding: 13px 16px;
+    margin: 14px 0 !important;
+    border: 1px solid var(--line, #dce3ee);
+    border-radius: 8px;
+    background: var(--soft, #edf2f8);
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--muted, #667085);
+}
+.admin-registration-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+    margin: 20px 0 12px;
+}
+.admin-registration-controls label {
+    display: grid;
+    gap: 8px;
+    flex: 1 1 180px;
+    font-size: 12px;
+}
+.admin-registration-controls label:first-child {
+    flex: 2 1 280px;
+}
+.admin-registration-view :is(input, select, textarea) {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid var(--line, #dce3ee);
+    border-radius: 7px;
+    background: var(--surface, #fff);
+    color: inherit;
+    padding: 11px 12px;
+    font: inherit;
+}
+.admin-registration-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 13px;
+    border: 1px solid var(--line, #dce3ee);
+    border-radius: 7px;
+    background: var(--surface, #fff);
+    color: var(--text, #24364c);
+    font: inherit;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.admin-registration-button.is-primary {
+    background: #304a6b;
+    color: #fff;
+    border-color: #304a6b;
+}
+.admin-registration-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+.admin-registration-count {
+    margin: 12px 0 !important;
+    color: var(--muted, #667085);
+    font-size: 12px;
+}
+.admin-registration-table {
+    border: 1px solid var(--line, #dce3ee);
+    background: var(--surface, #fff);
+    border-radius: 9px;
+    overflow: auto;
+}
+.admin-registration-table table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 790px;
+    font-size: 12px;
+}
+.admin-registration-table :is(th, td) {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line, #dce3ee);
+    vertical-align: top;
+}
+.admin-registration-table th {
+    background: var(--soft, #edf2f8);
+    color: var(--muted, #667085);
+    font-weight: 500;
+}
+.admin-registration-table th.q-col-number,
+.admin-registration-table td.q-col-number {
+    width: 52px;
+    min-width: 52px;
+    max-width: 56px;
+    padding-left: 16px;
+    padding-right: 8px;
+    text-align: center;
+    color: var(--muted, #667085);
+}
+.admin-registration-table small {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted, #667085);
+    font-size: 11px;
+}
+.admin-registration-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-top: 18px;
+    font-size: 12px;
+}
+.admin-registration-empty {
+    padding: 45px 20px;
+    text-align: center;
+    border: 1px solid var(--line, #dce3ee);
+    border-radius: 9px;
+    background: var(--surface, #fff);
+}
+.admin-registration-empty h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.admin-registration-empty p {
+    color: var(--muted, #667085);
+    line-height: 1.75;
+    font-size: 13px;
+}
+.admin-registration-card {
+    margin-top: 18px;
+    padding: 24px;
+    border: 1px solid var(--line, #dce3ee);
+    border-radius: 9px;
+    background: var(--surface, #fff);
+}
+.admin-registration-card h2 {
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+.admin-registration-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 26px;
+    margin: 22px 0;
+}
+.admin-registration-fields dt {
+    font-size: 11px;
+    color: var(--muted, #667085);
+    margin-bottom: 6px;
+}
+.admin-registration-fields dd {
+    margin: 0;
+    font-size: 13px;
+    white-space: pre-wrap;
+    line-height: 1.7;
+}
+.admin-registration-documents {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.admin-registration-documents li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--line, #dce3ee);
+    padding: 15px 0;
+}
+.admin-registration-documents strong {
+    font-size: 13px;
+}
+.admin-registration-documents p {
+    font-size: 11px;
+    margin-top: 5px;
+}
+.admin-registration-review-label {
+    display: grid;
+    gap: 8px;
+    margin: 20px 0;
+    font-size: 12px;
+}
+.admin-registration-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+}
+.admin-registration-history {
+    padding-left: 22px;
+}
+.admin-registration-history li {
+    padding: 0 0 20px 6px;
+    font-size: 13px;
+}
+.admin-registration-history small {
+    display: block;
+    margin: 6px 0;
+    color: var(--muted, #667085);
+    font-size: 11px;
+}
+.admin-registration-view [role="alert"] {
+    color: #b54141;
+    margin-top: 12px;
+}
+.admin-registration-dialog {
+    width: min(500px, calc(100% - 40px));
+    box-sizing: border-box;
+    padding: 26px;
+    color: var(--text, #24364c);
+    background: var(--surface, #fff);
+    border: 1px solid var(--line, #dce3ee);
+    border-radius: 12px;
+}
+.admin-registration-dialog::backdrop {
+    background: rgb(12 24 39 / 0.55);
+}
+.admin-registration-dialog h2 {
+    margin: 0 0 14px;
+    font-size: 20px;
+}
+.admin-registration-dialog p {
+    font-size: 13px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+:is(.admin-registration-view, .admin-registration-dialog)
+    :is(button, a, input, select, textarea):focus-visible {
+    outline: 3px solid #466882;
+    outline-offset: 3px;
+}
+.dark .admin-registration-status[data-status="Disetujui"] {
+    background: #203d31;
+    color: #a1e4bf;
+}
+.dark .admin-registration-status[data-status="Ditolak"] {
+    background: #4a2930;
+    color: #ffb5bd;
+}
+.dark .admin-registration-view [role="alert"] {
+    color: #ffb5bd;
+}
+@media (max-width: 640px) {
+    .admin-registration-heading {
+        flex-direction: column;
+    }
+    .admin-registration-card {
+        padding: 18px;
+    }
+    .admin-registration-fields {
+        grid-template-columns: 1fr;
+    }
+    .admin-registration-pagination {
+        justify-content: space-between;
+        gap: 8px;
+    }
+    .admin-registration-documents li {
+        align-items: flex-start;
+    }
+}

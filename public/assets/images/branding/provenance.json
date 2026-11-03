@@ -1,0 +1,33 @@
+{
+    "asset": "sidaya-logo.png",
+    "source": "User-provided Sidaya Logo.png",
+    "source_path": "C:/Users/ACER/Downloads/Sidaya Logo.png",
+    "provided_on": "2026-10-20",
+    "sha256": "81bf9aea852e0a84fcd8596b5f89f63761e527672f8741d462c1cf15c4a628bc",
+    "width": 1080,
+    "height": 1080,
+    "usage": "Shared sidebar brand logo for Admin, Ketua PSM, Anggota PSM, LKS and Karang Taruna dashboards",
+    "modifications": "Original PNG copied without pixel changes. CSS clips transparent margins and preserves the original colors.",
+    "visible_bounds": {
+        "x": 105,
+        "y": 391,
+        "width": 870,
+        "height": 327
+    },
+    "derivatives": [
+        {
+            "asset": "sidaya-logo-480.png",
+            "created_on": "2026-10-26",
+            "modifications": "Downscaled from 1080x1080 to 480x480 with Lanczos; transparency and colors kept. The sidebar's percentage-based clipping is unchanged.",
+            "usage": "Sidebar and login logo (about 239 CSS px wide, sharp at 2x)",
+            "sha256": "d4e6ddfb2bd991507af590795e896d4be3c3b12db2af3f7972ff088d4be8286c"
+        },
+        {
+            "asset": "sidaya-logo-480.webp",
+            "created_on": "2026-10-26",
+            "modifications": "sidaya-logo-480.png encoded as WebP quality 90 with alpha; same pixels size and clipping.",
+            "usage": "Sidebar and login logo (replaces the PNG derivative in markup)",
+            "sha256": "93217c74fe4ee36922eaf29fbcc428aca50a1d8739a89765534e1ce7c11d3cd2"
+        }
+    ]
+}

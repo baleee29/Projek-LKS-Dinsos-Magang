@@ -1,0 +1,55 @@
+/* Back button navigation in detail views */
+.quarterly-dashboard .q-back-nav {
+    display: block;
+    margin-bottom: 20px !important;
+}
+
+.quarterly-dashboard .q-back-nav .text-button,
+.quarterly-dashboard .q-back-link,
+.quarterly-dashboard #view-content > a.text-button:first-child {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px;
+    text-decoration: none;
+}
+
+.quarterly-dashboard #view-content > a.text-button:first-child:not(.q-back-nav *) {
+    margin-bottom: 20px !important;
+}
+
+/* File attachments list in member details */
+.quarterly-dashboard .q-files-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.quarterly-dashboard .q-file-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 16px;
+    background: var(--surface-soft, rgba(0, 0, 0, 0.02));
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    transition: border-color 0.15s;
+}
+.quarterly-dashboard .q-file-row:hover {
+    border-color: var(--accent);
+}
+.quarterly-dashboard .q-file-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+.quarterly-dashboard .q-file-info strong {
+    font-size: 13px;
+    color: var(--heading);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.quarterly-dashboard .q-file-info small {
+    font-size: 11px;
+}

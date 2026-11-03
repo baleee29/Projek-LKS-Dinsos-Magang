@@ -1,0 +1,314 @@
+/* Report detail content and attachments. */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 23px;
+    font-size: 12px;
+}
+
+.back-link .icon {
+    transform: rotate(180deg);
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.detail-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 0 0 24px;
+}
+
+.record-code {
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(280px, 1fr);
+    align-items: start;
+    gap: 22px;
+}
+
+.detail-primary,
+.detail-secondary {
+    min-width: 0;
+    display: grid;
+    gap: 20px;
+}
+
+.detail-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--brand-shadow);
+}
+
+.detail-card h2 {
+    color: var(--heading);
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 19px;
+}
+
+.detail-card > p {
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.detail-card > p:last-child {
+    margin-bottom: 0;
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.report-intro {
+    background: var(--soft-2);
+}
+
+.report-intro h2 {
+    margin-bottom: 12px;
+}
+
+.report-intro .eyebrow {
+    font-size: 10px;
+    margin-top: 0;
+}
+
+.field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 26px;
+    margin: 0;
+}
+
+.field-grid dt {
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 5px;
+}
+
+.field-grid dd {
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 0;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.detail-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.detail-metrics article {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 19px;
+}
+
+.detail-metrics span {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.detail-metrics strong {
+    display: block;
+    margin-top: 9px;
+    color: var(--heading);
+    font-size: 19px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.count-badge {
+    padding: 3px 6px;
+    margin-left: 5px;
+    border-radius: 5px;
+    color: var(--muted);
+    background: var(--soft);
+    font-size: 10px;
+}
+
+.attachment-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.attachment-list li + li {
+    border-top: 1px solid var(--line);
+}
+
+.attachment-list button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    padding: 12px 0;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    width: 100%;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.attachment-list button > span {
+    flex: 1;
+}
+
+.attachment-list button > .icon {
+    color: var(--primary);
+    width: 17px;
+    height: 17px;
+}
+
+.attachment-list button:hover {
+    color: var(--primary);
+}
+
+.attachment-list small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    padding-top: 4px;
+}
+
+.review-card > .muted {
+    font-size: 10px;
+    margin: 0 0 7px;
+}
+
+.review-note {
+    background: var(--soft-2);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.review-note strong {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 5px;
+}
+
+.review-note span {
+    display: block;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 12px;
+}
+
+.detail-form .save-button {
+    font-size: 12px;
+}
+
+.compact {
+    font-size: 11px;
+    padding: 12px;
+    margin: 18px 0 0;
+}
+
+.status-timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 5px;
+}
+
+.status-timeline li {
+    position: relative;
+    padding: 0 0 22px 20px;
+    border-left: 1px solid var(--line);
+}
+
+.status-timeline li:last-child {
+    padding-bottom: 0;
+    border-color: transparent;
+}
+
+.status-timeline li::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 4px;
+    width: 9px;
+    height: 9px;
+    border: 2px solid var(--surface);
+    border-radius: 50%;
+    background: var(--brand-focus);
+}
+
+.status-timeline strong {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-timeline time,
+.status-timeline span {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.status-timeline p {
+    margin: 7px 0 0;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.attachment-dialog {
+    width: min(640px, calc(100% - 32px));
+    color: var(--text);
+}
+
+.attachment-dialog h2 {
+    font-size: 20px;
+    margin-right: 18px;
+}
+
+#attachment-content {
+    margin: 22px 0;
+}
+
+#attachment-content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+#attachment-content pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font: inherit;
+    font-size: 12px;
+    line-height: 1.9;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--soft);
+}
+

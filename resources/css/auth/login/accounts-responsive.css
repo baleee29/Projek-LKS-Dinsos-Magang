@@ -1,0 +1,326 @@
+/* Demo accounts and the return link */
+.demo-accounts {
+    margin-top: 24px;
+    padding: 18px;
+    border: 1px solid var(--brand-border);
+    border-radius: 12px;
+    background: var(--brand-soft);
+}
+
+.login-return {
+    width: 100%;
+    margin: 16px 0 0;
+    text-align: center;
+}
+
+.login-page .login-back-link {
+    gap: 8px;
+    max-width: 100%;
+    border-color: var(--brand-border);
+    color: var(--brand-primary);
+}
+
+.login-back-link svg {
+    flex-shrink: 0;
+}
+
+.login-page .login-back-link:hover {
+    color: var(--brand-primary-hover);
+    background: #edf2f8;
+}
+
+.demo-accounts h2 {
+    color: var(--brand-primary-hover);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.demo-accounts > p {
+    margin-top: 5px;
+    color: var(--brand-muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.demo-account-list {
+    display: grid;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.demo-account {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--brand-border);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.demo-account strong,
+.demo-account span {
+    display: block;
+}
+
+.demo-account strong {
+    color: var(--brand-ink);
+    font-size: 12px;
+}
+
+.demo-account span {
+    margin-top: 3px;
+    color: var(--brand-muted);
+    font-size: 10px;
+    overflow-wrap: anywhere;
+}
+
+.demo-account button {
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    border: 1px solid var(--brand-border);
+    border-radius: 7px;
+    background: #fff;
+    color: var(--brand-primary);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.demo-account button:hover {
+    border-color: var(--brand-primary);
+    background: var(--brand-soft);
+}
+
+@media (max-width: 900px) {
+    .login-page {
+        padding: 24px 28px 32px;
+    }
+    .login-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    .login-intro {
+        min-height: 0;
+        padding: 28px 32px;
+    }
+    .login-intro h2 {
+        margin-top: 10px;
+        font-size: 30px;
+    }
+    .login-intro h2 br {
+        display: none;
+    }
+    .intro-description {
+        max-width: 540px;
+        margin-top: 12px;
+    }
+    .login-illustration,
+    .intro-footnote {
+        display: none;
+    }
+    .login-card {
+        max-width: 540px;
+    }
+}
+
+@media (max-width: 600px) {
+    .login-page {
+        padding: 20px 18px 28px;
+    }
+    .back-link {
+        min-height: 36px;
+        padding: 6px 9px;
+        font-size: 10px;
+    }
+    .login-intro {
+        padding: 24px;
+        border-radius: var(--brand-card-radius);
+    }
+    .login-intro h2 {
+        font-size: 26px;
+    }
+    .intro-description {
+        font-size: 12px;
+    }
+    .login-card {
+        padding: 28px 24px;
+        border-radius: var(--brand-card-radius);
+    }
+    .card-header h1 {
+        font-size: 26px;
+    }
+    #login-form {
+        margin-top: 26px;
+    }
+    .field input {
+        font-size: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .field input,
+    .back-link,
+    .submit-button {
+        transition: none;
+    }
+}
+
+/* Keep the login reachable on phones and short landscape screens. */
+.login-layout > *,
+.login-card,
+.login-intro,
+.demo-account > div {
+    min-width: 0;
+}
+
+.login-description,
+.intro-description,
+.form-status,
+.demo-account span {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 767px) {
+    .desktop-label {
+        display: none;
+    }
+    .password-label {
+        min-height: 21px;
+    }
+    .site-footer .footer-brand .brand {
+        line-height: 24px;
+    }
+}
+
+@media (min-width: 768px) and (max-height: 550px) {
+    .submit-button {
+        padding-block: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    .demo-account {
+        align-items: stretch;
+        flex-direction: column;
+    }
+    .demo-account button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .field input {
+        font-size: 16px;
+    }
+    .password-toggle {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+    .back-link {
+        min-height: 44px;
+        font-size: 12px;
+    }
+    .demo-account button {
+        min-height: 44px;
+        font-size: 13px;
+    }
+    .demo-account strong {
+        font-size: 13px;
+    }
+    .demo-account span,
+    .demo-accounts > p {
+        font-size: 12px;
+        line-height: 1.8;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .login-page {
+        padding: max(16px, env(safe-area-inset-top))
+            max(16px, env(safe-area-inset-right))
+            max(28px, env(safe-area-inset-bottom))
+            max(16px, env(safe-area-inset-left));
+    }
+    .login-intro {
+        padding: 20px;
+    }
+    .intro-description {
+        font-size: 13px;
+    }
+    .login-card {
+        padding: 26px 20px;
+    }
+    .card-header h1 {
+        font-size: 25px;
+    }
+    .demo-accounts {
+        padding: 14px;
+    }
+    .demo-account {
+        padding: 12px;
+    }
+}
+
+@media screen and (max-width: 900px) and (max-height: 500px) {
+    .login-intro {
+        display: none;
+    }
+    .login-layout {
+        align-items: start;
+    }
+}
+
+/* Change-password page: one centred card, same tokens as the login card. */
+.login-layout.is-single {
+    grid-template-columns: minmax(0, 480px);
+    justify-content: center;
+}
+
+.remember-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0 16px;
+    font-size: 14px;
+}
+
+/* Informational password rule checklist under the login password field. */
+.password-rules {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: var(--brand-muted);
+}
+
+.password-rules li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s ease;
+}
+
+.password-rule-icon {
+    display: inline-flex;
+    justify-content: center;
+    width: 14px;
+    font-weight: 700;
+}
+
+.password-rules li.is-met {
+    color: #2f7d4f;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+

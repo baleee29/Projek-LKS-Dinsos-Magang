@@ -1,0 +1,63 @@
+/* Local typography and visual tokens shared by every page. */
+.brand-name-case {
+    text-transform: none;
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("/assets/fonts/plus-jakarta-sans-400.woff2") format("woff2"),
+        url("/assets/fonts/plus-jakarta-sans-400.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("/assets/fonts/plus-jakarta-sans-500.woff2") format("woff2"),
+        url("/assets/fonts/plus-jakarta-sans-500.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("/assets/fonts/plus-jakarta-sans-600.woff2") format("woff2"),
+        url("/assets/fonts/plus-jakarta-sans-600.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("/assets/fonts/plus-jakarta-sans-700.woff2") format("woff2"),
+        url("/assets/fonts/plus-jakarta-sans-700.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --brand-navigation-gradient: linear-gradient(
+        90deg,
+        #102a43 0%,
+        #1e3a5f 30%,
+        #486284 65%,
+        #7fa6c8 100%
+    );
+    --brand-primary: #486284;
+    --brand-primary-hover: #354f70;
+    --brand-ink: #1a202c;
+    --brand-muted: #596b80;
+    --brand-pale: #cfd9e5;
+    --brand-footer: #d5dee8;
+    --brand-soft: #f8fafd;
+    --brand-line: #a6b4c3;
+    --brand-border: #dce4ec;
+    --brand-focus: #6d8bad;
+    --brand-shadow: 0 8px 28px rgb(26 32 44 / 5%);
+    --brand-control-radius: 8px;
+    --brand-card-radius: 18px;
+}

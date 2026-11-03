@@ -1,0 +1,220 @@
+/* Printable report details. */
+@media print {
+    .back-link,
+    .section-heading .panel-actions,
+    .toast,
+    dialog {
+        display: none !important;
+    }
+
+    .demo-banner {
+        background: #fff;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .detail-layout,
+    .detail-primary,
+    .detail-secondary {
+        display: block;
+    }
+
+    .detail-card {
+        box-shadow: none;
+        margin-bottom: 16px;
+        break-inside: avoid;
+        padding: 16px;
+    }
+
+    .field-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .attachment-list button {
+        color: #111;
+    }
+
+    .status-pill {
+        border: 1px solid #999;
+        background: #fff !important;
+        color: #111 !important;
+    }
+}
+
+/* Person cell with photo/avatar in admin member approval table */
+.q-person-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.q-member-avatar {
+    display: block;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid var(--line, #e2e8f0);
+    background: var(--surface-alt, #f2f1fb);
+    flex-shrink: 0;
+}
+.q-member-avatar-large {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+}
+.q-initials {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #eef2f6;
+    color: #354f70;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+.q-initials-large {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    font-size: 18px;
+}
+.q-district-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(43, 107, 79, 0.08);
+    color: #2b6b4f;
+    font-size: 11px;
+    font-weight: 600;
+}
+.q-detail-avatar-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background: #f8f9fc;
+    border: 1px solid var(--line, #e2e8f0);
+}
+.q-detail-avatar-box h3 {
+    margin: 0;
+    font-size: 16px;
+}
+.q-detail-avatar-box p {
+    margin: 2px 0 0;
+    font-size: 12px;
+}
+
+/* Numbered table column layout: balanced gap between No and profile photo */
+.reports-table.q-table-numbered th:first-child,
+.reports-table.q-table-numbered td:first-child,
+.reports-table th.q-col-number,
+.reports-table td.q-col-number {
+    width: 52px !important;
+    min-width: 52px !important;
+    max-width: 56px !important;
+    padding-left: 16px !important;
+    padding-right: 8px !important;
+    text-align: center !important;
+}
+
+.reports-table.q-table-numbered th:nth-child(2),
+.reports-table.q-table-numbered td:nth-child(2),
+.reports-table th.q-col-person,
+.reports-table td.q-col-person {
+    width: 25% !important;
+    min-width: 180px !important;
+    padding-left: 12px !important;
+}
+
+.reports-table.q-table-numbered th:last-child,
+.reports-table.q-table-numbered td:last-child,
+.reports-table th.q-col-action,
+.reports-table td.q-col-action {
+    width: auto !important;
+    min-width: 100px !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+}
+
+.reports-table .row-action,
+.q-table .row-action {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+}
+
+.reports-table.q-table-numbered .status-pill,
+.quarterly-dashboard .q-table.q-table-numbered .status-pill {
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+}
+
+/* Report Controls filter spacing & compact reset button */
+.report-controls .list-search + .workspace-filters,
+.report-controls .workspace-filters {
+    margin-top: 16px;
+}
+
+.workspace-filters > .text-button,
+.workspace-filters .q-reset-filter-btn,
+.workspace-filters [data-reset-member-filters] {
+    align-self: end;
+    justify-self: start;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: fit-content !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    padding: 0 14px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    line-height: 36px !important;
+    border-radius: 8px !important;
+    white-space: nowrap !important;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* Back button navigation in detail views */
+.q-back-nav {
+    display: block;
+    margin-bottom: 20px !important;
+}
+
+.q-back-nav .text-button,
+.q-back-link,
+#view-content > a.text-button:first-child {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px;
+    text-decoration: none;
+}
+
+#view-content > a.text-button:first-child:not(.q-back-nav *) {
+    margin-bottom: 20px !important;
+}
+
+.quarterly-dashboard .text-button + .section-heading,
+.quarterly-dashboard .q-back-link + .section-heading,
+.quarterly-dashboard .q-back-nav + .section-heading,
+#view-content > .text-button + .section-heading,
+#view-content > .q-back-nav + .section-heading {
+    margin-top: 4px;
+}

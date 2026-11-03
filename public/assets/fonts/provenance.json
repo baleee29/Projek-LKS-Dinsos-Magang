@@ -1,0 +1,25 @@
+{
+    "assets": [
+        {
+            "asset": "plus-jakarta-sans-400.woff2",
+            "sha256": "ad64b760eac4b6ccc319bfb9863c208da635befd5ec2249c0092655b5ad788c4"
+        },
+        {
+            "asset": "plus-jakarta-sans-500.woff2",
+            "sha256": "5bd7da40e3a781b43ad1d646c7b19d05e01bcc5d5db3db77b1c7feadb02e53e3"
+        },
+        {
+            "asset": "plus-jakarta-sans-600.woff2",
+            "sha256": "cd6b9159493fe9a27ce235a7ffb7e601f99f8554f62c456905dfb21ff3b342c1"
+        },
+        {
+            "asset": "plus-jakarta-sans-700.woff2",
+            "sha256": "d654db06fc730f0259f96e5fa5bd79e5eb12d60a043427e8d339f7b0ced1ed6c"
+        }
+    ],
+    "source": "plus-jakarta-sans-{400,500,600,700}.ttf in this folder (kept unchanged)",
+    "created_on": "2026-10-26",
+    "license": "SIL Open Font License 1.1, see OFL.txt (no Reserved Font Name declared)",
+    "modifications": "Container conversion TTF to WOFF2 with fontTools 4.63 (brotli); glyph data, metrics and names unchanged.",
+    "usage": "Primary @font-face source in resources/css/shared/brand.css; the TTF files remain the fallback and the source of the PDF report fonts."
+}

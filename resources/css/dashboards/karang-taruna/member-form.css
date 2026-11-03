@@ -1,0 +1,399 @@
+/* Karang Taruna member addition form; field behavior is owned by the shared module. */
+.kt-member-form-view {
+    --kt-member-form-surface: var(--surface, #fff);
+    --kt-member-form-soft: #f1f3ff;
+    --kt-member-form-ink: var(--text, #1d2939);
+    --kt-member-form-muted: var(--muted, #667085);
+    --kt-member-form-line: var(--line, #e5eaf2);
+    --kt-member-form-primary: #304a6b;
+    --kt-member-form-secondary: #486284;
+    --kt-member-form-on-primary: #fff;
+    --kt-member-form-error: #a03d36;
+    --kt-member-form-error-soft: #fff5f4;
+    --kt-member-form-error-line: #ddb3af;
+    min-width: 0;
+    color: var(--kt-member-form-ink);
+}
+
+.dark .kt-member-form-view {
+    --kt-member-form-soft: #23384d;
+    --kt-member-form-primary: #c7ddff;
+    --kt-member-form-secondary: #a8c3e8;
+    --kt-member-form-on-primary: #16283e;
+    --kt-member-form-error: #f6bdb8;
+    --kt-member-form-error-soft: #49333a;
+    --kt-member-form-error-line: #704b48;
+}
+
+.kt-member-form-view :is(h1, h2, p) {
+    margin: 0;
+}
+
+.kt-member-form-view :is(a, button, input, select, textarea):focus-visible {
+    outline: 3px solid var(--kt-member-form-secondary);
+    outline-offset: 3px;
+}
+
+.kt-member-form-view .kt-member-form-back,
+.kt-member-form-view .kt-member-form-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 10px 16px;
+    border: 1px solid var(--kt-member-form-line);
+    border-radius: 8px;
+    background: var(--kt-member-form-surface);
+    color: var(--kt-member-form-ink);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.45;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.kt-member-form-view .kt-member-form-back {
+    margin-bottom: 20px;
+    padding-inline: 12px;
+}
+
+.kt-member-form-view .kt-member-form-back svg,
+.kt-member-form-view .kt-member-form-button svg {
+    width: 17px;
+    height: 17px;
+    flex: none;
+}
+
+.kt-member-form-view .kt-member-form-heading {
+    margin-bottom: 24px;
+}
+
+.kt-member-form-view .kt-member-form-heading small {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--kt-member-form-muted);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
+.kt-member-form-view .kt-member-form-heading h1 {
+    font-size: clamp(25px, 2.5vw, 32px);
+    line-height: 1.25;
+    letter-spacing: -0.04em;
+}
+
+.kt-member-form-view .kt-member-form-heading p {
+    margin-top: 8px;
+    color: var(--kt-member-form-muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.kt-member-form-view .kt-member-form-card {
+    margin: 0;
+    padding: 30px;
+    border: 1px solid var(--kt-member-form-line);
+    border-radius: 16px;
+    background: var(--kt-member-form-surface);
+}
+
+.kt-member-form-view .kt-member-form-section {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.kt-member-form-view .kt-member-form-section + .kt-member-form-section {
+    margin-top: 30px;
+    padding-top: 28px;
+    border-top: 1px solid var(--kt-member-form-line);
+}
+
+.kt-member-form-view .kt-member-form-section legend {
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 6px;
+    font-size: 19px;
+    font-weight: 650;
+    line-height: 1.45;
+}
+
+.kt-member-form-view .kt-member-form-section legend + * {
+    clear: both;
+}
+
+.kt-member-form-view .kt-member-form-note {
+    margin-bottom: 24px;
+    color: var(--kt-member-form-muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.kt-member-form-view .kt-member-photo-upload-group {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--kt-member-form-line);
+}
+
+.kt-member-form-view .kt-member-photo-title {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--kt-member-form-ink);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.kt-member-form-view .kt-member-photo-title small {
+    color: var(--kt-member-form-muted);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.kt-member-form-view .kt-member-photo-uploader {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.kt-member-form-view .kt-member-photo-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 84px;
+    height: 84px;
+    border-radius: 16px;
+    border: 2px dashed var(--kt-member-form-line);
+    background: var(--kt-member-form-soft);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.kt-member-form-view .kt-photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: var(--kt-member-form-muted);
+}
+
+.kt-member-form-view .kt-photo-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.kt-member-form-view .kt-member-photo-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 220px;
+}
+
+.kt-member-form-view .kt-member-photo-btn-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.kt-member-form-view .kt-member-photo-pick-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.kt-member-form-view .kt-member-photo-remove-btn {
+    border-color: var(--kt-member-form-error-line) !important;
+    color: var(--kt-member-form-error) !important;
+    background: var(--kt-member-form-error-soft) !important;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.kt-member-form-view .kt-member-photo-hint {
+    margin: 0;
+    color: var(--kt-member-form-muted);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.kt-member-form-view .kt-photo-error {
+    margin: 0;
+    color: var(--kt-member-form-error);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.kt-member-form-view .kt-member-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.kt-member-form-view .psm-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 8px;
+}
+
+.kt-member-form-view .psm-field-wide {
+    grid-column: 1 / -1;
+}
+
+.kt-member-form-view .psm-field > label {
+    color: var(--kt-member-form-ink);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.kt-member-form-view .psm-field > label :is(span, small) {
+    color: var(--kt-member-form-muted);
+    font-size: inherit;
+    font-weight: 400;
+}
+
+.kt-member-form-view #member-form .psm-field :is(input, select, textarea) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid var(--kt-member-form-line);
+    border-radius: 7px;
+    background: var(--kt-member-form-surface);
+    color: var(--kt-member-form-ink);
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.kt-member-form-view #member-form .psm-field :is(input, textarea)::placeholder {
+    color: var(--kt-member-form-muted);
+    opacity: 1;
+}
+
+.kt-member-form-view #member-form .psm-field textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.kt-member-form-view
+    #member-form
+    .psm-field
+    :is(input, select, textarea)[aria-invalid="true"] {
+    border-color: var(--kt-member-form-error);
+}
+
+.kt-member-form-view .q-field-help {
+    color: var(--kt-member-form-muted);
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+.kt-member-form-view .q-field-error {
+    color: var(--kt-member-form-error);
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+.kt-member-form-view .q-errors {
+    margin-bottom: 24px;
+    padding: 18px;
+    border: 1px solid var(--kt-member-form-error-line);
+    border-left: 4px solid var(--kt-member-form-error);
+    border-radius: 10px;
+    background: var(--kt-member-form-error-soft);
+    color: var(--kt-member-form-error);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.kt-member-form-view .q-errors h2 {
+    margin-bottom: 8px;
+    color: inherit;
+    font-size: 15px;
+}
+
+.kt-member-form-view .q-errors ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+}
+
+.kt-member-form-view .q-errors :is(a, button) {
+    border: 0;
+    padding: 4px 0;
+    background: none;
+    color: inherit;
+    text-align: left;
+    text-decoration: underline;
+}
+
+.kt-member-form-view .kt-member-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.kt-member-form-view .kt-member-form-button.is-primary {
+    border-color: transparent;
+    background: var(--kt-member-form-primary);
+    color: var(--kt-member-form-on-primary);
+}
+
+.kt-member-form-view .kt-member-form-back:hover,
+.kt-member-form-view .kt-member-form-button:hover {
+    border-color: var(--kt-member-form-secondary);
+}
+
+.kt-member-form-view .kt-member-form-button.is-primary:hover {
+    background: var(--kt-member-form-secondary);
+}
+
+.kt-member-form-view .kt-member-form-button:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+@media (max-width: 700px) {
+    .kt-member-form-view .kt-member-form-card {
+        padding: 20px;
+    }
+
+    .kt-member-form-view .kt-member-form-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .kt-member-form-view .kt-member-form-section + .kt-member-form-section {
+        margin-top: 24px;
+        padding-top: 24px;
+    }
+
+    .kt-member-form-view #member-form .psm-field :is(input, select, textarea) {
+        font-size: 16px;
+    }
+
+    .kt-member-form-view .kt-member-form-actions .kt-member-form-button {
+        flex: 1 1 140px;
+    }
+}

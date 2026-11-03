@@ -1,0 +1,61 @@
+/* Shared centered confirm/alert dialog (SidayaUI.confirm / SidayaUI.alert). */
+.ui-dialog {
+    width: min(420px, calc(100vw - 32px));
+    margin: auto;
+    padding: 24px;
+    border: 1px solid var(--line, #e2e8f0);
+    border-radius: 14px;
+    background: var(--surface, #fff);
+    color: var(--text, #1e293b);
+    box-shadow: 0 24px 60px rgb(15 23 42 / 22%);
+}
+
+.ui-dialog::backdrop {
+    background: rgb(15 23 42 / 45%);
+}
+
+.ui-dialog h2 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.ui-dialog p {
+    margin: 0;
+    color: var(--muted, #64748b);
+    font-size: 14px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+.ui-dialog-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.ui-dialog-button {
+    min-height: 40px;
+    padding: 0 16px;
+    border: 1px solid var(--line, #e2e8f0);
+    border-radius: 8px;
+    background: var(--surface, #fff);
+    color: var(--text, #1e293b);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ui-dialog-button.is-primary {
+    border-color: var(--primary, #2563eb);
+    background: var(--primary, #2563eb);
+    color: #fff;
+}
+
+.ui-dialog-button.is-danger {
+    border-color: #b91c1c;
+    background: #b91c1c;
+    color: #fff;
+}
