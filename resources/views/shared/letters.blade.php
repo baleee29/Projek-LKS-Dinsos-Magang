@@ -28,7 +28,7 @@
             </div>
             <div>
                 @if ($isOutgoing)
-                    <button type="button" class="export-button lks-letter-create-button" id="btn-toggle-add-letter" aria-expanded="false" aria-controls="letter-form-section" data-open-text="{{ $admin ? 'Buat Surat ke LKS' : 'Buat Surat Keluar' }}">
+                    <button type="button" class="export-button lks-letter-create-button" id="btn-toggle-add-letter" aria-expanded="{{ $reply ? 'true' : 'false' }}" aria-controls="letter-form-section" data-open-text="{{ $admin ? 'Buat Surat ke LKS' : 'Buat Surat Keluar' }}">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
                         <span>{{ $admin ? 'Buat Surat ke LKS' : 'Buat Surat Keluar' }}</span>
                     </button>
@@ -50,7 +50,7 @@
         </div>
 
         @if ($isOutgoing)
-            <section class="lks-letter-card" aria-labelledby="form-heading" id="letter-form-section" hidden>
+            <section class="lks-letter-card" aria-labelledby="form-heading" id="letter-form-section" @unless ($reply) hidden @endunless>
                 <div class="lks-letter-card-header">
                     <div>
                         <h2 id="form-heading">
@@ -69,7 +69,7 @@
                                 <select id="input-target-lks" name="organization_id" required data-label="LKS penerima" aria-describedby="input-target-lks-error" style="padding: 10px 14px; border: 1px solid var(--lks-line, #e5eaf2); border-radius: 8px; font-size: 14px;">
                                     <option value="">-- Pilih Lembaga Kesejahteraan Sosial --</option>
                                     @foreach ($organizations as $org)
-                                        <option value="{{ $org['id'] }}">{{ $org['title'] }}</option>
+                                        <option value="{{ $org['id'] }}" @selected(($reply['organization_id'] ?? null) === $org['id'])>{{ $org['title'] }}</option>
                                     @endforeach
                                 </select>
                                 <p class="field-error" id="input-target-lks-error" hidden></p>
@@ -86,12 +86,12 @@
                         </div>
                         <div class="lks-form-field is-full">
                             <label for="input-subject">Perihal / Judul Surat <span class="required">*</span></label>
-                            <input type="text" id="input-subject" name="subject" placeholder="Contoh: Permohonan Rekomendasi / Surat Edaran / Pemberitahuan" required data-label="Perihal surat" aria-describedby="input-subject-error">
+                            <input type="text" id="input-subject" name="subject" value="{{ $reply ? 'Balasan: '.$reply['subject'] : '' }}" placeholder="Contoh: Permohonan Rekomendasi / Surat Edaran / Pemberitahuan" required data-label="Perihal surat" aria-describedby="input-subject-error">
                             <p class="field-error" id="input-subject-error" hidden></p>
                         </div>
                         <div class="lks-form-field is-full">
                             <label for="input-description">Keterangan / Ringkasan Isi</label>
-                            <textarea id="input-description" name="description" rows="3" placeholder="Tambahkan catatan atau ringkasan isi surat jika diperlukan..."></textarea>
+                            <textarea id="input-description" name="description" rows="3" placeholder="Tambahkan catatan atau ringkasan isi surat jika diperlukan...">{{ $reply ? 'Menindaklanjuti surat nomor '.($reply['letter_number'] ?: '-').' tanggal '.Format::date($reply['letter_date']).' perihal "'.$reply['subject'].'".' : '' }}</textarea>
                         </div>
                         <div class="lks-form-field is-full">
                             <label>Tempat Upload Berkas Surat</label>
@@ -230,6 +230,9 @@
                                             <button type="button" class="lks-action-btn" data-open-dialog="letter-detail-{{ $item['id'] }}" title="Lihat detail" aria-label="Lihat detail {{ $item['subject'] }}">
                                                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                                             </button>
+                                            @if ($admin && $item['type'] === 'outgoing')
+                                                <button type="button" class="lks-action-btn is-reply" data-href="{{ $rolePrefix }}?tab=outgoing&reply={{ $item['id'] }}" title="Balas Surat ini" aria-label="Balas surat {{ $item['subject'] }}"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="m9 17-5-5 5-5"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg></button>
+                                            @endif
                                             @if ($admin || $isOutgoing)
                                                 <button type="button" class="lks-action-btn is-delete" data-demo-action data-confirm="Surat &quot;{{ $item['subject'] }}&quot; akan dihapus." data-confirm-title="Hapus surat?" data-confirm-text="Ya, hapus surat" title="Hapus surat" aria-label="Hapus surat {{ $item['subject'] }}">
                                                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/></svg>
@@ -253,25 +256,55 @@
     </div>
 
     @foreach ($letters as $item)
-        <x-dashboard.dialog id="letter-detail-{{ $item['id'] }}" title="Detail surat">
-            <dl class="field-grid">
-                <div><dt>Perihal</dt><dd>{{ $item['subject'] }}</dd></div>
-                <div><dt>Nomor surat</dt><dd>{{ $item['letter_number'] ?: 'Tidak bernomor' }}</dd></div>
-                <div><dt>Tanggal surat</dt><dd>{{ Format::date($item['letter_date']) }}</dd></div>
-                <div><dt>Pengirim</dt><dd>{{ $item['sender'] }}</dd></div>
-                <div><dt>Tujuan</dt><dd>{{ $item['destination'] }}</dd></div>
-                <div><dt>Keterangan</dt><dd>{{ $item['description'] ?: 'Belum dicatat' }}</dd></div>
-            </dl>
-            <x-slot:actions>
-                <button class="text-button" type="button" data-close-dialog>Tutup</button>
-                @if (! $isOutgoing && ! $item['is_read'])
-                    {{-- TODO(Tahap 2): POST /lks/letters/{id}/read. --}}
-                    <button class="text-button" type="button" data-demo-action>Tandai dibaca</button>
+        @php($sent = ($item['type'] === ($admin ? 'incoming' : 'outgoing')))
+        <dialog id="letter-detail-{{ $item['id'] }}" class="q-dialog" aria-labelledby="letter-detail-{{ $item['id'] }}-title" style="max-width: 880px; width: 95%; max-height: 92vh; padding: 24px; border-radius: 12px; overflow-y: auto; box-sizing: border-box;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px;">
+                <div>
+                    <span class="{{ $sent ? 'lks-tag-destination' : 'lks-tag-sender' }}" style="font-size: 11px; margin-bottom: 6px;">{{ $sent ? 'SURAT KELUAR' : 'SURAT MASUK' }}</span>
+                    <h2 id="letter-detail-{{ $item['id'] }}-title" style="font-size: 18px; font-weight: 700; margin-top: 4px; color: var(--lks-ink, #1e293b);">{{ $item['subject'] }}</h2>
+                </div>
+                <button type="button" class="lks-action-btn" data-close-dialog style="flex-shrink: 0;" aria-label="Tutup"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size: 13px; margin-bottom: 20px; background: var(--lks-soft, #f8faff); padding: 16px; border-radius: 8px;">
+                <div><span style="color: var(--lks-muted, #64748b); display: block; font-size: 12px;">Nomor Surat</span><strong>{{ $item['letter_number'] ?: 'Belum dicatat' }}</strong></div>
+                <div><span style="color: var(--lks-muted, #64748b); display: block; font-size: 12px;">Tanggal Surat</span><strong>{{ Format::date($item['letter_date']) }}</strong></div>
+                @if ($admin)
+                    <div><span style="color: var(--lks-muted, #64748b); display: block; font-size: 12px;">LKS Terkait</span><strong style="color: var(--lks-primary, #304a6b);">{{ $sent ? $item['destination'] : $item['sender'] }}</strong></div>
                 @endif
+            </div>
+            @if ($item['description'])
+                <div style="margin-bottom: 20px;">
+                    <span style="font-size: 12px; font-weight: 600; color: var(--lks-muted, #64748b); display: block; margin-bottom: 4px;">Keterangan / Ringkasan</span>
+                    <p style="font-size: 13px; color: var(--lks-ink, #1e293b); background: #fff; border: 1px solid var(--lks-line, #e5eaf2); padding: 12px; border-radius: 8px; white-space: pre-line;">{{ $item['description'] }}</p>
+                </div>
+            @endif
+            <div style="margin-bottom: 24px;">
+                <span style="font-size: 12px; font-weight: 600; color: var(--lks-muted, #64748b); display: block; margin-bottom: 8px;">Tampilan Isi Berkas Lampiran</span>
                 @if ($item['has_file'])
-                    <button class="export-button" type="button" data-demo-download>Unduh berkas</button>
+                    {{-- Berkas dummy tidak punya isi, jadi memakai tampilan "pratinjau tidak didukung" dari sumber. --}}
+                    <div style="padding: 24px; text-align: center; border: 1px dashed var(--lks-line, #e5eaf2); border-radius: 8px; background: var(--lks-soft, #f8faff);">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 44px; height: 44px; color: var(--lks-primary, #304a6b); margin-bottom: 8px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                        <p style="font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--lks-ink, #1e293b);">{{ $item['file_name'] }} ({{ DemoLetters::fileSize($item['file_size']) }})</p>
+                        <p style="font-size: 12px; color: var(--lks-muted, #64748b); margin-bottom: 16px;">Pratinjau langsung tidak didukung untuk jenis dokumen ini di peramban.</p>
+                        <button type="button" class="lks-btn-primary" data-demo-download style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; padding: 8px 18px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>Unduh Berkas untuk Membuka</button>
+                    </div>
+                @else
+                    <div style="padding: 24px; text-align: center; border: 1px dashed var(--lks-line, #e5eaf2); border-radius: 8px; color: var(--lks-muted, #64748b); font-style: italic;">Tidak ada berkas yang dilampirkan pada surat ini.</div>
                 @endif
-            </x-slot:actions>
-        </x-dashboard.dialog>
+            </div>
+            @if ($item['type'] === 'incoming')
+                <p class="lks-letter-one-way-note">Surat dari Dinas Sosial ini tidak memerlukan balasan. LKS dapat membaca dan mengunduh lampirannya.</p>
+            @endif
+            <div style="display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
+                @if ($admin && $item['type'] === 'outgoing')
+                    <button type="button" class="lks-btn-primary" data-href="{{ $rolePrefix }}?tab=outgoing&reply={{ $item['id'] }}" style="display: inline-flex; align-items: center; gap: 6px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="m9 17-5-5 5-5"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>Balas Surat Ini</button>
+                @endif
+                @if (! $sent && ! $item['is_read'])
+                    {{-- Di sumber surat otomatis terbaca saat dibuka. TODO(Tahap 2): POST /lks/letters/{id}/read. --}}
+                    <button type="button" class="lks-btn-secondary" data-demo-action>Tandai dibaca</button>
+                @endif
+                <button type="button" class="lks-btn-secondary" data-close-dialog>Tutup</button>
+            </div>
+        </dialog>
     @endforeach
 @endsection

@@ -106,7 +106,7 @@
                                 </aside>
                             </div>
                             <p class="field-error" data-upload-error tabindex="-1" role="alert" hidden></p>
-                            <div data-q-attachments style="margin-top: 14px;" data-saved="{{ collect($report['attachments'])->map(fn ($file) => ['name' => $file['name'], 'size' => $file['size']])->toJson() }}"></div>
+                            <div data-q-attachments style="margin-top: 14px;" data-saved="{{ collect($report['attachments'])->map(fn ($file) => ['name' => $file['name'], 'size' => $file['size'], 'type' => $file['type']])->toJson() }}"></div>
                         </div>
                         <div class="lks-report-note" style="margin-top: 24px;">
                             <h3>Kelengkapan Laporan Semester</h3>
@@ -126,24 +126,36 @@
             <div class="lks-report-return" style="margin-top: 16px;">
                 <a href="/lks/reports">← Kembali ke daftar laporan</a>
                 @if ($report['status'] === 'Draf')
-                    <button type="button" class="psm-delete-button" data-demo-action data-confirm="Draf laporan semester ini akan dihapus." data-confirm-title="Hapus draf?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog">Hapus draf</button>
+                    <button type="button" class="psm-delete-button" data-demo-action data-confirm="Draf {{ $period['label'] }} milik {{ $organization['title'] }}, termasuk isian dan lampirannya, akan dihapus. Tindakan ini tidak dapat dibatalkan." data-confirm-title="Hapus draf laporan?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog">Hapus draf</button>
                 @endif
             </div>
         </form>
     </div>
-    <dialog class="detail-dialog q-dialog q-preview-dialog" id="report-preview-dialog" aria-labelledby="report-preview-title">
+    {{-- preview() dari shared/reports.js. Kalimat "Draf sudah disimpan." dari sumber dibuang karena Tahap 1 belum menyimpan apa pun. --}}
+    <dialog class="q-dialog psm-preview-dialog" id="report-preview-dialog" aria-labelledby="report-preview-title">
         <h2 id="report-preview-title">Pratinjau laporan semester</h2>
         <div class="q-preview-body">
-            <p class="muted">{{ $period['label'] }} · {{ $organization['title'] }}</p>
-            <dl class="field-grid">
-                <div><dt>Judul</dt><dd data-preview-title></dd></div>
-                <div><dt>Berkas</dt><dd data-preview-files></dd></div>
-            </dl>
-            <p class="notice" data-preview-interim @unless ($period['interim']) hidden @endunless>Periode masih berjalan. Pengiriman tersedia setelah {{ Format::date($period['end']) }}.</p>
+            <p class="q-inline-note">Periksa isi dan kelengkapan berkas di bawah, kemudian lanjutkan ke konfirmasi pengiriman.</p>
+            <section class="detail-card">
+                <h2>Informasi Laporan Semester</h2>
+                <dl class="field-grid">
+                    <div><dt>Periode</dt><dd>{{ $period['label'] }}</dd></div>
+                    <div><dt>Organisasi</dt><dd>{{ $organization['title'] }}</dd></div>
+                </dl>
+                <dl class="field-grid">
+                    <div><dt>Judul / Perihal Laporan</dt><dd style="font-size:1.05rem;font-weight:600;color:var(--text-color, #1e293b);" data-preview-title></dd></div>
+                    <div><dt>Jumlah Berkas Lampiran</dt><dd data-preview-count></dd></div>
+                </dl>
+            </section>
+            <section class="detail-card">
+                <h2 data-preview-files-title>Berkas Dokumen Laporan</h2>
+                <div data-preview-files></div>
+            </section>
+            <p class="notice" @unless ($period['interim']) hidden @endunless>Periode masih berjalan. Pengiriman tersedia setelah {{ Format::date($period['end']) }}.</p>
         </div>
         <div class="psm-form-actions q-actions">
-            <button class="text-button" type="button" data-close-dialog>Kembali mengedit</button>
-            <button class="export-button" type="button" data-demo-action @disabled($period['interim'])>Kirim ke Admin</button>
+            <button type="button" class="text-button" data-close-dialog>Kembali mengedit</button>
+            <button type="button" class="export-button" data-demo-action data-confirm="{{ $organization['title'] }} akan mengirim {{ $period['label'] }} kepada Admin tanpa memerlukan persetujuan. Pastikan judul dan berkas lampiran sudah benar. Perubahan berikutnya tetap privat sampai dikirim ulang." data-confirm-title="Kirim laporan semester?" data-confirm-text="Ya, kirim laporan" data-confirm-safe @disabled($period['interim'])>Lanjutkan pengiriman</button>
         </div>
     </dialog>
 @endsection

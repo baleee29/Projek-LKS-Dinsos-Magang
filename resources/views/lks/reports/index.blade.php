@@ -64,7 +64,7 @@
                                                 <a class="lks-button" href="/lks/report/{{ $item['id'] }}"><x-dashboard.lks-icon name="eye" />Detail</a>
                                                 <a class="lks-button lks-button-primary" href="/lks/edit/{{ $item['id'] }}"><x-dashboard.lks-icon name="edit" />{{ $isDraft ? 'Lanjutkan Isi' : 'Perbarui Laporan' }}</a>
                                                 @if ($isDraft)
-                                                    <button class="lks-button lks-button-danger" type="button" data-demo-action data-confirm="Draf laporan semester ini akan dihapus." data-confirm-title="Hapus draf?" data-confirm-text="Ya, hapus draf"><x-dashboard.lks-icon name="trash" />Hapus Draf</button>
+                                                    <button class="lks-button lks-button-danger lks-report-delete" type="button" data-demo-action data-confirm="Draf {{ DemoReports::periodLabel($item) }} milik {{ $organization['title'] }}, termasuk isian dan lampirannya, akan dihapus. Tindakan ini tidak dapat dibatalkan." data-confirm-title="Hapus draf laporan?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog" aria-label="Hapus draf {{ DemoReports::periodLabel($item) }}"><x-dashboard.lks-icon name="trash" />Hapus draf</button>
                                                 @endif
                                             </div>
                                         </td>

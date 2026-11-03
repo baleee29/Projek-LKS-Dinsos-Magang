@@ -49,6 +49,11 @@ if (toggle && section) {
     toggle.addEventListener('click', () => setOpen(section.hidden));
     section.querySelector('#btn-cancel-form').addEventListener('click', () => setOpen(false));
     input.addEventListener('change', showFile);
+    if (!section.hidden) {
+        label.textContent = 'Tutup Formulir';
+        icon.setAttribute('d', 'M18 6 6 18M6 6l12 12');
+        section.querySelector('#input-letter-number')?.focus();
+    }
     form.addEventListener('demo:submitted', () => {
         form.reset();
         preview.replaceChildren();

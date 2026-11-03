@@ -57,6 +57,8 @@ class LetterListing
             'today' => DemoClock::TODAY,
             'hasActiveFilter' => ($admin && $filters['org'] !== 'all') || $filters['month'] !== 'all' || $filters['year'] !== 'all' || trim($filters['q']) !== '',
             'rolePrefix' => $admin ? '/admin/letters/lks' : '/lks/letters',
+            // Balas surat: form terbuka dengan isian awal, dari handleReplyToLetter() di lks/letters-actions.js.
+            'reply' => $admin && $tab === 'outgoing' ? $letters->where('type', 'outgoing')->firstWhere('id', $request->query('reply')) : null,
         ];
     }
 }

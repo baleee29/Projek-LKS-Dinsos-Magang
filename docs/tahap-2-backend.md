@@ -92,6 +92,10 @@ Dari `AGENTS.md`, `docs/alur-sistem.md`, dan `docs/database.md` di sumber.
 - Beberapa `min-width: 0` ditambahkan langsung di markup Akun Mitra, Pengaduan, dan form klien untuk menghilangkan horizontal scroll, tanpa mengubah file CSS sumber.
 - Link publik pada halaman login dan footer kembali ke `/login`, karena halaman publik di luar cakupan.
 - Slot Kelola Landing Page berasal dari data dummy, dan tautan pratinjaunya dinonaktifkan.
+- Dialog pratinjau laporan tidak memuat kalimat "Draf sudah disimpan." dari sumber, karena Tahap 1 belum menyimpan apa pun. Kembalikan kalimat itu saat penyimpanan tersambung.
+- Surat tidak otomatis terbaca saat dibuka seperti di sumber; Tahap 1 memakai tombol Tandai dibaca dengan toast netral.
+- Berkas dummy tidak punya isi, jadi dialog surat selalu memakai tampilan "pratinjau tidak didukung". Pratinjau PDF dan gambar dari `lks/letters-actions.js` perlu dipasang di Tahap 2.
+- Kotak sukses kredensial akun (`renderSuccessBox` di `admin/partner-accounts.js`) tidak ditampilkan, karena Tahap 1 tidak membuat akun.
 
 ## 6. Komentar `TODO(Tahap 2)`
 
@@ -136,7 +140,7 @@ Daftar ini dibuat dari kode. Perbarui dengan `grep -rn "TODO(Tahap 2)" app resou
 - `resources/views/lks/reports/new-report-dialog.blade.php:1`: POST /laporan-triwulan.
 - `resources/views/shared/clients/recap.blade.php:15`: ekspor dari lks/resident-export.js.
 - `resources/views/shared/letters.blade.php:176`: ekspor dari lks/letters-export.js.
-- `resources/views/shared/letters.blade.php:268`: POST /lks/letters/{id}/read.
+- `resources/views/shared/letters.blade.php:303`: POST /lks/letters/{id}/read.
 - `resources/views/shared/letters.blade.php:63`: POST /lks/letters (LksLetterController sumber).
 - `resources/views/shared/notifications/detail.blade.php:16`: POST /notifications/{id}/unread.
 - `resources/views/shared/notifications/index.blade.php:12`: POST /notifications/read-all.

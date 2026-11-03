@@ -49,7 +49,7 @@
                 @else
                     <a class="export-button" href="/lks/edit/{{ $report['id'] }}">{{ $sent ? 'Perbarui laporan' : 'Lanjutkan draf' }}</a>
                     @unless ($sent)
-                        <button type="button" class="psm-delete-button" data-demo-action data-confirm="Draf laporan semester ini akan dihapus." data-confirm-title="Hapus draf?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog">Hapus draf</button>
+                        <button type="button" class="psm-delete-button" data-demo-action data-confirm="Draf {{ $period['label'] }} milik {{ $organization['title'] }}, termasuk isian dan lampirannya, akan dihapus. Tindakan ini tidak dapat dibatalkan." data-confirm-title="Hapus draf laporan?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog">Hapus draf</button>
                     @endunless
                 @endif
             </div>

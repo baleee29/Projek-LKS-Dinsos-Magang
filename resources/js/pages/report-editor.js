@@ -23,20 +23,24 @@ if (form) {
         list.replaceChildren();
         if (files.length) {
             const wrap = document.createElement('ul');
-            wrap.className = 'q-attachment-list';
+            wrap.className = 'psm-file-list';
             files.forEach((file, index) => {
                 const item = document.createElement('li');
-                const meta = document.createElement('div');
-                const name = document.createElement('strong');
-                name.textContent = file.name;
+                const meta = document.createElement('span');
+                meta.textContent = file.name;
                 const detail = document.createElement('small');
-                detail.className = 'muted';
-                detail.textContent = ` ${size(file.size)}`;
-                meta.append(name, detail);
+                detail.textContent = `${file.type || 'Dokumen'} · ${size(file.size)}`;
+                meta.append(detail);
+                const view = document.createElement('button');
+                view.type = 'button';
+                view.className = 'text-button';
+                view.textContent = 'Lihat';
+                view.dataset.demoDownload = '';
                 const remove = document.createElement('button');
                 remove.type = 'button';
-                remove.className = 'text-button';
+                remove.className = 'psm-delete-button';
                 remove.textContent = 'Hapus';
+                remove.setAttribute('aria-label', `Hapus lampiran ${file.name}`);
                 remove.addEventListener('click', async () => {
                     const accepted = await confirmDialog({
                         title: 'Hapus lampiran?',
@@ -47,14 +51,14 @@ if (form) {
                     files.splice(index, 1);
                     render();
                 });
-                item.append(meta, remove);
+                item.append(meta, view, remove);
                 wrap.append(item);
             });
             list.append(wrap);
         } else {
             const empty = document.createElement('p');
             empty.className = 'muted';
-            empty.textContent = 'Belum ada berkas laporan yang diunggah.';
+            empty.textContent = 'Belum ada lampiran.';
             list.append(empty);
         }
         const missing = [];
@@ -69,7 +73,7 @@ if (form) {
         let message = '';
         if (tooLarge) message = `Berkas "${tooLarge.name}" melebihi 5 MB.`;
         else if (files.length + chosen.length > MAX_FILES) message = 'Maksimal 10 berkas untuk satu laporan.';
-        else chosen.forEach((file) => files.push({ name: file.name, size: file.size }));
+        else chosen.forEach((file) => files.push({ name: file.name, size: file.size, type: file.type }));
         uploadError.textContent = message;
         uploadError.hidden = !message;
         input.value = '';
@@ -105,7 +109,10 @@ if (form) {
         }
         errorSummary.hidden = true;
         preview.querySelector('[data-preview-title]').textContent = title.value.trim();
-        preview.querySelector('[data-preview-files]').textContent = files.map((file) => file.name).join(', ');
+        preview.querySelector('[data-preview-count]').textContent = `${files.length} berkas terlampir`;
+        preview.querySelector('[data-preview-files-title]').textContent = `Berkas Dokumen Laporan (${files.length})`;
+        preview.querySelector('[data-preview-files]').replaceChildren(list.querySelector('ul').cloneNode(true));
+        preview.querySelectorAll('[data-preview-files] .psm-delete-button').forEach((node) => node.remove());
         preview.showModal();
     });
 
