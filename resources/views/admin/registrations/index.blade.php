@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', $title)
+@section('title', 'Pendaftaran LKS')
 
 @php
     use App\Support\Format;
@@ -8,8 +8,8 @@
 
 @section('content')
     <section class="admin-registration-view">
-        <header class="admin-registration-heading"><div><small>SiDaya · Admin Dinas Sosial</small><h1 id="view-title" tabindex="-1">{{ $title }}</h1><p>Periksa data ringkas dan dokumen pendaftaran, lalu berikan keputusan beserta catatan.</p></div><span class="admin-registration-badge">Verifikasi Berkas</span></header>
-        <p class="admin-registration-note">Pengajuan dan berkas berasal dari pendaftaran mandiri pilar sosial. Persetujuan menambahkan lembaga ke direktori organisasi.</p>
+        <header class="admin-registration-heading"><div><small>SiDaya · Admin Dinas Sosial</small><h1 id="view-title" tabindex="-1">Pendaftaran LKS</h1><p>Periksa data ringkas dan dokumen pendaftaran, lalu berikan keputusan beserta catatan.</p></div><span class="admin-registration-badge">Verifikasi Berkas</span></header>
+        <p class="admin-registration-note">Pengajuan dan berkas berasal dari pendaftaran mandiri LKS. Persetujuan menambahkan lembaga ke direktori organisasi.</p>
         <form class="admin-registration-controls" method="get" data-filter-form>
             <label>Cari pendaftaran<input type="search" id="registration-search" name="q" value="{{ $filters['q'] }}" placeholder="Nama lembaga, ketua, kontak…" @if ($filters['q']) data-autofocus @endif></label>
             <label>Status

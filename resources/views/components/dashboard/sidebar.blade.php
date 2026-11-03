@@ -29,11 +29,7 @@
                 <section @class(['admin-sidebar-group', 'admin-pillar-group' => $section['type'] === 'pillar'])>
                     @if ($section['type'] === 'pillar')
                         <button @class(['admin-pillar-card-toggle', 'is-current' => $navigation->groupActive($section['key'])]) type="button" aria-expanded="true" aria-controls="nav-admin-{{ $section['key'] }}" data-nav-toggle>
-                            @isset($section['logo'])
-                                <div class="pillar-toggle-icon has-logo"><img src="{{ $section['logo'] }}" alt="" width="30" height="30"></div>
-                            @else
-                                <div class="pillar-toggle-icon"><x-dashboard.icon :name="$section['icon']" /></div>
-                            @endisset
+                            <div class="pillar-toggle-icon"><x-dashboard.icon :name="$section['icon']" /></div>
                             <div class="pillar-toggle-info">
                                 <strong class="pillar-toggle-title">{{ $section['title'] }}</strong>
                                 <span class="pillar-toggle-desc">{{ $section['description'] }}</span>
@@ -47,20 +43,8 @@
                     @endif
                     <div id="nav-admin-{{ $section['key'] }}" @class(['admin-sidebar-group-items', 'admin-pillar-subitems' => $section['type'] === 'pillar'])>
                         @foreach ($section['items'] as $item)
-                            @if (($item['type'] ?? null) === 'group')
-                                <div>
-                                    <button @class(['nav-item', 'group-toggle', 'is-active' => $navigation->groupActive($item['key'])]) type="button" aria-expanded="true" aria-controls="{{ $item['id'] }}" data-nav-toggle>
-                                        <x-dashboard.icon :name="$item['icon']" /><span>{{ $item['label'] }}</span><x-dashboard.icon name="chevron" />
-                                    </button>
-                                    <div id="{{ $item['id'] }}" class="nav-children">
-                                        @foreach ($item['items'] as $child)
-                                            <x-dashboard.nav-link :href="$href($child['path'])" :label="$child['label']" :active="$navigation->active($child['path'])" :count="$count($child)" child />
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @else
-                                <x-dashboard.nav-link :href="$href($item['path'])" :label="$item['label']" :icon="$item['icon'] ?? null" :active="$navigation->active($item['path'])" :count="$count($item)" :unread="$item['unread'] ?? false" />
-                            @endif
+                            <x-dashboard.nav-link :href="$href($item['path'])" :label="$item['label']" :icon="$item['icon'] ?? null" :active="$navigation->active($item['path'])" :count="$count($item)" :unread="$item['unread'] ?? false" />
+
                         @endforeach
                     </div>
                 </section>

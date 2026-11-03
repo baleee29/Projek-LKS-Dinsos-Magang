@@ -53,7 +53,7 @@ class LetterListing
             ],
             'months' => self::MONTHS,
             'years' => [DemoClock::YEAR, DemoClock::YEAR - 1, DemoClock::YEAR - 2],
-            'organizations' => $admin ? DemoOrganizations::raw()->where('pillar', 'lks')->values() : collect(),
+            'organizations' => $admin ? DemoOrganizations::raw() : collect(),
             'today' => DemoClock::TODAY,
             'hasActiveFilter' => ($admin && $filters['org'] !== 'all') || $filters['month'] !== 'all' || $filters['year'] !== 'all' || trim($filters['q']) !== '',
             'rolePrefix' => $admin ? '/admin/letters/lks' : '/lks/letters',

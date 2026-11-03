@@ -8,7 +8,7 @@
 @endphp
 
 @section('content')
-    <x-dashboard.section-heading title="Notifikasi" :description="$admin ? 'Data masuk, pembaruan, penghapusan, dan perubahan status dari seluruh mitra.' : 'Pengajuan dan pembaruan status laporan organisasi Anda.'" :eyebrow="$eyebrow">
+    <x-dashboard.section-heading title="Notifikasi" :description="$admin ? 'Data masuk, pembaruan, penghapusan, dan perubahan status dari seluruh LKS.' : 'Pengajuan dan pembaruan status laporan organisasi Anda.'" :eyebrow="$eyebrow">
         {{-- TODO(Tahap 2): POST /notifications/read-all. --}}
         <button class="text-button" type="button" id="mark-notifications-read" data-demo-action @disabled($unreadCount === 0)>Tandai semua dibaca</button>
     </x-dashboard.section-heading>
@@ -23,17 +23,7 @@
         </div>
         <form class="q-notification-search" method="get" data-filter-form>
             <input type="hidden" name="filter" value="{{ $filters['filter'] === 'all' ? '' : $filters['filter'] }}">
-            <label class="list-search"><x-dashboard.icon name="search" /><span class="sr-only">Cari notifikasi</span><input type="search" name="q" value="{{ $filters['q'] }}" placeholder="{{ $admin ? 'Cari aktivitas atau nama mitra…' : 'Cari laporan…' }}" @if ($filters['q']) data-autofocus @endif></label>
-            @if ($admin)
-                <label class="filter-field"><span>Jenis mitra</span>
-                    <select name="pillar">
-                        <option value="">Semua mitra</option>
-                        @foreach ($labels as $key => $label)
-                            <option value="{{ $key }}" @selected($filters['pillar'] === $key)>{{ $label }}</option>
-                        @endforeach
-                    </select>
-                </label>
-            @endif
+            <label class="list-search"><x-dashboard.icon name="search" /><span class="sr-only">Cari notifikasi</span><input type="search" name="q" value="{{ $filters['q'] }}" placeholder="{{ $admin ? 'Cari aktivitas atau nama lembaga…' : 'Cari laporan…' }}" @if ($filters['q']) data-autofocus @endif></label>
             <a class="text-button" href="{{ request()->url() }}">Hapus filter</a>
             @if ($admin)
                 <a class="text-button" href="{{ request()->fullUrl() }}">Muat ulang</a>
@@ -48,7 +38,7 @@
                                 <span class="q-notification-dot" aria-hidden="true"></span>
                                 <div class="q-notification-content">
                                     <div class="q-notification-heading"><h2>{{ $item['title'] }}</h2><time datetime="{{ $item['at'] }}">{{ Format::dateTime($item['at']) }}</time></div>
-                                    <p class="q-notification-context">@if ($admin){{ $labels[$item['pillar']] ?? $item['pillar'] }} · {{ $item['organizationTitle'] }}@else{{ $item['periodLabel'] }}@endif</p>
+                                    <p class="q-notification-context">@if ($admin)LKS · {{ $item['organizationTitle'] }}@else{{ $item['periodLabel'] }}@endif</p>
                                     <p class="q-notification-message">{{ $item['message'] }}</p>
                                     <span class="q-notification-read-label">{{ $item['read'] ? 'Sudah dibaca' : 'Belum dibaca' }}</span>
                                 </div>

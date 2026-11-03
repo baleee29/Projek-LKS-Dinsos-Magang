@@ -4,12 +4,10 @@ namespace Tests\Feature;
 
 use App\Support\Demo\DemoAccounts;
 use App\Support\Demo\DemoClients;
-use App\Support\Demo\DemoComplaints;
 use App\Support\Demo\DemoLetters;
 use App\Support\Demo\DemoMembers;
 use App\Support\Demo\DemoNotifications;
 use App\Support\Demo\DemoOrganizations;
-use App\Support\Demo\DemoPsmMembers;
 use App\Support\Demo\DemoRegistrations;
 use App\Support\Demo\DemoReports;
 use Tests\TestCase;
@@ -18,24 +16,31 @@ class DemoDataTest extends TestCase
 {
     public function test_minimum_quantities_are_met(): void
     {
-        $this->assertGreaterThanOrEqual(8, DemoOrganizations::raw()->where('pillar', 'lks')->count());
-        $this->assertGreaterThanOrEqual(6, DemoOrganizations::raw()->where('pillar', 'karang-taruna')->count());
-        $this->assertGreaterThanOrEqual(10, DemoPsmMembers::raw()->count());
+        $this->assertGreaterThanOrEqual(8, DemoOrganizations::raw()->count());
         $this->assertGreaterThanOrEqual(40, DemoClients::raw()->count());
         $this->assertGreaterThanOrEqual(15, DemoMembers::raw()->count());
         $this->assertGreaterThanOrEqual(12, DemoReports::raw()->count());
         $this->assertGreaterThanOrEqual(15, DemoLetters::raw()->count());
         $this->assertGreaterThanOrEqual(10, DemoRegistrations::raw()->count());
         $this->assertGreaterThanOrEqual(8, DemoAccounts::raw()->count());
-        $this->assertGreaterThanOrEqual(10, DemoComplaints::raw()->count());
         $this->assertGreaterThanOrEqual(15, DemoNotifications::raw()->count());
+    }
+
+    public function test_all_admin_data_belongs_to_lks(): void
+    {
+        foreach ([DemoOrganizations::raw(), DemoRegistrations::raw()] as $rows) {
+            $this->assertSame(['lks'], $rows->pluck('pillar')->unique()->values()->all());
+        }
+        $this->assertSame(['lks'], DemoAccounts::raw()->pluck('role')->unique()->values()->all());
+        $this->assertSame(['lks'], DemoReports::raw()->pluck('pillar')->unique()->values()->all());
+        $this->assertSame(['lks'], DemoNotifications::raw()->pluck('pillar')->unique()->values()->all());
     }
 
     public function test_every_report_status_is_present(): void
     {
         $statuses = DemoReports::raw()->pluck('status')->unique();
 
-        foreach (['Draf', 'Terkirim', 'Diajukan', 'Ditinjau', 'Perlu Revisi', 'Disetujui'] as $status) {
+        foreach (['Draf', 'Terkirim'] as $status) {
             $this->assertTrue($statuses->contains($status), "Status {$status} belum ada.");
         }
     }
@@ -45,8 +50,6 @@ class DemoDataTest extends TestCase
         $numbers = DemoClients::raw()->pluck('nik')
             ->merge(DemoClients::raw()->pluck('familyCardNumber'))
             ->merge(DemoMembers::raw()->pluck('nik'))
-            ->merge(DemoPsmMembers::raw()->pluck('nik'))
-            ->merge(DemoComplaints::raw()->pluck('client_nik'))
             ->filter();
 
         foreach ($numbers as $number) {

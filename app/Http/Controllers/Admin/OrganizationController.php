@@ -6,52 +6,64 @@ use App\Http\Controllers\Controller;
 use App\Support\Demo\DemoClients;
 use App\Support\Demo\DemoMembers;
 use App\Support\Demo\DemoOrganizations;
+use App\Support\Demo\DemoPaginator;
+use App\Support\Demo\DemoRegions;
 use App\Support\Demo\DemoReports;
 use App\Support\Format;
-use App\Support\PartnerDirectory;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class OrganizationController extends Controller
 {
-    public function index(Request $request, string $pillar): View
+    public function index(Request $request): View
     {
-        return view('admin.organizations.index', PartnerDirectory::organizations($request, $pillar));
+        $filters = [
+            'q' => (string) $request->query('q', ''),
+            'district' => (string) $request->query('district', ''),
+            'village' => (string) $request->query('village', ''),
+        ];
+        $query = mb_strtolower(trim($filters['q']));
+        $rows = DemoOrganizations::all()
+            ->filter(fn (array $org) => (! $filters['district'] || $org['district'] === $filters['district'])
+                && (! $filters['village'] || $org['village'] === $filters['village'])
+                && (! $query || collect([$org['title'], $org['chair'], $org['contact']])->contains(fn ($value) => str_contains(mb_strtolower((string) $value), $query))))
+            ->values();
+
+        return view('admin.organizations.index', [
+            'filters' => $filters,
+            'districts' => DemoRegions::districts(),
+            'villages' => DemoRegions::villages($filters['district'] ?: null),
+            'organizations' => DemoPaginator::make($rows, 10),
+            'rosterOf' => fn (string $id) => DemoMembers::raw()->where('organizationId', $id)->values(),
+        ]);
     }
 
-    public function show(Request $request, string $id): View
+    public function show(string $id): View
     {
         $organization = DemoOrganizations::find($id);
-        abort_unless($organization && in_array($organization['pillar'], ['lks', 'karang-taruna'], true), 404);
+        abort_unless($organization, 404);
 
         $members = DemoMembers::forOrganization($id);
-        $map = Format::coordinates($organization['latitude'], $organization['longitude']);
 
-        if ($organization['pillar'] === 'lks') {
-            return view('admin.organizations.show-lks', [
-                'admin' => true,
-                'organization' => $organization,
-                'members' => $members,
-                'memberCount' => $members->count(),
-                'counts' => DemoClients::summary(DemoClients::forOrganization($id)),
-                'map' => $map,
-                'reports' => DemoReports::forOrganization($id)->where('status', '!=', 'Draf')->values(),
-            ]);
-        }
-
-        $filters = ['q' => (string) $request->query('q', ''), 'category' => (string) $request->query('category', '')];
-        $query = mb_strtolower(trim($filters['q']));
-
-        return view('admin.organizations.show-kt', [
+        return view('admin.organizations.show', [
+            'admin' => true,
             'organization' => $organization,
             'members' => $members,
-            'shown' => $members->filter(fn (array $member) => (! $filters['category'] || $member['category'] === $filters['category'])
-                && (! $query || collect([$member['title'], $member['position'], $member['category']])->contains(fn ($value) => str_contains(mb_strtolower((string) $value), $query))))->values(),
-            'filters' => $filters,
-            'categories' => $members->pluck('category')->unique()->values(),
-            'counts' => $members->countBy('category'),
-            'map' => $map,
-            'reports' => DemoReports::forOrganization($id)->values(),
+            'memberCount' => $members->count(),
+            'counts' => DemoClients::summary(DemoClients::forOrganization($id)),
+            'map' => Format::coordinates($organization['latitude'], $organization['longitude']),
+            'reports' => DemoReports::forOrganization($id)->where('status', '!=', 'Draf')->values(),
+        ]);
+    }
+
+    public function member(string $id): View
+    {
+        $member = DemoMembers::find($id);
+        abort_unless($member, 404);
+
+        return view('admin.organizations.member', [
+            'member' => $member,
+            'organization' => DemoOrganizations::find($member['organizationId']),
         ]);
     }
 }

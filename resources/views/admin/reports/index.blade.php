@@ -29,7 +29,7 @@
         </div>
         <section class="report-controls" aria-label="Pencarian dan filter">
             <div class="search-row">
-                <label class="list-search"><x-dashboard.icon name="search" /><span class="sr-only">Cari mitra atau nomor laporan</span><input type="search" name="q" value="{{ $filters['q'] }}" placeholder="Cari nama mitra atau nomor laporan…" @if ($filters['q']) data-autofocus @endif></label>
+                <label class="list-search"><x-dashboard.icon name="search" /><span class="sr-only">Cari lembaga atau nomor laporan</span><input type="search" name="q" value="{{ $filters['q'] }}" placeholder="Cari nama lembaga atau nomor laporan…" @if ($filters['q']) data-autofocus @endif></label>
                 <button class="text-button" type="button" data-href="{{ request()->url() }}">Reset filter</button>
             </div>
             <div class="workspace-filters">

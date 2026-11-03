@@ -1,4 +1,4 @@
-<form class="admin-partner-controls" aria-label="Pencarian dan filter mitra" method="get" data-filter-form>
+<form class="admin-partner-controls" aria-label="Pencarian dan filter LKS" method="get" data-filter-form>
     <label class="admin-partner-search"><x-dashboard.icon name="search" /><span class="sr-only">{{ $searchLabel }}</span><input type="search" name="q" value="{{ $filters['q'] }}" placeholder="{{ $placeholder }}" @if ($filters['q']) data-autofocus @endif></label>
     <div class="admin-partner-filters">
         <label class="admin-partner-filter"><span>Kecamatan</span>

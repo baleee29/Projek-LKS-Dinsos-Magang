@@ -18,7 +18,6 @@ export default defineConfig({
                 'resources/js/pages/lks-profile.js',
                 'resources/js/pages/registration-review.js',
                 'resources/js/pages/partner-accounts.js',
-                'resources/js/pages/correspondence.js',
                 'resources/js/pages/landing-content.js',
                 'resources/js/pages/account-settings.js',
             ],

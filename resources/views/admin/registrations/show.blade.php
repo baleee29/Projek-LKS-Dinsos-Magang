@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Pendaftaran '.$label)
+@section('title', 'Pendaftaran LKS')
 
 @php
     use App\Support\Format;
@@ -8,10 +8,7 @@
     use App\Support\Demo\DemoRegistrations;
     $pending = $row['status'] === 'Menunggu Verifikasi';
     $approved = $row['status'] === 'Disetujui';
-    $isLks = $row['pillar'] === 'lks';
-    $fields = $isLks
-        ? ['Nama Yayasan / LKS' => $row['organization_name'], 'Nama Pengisi Data' => $row['leader_name'], 'Nomor WhatsApp yang Bisa Dihubungi' => $row['whatsapp'], 'Nomor Izin Operasional Lama' => $row['sk_number'], 'Fokus Pelayanan / Bidang Garap' => $row['focus_area'], 'Kecamatan' => $row['district'], 'Kelurahan' => $row['village'], 'Alamat Sekretariat' => $row['address']]
-        : ['Nama Kelompok' => $row['organization_name'], 'Tanggal Berdiri' => Format::date($row['establishment_date']), 'Nama Ketua' => $row['leader_name'], 'No. HP / WhatsApp' => $row['whatsapp'], 'Alamat Sekretariat' => $row['address'], 'Kecamatan' => $row['district'], 'Kelurahan' => $row['village'], 'Nomor SK Kelurahan' => $row['sk_number']];
+    $fields = ['Nama Yayasan / LKS' => $row['organization_name'], 'Nama Pengisi Data' => $row['leader_name'], 'Nomor WhatsApp yang Bisa Dihubungi' => $row['whatsapp'], 'Nomor Izin Operasional Lama' => $row['sk_number'], 'Fokus Pelayanan / Bidang Garap' => $row['focus_area'], 'Kecamatan' => $row['district'], 'Kelurahan' => $row['village'], 'Alamat Sekretariat' => $row['address']];
     $paths = [
         'info' => '<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/>',
         'back' => '<path d="M20 12H4m7-7-7 7 7 7"/>',
@@ -31,9 +28,9 @@
 
 @section('content')
     <section class="admin-registration-view admin-lks-registration-detail" aria-labelledby="view-title">
-        <header class="lrd-heading"><div><p class="lrd-eyebrow">SiDaya &middot; Admin Dinas Sosial</p><h1 id="view-title" tabindex="-1">Pendaftaran {{ $label }}</h1><p class="lrd-organization">{{ $row['organization_name'] }}</p></div><span class="lrd-verification-badge"><span aria-hidden="true"></span>Verifikasi Berkas</span></header>
-        <div class="lrd-notice">{!! $icon('info') !!}<p>Pengajuan dan berkas berasal dari pendaftaran mandiri pilar sosial. Persetujuan menambahkan lembaga ke direktori organisasi.</p></div>
-        <a class="admin-registration-button lrd-back" href="/admin/registrations/{{ $row['pillar'] }}">{!! $icon('back') !!}Daftar pendaftaran</a>
+        <header class="lrd-heading"><div><p class="lrd-eyebrow">SiDaya &middot; Admin Dinas Sosial</p><h1 id="view-title" tabindex="-1">Pendaftaran LKS</h1><p class="lrd-organization">{{ $row['organization_name'] }}</p></div><span class="lrd-verification-badge"><span aria-hidden="true"></span>Verifikasi Berkas</span></header>
+        <div class="lrd-notice">{!! $icon('info') !!}<p>Pengajuan dan berkas berasal dari pendaftaran mandiri LKS. Persetujuan menambahkan lembaga ke direktori organisasi.</p></div>
+        <a class="admin-registration-button lrd-back" href="/admin/registrations/lks">{!! $icon('back') !!}Daftar pendaftaran</a>
         <section class="lrd-card lrd-identity" aria-labelledby="lrd-reference">
             <header class="lrd-record-heading"><div><div class="lrd-reference-line"><h2 id="lrd-reference">Status pendaftaran</h2>@include('admin.registrations.status', ['status' => $row['status']])</div><p>Dikirim {{ Format::dateTime($row['created_at']) }} &middot; Versi 1</p></div></header>
             @if ($row['notes'])
@@ -49,7 +46,7 @@
                     <a class="admin-registration-button" href="/admin/organization/{{ $organizationId }}">{!! $icon('building') !!}Lihat lembaga di direktori organisasi</a>
                 @endif
                 @if ($approved)
-                    <a class="admin-registration-button is-primary" href="/admin/partner-accounts?from_reg={{ $row['id'] }}">{!! $icon('key') !!}Buat Akun Mitra</a>
+                    <a class="admin-registration-button is-primary" href="/admin/partner-accounts?from_reg={{ $row['id'] }}">{!! $icon('key') !!}Buat Akun LKS</a>
                 @endif
             </footer>
         </section>
@@ -79,7 +76,7 @@
                 {!! $icon($approved ? 'check' : 'info') !!}
                 <p>
                     @if ($approved)
-                        Pendaftaran diterima. Buat akun di menu Akun Mitra, lalu kirim data login melalui WhatsApp.
+                        Pendaftaran diterima. Buat akun di menu Buat Akun LKS, lalu kirim data login melalui WhatsApp.
                     @else
                         Pendaftaran ditolak. <a class="admin-registration-button is-primary" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer">Kirim alasan via WhatsApp</a>
                     @endif

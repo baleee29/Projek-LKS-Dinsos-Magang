@@ -42,10 +42,7 @@ class DemoShell
         if ($role === 'admin') {
             return [
                 'unread' => DemoNotifications::forRole('admin')->where('read', false)->count(),
-                'registrationsLKS' => self::orNull(DemoRegistrations::pending('lks')),
-                'registrationsKT' => self::orNull(DemoRegistrations::pending('karang-taruna')),
-                'incomingLetters' => self::orNull(DemoActivities::pending()->count()),
-                'replyDrafts' => self::orNull(DemoReplies::all()->where('status', 'Draf')->count()),
+                'registrationsLKS' => self::orNull(DemoRegistrations::pending()),
                 'unreadLettersLKS' => self::orNull(DemoLetters::unreadForAdmin()),
             ];
         }

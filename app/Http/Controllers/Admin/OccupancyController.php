@@ -16,7 +16,7 @@ class OccupancyController extends Controller
         return view('shared.clients.recap', ClientRecap::build(
             $request,
             DemoClients::all(),
-            DemoOrganizations::raw()->where('pillar', 'lks')->values(),
+            DemoOrganizations::raw(),
             admin: true,
             title: 'Seluruh LKS',
         ));

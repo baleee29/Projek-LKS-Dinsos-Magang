@@ -20,13 +20,11 @@ class NotificationListing
         $all = DemoNotifications::forRole($role);
         $filters = [
             'q' => (string) $request->query('q', ''),
-            'pillar' => (string) $request->query('pillar', ''),
             'filter' => in_array($request->query('filter'), ['unread', 'read'], true) ? $request->query('filter') : 'all',
         ];
         $query = mb_strtolower(trim($filters['q']));
 
-        $items = $all->filter(fn (array $item) => (! $filters['pillar'] || $item['pillar'] === $filters['pillar'])
-            && ($filters['filter'] === 'all' || ($filters['filter'] === 'unread' ? ! $item['read'] : $item['read']))
+        $items = $all->filter(fn (array $item) => ($filters['filter'] === 'all' || ($filters['filter'] === 'unread' ? ! $item['read'] : $item['read']))
             && (! $query || collect([$item['title'], $item['message'], $item['organizationTitle'], $item['periodLabel']])
                 ->contains(fn ($value) => str_contains(mb_strtolower((string) $value), $query))))->values();
 
@@ -40,7 +38,6 @@ class NotificationListing
             'filters' => $filters,
             'counts' => ['all' => $all->count(), 'unread' => $unread, 'read' => $all->count() - $unread],
             'notifications' => DemoPaginator::make($items, self::PER_PAGE),
-            'labels' => ['lks' => 'LKS', 'psm' => 'PSM', 'karang-taruna' => 'Karang Taruna', 'admin' => 'Admin'],
         ];
     }
 

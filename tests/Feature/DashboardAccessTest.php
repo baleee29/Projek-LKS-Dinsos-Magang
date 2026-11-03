@@ -12,15 +12,10 @@ class DashboardAccessTest extends TestCase
     {
         return self::named([
             '/admin/overview', '/admin/notifications', '/admin/notification-detail/notif-001',
-            '/admin/registrations/lks', '/admin/registrations/karang-taruna', '/admin/registration/reg-lks-001',
-            '/admin/partner-accounts', '/admin/organizations/lks', '/admin/organizations/karang-taruna',
-            '/admin/organization/lks-001', '/admin/organization/kt-001',
-            '/admin/member/member-101', '/admin/member/member-131', '/admin/member/psm-member-001',
+            '/admin/registrations/lks', '/admin/registration/reg-lks-001', '/admin/partner-accounts',
+            '/admin/organizations/lks', '/admin/organization/lks-001', '/admin/member/member-101',
             '/admin/occupancy', '/admin/resident/client-002', '/admin/reports/lks', '/admin/report/RPT-LKS002-2026-S1',
-            '/admin/letters/lks', '/admin/members/psm', '/admin/complaints/psm',
-            '/admin/incoming-letters/karang-taruna', '/admin/incoming-letter/act-001',
-            '/admin/reply-letters/karang-taruna', '/admin/new-reply-letter', '/admin/reply-letter/reply-001',
-            '/admin/edit-reply-letter/reply-004', '/admin/guide', '/admin/landing-content', '/admin/account',
+            '/admin/letters/lks', '/admin/guide', '/admin/landing-content', '/admin/account',
         ]);
     }
 
@@ -96,11 +91,30 @@ class DashboardAccessTest extends TestCase
         }
     }
 
+    public function test_admin_only_manages_lks(): void
+    {
+        $session = $this->withSession(['demo_role' => 'admin']);
+
+        foreach ([
+            '/admin/registrations/karang-taruna', '/admin/organizations/karang-taruna', '/admin/members/psm', '/admin/complaints/psm',
+            '/admin/incoming-letters/karang-taruna', '/admin/reply-letters/karang-taruna', '/admin/new-reply-letter',
+        ] as $url) {
+            $session->get($url)->assertNotFound();
+        }
+
+        foreach (['/admin/overview', '/admin/guide', '/admin/partner-accounts', '/admin/notifications', '/admin/landing-content'] as $url) {
+            $response = $session->get($url)->assertOk();
+            $text = strip_tags($response->getContent());
+            $this->assertStringNotContainsString('Karang Taruna', $text, $url);
+            $this->assertStringNotContainsString('PSM', $text, $url);
+        }
+    }
+
     public function test_sidebar_badge_matches_the_table_it_counts(): void
     {
         $response = $this->withSession(['demo_role' => 'admin'])->get('/admin/registrations/lks?status=Menunggu%20Verifikasi');
 
-        $pending = \App\Support\Demo\DemoRegistrations::pending('lks');
+        $pending = \App\Support\Demo\DemoRegistrations::pending();
         $response->assertOk()->assertSee('<span class="psm-nav-count">'.$pending.'</span>', false);
         $this->assertSame($pending, substr_count($response->getContent(), 'data-status="Menunggu Verifikasi"'));
     }

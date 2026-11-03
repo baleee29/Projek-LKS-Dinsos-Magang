@@ -5,7 +5,7 @@ namespace App\Support\Demo;
 use Illuminate\Support\Collection;
 
 /**
- * Tabel sumber: organization_members (pengurus/SDM LKS dan anggota Karang Taruna).
+ * Tabel sumber: organization_members (pengurus dan SDM LKS).
  * NIK sengaja berpola 0000… supaya jelas palsu.
  */
 class DemoMembers extends DemoRepository
@@ -53,13 +53,12 @@ class DemoMembers extends DemoRepository
         $make($own, 'Julia Kartika', 'Relawan', 'Relawan Kesehatan', 'Perempuan', ['notes' => 'Pemeriksaan kesehatan rutin']);
 
         foreach (DemoOrganizations::raw() as $org) {
-            if ($org['id'] === $own || $org['pillar'] === 'psm') {
+            if ($org['id'] === $own) {
                 continue;
             }
-            $isLks = $org['pillar'] === 'lks';
-            $make($org['id'], $org['chair'], 'Pengurus', $isLks ? 'Ketua Lembaga' : 'Ketua', str_contains('Rohani Dewi Nur Salsabila Annisa Mega', explode(' ', $org['chair'])[0]) ? 'Perempuan' : 'Laki-laki', ['isChair' => true, 'notes' => 'Penanggung jawab']);
-            $make($org['id'], 'Kurnia Wati '.substr($org['id'], -1), $isLks ? 'Staf' : 'Pengurus', $isLks ? 'Staf Administrasi' : 'Sekretaris', 'Perempuan');
-            $make($org['id'], 'Lukman Hakim '.substr($org['id'], -1), $isLks ? 'Tenaga layanan' : 'Anggota berkegiatan', $isLks ? 'Pengasuh' : 'Anggota', 'Laki-laki');
+            $make($org['id'], $org['chair'], 'Pengurus', 'Ketua Lembaga', str_contains('Rohani Dewi Nur', explode(' ', $org['chair'])[0]) ? 'Perempuan' : 'Laki-laki', ['isChair' => true, 'notes' => 'Penanggung jawab']);
+            $make($org['id'], 'Kurnia Wati '.substr($org['id'], -1), 'Staf', 'Staf Administrasi', 'Perempuan');
+            $make($org['id'], 'Lukman Hakim '.substr($org['id'], -1), 'Tenaga layanan', 'Pengasuh', 'Laki-laki');
         }
 
         return $rows;

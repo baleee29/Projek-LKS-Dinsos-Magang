@@ -1,5 +1,6 @@
-/* Urutan mengikuti key styles role admin di manifest.json sumber. brand.css lebih dulu, sama seperti
-   app.blade.php sumber yang memuatnya sebelum CSS role. Jangan diubah: urutan memengaruhi hasil. */
+/* Urutan mengikuti key styles role admin di manifest.json sumber, tanpa CSS khusus PSM dan Karang Taruna.
+   brand.css lebih dulu, sama seperti app.blade.php sumber yang memuatnya sebelum CSS role.
+   Jangan diubah: urutan memengaruhi hasil. */
 @import "../shared/brand.css";
 @import "../dashboards/shared/layout.css";
 @import "../dashboards/shared/components/summary.css";
@@ -23,18 +24,9 @@
 @import "../dashboards/lks/profile.css";
 @import "../dashboards/shared/sidebar.css";
 @import "../dashboards/admin/partner-workspace.css";
-@import "../dashboards/karang-taruna/profile.css";
-@import "../dashboards/karang-taruna/member-detail.css";
-@import "../dashboards/psm/members.css";
 @import "../dashboards/admin/sidebar.css";
 @import "../dashboards/admin/registrations.css";
 @import "../dashboards/admin/lks-registration-detail.css";
-@import "../dashboards/admin/correspondence.css";
 @import "../dashboards/lks/letters.css";
 @import "../dashboards/admin/partner-accounts.css";
 @import "../dashboards/admin/landing-content.css";
-@import "../dashboards/psm/member-accounts/accounts.css";
-@import "../dashboards/psm/member-accounts/complaints.css";
-@import "../dashboards/psm/member-accounts/uploads.css";
-@import "../dashboards/admin/psm-complaints.css";
-@import "../dashboards/shared/psm-complaint-detail.css";

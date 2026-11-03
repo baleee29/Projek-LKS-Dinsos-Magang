@@ -1,6 +1,6 @@
 # SiDaya: Dashboard Admin dan LKS
 
-Dashboard **Admin** dan **LKS** SiDaya yang dibangun ulang dengan Laravel dan Blade, tanpa Vue dan Inertia.
+Dashboard **Admin** dan **LKS** SiDaya yang dibangun ulang dengan Laravel dan Blade, tanpa Vue dan Inertia. Dashboard Admin hanya mengelola LKS; fitur PSM dan Karang Taruna tidak disertakan.
 
 Project ini ada di **Tahap 1**: tampilan dan interaksi lengkap dengan data dummy. Belum ada database, autentikasi sungguhan, penyimpanan, upload, notifikasi, maupun pembuatan berkas Excel/PDF. Rencana backend ada di [docs/tahap-2-backend.md](docs/tahap-2-backend.md).
 

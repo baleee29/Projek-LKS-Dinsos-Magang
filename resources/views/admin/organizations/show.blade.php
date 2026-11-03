@@ -5,7 +5,7 @@
 @section('content')
     @include('shared.lks-profile-body')
     @if ($organization['registrationId'])
-        <section class="detail-card"><h2>Pendaftaran mitra</h2><p class="muted">Organisasi ini berasal dari pendaftaran publik yang disetujui Admin.</p><a class="text-button" href="/admin/registration/{{ $organization['registrationId'] }}">Lihat data dan berkas pendaftaran</a></section>
+        <section class="detail-card"><h2>Pendaftaran lembaga</h2><p class="muted">Lembaga ini berasal dari pendaftaran publik yang disetujui Admin.</p><a class="text-button" href="/admin/registration/{{ $organization['registrationId'] }}">Lihat data dan berkas pendaftaran</a></section>
     @endif
     <section class="reports-panel" id="lks-staff-section">
         <div class="panel-heading">

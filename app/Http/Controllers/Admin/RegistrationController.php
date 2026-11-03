@@ -12,9 +12,7 @@ use Illuminate\View\View;
 
 class RegistrationController extends Controller
 {
-    private const LABELS = ['lks' => 'LKS', 'karang-taruna' => 'Karang Taruna'];
-
-    public function index(Request $request, string $pillar): View
+    public function index(Request $request): View
     {
         $filters = [
             'q' => (string) $request->query('q', ''),
@@ -23,14 +21,12 @@ class RegistrationController extends Controller
         ];
         $query = mb_strtolower(trim($filters['q']));
 
-        $rows = DemoRegistrations::byPillar($pillar)->filter(fn (array $row) => (! $filters['status'] || $row['status'] === $filters['status'])
+        $rows = DemoRegistrations::all()->sortByDesc('created_at')->filter(fn (array $row) => (! $filters['status'] || $row['status'] === $filters['status'])
             && (! $filters['district'] || $row['district'] === $filters['district'])
             && (! $query || collect([$row['organization_name'], $row['leader_name'], $row['whatsapp']])
                 ->contains(fn ($value) => str_contains(mb_strtolower((string) $value), $query))))->values();
 
         return view('admin.registrations.index', [
-            'pillar' => $pillar,
-            'title' => 'Pendaftaran Mitra '.self::LABELS[$pillar],
             'filters' => $filters,
             'statuses' => ['Menunggu Verifikasi', 'Disetujui', 'Ditolak'],
             'districts' => DemoRegions::districts(),
@@ -45,7 +41,6 @@ class RegistrationController extends Controller
 
         return view('admin.registrations.show', [
             'row' => $row,
-            'label' => self::LABELS[$row['pillar']],
             'organizationId' => $this->organizationId($row),
             'whatsappUrl' => 'https://wa.me/62'.ltrim($row['whatsapp'], '0'),
         ]);

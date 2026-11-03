@@ -33,19 +33,19 @@ class DemoNotifications extends DemoRepository
         };
 
         $admin = [
-            ['lks', 'Laporan semester baru masuk', 'LKSA Pelita Harapan mengirim laporan semester.', 'LKSA Pelita Harapan', 'Semester 1 2026', '/admin/report/RPT-LKS002-2026-S1', false, ['title' => 'Laporan Kegiatan dan Layanan Semester 1 2026', 'year' => 2026, 'quarter' => 'Semester 1']],
-            ['lks', 'Laporan dikirim ulang', 'Yayasan Griya Lansia Sejahtera memperbarui laporan semester.', 'Yayasan Griya Lansia Sejahtera', 'Semester 1 2026', '/admin/report/RPT-LKS003-2026-S1', false, ['title' => 'Laporan Kegiatan dan Layanan Semester 1 2026', 'year' => 2026, 'quarter' => 'Semester 1']],
-            ['lks', 'Pendaftaran LKS baru', 'Ada pendaftaran LKS baru yang menunggu keputusan Admin.', 'LKS Harapan Mulia', 'Pendaftaran mitra', '/admin/registration/reg-lks-001', false, ['organization_name' => 'LKS Harapan Mulia', 'leader_name' => 'Ratna Sari', 'status' => 'Menunggu Verifikasi', 'district' => 'Cempaka', 'village' => 'Bangkal']],
-            ['karang-taruna', 'Pendaftaran Karang Taruna baru', 'Ada pendaftaran Karang Taruna baru yang menunggu keputusan Admin.', 'Karang Taruna Palam Muda', 'Pendaftaran mitra', '/admin/registration/reg-kt-001', false, ['organization_name' => 'Karang Taruna Palam Muda', 'leader_name' => 'Aldi Firmansyah', 'status' => 'Menunggu Verifikasi']],
-            ['karang-taruna', 'Surat pengajuan kegiatan masuk', 'Karang Taruna Bina Remaja mengajukan kegiatan baru.', 'Karang Taruna Bina Remaja', 'Surat pengajuan', '/admin/incoming-letter/act-001', false, ['title' => 'Pelatihan Keterampilan Remaja', 'status' => 'Menunggu Pemeriksaan']],
-            ['lks', 'Surat masuk dari LKS', 'Panti Asuhan Cahaya Kasih mengirim surat keluar ke Dinas Sosial.', 'Panti Asuhan Cahaya Kasih', 'Persuratan', '/admin/letters/lks', true, ['subject' => 'Permohonan Rekomendasi Bantuan Permakanan', 'letter_number' => '003/LKS-DEMO/4/2026']],
-            ['psm', 'Pengaduan anggota PSM baru', 'Seorang anggota PSM mengirim pengaduan warga.', 'PSM Kota Banjarbaru', 'Pengaduan', '/admin/complaints/psm', true, ['title' => 'Warga lansia membutuhkan pendampingan', 'status' => 'Dikirim']],
-            ['lks', 'Laporan semester baru masuk', 'LKSA Tunas Bangsa mengirim laporan semester.', 'LKSA Tunas Bangsa', 'Semester 1 2026', '/admin/report/RPT-LKS006-2026-S1', true, ['title' => 'Laporan Kegiatan dan Layanan Semester 1 2026', 'year' => 2026, 'quarter' => 'Semester 1']],
-            ['lks', 'Data lembaga diperbarui', 'LKS Rumah Singgah Mentari memperbarui profil lembaga.', 'LKS Rumah Singgah Mentari', 'Pembaruan data', '/admin/organization/lks-008', true, []],
-            ['karang-taruna', 'Surat balasan diterbitkan', 'Surat balasan untuk Karang Taruna Muda Berkarya telah diterbitkan.', 'Karang Taruna Muda Berkarya', 'Surat balasan', '/admin/reply-letter/reply-002', true, ['title' => 'Balasan Permohonan Dukungan Kegiatan', 'status' => 'Diterbitkan']],
+            ['Laporan semester baru masuk', 'LKSA Pelita Harapan mengirim laporan semester.', 'LKSA Pelita Harapan', 'Semester 1 2026', '/admin/report/RPT-LKS002-2026-S1', false, ['title' => 'Laporan Kegiatan dan Layanan Semester 1 2026', 'year' => 2026, 'quarter' => 'Semester 1']],
+            ['Laporan dikirim ulang', 'Yayasan Griya Lansia Sejahtera memperbarui laporan semester.', 'Yayasan Griya Lansia Sejahtera', 'Semester 1 2026', '/admin/report/RPT-LKS003-2026-S1', false, ['title' => 'Laporan Kegiatan dan Layanan Semester 1 2026', 'year' => 2026, 'quarter' => 'Semester 1']],
+            ['Pendaftaran LKS baru', 'Ada pendaftaran LKS baru yang menunggu keputusan Admin.', 'LKS Harapan Mulia', 'Pendaftaran LKS', '/admin/registration/reg-lks-001', false, ['organization_name' => 'LKS Harapan Mulia', 'leader_name' => 'Ratna Sari', 'status' => 'Menunggu Verifikasi', 'district' => 'Cempaka', 'village' => 'Bangkal']],
+            ['Pendaftaran LKS baru', 'Ada pendaftaran LKS baru yang menunggu keputusan Admin.', 'Panti Sosial Kasih Ibu', 'Pendaftaran LKS', '/admin/registration/reg-lks-002', false, ['organization_name' => 'Panti Sosial Kasih Ibu', 'leader_name' => 'Teguh Wijaya', 'status' => 'Menunggu Verifikasi']],
+            ['Surat masuk dari LKS', 'Panti Asuhan Cahaya Kasih mengirim surat ke Dinas Sosial.', 'Panti Asuhan Cahaya Kasih', 'Persuratan', '/admin/letters/lks', false, ['subject' => 'Permohonan Rekomendasi Bantuan Permakanan']],
+            ['Surat masuk dari LKS', 'LKSA Tunas Bangsa mengirim surat ke Dinas Sosial.', 'LKSA Tunas Bangsa', 'Persuratan', '/admin/letters/lks', true, ['subject' => 'Laporan Perubahan Susunan Pengurus']],
+            ['Laporan semester baru masuk', 'LKSA Tunas Bangsa mengirim laporan semester.', 'LKSA Tunas Bangsa', 'Semester 1 2026', '/admin/report/RPT-LKS006-2026-S1', true, ['title' => 'Laporan Kegiatan dan Layanan Semester 1 2026', 'year' => 2026, 'quarter' => 'Semester 1']],
+            ['Data lembaga diperbarui', 'LKS Rumah Singgah Mentari memperbarui profil lembaga.', 'LKS Rumah Singgah Mentari', 'Pembaruan data', '/admin/organization/lks-008', true, []],
+            ['Klien baru tercatat', 'Yayasan Peduli Sesama Banua menambahkan biodata klien.', 'Yayasan Peduli Sesama Banua', 'Pembaruan data', '/admin/occupancy?org=lks-007&residence=', true, []],
+            ['Laporan semester baru masuk', 'Yayasan Peduli Sesama Banua mengirim laporan semester.', 'Yayasan Peduli Sesama Banua', 'Semester 1 2026', '/admin/report/RPT-LKS007-2026-S1', true, ['title' => 'Laporan Kegiatan dan Layanan Semester 1 2026', 'year' => 2026, 'quarter' => 'Semester 1']],
         ];
         foreach ($admin as $row) {
-            $make('admin', ...$row);
+            $make('admin', 'lks', ...$row);
         }
 
         $lks = [

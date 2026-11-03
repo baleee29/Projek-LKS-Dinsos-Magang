@@ -28,7 +28,7 @@ class ReportController extends Controller
             ? DemoClock::period((int) $filters['year'], $filters['quarter'] === '1' ? 1 : 3)
             : null;
 
-        $reports = DemoReports::submittedLks()->filter(function (array $item) use ($filters, $query) {
+        $reports = DemoReports::submitted()->filter(function (array $item) use ($filters, $query) {
             $org = DemoOrganizations::find($item['organizationId']);
 
             return ($filters['year'] === 'all' || (string) $item['year'] === $filters['year'])

@@ -67,21 +67,6 @@ class DemoLanding
                     $image('lks.utama.02', 'Foto utama', 'Kegiatan LKS', $placeholder),
                 ]],
             ]),
-            $page('psm', 'PSM', [
-                ['key' => 'utama', 'label' => 'Pekerja Sosial Masyarakat', 'slots' => [
-                    $text('psm.utama.01', 'Judul utama', 'Pekerja Sosial Masyarakat', 'h1'),
-                ]],
-            ]),
-            $page('karang-taruna', 'Karang Taruna', [
-                ['key' => 'utama', 'label' => 'Karang Taruna', 'slots' => [
-                    $text('karang-taruna.utama.01', 'Judul utama', 'Karang Taruna', 'h1'),
-                ]],
-            ]),
-            $page('pub', 'PUB', [
-                ['key' => 'utama', 'label' => 'Pengumpulan Uang atau Barang', 'slots' => [
-                    $text('pub.utama.01', 'Judul utama', 'Pengumpulan Uang atau Barang', 'h1'),
-                ]],
-            ]),
             $page('footer', 'Footer', [
                 ['key' => 'utama', 'label' => 'Footer', 'slots' => [
                     $text('footer.utama.01', 'Deskripsi', 'Informasi pemberdayaan sosial untuk masyarakat Kota Banjarbaru.'),

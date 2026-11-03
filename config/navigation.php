@@ -16,14 +16,8 @@ return [
         [
             'type' => 'section', 'key' => 'review', 'label' => 'Penerimaan & Verifikasi',
             'items' => [
-                [
-                    'type' => 'group', 'key' => 'registrations', 'id' => 'nav-admin-registrations', 'label' => 'Pendaftaran Mitra', 'icon' => 'file',
-                    'items' => [
-                        ['path' => 'registrations/lks', 'label' => 'LKS', 'count' => 'registrationsLKS'],
-                        ['path' => 'registrations/karang-taruna', 'label' => 'Karang Taruna', 'count' => 'registrationsKT'],
-                    ],
-                ],
-                ['path' => 'partner-accounts', 'label' => 'Buat Akun Mitra', 'icon' => 'users'],
+                ['path' => 'registrations/lks', 'label' => 'Pendaftaran LKS', 'icon' => 'file', 'count' => 'registrationsLKS'],
+                ['path' => 'partner-accounts', 'label' => 'Buat Akun LKS', 'icon' => 'users'],
             ],
         ],
         [
@@ -33,26 +27,6 @@ return [
                 ['path' => 'occupancy', 'label' => 'Rekap Penghuni', 'icon' => 'users'],
                 ['path' => 'reports/lks', 'label' => 'Laporan Semester', 'icon' => 'file'],
                 ['path' => 'letters/lks', 'label' => 'Surat Masuk & Keluar', 'icon' => 'envelope', 'count' => 'unreadLettersLKS'],
-            ],
-        ],
-        [
-            'type' => 'pillar', 'key' => 'psm', 'title' => 'PSM', 'description' => 'Pekerja Sosial Masyarakat', 'logo' => '/assets/images/branding/logo-psm-96.webp',
-            'items' => [
-                ['path' => 'members/psm', 'label' => 'Data Anggota', 'icon' => 'users'],
-                ['path' => 'complaints/psm', 'label' => 'Pengaduan Anggota', 'icon' => 'envelope'],
-            ],
-        ],
-        [
-            'type' => 'pillar', 'key' => 'kt', 'title' => 'Karang Taruna', 'description' => 'Kelompok & surat pengajuan', 'logo' => '/assets/images/branding/logo-karang-taruna-96.webp',
-            'items' => [
-                ['path' => 'organizations/karang-taruna', 'label' => 'Data Kelompok', 'icon' => 'building'],
-                [
-                    'type' => 'group', 'key' => 'letters', 'id' => 'nav-admin-kt-letters', 'label' => 'Surat Pengajuan', 'icon' => 'file',
-                    'items' => [
-                        ['path' => 'incoming-letters/karang-taruna', 'label' => 'Surat Masuk', 'count' => 'incomingLetters'],
-                        ['path' => 'reply-letters/karang-taruna', 'label' => 'Surat Balasan', 'count' => 'replyDrafts'],
-                    ],
-                ],
             ],
         ],
         [

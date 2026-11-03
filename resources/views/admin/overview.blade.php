@@ -4,8 +4,6 @@
 
 @php
     use App\Support\Format;
-    $pillarLabels = ['psm' => 'PSM', 'lks' => 'LKS', 'karang-taruna' => 'Karang Taruna'];
-    $pillarUrls = ['psm' => '/admin/members/psm', 'lks' => '/admin/organizations/lks', 'karang-taruna' => '/admin/organizations/karang-taruna'];
     $arrow = '<svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg>';
     $link = fn (string $href, string $title) => '<a class="q-admin-link" href="'.e($href).'">'.e($title).$arrow.'</a>';
     $facts = function (array $rows) {
@@ -18,24 +16,22 @@
         return $html.'</dl>';
     };
     $status = function (string $value) {
-        $tones = ['Terkirim' => 'approved', 'Diajukan' => 'pending', 'Ditinjau' => 'progress', 'Perlu Revisi' => 'revision', 'Disetujui' => 'approved', 'Diterima' => 'approved', 'Menunggu Persetujuan' => 'pending', 'Menunggu Verifikasi' => 'pending', 'Menunggu Pemeriksaan' => 'pending', 'Perlu Perbaikan' => 'revision'];
+        $tones = ['Terkirim' => 'approved', 'Diterima' => 'approved', 'Menunggu Verifikasi' => 'pending'];
 
         return '<span class="q-admin-status q-admin-status-'.($tones[$value] ?? 'neutral').'">'.e($value).'</span>';
     };
     $icon = fn (string $name) => '<svg class="icon q-admin-card-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-'.$name.'"/></svg>';
     $excerpt = fn (?string $value) => mb_strimwidth((string) $value, 0, 180, '…');
     $queueCards = [
-        ['Formulir terbuka', 'Pendaftaran LKS', $queues['registrationsLKS'], 'Pendaftaran lembaga beserta berkas yang dikirim melalui formulir publik.', '/admin/registrations/lks', 'Periksa pendaftaran LKS'],
-        ['Formulir terbuka', 'Pendaftaran Karang Taruna', $queues['registrationsKT'], 'Pendaftaran kelompok dan kelengkapan berkas yang menunggu pemeriksaan.', '/admin/registrations/karang-taruna', 'Periksa pendaftaran kelompok'],
-        ['Agenda mitra', 'Surat masuk kegiatan', $queues['incomingLetters'], 'Pengajuan Karang Taruna yang menunggu pemeriksaan atau sedang ditinjau.', '/admin/incoming-letters/karang-taruna', 'Periksa surat masuk'],
-        ['Administrasi', 'Draf surat balasan', $queues['replyDrafts'], 'Draf milik akun Admin ini belum terlihat oleh penerima.', '/admin/reply-letters/karang-taruna', 'Buka surat balasan'],
+        ['Formulir terbuka', 'Pendaftaran LKS', $pendingRegistrations, 'Pendaftaran lembaga beserta berkas yang dikirim melalui formulir publik.', '/admin/registrations/lks', 'Periksa pendaftaran LKS'],
+        ['Persuratan', 'Surat masuk dari LKS', $unreadLetters, 'Surat dari lembaga yang belum dibaca oleh Dinas Sosial.', '/admin/letters/lks', 'Buka surat masuk'],
     ];
 @endphp
 
 @section('content')
     <div class="q-admin-overview">
         <div class="q-admin-overview-toolbar">
-            <header class="q-admin-overview-heading"><h1 id="view-title" tabindex="-1">Ringkasan Admin</h1><p class="view-description">Pantau berkas masuk, tiga pilar sosial, dan progres laporan semester.</p></header>
+            <header class="q-admin-overview-heading"><h1 id="view-title" tabindex="-1">Ringkasan Admin</h1><p class="view-description">Pantau berkas masuk, data lembaga, klien, dan progres laporan semester LKS.</p></header>
             <form class="q-admin-period" method="get" aria-label="Periode laporan LKS">
                 <label><span>Tahun anggaran</span><select name="year" aria-label="Tahun">@foreach ($years as $value)<option value="{{ $value }}" @selected($value === $year)>{{ $value }}</option>@endforeach</select></label>
                 <label><span>Periode pelaporan</span><select name="quarter" aria-label="Semester"><option value="1" @selected($semester === 1)>Semester 1 · Januari–Juni</option><option value="2" @selected($semester === 2)>Semester 2 · Juli–Desember</option></select></label>
@@ -44,20 +40,20 @@
         </div>
         <section class="q-admin-statistics" data-admin-section="statistics" aria-label="Statistik utama">
             <article class="q-admin-stat q-admin-stat-hero">
-                <div class="q-admin-stat-heading"><h2>Entitas mitra terdaftar</h2><span class="q-admin-category">3 pilar sosial</span></div>
+                <div class="q-admin-stat-heading"><h2>LKS terdaftar</h2><span class="q-admin-category">Kota Banjarbaru</span></div>
                 <strong>{{ $organizationCount }}</strong>
-                <p class="q-admin-stat-caption">Organisasi mitra</p>
-                <p class="q-admin-stat-description">Lembaga kesejahteraan sosial, organisasi PSM, dan kelompok Karang Taruna yang tercatat pada sumber data aktif.</p>
-                {!! $link('/admin/organizations/lks', 'Lihat seluruh mitra') !!}
+                <p class="q-admin-stat-caption">Lembaga Kesejahteraan Sosial</p>
+                <p class="q-admin-stat-description">Lembaga kesejahteraan sosial yang tercatat pada sumber data aktif.</p>
+                {!! $link('/admin/organizations/lks', 'Lihat seluruh LKS') !!}
                 <dl class="q-admin-distribution">
-                    @foreach ($pillarLabels as $pillar => $title)
-                        <div><dt>{{ $title }}</dt><dd><a href="{{ $pillarUrls[$pillar] }}">{{ $pillarCounts[$pillar] }}<span class="sr-only"> organisasi {{ $title }}</span></a></dd></div>
-                    @endforeach
+                    <div><dt>Sudah melapor</dt><dd><a href="{{ $reportUrl }}">{{ $organizationCount - $unsubmitted->count() }}<span class="sr-only"> lembaga pada periode ini</span></a></dd></div>
+                    <div><dt>Belum melapor</dt><dd><a href="/admin/organizations/lks">{{ $unsubmitted->count() }}<span class="sr-only"> lembaga pada periode ini</span></a></dd></div>
+                    <div><dt>Pendaftaran baru</dt><dd><a href="/admin/registrations/lks?status=Menunggu%20Verifikasi">{{ $pendingRegistrations }}<span class="sr-only"> menunggu keputusan</span></a></dd></div>
                 </dl>
             </article>
             <div class="q-admin-stat-matrix">
                 @foreach ([
-                    ['Anggota terdaftar', $memberCount, 'Pengurus, SDM dan anggota aktif dari seluruh mitra.', '/admin/organizations/lks', 'users', 'Lihat detail keanggotaan'],
+                    ['Pengurus & SDM', $memberCount, 'Pengurus, staf, tenaga layanan, dan relawan dari seluruh LKS.', '/admin/organizations/lks', 'users', 'Lihat data LKS'],
                     ['Klien terdaftar', $clientCount, 'Klien terdaftar pada LKS di Kota Banjarbaru.', '/admin/occupancy?residence=', 'heart', 'Buka klien LKS'],
                     ['Laporan LKS', $reportCount, 'Laporan semester terkirim; setiap periode dihitung satu laporan.', $reportUrl, 'file', 'Arsip laporan LKS'],
                 ] as [$title, $value, $note, $href, $symbol, $action])
@@ -67,7 +63,7 @@
         </section>
 
         <section class="q-admin-section" data-admin-section="work">
-            <header class="q-admin-section-heading"><div><p class="q-admin-eyebrow">Pekerjaan Admin</p><h2>Perlu ditindaklanjuti</h2><p>Pendaftaran, kegiatan, dan surat balasan dari seluruh periode.</p></div><span @class(['q-admin-total', 'is-pending' => $pendingWork > 0])>{{ $pendingWork }} pekerjaan membutuhkan aksi</span></header>
+            <header class="q-admin-section-heading"><div><p class="q-admin-eyebrow">Pekerjaan Admin</p><h2>Perlu ditindaklanjuti</h2><p>Pendaftaran dan surat LKS dari seluruh periode.</p></div><span @class(['q-admin-total', 'is-pending' => $pendingWork > 0])>{{ $pendingWork }} pekerjaan membutuhkan aksi</span></header>
             <div class="q-admin-queues">
                 @foreach ($queueCards as [$category, $title, $count, $note, $href, $action])
                     <article @class(['q-admin-queue', 'is-pending' => $count > 0])>
@@ -81,30 +77,23 @@
         </section>
 
         <section class="q-admin-section" data-admin-section="partners">
-            <header class="q-admin-section-heading"><div><p class="q-admin-eyebrow">Tiga mitra strategis</p><h2>Ringkasan setiap mitra</h2><p>Keanggotaan dan klien menggunakan data terkini. Rekap laporan hanya berlaku untuk LKS pada periode terpilih.</p></div></header>
+            <header class="q-admin-section-heading"><div><p class="q-admin-eyebrow">Data LKS</p><h2>Ringkasan LKS</h2><p>Lembaga dan klien menggunakan data terkini. Rekap laporan berlaku untuk periode terpilih.</p></div></header>
             <div class="q-admin-pillars">
                 <article class="q-admin-pillar" data-pillar="lks">
-                    <header><div><h3>LKS</h3><p>Lembaga, klien dan laporan layanan</p></div>{!! $icon('building') !!}</header>
-                    {!! $facts([['Lembaga', $lksOrgCount, '/admin/organizations/lks'], ['Pengurus & SDM', $lksMemberCount, '/admin/organizations/lks'], ['Klien terdaftar', $clientCount, '/admin/occupancy?residence='], ['Masih tinggal di panti', $inhabitants, '/admin/occupancy?residence=living']]) !!}
+                    <header><div><h3>Lembaga</h3><p>Direktori, SDM, dan akun LKS</p></div>{!! $icon('building') !!}</header>
+                    {!! $facts([['Lembaga', $organizationCount, '/admin/organizations/lks'], ['Pengurus & SDM', $memberCount, '/admin/organizations/lks'], ['Akun aktif', $accountCount, '/admin/partner-accounts']]) !!}
+                    {!! $link('/admin/organizations/lks', 'Lihat data LKS') !!}{!! $link('/admin/registrations/lks', 'Periksa pendaftaran LKS') !!}
+                </article>
+                <article class="q-admin-pillar" data-pillar="lks">
+                    <header><div><h3>Klien</h3><p>Penghuni dan penerima layanan</p></div>{!! $icon('heart') !!}</header>
+                    {!! $facts([['Klien terdaftar', $clientCount, '/admin/occupancy?residence='], ['Masih tinggal di panti', $clientSummary['residents'], '/admin/occupancy?residence=living'], ['Layanan nonresidensial', $clientSummary['nonresidential'], '/admin/occupancy?residence=nonresidential'], ['Sudah keluar', $clientSummary['exited'], '/admin/occupancy?residence=exited']]) !!}
                     <p class="q-admin-note">Penghuni memakai biodata tersimpan terbaru; terpisah dari penerima manfaat dalam laporan.</p>
-                    <div class="q-admin-pillar-statuses">
-                        @foreach ($reportStatusCounts as $value => $count)
-                            <a href="{{ $reportUrl }}&status={{ $value }}">{!! $status($value) !!}<strong>{{ $count }}</strong></a>
-                        @endforeach
-                    </div>
-                    {!! $link($reportUrl, 'Lihat laporan periode ini') !!}{!! $link('/admin/registrations/lks', 'Periksa pendaftaran LKS') !!}{!! $link('/admin/organizations/lks', 'Data SDM LKS') !!}
+                    {!! $link('/admin/occupancy', 'Buka rekap penghuni') !!}
                 </article>
-                <article class="q-admin-pillar" data-pillar="psm">
-                    <header><div><h3>PSM</h3><p>Anggota dan organisasi PSM</p></div>{!! $icon('heart') !!}</header>
-                    {!! $facts([['Organisasi / wilayah', $psmOrgCount, '/admin/members/psm'], ['Anggota terdaftar', $psmMemberCount, '/admin/members/psm']]) !!}
-                    <p class="q-admin-note">Data anggota dan akun yang ditambahkan Ketua PSM tercatat dalam daftar yang sama.</p>
-                    {!! $link('/admin/members/psm', 'Lihat data anggota') !!}{!! $link('/admin/complaints/psm', 'Pengaduan Anggota PSM') !!}
-                </article>
-                <article class="q-admin-pillar" data-pillar="karang-taruna">
-                    <header><div><h3>Karang Taruna</h3><p>Kelompok dan keanggotaan operasional</p></div>{!! $icon('users') !!}</header>
-                    {!! $facts([['Kelompok', $ktOrgCount, '/admin/organizations/karang-taruna'], ['Pengurus', $ktOfficers, '/admin/organizations/karang-taruna'], ['Anggota berkegiatan', $ktParticipating, '/admin/organizations/karang-taruna'], ['Total anggota', $ktMemberCount, '/admin/organizations/karang-taruna']]) !!}
-                    <p class="q-admin-note">Jumlah anggota operasional tidak mewakili seluruh warga Karang Taruna.</p>
-                    {!! $link('/admin/organizations/karang-taruna', 'Lihat data kelompok') !!}{!! $link('/admin/organizations/karang-taruna', 'Data anggota') !!}{!! $link('/admin/registrations/karang-taruna', 'Pendaftaran kelompok') !!}{!! $link('/admin/incoming-letters/karang-taruna', 'Surat masuk kegiatan') !!}{!! $link('/admin/reply-letters/karang-taruna', 'Surat balasan dinas') !!}
+                <article class="q-admin-pillar" data-pillar="lks">
+                    <header><div><h3>Laporan</h3><p>{{ $period['label'] }}</p></div>{!! $icon('file') !!}</header>
+                    {!! $facts([['Laporan terkirim', $reportCount, $reportUrl], ['Berkas terlampir', $totalFiles], ['LKS belum melapor', $unsubmitted->count()]]) !!}
+                    {!! $link($reportUrl, 'Lihat laporan periode ini') !!}
                 </article>
             </div>
 
@@ -145,7 +134,7 @@
         </section>
 
         <section class="q-admin-section" data-admin-section="activity">
-            <header class="q-admin-section-heading"><div><p class="q-admin-eyebrow">Riwayat tercatat</p><h2>Aktivitas terbaru</h2><p>Pendaftaran mitra, laporan LKS, kegiatan dan surat balasan.</p></div></header>
+            <header class="q-admin-section-heading"><div><p class="q-admin-eyebrow">Riwayat tercatat</p><h2>Aktivitas terbaru</h2><p>Pendaftaran dan laporan semester LKS.</p></div></header>
             <div class="q-admin-activity-panel">
                 @if ($activities->isEmpty())
                     <div class="q-admin-empty q-admin-activity-empty">{!! $icon('file') !!}<p>Belum ada riwayat pengajuan atau pemeriksaan dari sumber yang terhubung.</p></div>
@@ -155,7 +144,7 @@
                             <li>
                                 <div>
                                     <div class="q-admin-activity-heading"><h3><a href="{{ $event['url'] }}">{{ $event['title'] }}</a></h3>{!! $status($event['status']) !!}</div>
-                                    <p>{{ $pillarLabels[$event['pillar']] }} · {{ $event['organizationTitle'] }}</p>
+                                    <p>LKS · {{ $event['organizationTitle'] }}</p>
                                     @if ($event['note'])
                                         <p class="q-admin-activity-note">{{ $excerpt($event['note']) }}</p>
                                     @endif
@@ -172,7 +161,7 @@
             </div>
         </section>
         <footer class="q-admin-overview-footer">
-            <p class="q-admin-storage-note">Data yang tersimpan di browser hanya tersedia pada browser dan alamat situs yang sama. Data server mengikuti sumber pada masing-masing fitur; arsip laporan PSM/Karang Taruna tidak dihitung sebagai pekerjaan laporan aktif.</p>
+            <p class="q-admin-storage-note">Ringkasan ini hanya memuat data Lembaga Kesejahteraan Sosial.</p>
             <span>SiDaya · Kota Banjarbaru</span>
         </footer>
     </div>

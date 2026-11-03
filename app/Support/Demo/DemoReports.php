@@ -5,9 +5,7 @@ namespace App\Support\Demo;
 use Illuminate\Support\Collection;
 
 /**
- * Tabel sumber: quarterly_reports. LKS memakai status aktif Draf/Terkirim (statuses di shared/data.js).
- * Diajukan, Ditinjau, Perlu Revisi, dan Disetujui hanya ada pada arsip lama Karang Taruna,
- * sama seperti legacy reports di shared/workspace-reports.js.
+ * Tabel sumber: quarterly_reports. Status aktif LKS: Draf dan Terkirim (statuses di shared/data.js).
  */
 class DemoReports extends DemoRepository
 {
@@ -53,11 +51,6 @@ class DemoReports extends DemoRepository
         $make('RPT-LKS006-2026-S1', 'lks-006', 'lks', 2026, 1, 'Terkirim');
         $make('RPT-LKS007-2026-S1', 'lks-007', 'lks', 2026, 1, 'Terkirim');
 
-        $make('RPT-KT001-2024-T1', 'kt-001', 'karang-taruna', 2024, 1, 'Diajukan', ['title' => 'Arsip laporan triwulan I 2024']);
-        $make('RPT-KT002-2024-T2', 'kt-002', 'karang-taruna', 2024, 2, 'Ditinjau', ['title' => 'Arsip laporan triwulan II 2024']);
-        $make('RPT-KT003-2024-T3', 'kt-003', 'karang-taruna', 2024, 3, 'Perlu Revisi', ['title' => 'Arsip laporan triwulan III 2024']);
-        $make('RPT-KT004-2024-T4', 'kt-004', 'karang-taruna', 2024, 4, 'Disetujui', ['title' => 'Arsip laporan triwulan IV 2024']);
-
         return $rows;
     }
 
@@ -67,10 +60,10 @@ class DemoReports extends DemoRepository
         return static::all()->where('organizationId', $organizationId)->values();
     }
 
-    /** Admin tidak melihat draf; hanya laporan LKS terkirim. @return Collection<int, array<string, mixed>> */
-    public static function submittedLks(): Collection
+    /** Admin tidak melihat draf. @return Collection<int, array<string, mixed>> */
+    public static function submitted(): Collection
     {
-        return static::all()->where('pillar', 'lks')->where('status', 'Terkirim')->values();
+        return static::all()->where('status', 'Terkirim')->values();
     }
 
     /** @param  array<string, mixed>  $report */
