@@ -11,8 +11,7 @@
     <section class="admin-partner-view">
         <header class="admin-partner-heading">
             <div><small>SiDaya · Admin Dinas Sosial</small><h1 id="view-title" tabindex="-1">Data LKS</h1><p>Direktori lembaga kesejahteraan sosial beserta SDM yang tercatat.</p></div>
-            {{-- TODO(Tahap 2): ekspor dari admin/partner-export-lks.js. --}}
-            <div class="admin-partner-heading-actions"><button type="button" class="export-button" data-demo-download><x-dashboard.icon name="download" /> Unduh Excel</button><button type="button" class="export-button" data-demo-download><x-dashboard.icon name="download" /> Unduh PDF</button></div>
+            <div class="admin-partner-heading-actions"><button type="button" class="export-button" data-export-url="/ekspor/lembaga" data-export-format="xlsx"><x-dashboard.icon name="download" /> Unduh Excel</button><button type="button" class="export-button" data-export-url="/ekspor/lembaga" data-export-format="pdf"><x-dashboard.icon name="download" /> Unduh PDF</button></div>
         </header>
         <p class="admin-partner-source-note">Daftar memuat data lembaga dan pendaftaran publik yang telah disetujui.</p>
         @include('admin.organizations.controls', ['searchLabel' => 'Cari nama lembaga, ketua, atau kontak', 'placeholder' => 'Cari nama lembaga, ketua, atau kontak'])

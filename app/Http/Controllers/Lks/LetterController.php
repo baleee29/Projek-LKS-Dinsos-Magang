@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Lks;
 
 use App\Http\Controllers\Controller;
-use App\Support\Demo\DemoLetters;
-use App\Support\Demo\DemoOrganizations;
+use App\Support\Data\DataSurat;
+use App\Support\Data\DataLembaga;
 use App\Support\LetterListing;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -15,7 +15,7 @@ class LetterController extends Controller
     {
         return view('shared.letters', LetterListing::build(
             $request,
-            DemoLetters::forLks(DemoOrganizations::OWN_LKS),
+            DataSurat::forLks(DataLembaga::ownId()),
             admin: false,
         ));
     }

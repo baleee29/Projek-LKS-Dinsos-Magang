@@ -1,6 +1,5 @@
-// Pendaftaran LKS tanpa backend: isian dan berkas hanya hidup di memori halaman.
-// Tidak ada pengiriman ke server, penyimpanan browser, atau database.
-// TODO(Tahap 2): kirim lewat shared/partner-registration-data.js; hasilnya disampaikan Admin melalui WhatsApp.
+// Pendaftaran LKS: isian dan berkas dikirim ke server, tidak disimpan di browser.
+// Hasilnya disampaikan Admin melalui WhatsApp.
 import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
 
 (() => {
@@ -121,6 +120,8 @@ import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
     attachments.forEach((attachment) => {
         attachment.label = attachment.wrapper.dataset.label.trim();
     });
+
+    let requestId = null;
 
     function values() {
         return {
@@ -657,7 +658,8 @@ import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
     });
     document
         .getElementById("btn-proceed")
-        ?.addEventListener("click", () => {
+        ?.addEventListener("click", async (event) => {
+            const proceed = event.currentTarget;
             const currentValues = values();
             const sameReview =
                 reviewedData &&
@@ -678,10 +680,49 @@ import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
                 if (prepareReview()) showView("summary");
                 return;
             }
+            // request_id tetap sama bila dikirim ulang, supaya tidak tercatat ganda.
+            requestId ??= crypto.randomUUID();
+            const body = new FormData();
+            body.set("request_id", requestId);
+            body.set("website", form.elements.namedItem("website")?.value || "");
+            Object.entries(reviewedData.values).forEach(([name, value]) => {
+                if (Array.isArray(value)) value.forEach((item) => body.append(name + "[]", item));
+                else body.set(name, value);
+            });
+            attachments.forEach((attachment) => {
+                body.set("files[" + attachment.key + "]", attachment.file);
+                body.set("file_labels[" + attachment.key + "]", attachment.wrapper.dataset.label.trim());
+            });
+            proceed.disabled = true;
+            let result;
+            try {
+                result = await fetch("/pendaftaran/mitra", {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]')?.content || "",
+                    },
+                    body,
+                });
+            } catch {
+                result = null;
+            }
+            proceed.disabled = false;
             confirmDialog?.close();
-            setText("success-reference", "Belum dikirim (mode demo)");
+            if (!result?.ok) {
+                const data = result ? await result.json().catch(() => ({})) : {};
+                const detail = Object.values(data.errors || {})[0]?.[0] || data.message;
+                errorSummary.textContent = result?.status === 429
+                    ? "Terlalu banyak percobaan. Tunggu sebentar, lalu kirim lagi."
+                    : detail || "Pendaftaran belum terkirim. Periksa koneksi, lalu coba lagi.";
+                errorSummary.hidden = false;
+                errorSummary.focus?.();
+                return;
+            }
+            requestId = null;
+            setText("success-reference", "Menunggu verifikasi Admin");
             setText("success-nama", reviewedData.values["lks-nama"]);
-            setText("success-berkas", attachments.length + " dokumen persyaratan diperiksa, tidak disimpan");
+            setText("success-berkas", attachments.length + " dokumen persyaratan terkirim");
             setText(
                 "success-permohonan",
                 attachments.find((attachment) => attachment.key === "surat_permohonan")?.file?.name ||

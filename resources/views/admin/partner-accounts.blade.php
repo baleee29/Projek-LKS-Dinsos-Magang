@@ -25,7 +25,7 @@
                 <section class="admin-accounts-card" style="min-width: 0;">
                     <h2>Formulir Buat Akun LKS</h2>
                     <p class="card-desc">Pilih pendaftaran yang masuk untuk mengisi data secara otomatis, atau masukkan data secara manual. Akun akan tersimpan dan dapat digunakan untuk masuk ke SiDaya.</p>
-                    {{-- TODO(Tahap 2): POST /admin/partner-accounts. Kata sandi tidak pernah disimpan di browser. --}}
+                    {{-- Kata sandi tidak pernah disimpan di browser. --}}
                     <form class="admin-accounts-form" id="form-create-account" novalidate>
                         <div class="admin-form-group">
                             <label for="acc-reg-select">Ambil dari Pendaftaran LKS (Opsional)</label>
@@ -101,10 +101,10 @@
                                     <td style="text-align: right;">
                                         <div class="admin-action-group" style="justify-content: flex-end;">
                                             @if ($account['phone'])
-                                                <a class="admin-btn-action admin-btn-whatsapp" style="padding: 6px 12px; font-size: 12px;" href="https://wa.me/62{{ ltrim($account['phone'], '0') }}" target="_blank" rel="noopener noreferrer" title="Kirim pesan WhatsApp">WhatsApp</a>
+                                                <a class="admin-btn-action admin-btn-whatsapp" style="padding: 6px 12px; font-size: 12px;" href="{{ \App\Support\KeamananAkun::tautanWhatsapp($account['phone']) }}" target="_blank" rel="noopener noreferrer" title="Kirim pesan WhatsApp">WhatsApp</a>
                                             @endif
-                                            <button type="button" class="admin-btn-action admin-btn-secondary" style="padding: 6px 12px; font-size: 12px;" data-reset-acc="{{ $account['name'] }}" title="Reset kata sandi">Reset Sandi</button>
-                                            <button type="button" class="admin-btn-action admin-btn-danger" data-demo-action data-confirm="Akses login {{ $account['name'] }} akan dicabut. Data organisasi, laporan, surat, dan notifikasinya tetap tersimpan." data-confirm-title="Cabut Akses Akun LKS?" data-confirm-text="Ya, Cabut Akses" title="Cabut akses login LKS">Cabut Akses</button>
+                                            <button type="button" class="admin-btn-action admin-btn-secondary" style="padding: 6px 12px; font-size: 12px;" data-reset-acc="{{ $account['name'] }}" data-reset-url="/admin/partner-accounts/{{ $account['id'] }}/reset-password" title="Reset kata sandi">Reset Sandi</button>
+                                            <button type="button" class="admin-btn-action admin-btn-danger" data-action-url="/admin/partner-accounts/{{ $account['id'] }}" data-action-method="DELETE" data-confirm="Akses login {{ $account['name'] }} akan dicabut. Data organisasi, laporan, surat, dan notifikasinya tetap tersimpan." data-confirm-title="Cabut Akses Akun LKS?" data-confirm-text="Ya, Cabut Akses" title="Cabut akses login LKS">Cabut Akses</button>
                                         </div>
                                     </td>
                                 </tr>

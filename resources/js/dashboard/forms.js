@@ -1,7 +1,7 @@
-// Validasi browser untuk form dummy: pesan error per isian, pratinjau berkas, dan area seret-lepas.
-// Form tidak pernah dikirim ke server. TODO(Tahap 2): kirim ke endpoint sumber setelah validasi lolos.
+// Validasi dan pengiriman form: pesan error per isian, pratinjau berkas, dan area seret-lepas.
+import { afterSuccess, send } from './api.js';
 import { confirmDialog } from './dialogs.js';
-import { DEMO_SAVE_MESSAGE, notify } from './toast.js';
+import { notify } from './toast.js';
 
 const MB = 1024 * 1024;
 
@@ -110,15 +110,29 @@ function initFileInputs() {
     });
 }
 
+/** Menampilkan pesan validasi server di bawah isian yang bersangkutan. */
+export function showServerErrors(form, errors) {
+    let first = null;
+    Object.entries(errors).forEach(([name, messages]) => {
+        const control = form.elements.namedItem(name);
+        if (control instanceof Element && control.getAttribute('aria-describedby')) {
+            setFieldError(control, messages[0]);
+            first ??= control;
+        }
+    });
+    first?.focus();
+    return first !== null;
+}
+
 /**
- * form[data-demo-form]: validasi, konfirmasi opsional (data-confirm, data-confirm-title,
- * data-confirm-text, data-confirm-safe), lalu toast netral.
+ * form[data-form-url]: validasi, konfirmasi opsional (data-confirm, data-confirm-title,
+ * data-confirm-text, data-confirm-safe), lalu kirim ke server.
  */
 export function initForms() {
     initFileInputs();
     document.addEventListener('submit', async (event) => {
         const form = event.target;
-        if (!form.matches('form[data-demo-form]')) return;
+        if (!form.matches('form[data-form-url]')) return;
         event.preventDefault();
         if (!validateForm(form)) return;
         const { confirm: message, confirmTitle, confirmText, confirmSafe } = form.dataset;
@@ -131,9 +145,14 @@ export function initForms() {
             });
             if (!accepted) return;
         }
-        form.closest('dialog')?.close();
-        form.dispatchEvent(new CustomEvent('demo:submitted', { bubbles: true }));
-        notify(DEMO_SAVE_MESSAGE);
+        const submitter = event.submitter;
+        if (submitter) submitter.disabled = true;
+        try {
+            afterSuccess(await send(form.dataset.formUrl, { method: form.dataset.formMethod || 'POST', body: new FormData(form) }));
+        } catch (error) {
+            if (submitter) submitter.disabled = false;
+            if (!showServerErrors(form, error.errors || {})) notify(error.message);
+        }
     });
 
     document.addEventListener('input', (event) => {

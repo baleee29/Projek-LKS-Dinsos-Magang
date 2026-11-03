@@ -30,6 +30,7 @@
                                 href="/pilar/lks.html#pendaftaran"
                                 >&larr; Kembali ke Panduan LKS</a
                             >
+                            @if (app()->environment('local'))
                             <button
                                 class="button button-primary"
                                 id="btn-fill-demo"
@@ -38,6 +39,7 @@
                             >
                                 Isi Data Contoh
                             </button>
+                            @endif
                         </div>
                     </div>
                     <div class="lksr-page-heading">
@@ -65,7 +67,7 @@
                                 >Pendaftaran Lembaga Kesejahteraan Sosial</strong
                             >
                             <p>
-                                Mode demo: data dan berkas hanya diperiksa di browser, tidak dikirim ke server, dan tidak disimpan di mana pun.
+                                Data dan berkas dikirim ke Dinas Sosial setelah Anda menekan tombol kirim, lalu diverifikasi oleh Admin.
                             </p>
                         </div>
                     </aside>
@@ -83,7 +85,6 @@
             >
                 <div class="container lksr-shell">
                     <div class="lksr-layout" id="view-form-grid">
-                        {{-- TODO(Tahap 2): kirim ke POST /pendaftaran/mitra lewat shared/partner-registration-data.js. --}}
                         <form class="lksr-main-column" id="form-lks" novalidate>
                             <div style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label for="lks-website">Situs web</label><input type="text" id="lks-website" name="website" tabindex="-1" autocomplete="off" value=""></div>
                             <div
@@ -657,7 +658,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-surat_permohonan-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -778,7 +779,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-ad_art-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -899,7 +900,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-akta_pendirian-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -1020,7 +1021,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-domisili-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -1141,7 +1142,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-npwp-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -1262,7 +1263,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-kemenkumham-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -1383,7 +1384,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-struktur_organisasi-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -1504,7 +1505,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-data_umum-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -1625,7 +1626,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-ktp_kontak_pengurus-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -1746,7 +1747,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-bebas_narkoba-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -1867,7 +1868,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-pernyataan_sengketa-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -1988,7 +1989,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-kesanggupan_laporan-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -2109,7 +2110,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-keabsahan_dana-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -2230,7 +2231,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-persetujuan_tetangga-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -2351,7 +2352,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-proposal-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -2472,7 +2473,7 @@
                                             class="lksr-field-help"
                                             id="help-lks-formulir_pendaftaran-input"
                                         >
-                                            Berkas hanya dipratinjau di browser dan tidak disimpan.
+                                            Berkas baru terkirim setelah formulir dikirim.
                                         </p>
                                         <div
                                             class="lksr-selected-file"
@@ -3033,7 +3034,7 @@
                             Pendaftaran Belum Dikirim (Mode Demo)
                         </h2>
                         <p>
-                            Seluruh isian lolos pemeriksaan. Data dan berkas tidak dikirim ke server dan tidak disimpan, jadi formulir kosong kembali saat halaman dimuat ulang.
+                            Pendaftaran sudah masuk dan menunggu verifikasi Admin Dinas Sosial. Hasilnya disampaikan melalui WhatsApp.
                         </p>
                         <dl class="lksr-success-recap">
                             <div><dt>Status</dt><dd id="success-reference"></dd></div>
@@ -3082,7 +3083,7 @@
             <p class="eyebrow">Konfirmasi Pendaftaran</p>
             <h2 id="confirmation-title">Selesaikan pemeriksaan pendaftaran?</h2>
             <p id="confirmation-description">
-                Mode demo: data dan berkas tidak dikirim ke server dan tidak disimpan di mana pun.
+                Pastikan data sudah benar. Keputusan Admin bersifat final; bila ditolak, Anda dapat mengirim pendaftaran baru.
             </p>
             <div class="lksr-dialog-actions">
                 <button

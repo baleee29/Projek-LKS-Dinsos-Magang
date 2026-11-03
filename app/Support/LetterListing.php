@@ -2,8 +2,8 @@
 
 namespace App\Support;
 
-use App\Support\Demo\DemoClock;
-use App\Support\Demo\DemoOrganizations;
+use App\Support\Data\Kalender;
+use App\Support\Data\DataLembaga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -52,9 +52,9 @@ class LetterListing
                 'outgoing' => $letters->where('type', $typeOfTab('outgoing'))->count(),
             ],
             'months' => self::MONTHS,
-            'years' => [DemoClock::YEAR, DemoClock::YEAR - 1, DemoClock::YEAR - 2],
-            'organizations' => $admin ? DemoOrganizations::raw() : collect(),
-            'today' => DemoClock::TODAY,
+            'years' => [Kalender::year(), Kalender::year() - 1, Kalender::year() - 2],
+            'organizations' => $admin ? DataLembaga::raw() : collect(),
+            'today' => Kalender::today(),
             'hasActiveFilter' => ($admin && $filters['org'] !== 'all') || $filters['month'] !== 'all' || $filters['year'] !== 'all' || trim($filters['q']) !== '',
             'rolePrefix' => $admin ? '/admin/letters/lks' : '/lks/letters',
             // Balas surat: form terbuka dengan isian awal, dari handleReplyToLetter() di lks/letters-actions.js.

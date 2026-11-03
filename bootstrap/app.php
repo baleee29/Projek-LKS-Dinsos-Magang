@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Middleware\EnsureDemoRole;
+use App\Http\Middleware\EnsurePeran;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias(['demo.role' => EnsureDemoRole::class]);
+        $middleware->alias(['peran' => EnsurePeran::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

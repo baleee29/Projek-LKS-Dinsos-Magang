@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Lks;
 
 use App\Http\Controllers\Controller;
-use App\Support\Demo\DemoClients;
-use App\Support\Demo\DemoClock;
-use App\Support\Demo\DemoMembers;
-use App\Support\Demo\DemoOrganizations;
+use App\Support\Data\DataKlien;
+use App\Support\Data\Kalender;
+use App\Support\Data\DataPengurus;
+use App\Support\Data\DataLembaga;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -14,8 +14,8 @@ class MemberController extends Controller
 {
     public function index(Request $request): View
     {
-        $organization = DemoOrganizations::own();
-        $members = DemoMembers::forOrganization($organization['id']);
+        $organization = DataLembaga::own();
+        $members = DataPengurus::forOrganization($organization['id']);
         $filters = ['q' => (string) $request->query('q', ''), 'category' => (string) $request->query('category', '')];
         $query = mb_strtolower(trim($filters['q']));
 
@@ -24,7 +24,7 @@ class MemberController extends Controller
                 ->contains(fn ($value) => str_contains(mb_strtolower((string) $value), $query))))->values();
 
         $serviceStaff = $members->filter(fn (array $member) => in_array(mb_strtolower($member['category']), ['staf', 'tenaga layanan', 'relawan'], true))->count();
-        $residents = DemoClients::summary(DemoClients::forOrganization($organization['id']))['residents'];
+        $residents = DataKlien::summary(DataKlien::forOrganization($organization['id']))['residents'];
 
         return view('lks.members.index', [
             'organization' => $organization,
@@ -42,7 +42,7 @@ class MemberController extends Controller
 
         return view('lks.members.show', [
             'member' => $member,
-            'organization' => DemoOrganizations::own(),
+            'organization' => DataLembaga::own(),
         ]);
     }
 
@@ -61,16 +61,16 @@ class MemberController extends Controller
     {
         return view('lks.members.form', [
             'member' => $member,
-            'values' => $member ?? ['joined' => DemoClock::TODAY, 'category' => 'Tenaga layanan', 'position' => 'Anggota'],
-            'today' => DemoClock::TODAY,
+            'values' => $member ?? ['joined' => Kalender::today(), 'category' => 'Tenaga layanan', 'position' => 'Anggota'],
+            'today' => Kalender::today(),
         ]);
     }
 
     /** @return array<string, mixed> */
     private function owned(string $id): array
     {
-        $member = DemoMembers::find($id);
-        abort_unless($member && $member['organizationId'] === DemoOrganizations::OWN_LKS, 404);
+        $member = DataPengurus::find($id);
+        abort_unless($member && $member['organizationId'] === DataLembaga::ownId(), 404);
 
         return $member;
     }

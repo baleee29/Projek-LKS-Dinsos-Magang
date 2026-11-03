@@ -1,6 +1,6 @@
 # Rancangan Database dan Alur SiDaya
 
-Acuan sebelum backend dibangun. Dokumen ini menetapkan tabel yang dibutuhkan, nama Indonesianya, dan alur tiap use case. Cakupannya hanya **Admin Dinas Sosial, LKS, dan pengunjung publik**. PSM, Karang Taruna, dan PUB tidak dibuat.
+Dokumen ini menetapkan tabel yang dibutuhkan, nama Indonesianya, dan alur tiap use case. Cakupannya hanya **Admin Dinas Sosial, LKS, dan pengunjung publik**. PSM, Karang Taruna, dan PUB tidak dibuat.
 
 Semua diagram memakai Mermaid. Salin isi blok `mermaid` ke [mermaid.live](https://mermaid.live) untuk melihat atau mengunduhnya.
 
@@ -10,7 +10,7 @@ Semua diagram memakai Mermaid. Salin isi blok `mermaid` ke [mermaid.live](https:
 | --- | --- |
 | Database aplikasi | `sidaya` |
 | Database pengujian | `sidaya_uji`. Tes tidak boleh berjalan di database aplikasi. |
-| Mesin | MySQL/MariaDB, `utf8mb4`. `.env` dan `phpunit.xml` sekarang masih SQLite, jadi keduanya perlu diganti. |
+| Mesin | MySQL/MariaDB, `utf8mb4` |
 | Nama tabel | Bahasa Indonesia, huruf kecil, `snake_case`, bentuk tunggal |
 | Nama kolom | Bahasa Indonesia, kecuali kolom bawaan Laravel pada tabel `notifikasi` dan `sesi` (bagian 7) |
 | Jumlah tabel | 13 tabel, ditambah `migrations` milik Laravel |
@@ -454,7 +454,7 @@ Indeks: (`lembaga_id`, `arah`, `tanggal_surat`), `nomor_surat`.
 | --- | --- | --- |
 | `id` | `uuid` PK | |
 | `lembaga_id` | `uuid` FK `lembaga` boleh kosong | Kosong untuk pendaftaran dan landing page |
-| `jenis_sumber` | `varchar(40)` | `lembaga`, `pengurus`, `klien`, `laporan`, `surat`, `pendaftaran`, `landing` |
+| `jenis_sumber` | `varchar(40)` | `lembaga`, `pengurus` (lampiran), `pengurus-foto`, `klien`, `laporan`, `surat`, `pendaftaran`, `landing` |
 | `id_sumber` | `varchar(100)` | ID baris pemilik berkas, tanpa FK karena pemiliknya beragam |
 | `nama` | `varchar(255)` | Nama berkas asli |
 | `jenis_mime` | `varchar(100)` | |
@@ -772,7 +772,7 @@ Menyimpan draf tidak membuat notifikasi. Notifikasi ditulis dalam transaksi yang
 | `notifikasi` | Buat turunan `DatabaseNotification` dengan `$table = 'notifikasi'`, lalu timpa relasi `notifications()` di `Pengguna`. Kolom tetap bawaan karena `DatabaseChannel` menulis ke nama kolom itu. |
 | `sesi` | Atur `SESSION_DRIVER=database` dan `SESSION_TABLE=sesi`. Kolom tetap bawaan karena handler sesi Laravel menulis ke nama kolom itu. |
 | `migrations` | Tetap memakai nama bawaan karena hanya catatan milik framework. |
-| Blade Tahap 1 | Saat ini membaca kunci dummy Inggris seperti `organization_name` dan `organizationId`. Saat data dummy diganti, sesuaikan view atau petakan dulu di controller. |
+| Blade | Tetap membaca kunci Inggris seperti `organization_name` dan `organizationId`. `App\Support\Data` memetakan kolom Indonesia ke kunci itu. |
 | Formulir publik | Nama isian seperti `lks-nama` tetap. Pemetaannya ada di bagian 5.3. |
 
 ## 8. Perbedaan dari skema sumber
@@ -798,16 +798,16 @@ Dua hal lain yang perlu diperhatikan saat memindahkan kode:
 - **Lembaga dibuat saat pendaftaran diterima.** Di kode sumber, kiriman publik menyimpan `organization_id` kosong, tetapi proses menerima langsung memanggil `Organization::findOrFail()` pada kolom itu. Dari pembacaan kode, penerimaan pendaftaran publik tampaknya akan gagal, jadi jangan menyalin bagian ini apa adanya. Perilaku ini belum diuji dengan menjalankan project sumber.
 - **Nilai semester.** Data dummy memakai `quarter` 1 dan 3, sedangkan sumber memakai 1 dan 2. Di tabel baru nilainya hanya 1 dan 2.
 
-## 9. Keputusan yang perlu dikonfirmasi
+## 9. Keputusan yang dipakai
 
-Rancangan di atas sudah memakai usulan pada tabel ini. Beri tahu bila ada yang ingin diubah sebelum migrasi ditulis.
+Implementasi memakai pilihan berikut.
 
-| No | Keputusan | Usulan |
+| No | Keputusan | Pilihan |
 | --- | --- | --- |
 | 1 | Nama database | `sidaya` dan `sidaya_uji` |
 | 2 | Kolom `notifikasi` dan `sesi` tetap bawaan Laravel | Ya. Mengubahnya berarti menulis ulang channel notifikasi dan handler sesi. |
 | 3 | `pengurus_lks` memakai kolom biasa, bukan JSON seperti sumber | Ya |
-| 4 | `preferensi_notifikasi` ditambahkan | Ya. Halaman Pengaturan Akun punya pilihan ini, tetapi `app/` di sumber tidak menyimpannya di server. Kalau pilihannya akan dihapus dari halaman, kolom ini tidak perlu. |
+| 4 | `preferensi_notifikasi` ditambahkan | Ya. Halaman Pengaturan Akun punya pilihan ini, sedangkan `app/` di sumber tidak menyimpannya di server. |
 | 5 | Admin bisa membuat akun LKS tanpa pendaftaran | Ya, sama seperti sumber |
 
 ## 10. Urutan migrasi

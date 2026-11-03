@@ -1,5 +1,4 @@
-// Validasi ganti kata sandi di browser. Aturannya mengikuti AccountSecurity::rule() sumber.
-// TODO(Tahap 2): kirim ke PUT /account/password.
+// Ganti kata sandi Admin. Aturannya sama dengan KeamananAkun::aturanSandi() di server.
 const form = document.querySelector('#change-password-form');
 
 if (form) {
@@ -26,7 +25,7 @@ if (form) {
         Object.values(fields).forEach((input) => { input.type = type; });
     });
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const next = fields.next.value;
         const messages = {
@@ -44,8 +43,25 @@ if (form) {
             status.hidden = true;
             return;
         }
-        status.textContent = 'Mode demo: perubahan belum disimpan.';
+        const body = new URLSearchParams({
+            _method: 'PUT',
+            current_password: fields.current.value,
+            password: next,
+            password_confirmation: fields.confirm.value,
+        });
+        const response = await fetch('/account/password', {
+            method: 'POST',
+            headers: { Accept: 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content },
+            body,
+        }).catch(() => null);
+        const data = response ? await response.json().catch(() => ({})) : {};
+        if (response?.ok) {
+            window.location.assign(data.redirect);
+            return;
+        }
+        if (data.errors?.current_password) show('current', data.errors.current_password[0]);
+        if (data.errors?.password) show('next', data.errors.password[0]);
+        status.textContent = data.errors ? 'Periksa kembali isian di atas.' : (data.message || 'Tidak dapat terhubung ke server. Coba lagi.');
         status.hidden = false;
-        form.reset();
     });
 }

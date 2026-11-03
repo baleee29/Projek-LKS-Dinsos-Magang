@@ -1,6 +1,8 @@
-{{-- Dialog Edit Profil dari editProfile() di shared/workspace-profile.js. TODO(Tahap 2): PUT /organization/profile, POST /organization/logo, POST /organization/coordinates. --}}
+{{-- Dialog Edit Profil dari editProfile() di shared/workspace-profile.js. --}}
 <x-dashboard.dialog id="edit-profile-dialog" title="Edit profil organisasi">
-    <form id="organization-form" novalidate data-demo-form>
+    <form id="organization-form" novalidate data-form-url="/lks/profile">
+        <input type="hidden" name="version" value="{{ $org['version'] }}">
+        <input type="hidden" name="removeLogo" value="0" id="org-remove-logo">
         <p class="muted">Perubahan profil digunakan pada pengiriman berikutnya. Identitas dalam laporan yang telah dikirim tetap tercatat.</p>
         <div class="psm-form-grid">
             <div class="psm-form-field is-wide" style="grid-column: 1 / -1; margin-bottom: 8px; padding: 14px; background: var(--kt-profile-soft, #f8fafc); border-radius: 8px; border: 1px solid var(--line, #e2e8f0);">
@@ -18,7 +20,7 @@
                             <label class="export-button" style="font-size: 12px; padding: 6px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; margin: 0;">
                                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                                 Pilih Logo
-                                <input type="file" id="org-logo-file-input" accept="image/png,image/jpeg,image/webp" data-max-mb="2" data-preview="org-logo-preview-box" data-status="org-logo-status-text" style="display: none;">
+                                <input type="file" id="org-logo-file-input" name="logo" accept="image/png,image/jpeg,image/webp" data-max-mb="2" data-preview="org-logo-preview-box" data-status="org-logo-status-text" style="display: none;">
                             </label>
                             <button type="button" class="text-button" id="btn-remove-org-logo" style="font-size: 12px; padding: 6px 10px; color: #dc2626; display: none;">Hapus Logo</button>
                         </div>

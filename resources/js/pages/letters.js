@@ -3,7 +3,6 @@ const toggle = document.querySelector('#btn-toggle-add-letter');
 const section = document.querySelector('#letter-form-section');
 
 if (toggle && section) {
-    const form = section.querySelector('form');
     const icon = toggle.querySelector('path');
     const label = toggle.querySelector('span');
     const input = section.querySelector('#input-letter-file');
@@ -54,9 +53,4 @@ if (toggle && section) {
         icon.setAttribute('d', 'M18 6 6 18M6 6l12 12');
         section.querySelector('#input-letter-number')?.focus();
     }
-    form.addEventListener('demo:submitted', () => {
-        form.reset();
-        preview.replaceChildren();
-        setOpen(false);
-    });
 }

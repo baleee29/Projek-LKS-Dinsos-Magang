@@ -1,6 +1,6 @@
 {{-- reportTable() dari shared/workspace-reports.js. $reports: koleksi atau paginator; $offset: nomor awal. --}}
 @php
-    use App\Support\Demo\DemoReports;
+    use App\Support\Data\DataLaporan;
     use App\Support\Format;
 @endphp
 @if (count($reports))
@@ -11,22 +11,21 @@
             <tbody>
                 @foreach ($reports as $index => $item)
                     @php
-                        $org = \App\Support\Demo\DemoOrganizations::find($item['organizationId']);
+                        $org = \App\Support\Data\DataLembaga::find($item['organizationId']);
                         $filesCount = count($item['attachments']);
                     @endphp
                     <tr>
                         <td class="q-col-number" data-label="No.">{{ ($offset ?? 0) + $index + 1 }}</td>
                         <td data-label="Lembaga"><a class="record-link" href="/admin/report/{{ $item['id'] }}">{{ $org['title'] }}</a><span class="cell-meta">{{ $item['id'] }}</span></td>
                         <td data-label="Wilayah">{{ $org['village'] }}<span class="cell-meta">{{ $org['district'] }}</span></td>
-                        <td data-label="Periode &amp; Judul"><strong>{{ DemoReports::periodLabel($item) }}</strong>@if ($item['title'])<span class="cell-meta" style="color:var(--text-color, #1e293b);font-weight:500;">{{ $item['title'] }}</span>@endif</td>
+                        <td data-label="Periode &amp; Judul"><strong>{{ DataLaporan::periodLabel($item) }}</strong>@if ($item['title'])<span class="cell-meta" style="color:var(--text-color, #1e293b);font-weight:500;">{{ $item['title'] }}</span>@endif</td>
                         <td data-label="Berkas Terlampir">@if ($filesCount)<span class="cell-badge">{{ $filesCount }} berkas</span>@else<span class="cell-meta">Belum ada berkas</span>@endif</td>
                         <td data-label="Pengajuan">{{ Format::date($item['submittedAt'], 'Belum diajukan') }}</td>
                         <td data-label="Status"><x-dashboard.status-badge :status="$item['status']" /></td>
                         <td class="q-col-action" data-label="Tindakan">
                             <div class="q-actions q-table-actions">
                                 <a class="text-button" href="/admin/report/{{ $item['id'] }}">Lihat laporan</a>
-                                {{-- TODO(Tahap 2): admin/report-download.js. --}}
-                                <button class="text-button" type="button" data-demo-download aria-label="Unduh PDF {{ $item['title'] }}">Unduh PDF</button>
+                                <button class="text-button" type="button" data-export-url="/ekspor/laporan/{{ $item['id'] }}" data-export-format="pdf" aria-label="Unduh PDF {{ $item['title'] }}">Unduh PDF</button>
                             </div>
                         </td>
                     </tr>

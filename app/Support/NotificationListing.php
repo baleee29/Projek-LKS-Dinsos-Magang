@@ -2,9 +2,9 @@
 
 namespace App\Support;
 
-use App\Support\Demo\DemoNotifications;
-use App\Support\Demo\DemoOrganizations;
-use App\Support\Demo\DemoPaginator;
+use App\Support\Data\DataNotifikasi;
+use App\Support\Data\DataLembaga;
+use App\Support\Data\Halaman;
 use Illuminate\Http\Request;
 
 /**
@@ -17,7 +17,7 @@ class NotificationListing
     /** @return array<string, mixed> */
     public static function build(Request $request, string $role): array
     {
-        $all = DemoNotifications::forRole($role);
+        $all = DataNotifikasi::milikSaya();
         $filters = [
             'q' => (string) $request->query('q', ''),
             'filter' => in_array($request->query('filter'), ['unread', 'read'], true) ? $request->query('filter') : 'all',
@@ -32,20 +32,21 @@ class NotificationListing
 
         return [
             'admin' => $role === 'admin',
-            'eyebrow' => $role === 'admin' ? 'Dinas Sosial Kota Banjarbaru' : DemoOrganizations::own()['title'],
+            'eyebrow' => $role === 'admin' ? 'Dinas Sosial Kota Banjarbaru' : DataLembaga::own()['title'],
             'all' => $all,
             'unreadCount' => $unread,
             'filters' => $filters,
             'counts' => ['all' => $all->count(), 'unread' => $unread, 'read' => $all->count() - $unread],
-            'notifications' => DemoPaginator::make($items, self::PER_PAGE),
+            'notifications' => Halaman::make($items, self::PER_PAGE),
         ];
     }
 
     /** @return array<string, mixed> */
     public static function detail(string $id, string $role): array
     {
-        $item = DemoNotifications::find($id);
-        abort_unless($item && $item['audience'] === $role, 404);
+        $item = DataNotifikasi::find($id);
+        abort_unless($item, 404);
+        auth()->user()->notifications()->whereKey($id)->whereNull('read_at')->update(['read_at' => now()]);
 
         return [
             'item' => $item,

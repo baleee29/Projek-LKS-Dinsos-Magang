@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\ChangePasswordController;
-use App\Http\Controllers\Auth\DemoSessionController;
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\Aksi;
+use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\Auth\SessionController;
+use App\Http\Controllers\BerkasController;
+use App\Http\Controllers\EksporController;
 use App\Http\Controllers\Lks;
 use Illuminate\Support\Facades\Route;
 
@@ -15,14 +18,30 @@ Route::view('/pilar-sosial.html', 'public.pillars');
 Route::view('/pilar/lks.html', 'public.lks');
 Route::view('/pilar/pendaftaran-lks.html', 'public.registration-lks');
 
-// TODO(Tahap 2): rute masuk demo diganti SessionController dengan middleware guest dan throttle.
-Route::get('/login', [DemoSessionController::class, 'create'])->name('login');
-Route::post('/login', [DemoSessionController::class, 'store'])->name('login.store');
-Route::post('/login/demo/{role}', [DemoSessionController::class, 'demo'])->name('login.demo');
-Route::post('/logout', [DemoSessionController::class, 'destroy'])->name('logout');
-Route::get('/account/password', [ChangePasswordController::class, 'edit'])->name('password.edit');
+// Formulir publik tanpa akun: dibatasi percobaannya dan dicegah kiriman ganda lewat request_id.
+Route::post('/pendaftaran/mitra', [Aksi\PendaftaranController::class, 'store'])->middleware('throttle:10,1');
+Route::get('/media/{id}', [BerkasController::class, 'media'])->whereUuid('id');
 
-Route::prefix('lks')->middleware('demo.role:lks')->group(function () {
+Route::get('/login', [SessionController::class, 'create'])->name('login');
+Route::post('/login', [SessionController::class, 'store'])->middleware('throttle:10,1')->name('login.store');
+Route::post('/login/demo/{role}', [SessionController::class, 'demo'])->name('login.demo');
+Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
+
+Route::middleware('peran')->group(function () {
+    Route::get('/account/password', [PasswordController::class, 'edit'])->name('password.edit');
+    Route::put('/account/password', [PasswordController::class, 'update']);
+    Route::get('/berkas/{id}', [BerkasController::class, 'unduh'])->whereUuid('id');
+    Route::get('/ekspor/klien', [EksporController::class, 'klien']);
+    Route::get('/ekspor/pengurus', [EksporController::class, 'pengurus']);
+    Route::get('/ekspor/lembaga', [EksporController::class, 'lembaga']);
+    Route::get('/ekspor/laporan', [EksporController::class, 'laporan']);
+    Route::get('/ekspor/laporan/{id}', [EksporController::class, 'laporanDetail'])->whereUuid('id');
+    Route::get('/ekspor/surat', [EksporController::class, 'surat']);
+    Route::post('/notifications/read-all', [Aksi\NotifikasiController::class, 'bacaSemua']);
+    Route::post('/notifications/{id}/unread', [Aksi\NotifikasiController::class, 'belumDibaca'])->whereUuid('id');
+});
+
+Route::prefix('lks')->middleware('peran:lks')->group(function () {
     Route::get('/overview', Lks\OverviewController::class);
     Route::get('/notifications', [Lks\NotificationController::class, 'index']);
     Route::get('/notification-detail/{id}', [Lks\NotificationController::class, 'show']);
@@ -41,9 +60,23 @@ Route::prefix('lks')->middleware('demo.role:lks')->group(function () {
     Route::get('/report/{id}', [Lks\ReportController::class, 'show']);
     Route::get('/edit/{id}', [Lks\ReportController::class, 'edit']);
     Route::get('/guide', Lks\GuideController::class);
+
+    Route::post('/profile', [Aksi\ProfilLembagaController::class, 'update']);
+    Route::post('/members', [Aksi\PengurusController::class, 'store']);
+    Route::post('/members/{id}', [Aksi\PengurusController::class, 'update'])->whereUuid('id');
+    Route::delete('/members/{id}', [Aksi\PengurusController::class, 'destroy'])->whereUuid('id');
+    Route::post('/clients', [Aksi\KlienController::class, 'store']);
+    Route::post('/clients/{id}', [Aksi\KlienController::class, 'update'])->whereUuid('id');
+    Route::delete('/clients/{id}', [Aksi\KlienController::class, 'destroy'])->whereUuid('id');
+    Route::post('/reports', [Aksi\LaporanController::class, 'bukaPeriode']);
+    Route::post('/reports/{id}', [Aksi\LaporanController::class, 'simpan'])->whereUuid('id');
+    Route::delete('/reports/{id}', [Aksi\LaporanController::class, 'destroy'])->whereUuid('id');
+    Route::post('/letters', [Aksi\SuratController::class, 'store']);
+    Route::post('/letters/{id}/read', [Aksi\SuratController::class, 'read'])->whereUuid('id');
+    Route::delete('/letters/{id}', [Aksi\SuratController::class, 'destroy'])->whereUuid('id');
 });
 
-Route::prefix('admin')->middleware('demo.role:admin')->group(function () {
+Route::prefix('admin')->middleware('peran:admin')->group(function () {
     Route::get('/overview', Admin\OverviewController::class);
     Route::get('/notifications', [Admin\NotificationController::class, 'index']);
     Route::get('/notification-detail/{id}', [Admin\NotificationController::class, 'show']);
@@ -61,7 +94,20 @@ Route::prefix('admin')->middleware('demo.role:admin')->group(function () {
     Route::get('/guide', Admin\GuideController::class);
     Route::get('/landing-content', Admin\LandingContentController::class);
     Route::get('/account', Admin\AccountController::class);
+
+    Route::post('/registration/{id}/review', [Aksi\PendaftaranController::class, 'tinjau'])->whereUuid('id');
+    Route::post('/partner-accounts', [Aksi\AkunLksController::class, 'store']);
+    Route::post('/partner-accounts/{id}/reset-password', [Aksi\AkunLksController::class, 'reset'])->whereNumber('id');
+    Route::delete('/partner-accounts/{id}', [Aksi\AkunLksController::class, 'cabut'])->whereNumber('id');
+    Route::post('/letters', [Aksi\SuratController::class, 'store']);
+    Route::post('/letters/{id}/read', [Aksi\SuratController::class, 'read'])->whereUuid('id');
+    Route::delete('/letters/{id}', [Aksi\SuratController::class, 'destroy'])->whereUuid('id');
+    Route::post('/landing-content/{kunci}', [Aksi\IsiLandingController::class, 'simpan']);
+    Route::post('/landing-content/{kunci}/image', [Aksi\IsiLandingController::class, 'foto']);
+    Route::delete('/landing-content/{kunci}', [Aksi\IsiLandingController::class, 'kembalikan']);
 });
+
+Route::put('/account/profile', [Aksi\AkunAdminController::class, 'update'])->middleware('peran:admin');
 
 // Fallback di dalam grup web agar session terbaca dan halaman 404 memakai kerangka dashboard.
 Route::fallback(fn () => abort(404));

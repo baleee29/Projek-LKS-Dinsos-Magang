@@ -2,8 +2,7 @@
 
 namespace App\View\Composers;
 
-use App\Support\Demo\DemoShell;
-use App\Support\Demo\DemoState;
+use App\Support\Data\DataRangka;
 use App\Support\Navigation;
 use Illuminate\View\View;
 
@@ -14,21 +13,19 @@ class DashboardComposer
 {
     public function compose(View $view): void
     {
-        $role = session('demo_role');
-
-        if (! $role) {
+        $akun = auth()->user();
+        if (! $akun) {
             return;
         }
-
+        $role = $akun->peran;
         $path = request()->path();
         $workspace = str_starts_with($path, $role.'/') ? substr($path, strlen($role) + 1) : $path;
 
         $view->with([
             'role' => $role,
-            'identity' => DemoShell::identity($role),
-            'counts' => DemoShell::counts($role),
+            'identity' => DataRangka::identity($akun),
+            'counts' => DataRangka::counts($akun),
             'navigation' => new Navigation($role, $workspace, request()->query()),
-            'demoError' => DemoState::isError(),
         ]);
     }
 }

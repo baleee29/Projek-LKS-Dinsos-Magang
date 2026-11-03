@@ -13,8 +13,7 @@
             <p class="view-description">{{ $item['organizationTitle'] }}</p>
         </div>
         <div class="q-actions">
-            {{-- TODO(Tahap 2): POST /notifications/{id}/unread. --}}
-            <button class="text-button" type="button" data-demo-action>Tandai belum dibaca</button>
+            <button class="text-button" type="button" data-action-url="/notifications/{{ $item['id'] }}/unread">Tandai belum dibaca</button>
             <a class="text-button" href="{{ $backUrl }}">Kembali ke notifikasi</a>
         </div>
     </div>

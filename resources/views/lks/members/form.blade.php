@@ -23,7 +23,9 @@
             <div class="lm-actions"><a class="lm-button" href="/lks/members">Kembali</a></div>
         </header>
         <p class="lm-demo-note">Personel yang disimpan langsung masuk daftar Pengurus & SDM.</p>
-        <form class="lm-card lm-form q-member-form" novalidate data-demo-form data-member-form>
+        <form class="lm-card lm-form q-member-form" novalidate data-form-url="{{ $member ? '/lks/members/'.$member['id'] : '/lks/members' }}" data-member-form>
+            @if ($member)<input type="hidden" name="version" value="{{ $member['version'] }}">@endif
+            <input type="hidden" name="removePhoto" value="0" id="lm-remove-photo">
             <div class="lm-error" role="alert" tabindex="-1" data-lm-error hidden></div>
             <div class="lm-photo-section">
                 <div class="lm-photo-preview-wrapper">
@@ -33,7 +35,7 @@
                     <label for="lm-photo-input" class="lm-photo-label">Foto Profil Personel</label>
                     <p>Format JPG, PNG, atau WebP, maksimal 5 MB. Foto akan tampil di halaman pengurus & SDM.</p>
                     <div class="lm-photo-actions">
-                        <label class="lm-button lm-button-upload" for="lm-photo-input"><input id="lm-photo-input" type="file" accept="image/jpeg,image/png,image/webp" style="display:none"><span>Upload Foto Profil</span></label>
+                        <label class="lm-button lm-button-upload" for="lm-photo-input"><input id="lm-photo-input" name="photo" type="file" accept="image/jpeg,image/png,image/webp" style="display:none"><span>Upload Foto Profil</span></label>
                         <button type="button" class="lm-button lm-button-danger" id="lm-photo-remove" hidden>Hapus Foto</button>
                     </div>
                     <small class="lm-field-error" id="lm-photo-error" hidden></small>
@@ -67,9 +69,9 @@
                 <p>PDF, JPG, atau PNG, maksimal 5 MB per berkas. Anda dapat memilih beberapa berkas sekaligus (bisa ditumpuk).</p>
                 @if (count($attachments))
                     <p>Berkas tersimpan ({{ count($attachments) }}): {{ collect($attachments)->pluck('name')->join(', ') }}</p>
-                    <label class="lm-checkbox"><input type="checkbox" name="removeAttachment"> Hapus berkas tersimpan</label>
+                    <label class="lm-checkbox"><input type="checkbox" name="removeAttachment" value="1"> Hapus berkas tersimpan</label>
                 @endif
-                <label for="lm-attachment">Pilih berkas pendukung (bisa lebih dari 1)<input id="lm-attachment" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" data-max-mb="5"><small class="lm-field-error" data-lm-field-error="attachments" hidden></small></label>
+                <label for="lm-attachment">Pilih berkas pendukung (bisa lebih dari 1)<input id="lm-attachment" name="attachments[]" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" data-max-mb="5"><small class="lm-field-error" data-lm-field-error="attachments" hidden></small></label>
             </fieldset>
             <div class="lm-actions"><a class="lm-button" href="/lks/members">Batal</a><button type="submit" class="lm-button lm-button-primary">Simpan Personel</button></div>
         </form>

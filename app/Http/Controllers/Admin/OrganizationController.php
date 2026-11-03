@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Support\Demo\DemoClients;
-use App\Support\Demo\DemoMembers;
-use App\Support\Demo\DemoOrganizations;
-use App\Support\Demo\DemoPaginator;
-use App\Support\Demo\DemoRegions;
-use App\Support\Demo\DemoReports;
+use App\Support\Data\DataKlien;
+use App\Support\Data\DataPengurus;
+use App\Support\Data\DataLembaga;
+use App\Support\Data\Halaman;
+use App\Support\Data\Wilayah;
+use App\Support\Data\DataLaporan;
 use App\Support\Format;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -23,7 +23,7 @@ class OrganizationController extends Controller
             'village' => (string) $request->query('village', ''),
         ];
         $query = mb_strtolower(trim($filters['q']));
-        $rows = DemoOrganizations::all()
+        $rows = DataLembaga::all()
             ->filter(fn (array $org) => (! $filters['district'] || $org['district'] === $filters['district'])
                 && (! $filters['village'] || $org['village'] === $filters['village'])
                 && (! $query || collect([$org['title'], $org['chair'], $org['contact']])->contains(fn ($value) => str_contains(mb_strtolower((string) $value), $query))))
@@ -31,39 +31,39 @@ class OrganizationController extends Controller
 
         return view('admin.organizations.index', [
             'filters' => $filters,
-            'districts' => DemoRegions::districts(),
-            'villages' => DemoRegions::villages($filters['district'] ?: null),
-            'organizations' => DemoPaginator::make($rows, 10),
-            'rosterOf' => fn (string $id) => DemoMembers::raw()->where('organizationId', $id)->values(),
+            'districts' => Wilayah::districts(),
+            'villages' => Wilayah::villages($filters['district'] ?: null),
+            'organizations' => Halaman::make($rows, 10),
+            'rosterOf' => fn (string $id) => DataPengurus::raw()->where('organizationId', $id)->values(),
         ]);
     }
 
     public function show(string $id): View
     {
-        $organization = DemoOrganizations::find($id);
+        $organization = DataLembaga::find($id);
         abort_unless($organization, 404);
 
-        $members = DemoMembers::forOrganization($id);
+        $members = DataPengurus::forOrganization($id);
 
         return view('admin.organizations.show', [
             'admin' => true,
             'organization' => $organization,
             'members' => $members,
             'memberCount' => $members->count(),
-            'counts' => DemoClients::summary(DemoClients::forOrganization($id)),
+            'counts' => DataKlien::summary(DataKlien::forOrganization($id)),
             'map' => Format::coordinates($organization['latitude'], $organization['longitude']),
-            'reports' => DemoReports::forOrganization($id)->where('status', '!=', 'Draf')->values(),
+            'reports' => DataLaporan::forOrganization($id)->where('status', '!=', 'Draf')->values(),
         ]);
     }
 
     public function member(string $id): View
     {
-        $member = DemoMembers::find($id);
+        $member = DataPengurus::find($id);
         abort_unless($member, 404);
 
         return view('admin.organizations.member', [
             'member' => $member,
-            'organization' => DemoOrganizations::find($member['organizationId']),
+            'organization' => DataLembaga::find($member['organizationId']),
         ]);
     }
 }

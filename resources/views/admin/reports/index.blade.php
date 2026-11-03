@@ -62,9 +62,8 @@
         <div class="panel-heading">
             <div><h2>Daftar laporan</h2><p class="panel-description" id="report-count" role="status" aria-live="polite">{{ $reports->total() }} laporan</p></div>
             <div class="panel-actions" style="display:inline-flex;align-items:center;gap:8px;">
-                {{-- TODO(Tahap 2): ekspor dari shared/report-recap-export.js. --}}
-                <button type="button" class="export-button" data-demo-download><x-dashboard.icon name="download" /> Unduh PDF</button>
-                <button type="button" class="export-button" data-demo-download><x-dashboard.icon name="download" /> Unduh Excel</button>
+                <button type="button" class="export-button" data-export-url="/ekspor/laporan" data-export-format="pdf"><x-dashboard.icon name="download" /> Unduh PDF</button>
+                <button type="button" class="export-button" data-export-url="/ekspor/laporan" data-export-format="xlsx"><x-dashboard.icon name="download" /> Unduh Excel</button>
                 <a class="export-button" href="/assets/documents/Template_Laporan_LKS.pdf" download="Template_Laporan_LKS.pdf" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><x-dashboard.icon name="file" /> Template Laporan</a>
             </div>
         </div>

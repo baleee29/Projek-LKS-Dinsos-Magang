@@ -16,8 +16,9 @@
 
 @section('content')
     <x-dashboard.section-heading title="Pengaturan Akun" description="Perbarui biodata dan tampilan jumlah notifikasi." />
-    {{-- TODO(Tahap 2): PUT /account/profile. --}}
-    <form id="admin-account-form" class="detail-card q-account-form" novalidate data-demo-form>
+    
+    <form id="admin-account-form" class="detail-card q-account-form" novalidate data-form-url="/account/profile" data-form-method="PUT">
+        <input type="hidden" name="version" value="{{ $account['version'] }}">
         <div id="account-error-summary" class="q-errors" role="alert" tabindex="-1" hidden></div>
         <fieldset class="q-account-section">
             <legend>Biodata</legend>
@@ -39,7 +40,7 @@
             <legend>Notifikasi</legend>
             <p class="q-inline-note" id="account-notification-help">Seluruh data masuk, perubahan, penghapusan, dan perubahan status dicatat otomatis. Pilihan ini mengatur tampilan jumlah belum dibaca.</p>
             <div class="q-account-preferences">
-                <label class="q-account-preference" for="account-showUnreadBadge"><input id="account-showUnreadBadge" name="showUnreadBadge" type="checkbox" checked><span><strong>Tampilkan jumlah belum dibaca di sidebar</strong><span class="q-field-help">Tampilkan angka pada menu Notifikasi.</span></span></label>
+                <label class="q-account-preference" for="account-showUnreadBadge"><input id="account-showUnreadBadge" name="showUnreadBadge" type="checkbox" value="1" @checked($account['notificationPreferences']['showUnreadBadge'])><span><strong>Tampilkan jumlah belum dibaca di sidebar</strong><span class="q-field-help">Tampilkan angka pada menu Notifikasi.</span></span></label>
             </div>
         </fieldset>
         <p id="account-unsaved" class="q-inline-note" role="status" aria-live="polite" hidden>Ada perubahan yang belum disimpan.</p>

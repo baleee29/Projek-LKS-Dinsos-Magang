@@ -1,6 +1,7 @@
 // Editor laporan semester, dari lks/report-editor.js dan shared/reports-editor.js.
-// Berkas hanya ditampilkan di browser. TODO(Tahap 2): unggah lewat shared/reports-attachments.js.
+import { afterSuccess, send } from '../dashboard/api.js';
 import { confirmDialog } from '../dashboard/dialogs.js';
+import { notify } from '../dashboard/toast.js';
 
 const form = document.querySelector('[data-q-editor]');
 
@@ -35,7 +36,8 @@ if (form) {
                 view.type = 'button';
                 view.className = 'text-button';
                 view.textContent = 'Lihat';
-                view.dataset.demoDownload = '';
+                if (file.url) view.dataset.downloadUrl = file.url;
+                else view.hidden = true;
                 const remove = document.createElement('button');
                 remove.type = 'button';
                 remove.className = 'psm-delete-button';
@@ -73,7 +75,7 @@ if (form) {
         let message = '';
         if (tooLarge) message = `Berkas "${tooLarge.name}" melebihi 5 MB.`;
         else if (files.length + chosen.length > MAX_FILES) message = 'Maksimal 10 berkas untuk satu laporan.';
-        else chosen.forEach((file) => files.push({ name: file.name, size: file.size, type: file.type }));
+        else chosen.forEach((file) => files.push({ name: file.name, size: file.size, type: file.type, file }));
         uploadError.textContent = message;
         uploadError.hidden = !message;
         input.value = '';
@@ -114,6 +116,50 @@ if (form) {
         preview.querySelector('[data-preview-files]').replaceChildren(list.querySelector('ul').cloneNode(true));
         preview.querySelectorAll('[data-preview-files] .psm-delete-button').forEach((node) => node.remove());
         preview.showModal();
+    });
+
+    // Simpan draf atau kirim. Berkas baru dikirim bersama daftar berkas lama yang dipertahankan.
+    async function save(action) {
+        const body = new FormData();
+        body.set('action', action);
+        body.set('version', form.dataset.version);
+        body.set('title', title.value.trim());
+        files.forEach((item) => {
+            if (item.id) body.append('kept[]', item.id);
+            else body.append('files[]', item.file);
+        });
+        return send(form.dataset.url, { body });
+    }
+
+    document.querySelectorAll('[data-report-save]').forEach((button) => {
+        button.addEventListener('click', async () => {
+            button.disabled = true;
+            try {
+                afterSuccess(await save('draft'));
+            } catch (error) {
+                button.disabled = false;
+                notify(error.message);
+            }
+        });
+    });
+
+    preview.querySelector('[data-report-send]')?.addEventListener('click', async (event) => {
+        const button = event.currentTarget;
+        const accepted = await confirmDialog({
+            title: button.dataset.confirmTitle,
+            message: button.dataset.confirm,
+            confirmText: button.dataset.confirmText,
+            danger: false,
+        });
+        if (!accepted) return;
+        button.disabled = true;
+        try {
+            afterSuccess(await save('send'));
+        } catch (error) {
+            button.disabled = false;
+            preview.close();
+            notify(error.message);
+        }
     });
 
     render();

@@ -2,12 +2,12 @@
 
 namespace App\Support;
 
-use App\Support\Demo\DemoClientSchema;
-use App\Support\Demo\DemoClients;
-use App\Support\Demo\DemoClock;
-use App\Support\Demo\DemoOrganizations;
-use App\Support\Demo\DemoPaginator;
-use App\Support\Demo\DemoRegions;
+use App\Support\Data\SkemaKlien;
+use App\Support\Data\DataKlien;
+use App\Support\Data\Kalender;
+use App\Support\Data\DataLembaga;
+use App\Support\Data\Halaman;
+use App\Support\Data\Wilayah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -34,11 +34,11 @@ class ClientRecap
             'district' => $admin ? (string) $request->query('district', '') : '',
             'village' => $admin ? (string) $request->query('village', '') : '',
             // Bawaan sumber: hanya penghuni panti. Nilai kosong berarti semua keberadaan.
-            'residence' => (string) $request->query('residence', 'living'),
+            'residence' => $request->query->has('residence') ? (string) $request->query('residence') : 'living',
         ];
 
         $inScope = $clients->filter(function (array $client) use ($filters) {
-            $owner = DemoOrganizations::find($client['organizationId']);
+            $owner = DataLembaga::find($client['organizationId']);
 
             return (! $filters['org'] || $owner['id'] === $filters['org'])
                 && (! $filters['district'] || $owner['district'] === $filters['district'])
@@ -53,7 +53,7 @@ class ClientRecap
                 'nonresidential' => $client['serviceType'] === 'Layanan nonresidensial' && $client['residenceStatus'] === 'Masih menerima layanan',
                 default => true,
             };
-            $haystack = [$client['name'], $client['code'], $admin ? DemoOrganizations::find($client['organizationId'])['title'] : ''];
+            $haystack = [$client['name'], $client['code'], $admin ? DataLembaga::find($client['organizationId'])['title'] : ''];
 
             return (! $filters['category'] || $client['category'] === $filters['category'])
                 && (! $filters['gender'] || $client['gender'] === $filters['gender'])
@@ -64,16 +64,17 @@ class ClientRecap
         return [
             'admin' => $admin,
             'filters' => $filters,
-            'counts' => DemoClients::summary($inScope),
+            'counts' => DataKlien::summary($inScope),
             'total' => $inScope->count(),
-            'clients' => DemoPaginator::make($items, self::PER_PAGE),
+            'allItems' => $items,
+            'clients' => Halaman::make($items, self::PER_PAGE),
             'organizations' => $organizations,
-            'districts' => DemoRegions::districts(),
-            'villages' => DemoRegions::villages($filters['district'] ?: null),
-            'options' => DemoClients::formOptions(),
-            'caption' => $admin ? (DemoOrganizations::find($filters['org'])['title'] ?? 'Seluruh LKS') : $title,
-            'today' => DemoClock::TODAY,
-            'organizationName' => fn (string $id) => DemoOrganizations::find($id),
+            'districts' => Wilayah::districts(),
+            'villages' => Wilayah::villages($filters['district'] ?: null),
+            'options' => DataKlien::formOptions(),
+            'caption' => $admin ? (DataLembaga::find($filters['org'])['title'] ?? 'Seluruh LKS') : $title,
+            'today' => Kalender::today(),
+            'organizationName' => fn (string $id) => DataLembaga::find($id),
         ];
     }
 
@@ -88,10 +89,10 @@ class ClientRecap
         return [
             'admin' => $admin,
             'item' => $client,
-            'organization' => DemoOrganizations::find($client['organizationId']),
-            'sections' => DemoClientSchema::detailSections(),
-            'fields' => DemoClientSchema::fields(),
-            'today' => DemoClock::TODAY,
+            'organization' => DataLembaga::find($client['organizationId']),
+            'sections' => SkemaKlien::detailSections(),
+            'fields' => SkemaKlien::fields(),
+            'today' => Kalender::today(),
             'backUrl' => ($admin ? '/admin/occupancy' : '/lks/occupancy').($back ? '?'.http_build_query($back) : ''),
         ];
     }

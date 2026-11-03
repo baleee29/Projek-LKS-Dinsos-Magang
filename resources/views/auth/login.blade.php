@@ -81,8 +81,6 @@
                         akun tersebut.
                     </p>
                 </header>
-
-                {{-- TODO(Tahap 2): form ini memakai autentikasi sungguhan (SessionController sumber). --}}
                 <form id="login-form" method="post" action="{{ route('login.store') }}" novalidate>
                     @csrf
                     <div class="field email-field">
@@ -140,7 +138,7 @@
                 @if (count($demoAccounts))
                     <section class="demo-accounts" aria-labelledby="demo-accounts-title">
                         <h2 id="demo-accounts-title">Pilihan Akun Cepat</h2>
-                        <p>Pilih akun untuk langsung masuk ke dashboard demo. Kata sandi tidak diperiksa.</p>
+                        <p>Khusus pengembangan lokal: pilih akun contoh untuk langsung masuk tanpa kata sandi.</p>
                         <div class="demo-account-list">
                             @foreach ($demoAccounts as $account)
                                 <div class="demo-account">

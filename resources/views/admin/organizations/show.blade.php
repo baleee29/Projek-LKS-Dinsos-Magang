@@ -10,8 +10,7 @@
     <section class="reports-panel" id="lks-staff-section">
         <div class="panel-heading">
             <h2>Pengurus & SDM</h2>
-            {{-- TODO(Tahap 2): ekspor dari lks/staff-export.js. --}}
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;"><button type="button" class="export-button" data-demo-download><x-dashboard.icon name="download" /> Unduh PDF</button><button type="button" class="export-button" data-demo-download><x-dashboard.icon name="download" /> Unduh Excel</button></div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;"><button type="button" class="export-button" data-export-url="/ekspor/pengurus?org={{ $organization['id'] }}" data-export-format="pdf"><x-dashboard.icon name="download" /> Unduh PDF</button><button type="button" class="export-button" data-export-url="/ekspor/pengurus?org={{ $organization['id'] }}" data-export-format="xlsx"><x-dashboard.icon name="download" /> Unduh Excel</button></div>
         </div>
         @include('admin.organizations.member-table', ['members' => $members])
     </section>
