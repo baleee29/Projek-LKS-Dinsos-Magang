@@ -1,12 +1,27 @@
-// Form akun LKS dan dialog reset sandi, dari admin/partner-accounts.js. Tidak ada yang dikirim atau disimpan.
-// TODO(Tahap 2): POST /admin/partner-accounts dan POST /admin/partner-accounts/{id}/reset-password.
+// Form akun LKS dan dialog reset sandi, dari admin/partner-accounts.js.
+import { send } from '../dashboard/api.js';
 import { confirmDialog } from '../dashboard/dialogs.js';
-import { DEMO_SAVE_MESSAGE, notify } from '../dashboard/toast.js';
+import { notify } from '../dashboard/toast.js';
 
 function generatePassword() {
     const digits = new Uint32Array(8);
     crypto.getRandomValues(digits);
     return 'LKS#' + Array.from(digits, (n) => n % 10).join('');
+}
+
+/** Sandi hanya tampil di tautan WhatsApp ini, lalu halaman dimuat ulang. */
+async function offerWhatsapp(title, data) {
+    if (data.whatsapp_url) {
+        const send = await confirmDialog({
+            title,
+            message: 'Kirim data login ke pengurus lewat WhatsApp sekarang? Kata sandi tidak dapat dilihat lagi setelah jendela ini ditutup.',
+            confirmText: 'Kirim via WhatsApp',
+            cancelText: 'Tutup',
+            danger: false,
+        });
+        if (send) window.open(data.whatsapp_url, '_blank', 'noopener');
+    }
+    window.location.reload();
 }
 
 const validPassword = (value) => value.length >= 10 && /[A-Za-z]/.test(value) && /\d/.test(value);
@@ -54,8 +69,20 @@ if (form) {
             danger: false,
         });
         if (!accepted) return;
-        notify(DEMO_SAVE_MESSAGE);
-        password.value = '';
+        const body = new FormData();
+        body.set('registration_id', select.value);
+        body.set('whatsapp', whatsapp.value.trim());
+        body.set('name', name.value.trim());
+        body.set('username', username.value.trim());
+        body.set('password', password.value.trim());
+        try {
+            const data = await send('/admin/partner-accounts', { body });
+            password.value = '';
+            await offerWhatsapp('Akun LKS tersimpan', data);
+        } catch (error) {
+            alert.textContent = error.message;
+            alert.hidden = false;
+        }
     });
 
 }
@@ -98,6 +125,7 @@ if (resetDialog) {
             return;
         }
         const accountName = resetDialog.querySelector('[data-reset-name]').textContent;
+        const url = trigger.dataset.resetUrl;
         resetDialog.close();
         const accepted = await confirmDialog({
             title: 'Ganti Kata Sandi?',
@@ -105,6 +133,13 @@ if (resetDialog) {
             confirmText: 'Ya, Ganti Kata Sandi',
             danger: false,
         });
-        if (accepted) notify(DEMO_SAVE_MESSAGE);
+        if (!accepted) return;
+        const body = new FormData();
+        body.set('password', value);
+        try {
+            await offerWhatsapp('Kata sandi diganti', await send(url, { body }));
+        } catch (error) {
+            notify(error.message);
+        }
     });
 }

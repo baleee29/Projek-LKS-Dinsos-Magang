@@ -19,9 +19,8 @@
             @endforeach
         </div>
         <x-dashboard.lks-heading title="Pengurus & SDM" :description="'Kelola pengurus, staf, tenaga layanan, dan relawan di '.$organization['title'].'.'">
-            {{-- TODO(Tahap 2): ekspor dari lks/staff-export.js. --}}
-            <button type="button" class="lks-button" data-demo-download><x-dashboard.lks-icon name="download" /> Unduh PDF</button>
-            <button type="button" class="lks-button" data-demo-download><x-dashboard.lks-icon name="download" /> Unduh Excel</button>
+            <button type="button" class="lks-button" data-export-url="/ekspor/pengurus" data-export-format="pdf"><x-dashboard.lks-icon name="download" /> Unduh PDF</button>
+            <button type="button" class="lks-button" data-export-url="/ekspor/pengurus" data-export-format="xlsx"><x-dashboard.lks-icon name="download" /> Unduh Excel</button>
             <a class="lks-button lks-button-primary" href="/lks/new-member"><x-dashboard.lks-icon name="plus" />Tambah Personel</a>
         </x-dashboard.lks-heading>
         <div class="lks-info"><x-dashboard.lks-icon name="info" /><p><strong>Pengelolaan SDM lembaga:</strong> personel baru langsung tercatat dalam daftar Pengurus & SDM. Data personel yang sudah terdaftar tetap dapat diperbarui. Data Pengurus & SDM terpisah dari biodata klien.</p></div>

@@ -40,7 +40,7 @@
                 <h2>Berkas pendukung ({{ count($member['attachments']) }})</h2>
                 <div class="q-files-stack">
                     @foreach ($member['attachments'] as $attachment)
-                        <div class="q-file-row"><div class="q-file-info"><strong>{{ $attachment['name'] }}</strong><small class="muted">{{ ceil($attachment['size'] / 1024) }} KB · {{ $attachment['type'] }}</small></div><button class="export-button" type="button" data-demo-download>Unduh Berkas</button></div>
+                        <div class="q-file-row"><div class="q-file-info"><strong>{{ $attachment['name'] }}</strong><small class="muted">{{ ceil($attachment['size'] / 1024) }} KB · {{ $attachment['type'] }}</small></div><button class="export-button" type="button" data-download-url="{{ $attachment['url'] }}">Unduh Berkas</button></div>
                     @endforeach
                 </div>
             </section>

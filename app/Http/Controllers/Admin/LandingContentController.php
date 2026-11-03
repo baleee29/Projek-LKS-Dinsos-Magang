@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Support\Demo\DemoLanding;
-use App\Support\Demo\DemoState;
+use App\Support\Data\DataLanding;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -12,7 +11,7 @@ class LandingContentController extends Controller
 {
     public function __invoke(Request $request): View
     {
-        $pages = DemoState::isEmpty() ? [] : DemoLanding::pages();
+        $pages = DataLanding::pages();
         $current = collect($pages)->firstWhere('key', $request->query('filter')) ?? ($pages[0] ?? null);
         $query = mb_strtolower(trim((string) $request->query('q', '')));
 
@@ -34,7 +33,7 @@ class LandingContentController extends Controller
             'q' => (string) $request->query('q', ''),
             'total' => $slots->count(),
             'changed' => $slots->where('changed', true)->count(),
-            'limits' => DemoLanding::imageLimits(),
+            'limits' => DataLanding::imageLimits(),
         ]);
     }
 }

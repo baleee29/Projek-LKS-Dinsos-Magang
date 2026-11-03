@@ -19,8 +19,6 @@
                         serta angka. Sesi di perangkat lain akan dikeluarkan.
                     </p>
                 </header>
-
-                {{-- TODO(Tahap 2): kirim ke PUT /account/password (AccountPasswordController sumber). --}}
                 <form id="change-password-form" novalidate>
                     <div class="field">
                         <label for="current_password">Kata sandi saat ini</label>

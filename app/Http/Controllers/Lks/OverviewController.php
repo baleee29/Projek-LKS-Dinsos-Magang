@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Lks;
 
 use App\Http\Controllers\Controller;
-use App\Support\Demo\DemoClients;
-use App\Support\Demo\DemoClock;
-use App\Support\Demo\DemoMembers;
-use App\Support\Demo\DemoOrganizations;
-use App\Support\Demo\DemoReports;
+use App\Support\Data\DataKlien;
+use App\Support\Data\Kalender;
+use App\Support\Data\DataPengurus;
+use App\Support\Data\DataLembaga;
+use App\Support\Data\DataLaporan;
 use App\Support\Format;
 use Illuminate\View\View;
 
@@ -15,17 +15,17 @@ class OverviewController extends Controller
 {
     public function __invoke(): View
     {
-        $organization = DemoOrganizations::own();
-        $members = DemoMembers::forOrganization($organization['id']);
-        $clients = DemoClients::forOrganization($organization['id']);
-        $reports = DemoReports::forOrganization($organization['id']);
-        $period = DemoClock::period();
+        $organization = DataLembaga::own();
+        $members = DataPengurus::forOrganization($organization['id']);
+        $clients = DataKlien::forOrganization($organization['id']);
+        $reports = DataLaporan::forOrganization($organization['id']);
+        $period = Kalender::period();
 
         return view('lks.overview', [
             'organization' => $organization,
             'members' => $members,
             'clients' => $clients,
-            'summary' => DemoClients::summary($clients),
+            'summary' => DataKlien::summary($clients),
             'reportCounts' => [
                 'Draf' => $reports->where('status', 'Draf')->count(),
                 'Terkirim' => $reports->where('status', 'Terkirim')->count(),

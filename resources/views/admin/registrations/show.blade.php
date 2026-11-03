@@ -4,11 +4,11 @@
 
 @php
     use App\Support\Format;
-    use App\Support\Demo\DemoLetters;
-    use App\Support\Demo\DemoRegistrations;
+    use App\Support\Data\DataSurat;
+    use App\Support\Data\DataPendaftaran;
     $pending = $row['status'] === 'Menunggu Verifikasi';
     $approved = $row['status'] === 'Disetujui';
-    $fields = ['Nama Yayasan / LKS' => $row['organization_name'], 'Nama Pengisi Data' => $row['leader_name'], 'Nomor WhatsApp yang Bisa Dihubungi' => $row['whatsapp'], 'Nomor Izin Operasional Lama' => $row['sk_number'], 'Fokus Pelayanan / Bidang Garap' => $row['focus_area'], 'Kecamatan' => $row['district'], 'Kelurahan' => $row['village'], 'Alamat Sekretariat' => $row['address']];
+    $fields = ['Nama Yayasan / LKS' => $row['organization_name'], 'Nama Pengisi Data' => $row['leader_name'], 'Nomor WhatsApp yang Bisa Dihubungi' => $row['whatsapp'], 'Nomor Izin Operasional Lama' => $row['license_number'], 'Rekening Bank' => $row['bank_account'], 'Fokus Pelayanan / Bidang Garap' => $row['focus_area'], 'Prioritas Pelayanan' => implode(', ', $row['service_priorities']), 'Jenis Pelayanan' => implode(', ', $row['service_types']), 'Sasaran Pelayanan' => implode(', ', $row['service_targets']), 'Jenis Kegiatan' => implode(', ', $row['activity_types']), 'Sifat Pelayanan' => implode(', ', $row['service_scopes'])];
     $paths = [
         'info' => '<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/>',
         'back' => '<path d="M20 12H4m7-7-7 7 7 7"/>',
@@ -32,7 +32,7 @@
         <div class="lrd-notice">{!! $icon('info') !!}<p>Pengajuan dan berkas berasal dari pendaftaran mandiri LKS. Persetujuan menambahkan lembaga ke direktori organisasi.</p></div>
         <a class="admin-registration-button lrd-back" href="/admin/registrations/lks">{!! $icon('back') !!}Daftar pendaftaran</a>
         <section class="lrd-card lrd-identity" aria-labelledby="lrd-reference">
-            <header class="lrd-record-heading"><div><div class="lrd-reference-line"><h2 id="lrd-reference">Status pendaftaran</h2>@include('admin.registrations.status', ['status' => $row['status']])</div><p>Dikirim {{ Format::dateTime($row['created_at']) }} &middot; Versi 1</p></div></header>
+            <header class="lrd-record-heading"><div><div class="lrd-reference-line"><h2 id="lrd-reference">Status pendaftaran</h2>@include('admin.registrations.status', ['status' => $row['status']])</div><p>Dikirim {{ Format::dateTime($row['created_at']) }} &middot; Versi {{ $row['version'] }}</p></div></header>
             @if ($row['notes'])
                 <div class="lrd-latest-note">{!! $icon('message') !!}<div><h3>Catatan terakhir:</h3><p>{{ $row['notes'] }}</p></div></div>
             @endif
@@ -54,13 +54,12 @@
             <header class="lrd-section-heading"><h2 id="lrd-documents-title">Dokumen pendaftaran</h2><p>{{ count($row['files']) }} Berkas Tersedia</p></header>
             <ul class="lrd-documents">
                 @foreach ($row['files'] as $file)
-                    <li><span class="lrd-document-icon">{!! $icon('file') !!}</span><div><h3>{{ $file['label'] }}</h3><p>{{ $file['name'] }} &middot; {{ DemoLetters::fileSize($file['size']) }}</p></div><button type="button" class="admin-registration-button" data-demo-download aria-label="Unduh {{ $file['label'] }}">{!! $icon('download') !!}Unduh</button></li>
+                    <li><span class="lrd-document-icon">{!! $icon('file') !!}</span><div><h3>{{ $file['label'] }}</h3><p>{{ $file['name'] }} &middot; {{ DataSurat::fileSize($file['size']) }}</p></div><button type="button" class="admin-registration-button" data-download-url="/berkas/{{ $file['id'] }}" aria-label="Unduh {{ $file['label'] }}">{!! $icon('download') !!}Unduh</button></li>
                 @endforeach
             </ul>
         </section>
         @if ($pending)
-            {{-- TODO(Tahap 2): POST /admin/partner-registrations/{id}/review. Alasan penolakan wajib minimal 10 karakter. --}}
-            <section class="lrd-card lrd-review" aria-labelledby="lrd-review-title" data-registration-review data-whatsapp="{{ $whatsappUrl }}">
+            <section class="lrd-card lrd-review" aria-labelledby="lrd-review-title" data-registration-review data-url="/admin/registration/{{ $row['id'] }}/review">
                 <h2 id="lrd-review-title">Keputusan Admin</h2>
                 <p>Periksa identitas dan seluruh berkas, lalu terima atau tolak. Penolakan wajib menyertakan alasan; alasan ini dikirim ke pendaftar melalui WhatsApp.</p>
                 <label class="admin-registration-review-label" for="registration-review-note">Alasan penolakan<textarea id="registration-review-note" rows="4" maxlength="2000" placeholder="Wajib diisi bila menolak, minimal 10 karakter"></textarea></label>
@@ -69,7 +68,6 @@
                     <button type="button" class="admin-registration-button is-primary" data-action="approve">Terima Pendaftaran</button>
                 </div>
                 <p data-review-error role="alert"></p>
-                <p data-review-whatsapp hidden><a class="admin-registration-button is-primary" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer">Kirim alasan via WhatsApp</a></p>
             </section>
         @else
             <div class="lrd-notice lrd-completion" data-status="{{ $row['status'] }}">
@@ -87,7 +85,7 @@
             <h2 id="lrd-history-title">Riwayat pendaftaran</h2>
             <ol class="lrd-history">
                 @foreach ($row['history'] as $event)
-                    <li data-status="{{ $event['status'] }}"><span class="lrd-timeline-dot" aria-hidden="true"></span><h3>{{ $loop->iteration }}. {{ DemoRegistrations::statusLabel($event['status']) }}</h3><p class="lrd-event-date">{{ Format::dateTime($event['at']) }} &middot; {{ $event['actor'] }}</p>@if ($event['note'])<p class="lrd-event-note">{{ $event['note'] }}</p>@endif</li>
+                    <li data-status="{{ $event['status'] }}"><span class="lrd-timeline-dot" aria-hidden="true"></span><h3>{{ $loop->iteration }}. {{ DataPendaftaran::statusLabel($event['status']) }}</h3><p class="lrd-event-date">{{ Format::dateTime($event['at']) }} &middot; {{ $event['actor'] }}</p>@if ($event['note'])<p class="lrd-event-note">{{ $event['note'] }}</p>@endif</li>
                 @endforeach
             </ol>
         </section>

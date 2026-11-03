@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Support\Demo\DemoClock;
-use App\Support\Demo\DemoOrganizations;
-use App\Support\Demo\DemoPaginator;
-use App\Support\Demo\DemoRegions;
-use App\Support\Demo\DemoReports;
+use App\Support\Data\Kalender;
+use App\Support\Data\DataLembaga;
+use App\Support\Data\Halaman;
+use App\Support\Data\Wilayah;
+use App\Support\Data\DataLaporan;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -25,11 +25,11 @@ class ReportController extends Controller
         ];
         $query = mb_strtolower(trim($filters['q']));
         $period = $filters['year'] !== 'all' && $filters['quarter'] !== 'all'
-            ? DemoClock::period((int) $filters['year'], $filters['quarter'] === '1' ? 1 : 3)
+            ? Kalender::period((int) $filters['year'], $filters['quarter'] === '1' ? 1 : 3)
             : null;
 
-        $reports = DemoReports::submitted()->filter(function (array $item) use ($filters, $query) {
-            $org = DemoOrganizations::find($item['organizationId']);
+        $reports = DataLaporan::submitted()->filter(function (array $item) use ($filters, $query) {
+            $org = DataLembaga::find($item['organizationId']);
 
             return ($filters['year'] === 'all' || (string) $item['year'] === $filters['year'])
                 && ($filters['quarter'] === 'all' || ((int) $item['quarter'] <= 2 ? '1' : '2') === $filters['quarter'])
@@ -42,25 +42,25 @@ class ReportController extends Controller
         return view('admin.reports.index', [
             'filters' => $filters,
             'period' => $period,
-            'years' => [DemoClock::YEAR, DemoClock::YEAR - 1, DemoClock::YEAR - 2],
-            'districts' => DemoRegions::districts(),
-            'villages' => DemoRegions::villages($filters['district'] ?: null),
-            'reports' => DemoPaginator::make($reports, 10),
-            'organizationOf' => fn (string $id) => DemoOrganizations::find($id),
+            'years' => [Kalender::year(), Kalender::year() - 1, Kalender::year() - 2],
+            'districts' => Wilayah::districts(),
+            'villages' => Wilayah::villages($filters['district'] ?: null),
+            'reports' => Halaman::make($reports, 10),
+            'organizationOf' => fn (string $id) => DataLembaga::find($id),
         ]);
     }
 
     public function show(string $id): View
     {
         // Admin tidak boleh membaca draf, sama seperti detail() di shared/reports.js.
-        $report = DemoReports::find($id);
+        $report = DataLaporan::find($id);
         abort_unless($report && $report['status'] !== 'Draf', 404);
 
         return view('shared.reports.detail', [
             'admin' => true,
             'report' => $report,
-            'organization' => DemoOrganizations::find($report['organizationId']),
-            'period' => DemoClock::period((int) $report['year'], (int) $report['quarter']),
+            'organization' => DataLembaga::find($report['organizationId']),
+            'period' => Kalender::period((int) $report['year'], (int) $report['quarter']),
         ]);
     }
 }

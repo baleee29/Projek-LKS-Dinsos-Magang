@@ -3,16 +3,15 @@
 @section('title', $pageTitle)
 
 @php
-    use App\Support\Demo\DemoReports;
+    use App\Support\Data\DataLaporan;
     use App\Support\Format;
 @endphp
 
 @section('content')
     <section class="lks-workspace lks-report-view">
         <x-dashboard.lks-heading :title="$pageTitle" :description="$description" group="Pelaporan">
-            {{-- TODO(Tahap 2): ekspor dari lks/reports-export.js. --}}
-            <button class="lks-button" type="button" data-demo-download><x-dashboard.lks-icon name="download" />Unduh PDF</button>
-            <button class="lks-button" type="button" data-demo-download><x-dashboard.lks-icon name="download" />Unduh Excel</button>
+            <button class="lks-button" type="button" data-export-url="/ekspor/laporan" data-export-format="pdf"><x-dashboard.lks-icon name="download" />Unduh PDF</button>
+            <button class="lks-button" type="button" data-export-url="/ekspor/laporan" data-export-format="xlsx"><x-dashboard.lks-icon name="download" />Unduh Excel</button>
             <a class="lks-button" href="/assets/documents/Template_Laporan_LKS.pdf" download="Template_Laporan_LKS.pdf" target="_blank" rel="noopener" title="Unduh format template laporan semester LKS"><x-dashboard.lks-icon name="file" />Template Laporan</a>
             <button class="lks-button lks-button-primary" type="button" data-open-dialog="new-report-dialog"><x-dashboard.lks-icon name="plus" />Buat Laporan Baru</button>
         </x-dashboard.lks-heading>
@@ -50,7 +49,7 @@
                                             <div class="lks-report-period">
                                                 <span class="lks-icon-tile lks-report-icon-{{ $isDraft ? 'draft' : 'approved' }}"><x-dashboard.lks-icon :name="$isDraft ? 'edit' : 'file'" /></span>
                                                 <div>
-                                                    <a class="lks-report-name" href="/lks/report/{{ $item['id'] }}">{{ DemoReports::periodLabel($item) }}</a>
+                                                    <a class="lks-report-name" href="/lks/report/{{ $item['id'] }}">{{ DataLaporan::periodLabel($item) }}</a>
                                                     <small class="lks-cell-meta lks-report-id">{{ $item['id'] }}</small>
                                                     <small class="lks-cell-meta">{{ $isDraft ? 'Disimpan '.Format::date($item['updated']) : 'Dikirim '.Format::date($item['submittedAt'], 'belum tercatat') }}</small>
                                                 </div>
@@ -64,7 +63,7 @@
                                                 <a class="lks-button" href="/lks/report/{{ $item['id'] }}"><x-dashboard.lks-icon name="eye" />Detail</a>
                                                 <a class="lks-button lks-button-primary" href="/lks/edit/{{ $item['id'] }}"><x-dashboard.lks-icon name="edit" />{{ $isDraft ? 'Lanjutkan Isi' : 'Perbarui Laporan' }}</a>
                                                 @if ($isDraft)
-                                                    <button class="lks-button lks-button-danger lks-report-delete" type="button" data-demo-action data-confirm="Draf {{ DemoReports::periodLabel($item) }} milik {{ $organization['title'] }}, termasuk isian dan lampirannya, akan dihapus. Tindakan ini tidak dapat dibatalkan." data-confirm-title="Hapus draf laporan?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog" aria-label="Hapus draf {{ DemoReports::periodLabel($item) }}"><x-dashboard.lks-icon name="trash" />Hapus draf</button>
+                                                    <button class="lks-button lks-button-danger lks-report-delete" type="button" data-action-url="/lks/reports/{{ $item['id'] }}" data-action-method="DELETE" data-confirm="Draf {{ DataLaporan::periodLabel($item) }} milik {{ $organization['title'] }}, termasuk isian dan lampirannya, akan dihapus. Tindakan ini tidak dapat dibatalkan." data-confirm-title="Hapus draf laporan?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog" aria-label="Hapus draf {{ DataLaporan::periodLabel($item) }}"><x-dashboard.lks-icon name="trash" />Hapus draf</button>
                                                 @endif
                                             </div>
                                         </td>

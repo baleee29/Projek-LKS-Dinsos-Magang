@@ -1,5 +1,7 @@
 // Dialog konfirmasi dari shared/ui-helpers.js, serta pembuka <dialog> yang sudah dirender Blade.
-import { DEMO_DOWNLOAD_MESSAGE, DEMO_SAVE_MESSAGE, notify } from './toast.js';
+import { afterSuccess, send } from './api.js';
+import { runExport } from './ekspor.js';
+import { notify } from './toast.js';
 
 let sequence = 0;
 
@@ -54,21 +56,29 @@ export function confirmDialog({ title = 'Konfirmasi', message = '', confirmText 
 }
 
 /**
- * Perilaku bersama untuk aksi dummy:
- * - [data-demo-action]: konfirmasi opsional (data-confirm, data-confirm-title, data-confirm-text,
- *   data-confirm-safe), lalu toast netral.
- * - [data-demo-download]: toast unduhan.
+ * Aksi tombol lewat atribut:
+ * - [data-action-url], [data-action-method]: kirim ke server, dengan konfirmasi opsional
+ *   (data-confirm, data-confirm-title, data-confirm-text, data-confirm-safe) dan isian dari
+ *   data-action-fields="idElemen:namaIsian,...".
+ * - [data-download-url]: unduh berkas.
+ * - [data-export-url], [data-export-format]: ekspor PDF atau Excel.
  * - [data-open-dialog="id"] dan [data-close-dialog]: membuka dan menutup <dialog>.
- * Tidak ada permintaan ke server. TODO(Tahap 2): ganti tiap aksi dengan endpoint sumber.
  */
 export function initDialogs() {
     let lastTrigger = null;
 
     document.addEventListener('click', async (event) => {
-        const download = event.target.closest('[data-demo-download]');
+        const download = event.target.closest('[data-download-url]');
         if (download) {
             event.preventDefault();
-            notify(DEMO_DOWNLOAD_MESSAGE);
+            window.open(download.dataset.downloadUrl, '_blank', 'noopener');
+            return;
+        }
+
+        const exporter = event.target.closest('[data-export-url]');
+        if (exporter) {
+            event.preventDefault();
+            if (!exporter.disabled) await runExport(exporter);
             return;
         }
 
@@ -79,8 +89,7 @@ export function initDialogs() {
             if (dialog) {
                 lastTrigger = opener;
                 dialog.showModal();
-                dialog.dispatchEvent(new CustomEvent('demo:open', { detail: { trigger: opener } }));
-            }
+                            }
             return;
         }
 
@@ -91,11 +100,11 @@ export function initDialogs() {
             return;
         }
 
-        const action = event.target.closest('button[data-demo-action], a[data-demo-action]');
+        const action = event.target.closest('button[data-action-url], a[data-action-url]');
         if (action) {
             event.preventDefault();
             if (action.disabled) return;
-            await runDemoAction(action);
+            await runAction(action);
         }
     });
 
@@ -106,8 +115,8 @@ export function initDialogs() {
     });
 }
 
-export async function runDemoAction(node) {
-    const { confirm: message, confirmTitle, confirmText, confirmSafe } = node.dataset;
+export async function runAction(node) {
+    const { confirm: message, confirmTitle, confirmText, confirmSafe, actionUrl, actionMethod, actionFields } = node.dataset;
     if (message) {
         const accepted = await confirmDialog({
             title: confirmTitle || 'Konfirmasi',
@@ -117,7 +126,19 @@ export async function runDemoAction(node) {
         });
         if (!accepted) return false;
     }
-    node.closest('dialog')?.close();
-    notify(DEMO_SAVE_MESSAGE);
-    return true;
+    const body = new FormData();
+    (actionFields || '').split(',').filter(Boolean).forEach((pair) => {
+        const [id, name] = pair.split(':');
+        body.set(name, document.getElementById(id)?.value ?? '');
+    });
+    node.disabled = true;
+    try {
+        afterSuccess(await send(actionUrl, { method: actionMethod || 'POST', body }));
+        return true;
+    } catch (error) {
+        node.disabled = false;
+        node.closest('dialog')?.close();
+        notify(error.message);
+        return false;
+    }
 }

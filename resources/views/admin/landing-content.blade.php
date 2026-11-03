@@ -50,10 +50,10 @@
                                         <label class="landing-field" for="{{ $id }}-alt">Teks alternatif (deskripsi foto)</label>
                                         <input id="{{ $id }}-alt" type="text" maxlength="300" value="{{ $slot['value'] }}" data-landing-alt placeholder="Kosongkan bila foto hanya hiasan">
                                         <div class="landing-actions">
-                                            <button type="button" class="landing-button is-primary" data-landing-upload data-demo-action disabled>Unggah foto</button>
-                                            <button type="button" class="landing-button" data-landing-save-alt data-demo-action disabled>Simpan deskripsi</button>
+                                            <button type="button" class="landing-button is-primary" data-landing-upload disabled>Unggah foto</button>
+                                            <button type="button" class="landing-button" data-landing-save-alt disabled>Simpan deskripsi</button>
                                             @if ($slot['changed'])
-                                                <button type="button" class="landing-button" data-demo-action data-confirm="&quot;{{ $slot['label'] }}&quot; akan kembali ke isi bawaan di halaman publik." data-confirm-title="Kembalikan isi bawaan?" data-confirm-text="Ya, kembalikan">Kembalikan bawaan</button>
+                                                <button type="button" class="landing-button" data-action-url="/admin/landing-content/{{ rawurlencode($slot['key']) }}" data-action-method="DELETE" data-confirm="&quot;{{ $slot['label'] }}&quot; akan kembali ke isi bawaan di halaman publik." data-confirm-title="Kembalikan isi bawaan?" data-confirm-text="Ya, kembalikan">Kembalikan bawaan</button>
                                             @endif
                                         </div>
                                     </article>
@@ -69,9 +69,9 @@
                                         <div class="landing-meta"><span data-landing-count data-max="{{ $slot['max'] }}">{{ mb_strlen($slot['value']) }}/{{ $slot['max'] }}</span>@if ($slot['changed'])<span>Bawaan: {{ $slot['default'] }}</span>@endif</div>
                                         <p class="landing-hint">Tulis <code>*kata*</code> untuk huruf miring.@if ($multiline) Tekan Enter untuk baris baru.@endif</p>
                                         <div class="landing-actions">
-                                            <button type="button" class="landing-button is-primary" data-landing-save data-demo-action disabled>Simpan</button>
+                                            <button type="button" class="landing-button is-primary" data-landing-save disabled>Simpan</button>
                                             @if ($slot['changed'])
-                                                <button type="button" class="landing-button" data-demo-action data-confirm="&quot;{{ $slot['label'] }}&quot; akan kembali ke isi bawaan di halaman publik." data-confirm-title="Kembalikan isi bawaan?" data-confirm-text="Ya, kembalikan">Kembalikan bawaan</button>
+                                                <button type="button" class="landing-button" data-action-url="/admin/landing-content/{{ rawurlencode($slot['key']) }}" data-action-method="DELETE" data-confirm="&quot;{{ $slot['label'] }}&quot; akan kembali ke isi bawaan di halaman publik." data-confirm-title="Kembalikan isi bawaan?" data-confirm-text="Ya, kembalikan">Kembalikan bawaan</button>
                                             @endif
                                         </div>
                                     </article>

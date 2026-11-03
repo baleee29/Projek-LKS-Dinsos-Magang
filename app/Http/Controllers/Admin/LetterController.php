@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Support\Demo\DemoLetters;
+use App\Support\Data\DataSurat;
 use App\Support\LetterListing;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -12,6 +12,6 @@ class LetterController extends Controller
 {
     public function __invoke(Request $request): View
     {
-        return view('shared.letters', LetterListing::build($request, DemoLetters::all(), admin: true));
+        return view('shared.letters', LetterListing::build($request, DataSurat::all(), admin: true));
     }
 }

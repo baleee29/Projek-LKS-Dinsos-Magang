@@ -9,8 +9,7 @@
 
 @section('content')
     <x-dashboard.section-heading title="Notifikasi" :description="$admin ? 'Data masuk, pembaruan, penghapusan, dan perubahan status dari seluruh LKS.' : 'Pengajuan dan pembaruan status laporan organisasi Anda.'" :eyebrow="$eyebrow">
-        {{-- TODO(Tahap 2): POST /notifications/read-all. --}}
-        <button class="text-button" type="button" id="mark-notifications-read" data-demo-action @disabled($unreadCount === 0)>Tandai semua dibaca</button>
+        <button class="text-button" type="button" id="mark-notifications-read" data-action-url="/notifications/read-all" @disabled($unreadCount === 0)>Tandai semua dibaca</button>
     </x-dashboard.section-heading>
     <section class="q-notification-panel" aria-label="{{ $admin ? 'Seluruh notifikasi Admin' : 'Pemberitahuan laporan' }}">
         <div class="q-notification-toolbar">
@@ -34,7 +33,7 @@
                 <ul class="q-notification-list">
                     @foreach ($notifications as $item)
                         <li @class(['q-notification-item', 'is-unread' => ! $item['read']])>
-                            <a class="q-notification-link" href="/{{ session('demo_role') }}/notification-detail/{{ $item['id'] }}">
+                            <a class="q-notification-link" href="/{{ auth()->user()?->peran }}/notification-detail/{{ $item['id'] }}">
                                 <span class="q-notification-dot" aria-hidden="true"></span>
                                 <div class="q-notification-content">
                                     <div class="q-notification-heading"><h2>{{ $item['title'] }}</h2><time datetime="{{ $item['at'] }}">{{ Format::dateTime($item['at']) }}</time></div>

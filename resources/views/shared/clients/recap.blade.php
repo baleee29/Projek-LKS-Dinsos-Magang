@@ -12,9 +12,8 @@
 @section('content')
     <section @class(['lks-workspace', 'lks-client-view', 'lks-occupancy-view', 'lks-client-admin-view' => $admin])>
         <x-dashboard.lks-heading :title="$pageTitle" description="Jumlah dan daftar klien terdaftar. Penghuni panti dihitung terpisah dari layanan nonresidensial." :group="$admin ? 'LKS' : 'Pendataan'">
-            {{-- TODO(Tahap 2): ekspor dari lks/resident-export.js. --}}
-            <button type="button" class="lks-button" data-demo-download><x-dashboard.lks-icon name="download" /> Unduh PDF</button>
-            <button type="button" class="lks-button" data-demo-download><x-dashboard.lks-icon name="download" /> Unduh Excel</button>
+            <button type="button" class="lks-button" data-export-url="/ekspor/klien" data-export-format="pdf"><x-dashboard.lks-icon name="download" /> Unduh PDF</button>
+            <button type="button" class="lks-button" data-export-url="/ekspor/klien" data-export-format="xlsx"><x-dashboard.lks-icon name="download" /> Unduh Excel</button>
             @unless ($admin)
                 <a class="lks-button lks-button-primary" href="/lks/new-resident"><x-dashboard.lks-icon name="plus" />Tambah Klien</a>
             @endunless

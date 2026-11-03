@@ -1,7 +1,7 @@
 <?php
 
 // Menu sidebar Admin dan LKS, disalin dari DashboardSidebar.vue sumber.
-// count: kunci lencana dari App\Support\Demo\DemoShell::counts(). unread: lencana hanya tampil bila > 0.
+// count: kunci lencana dari App\Support\Data\DataRangka::counts(). unread: lencana hanya tampil bila > 0.
 return [
     'role_names' => ['admin' => 'ADMIN', 'lks' => 'LKS'],
 

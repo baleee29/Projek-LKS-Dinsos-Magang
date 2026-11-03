@@ -29,13 +29,9 @@
                 </div>
                 <div>
                     <div id="view-content">
-                        @if ($demoError ?? false)
-                            @include('shared.demo-error')
-                        @else
-                            @yield('content')
-                        @endif
+                        @yield('content')
                     </div>
-                    <div class="q-toast" id="app-toast" role="status" aria-live="polite" hidden></div>
+                    <div class="q-toast" id="app-toast" role="status" aria-live="polite" @if (session('status')) data-flash="{{ session('status') }}" @endif hidden></div>
                 </div>
             </main>
         </div>

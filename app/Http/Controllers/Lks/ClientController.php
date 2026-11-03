@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Lks;
 
 use App\Http\Controllers\Controller;
 use App\Support\ClientRecap;
-use App\Support\Demo\DemoClientSchema;
-use App\Support\Demo\DemoClients;
-use App\Support\Demo\DemoClock;
-use App\Support\Demo\DemoOrganizations;
+use App\Support\Data\SkemaKlien;
+use App\Support\Data\DataKlien;
+use App\Support\Data\Kalender;
+use App\Support\Data\DataLembaga;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -15,11 +15,11 @@ class ClientController extends Controller
 {
     public function occupancy(Request $request): View
     {
-        $organization = DemoOrganizations::own();
+        $organization = DataLembaga::own();
 
         return view('shared.clients.recap', ClientRecap::build(
             $request,
-            DemoClients::forOrganization($organization['id']),
+            DataKlien::forOrganization($organization['id']),
             collect([$organization]),
             admin: false,
             title: $organization['title'],
@@ -46,19 +46,19 @@ class ClientController extends Controller
     {
         return view('lks.clients.form', [
             'item' => $item,
-            'data' => $item ?? DemoClientSchema::blank(),
-            'fields' => DemoClientSchema::fields(),
-            'sections' => DemoClientSchema::formSections(),
-            'organization' => DemoOrganizations::own(),
-            'today' => DemoClock::TODAY,
+            'data' => $item ?? SkemaKlien::blank(),
+            'fields' => SkemaKlien::fields(),
+            'sections' => SkemaKlien::formSections(),
+            'organization' => DataLembaga::own(),
+            'today' => Kalender::today(),
         ]);
     }
 
     /** @return array<string, mixed> */
     private function owned(string $id): array
     {
-        $client = DemoClients::find($id);
-        abort_unless($client && $client['organizationId'] === DemoOrganizations::OWN_LKS, 404);
+        $client = DataKlien::find($id);
+        abort_unless($client && $client['organizationId'] === DataLembaga::ownId(), 404);
 
         return $client;
     }

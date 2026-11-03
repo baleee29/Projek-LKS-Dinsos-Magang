@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @php
-    use App\Support\Demo\DemoClientSchema;
+    use App\Support\Data\SkemaKlien;
     use App\Support\Format;
     $canEdit = ! $admin;
     $data = $item;
@@ -44,7 +44,7 @@
                                 <div class="lcd-field lcd-field-wide" data-client-field="photo"><dt>Foto profil</dt><dd><span class="lcd-value-empty">Belum ada foto profil</span></dd></div>
                             @endif
                             @foreach ($section['fields'] as $key)
-                                @continue(! DemoClientSchema::applicable($key, $data))
+                                @continue(! SkemaKlien::applicable($key, $data))
                                 @php
                                     $field = $fields[$key];
                                     $type = $field['type'] ?? 'text';

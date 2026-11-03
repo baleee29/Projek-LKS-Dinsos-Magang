@@ -24,8 +24,7 @@ if (dialog) {
             detect.textContent = label;
             dialog.querySelector('[name="latitude"]').value = position.coords.latitude.toFixed(6);
             dialog.querySelector('[name="longitude"]').value = position.coords.longitude.toFixed(6);
-            // Isian hanya terisi di form; belum ada yang tersimpan.
-            notify('Titik koordinat terisi di formulir.');
+            notify('Titik koordinat terisi di formulir. Simpan profil untuk menyimpannya.');
         }, (error) => {
             detect.disabled = false;
             detect.textContent = label;
@@ -35,9 +34,11 @@ if (dialog) {
 
     fileInput?.addEventListener('change', () => {
         remove.style.display = fileInput.files?.length ? 'inline-block' : 'none';
+        dialog.querySelector('#org-remove-logo').value = '0';
     });
     remove?.addEventListener('click', () => {
         fileInput.value = '';
+        dialog.querySelector('#org-remove-logo').value = '1';
         preview.textContent = preview.dataset.placeholder;
         remove.style.display = 'none';
         status.textContent = 'Belum ada logo dipilih';

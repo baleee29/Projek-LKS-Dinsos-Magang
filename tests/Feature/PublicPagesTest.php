@@ -36,20 +36,6 @@ class PublicPagesTest extends TestCase
         $this->assertSame(1, substr_count($text, 'class="pillar-panel-item"'));
     }
 
-    public function test_registration_form_has_no_backend(): void
-    {
-        $this->get('/pilar/pendaftaran-lks.html')->assertOk()->assertSee('id="form-lks"', false)->assertDontSee('name="_token"', false);
-        $this->post('/pilar/pendaftaran-lks.html')->assertStatus(405);
-        $this->post('/pendaftaran/mitra')->assertStatus(405);
-
-        foreach (['lks.js', 'lks-documents.js', 'lks-rules.js'] as $file) {
-            $source = (string) file_get_contents(resource_path('js/public/registrations/'.$file));
-            foreach (['localStorage', 'sessionStorage', 'indexedDB', 'XMLHttpRequest', 'sendBeacon', 'method:'] as $api) {
-                $this->assertStringNotContainsString($api, $source, "{$file}: {$api}");
-            }
-        }
-    }
-
     public function test_other_pillar_pages_do_not_exist(): void
     {
         foreach (['/pilar/psm.html', '/pilar/karang-taruna.html', '/pilar/pub.html', '/pilar/pendaftaran-karang-taruna.html'] as $url) {
@@ -59,7 +45,7 @@ class PublicPagesTest extends TestCase
 
     public function test_landing_editor_only_lists_general_and_lks_pages(): void
     {
-        $response = $this->withSession(['demo_role' => 'admin'])->get('/admin/landing-content')->assertOk();
+        $response = $this->actingAs($this->admin())->get('/admin/landing-content')->assertOk();
 
         foreach (['Beranda', 'Profil', 'Kontak', 'Pilar Sosial', 'LKS', 'Footer'] as $tab) {
             $response->assertSee($tab);

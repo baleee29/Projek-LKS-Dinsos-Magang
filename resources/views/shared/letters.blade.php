@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @php
-    use App\Support\Demo\DemoLetters;
+    use App\Support\Data\DataSurat;
     use App\Support\Format;
     $pageTitle = $admin ? 'Persuratan LKS · Ruang Admin' : 'Surat Masuk & Keluar';
     $tabUrl = fn (string $name) => request()->fullUrlWithQuery(['tab' => $name === 'incoming' ? null : $name]);
@@ -18,7 +18,7 @@
         <header class="lks-page-heading">
             <div>
                 <div class="lks-breadcrumb">
-                    <a href="/{{ session('demo_role') }}/overview">Dashboard</a>
+                    <a href="/{{ auth()->user()?->peran }}/overview">Dashboard</a>
                     <span>/</span>
                     @if ($admin)<span>LKS</span><span>/</span>@endif
                     <span aria-current="page">Surat Masuk &amp; Keluar</span>
@@ -60,8 +60,8 @@
                         <p>{{ $admin ? 'Pilih LKS tujuan dan lampirkan surat keputusan / surat dinas resmi (maksimal 5 MB).' : 'Catat surat keluar resmi dari LKS dan lampirkan berkas dokumen (maksimal 5 MB).' }}</p>
                     </div>
                 </div>
-                {{-- TODO(Tahap 2): POST /lks/letters (LksLetterController sumber). --}}
-                <form id="lks-letter-form" class="lks-letter-form" novalidate data-demo-form>
+                
+                <form id="lks-letter-form" class="lks-letter-form" novalidate data-form-url="{{ $admin ? '/admin/letters' : '/lks/letters' }}">
                     <div class="lks-letter-form-grid">
                         @if ($admin)
                             <div class="lks-form-field is-full">
@@ -173,9 +173,9 @@
                 <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
                     <div style="font-size: 13px; color: var(--lks-muted, #64748b);">Total: <strong>{{ $letters->count() }}</strong> surat tercatat</div>
                     <div class="lks-export-actions" style="display: inline-flex; gap: 8px;">
-                        {{-- TODO(Tahap 2): ekspor dari lks/letters-export.js. --}}
-                        <button type="button" class="export-button" @disabled($letters->isEmpty()) data-demo-download title="Unduh daftar surat dalam format PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Unduh PDF</span></button>
-                        <button type="button" class="export-button" @disabled($letters->isEmpty()) data-demo-download title="Unduh daftar surat dalam format Excel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Unduh Excel</span></button>
+                        
+                        <button type="button" class="export-button" @disabled($letters->isEmpty()) data-export-url="/ekspor/surat" data-export-format="pdf" title="Unduh daftar surat dalam format PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Unduh PDF</span></button>
+                        <button type="button" class="export-button" @disabled($letters->isEmpty()) data-export-url="/ekspor/surat" data-export-format="xlsx" title="Unduh daftar surat dalam format Excel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Unduh Excel</span></button>
                     </div>
                 </div>
             </div>
@@ -216,11 +216,11 @@
                                     </td>
                                     <td>
                                         @if ($item['has_file'])
-                                            <button type="button" class="lks-table-file-btn" data-demo-download title="Unduh {{ $item['file_name'] }}">
+                                            <button type="button" class="lks-table-file-btn" data-download-url="/berkas/{{ $item['file_id'] }}" title="Unduh {{ $item['file_name'] }}">
                                                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>
                                                 <span>Unduh</span>
                                             </button>
-                                            <span style="display: block; font-size: 11px; color: var(--lks-muted, #64748b); margin-top: 2px;">{{ DemoLetters::fileSize($item['file_size']) }}</span>
+                                            <span style="display: block; font-size: 11px; color: var(--lks-muted, #64748b); margin-top: 2px;">{{ DataSurat::fileSize($item['file_size']) }}</span>
                                         @else
                                             <span style="color: var(--lks-muted, #94a3b8); font-size: 12px;">-</span>
                                         @endif
@@ -234,7 +234,7 @@
                                                 <button type="button" class="lks-action-btn is-reply" data-href="{{ $rolePrefix }}?tab=outgoing&reply={{ $item['id'] }}" title="Balas Surat ini" aria-label="Balas surat {{ $item['subject'] }}"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="m9 17-5-5 5-5"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg></button>
                                             @endif
                                             @if ($admin || $isOutgoing)
-                                                <button type="button" class="lks-action-btn is-delete" data-demo-action data-confirm="Surat &quot;{{ $item['subject'] }}&quot; akan dihapus." data-confirm-title="Hapus surat?" data-confirm-text="Ya, hapus surat" title="Hapus surat" aria-label="Hapus surat {{ $item['subject'] }}">
+                                                <button type="button" class="lks-action-btn is-delete" data-action-url="{{ $admin ? '/admin' : '/lks' }}/letters/{{ $item['id'] }}" data-action-method="DELETE" data-confirm="Surat &quot;{{ $item['subject'] }}&quot; akan dihapus." data-confirm-title="Hapus surat?" data-confirm-text="Ya, hapus surat" title="Hapus surat" aria-label="Hapus surat {{ $item['subject'] }}">
                                                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/></svg>
                                                 </button>
                                             @endif
@@ -281,12 +281,11 @@
             <div style="margin-bottom: 24px;">
                 <span style="font-size: 12px; font-weight: 600; color: var(--lks-muted, #64748b); display: block; margin-bottom: 8px;">Tampilan Isi Berkas Lampiran</span>
                 @if ($item['has_file'])
-                    {{-- Berkas dummy tidak punya isi, jadi memakai tampilan "pratinjau tidak didukung" dari sumber. --}}
-                    <div style="padding: 24px; text-align: center; border: 1px dashed var(--lks-line, #e5eaf2); border-radius: 8px; background: var(--lks-soft, #f8faff);">
+                                        <div style="padding: 24px; text-align: center; border: 1px dashed var(--lks-line, #e5eaf2); border-radius: 8px; background: var(--lks-soft, #f8faff);">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 44px; height: 44px; color: var(--lks-primary, #304a6b); margin-bottom: 8px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-                        <p style="font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--lks-ink, #1e293b);">{{ $item['file_name'] }} ({{ DemoLetters::fileSize($item['file_size']) }})</p>
-                        <p style="font-size: 12px; color: var(--lks-muted, #64748b); margin-bottom: 16px;">Pratinjau langsung tidak didukung untuk jenis dokumen ini di peramban.</p>
-                        <button type="button" class="lks-btn-primary" data-demo-download style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; padding: 8px 18px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>Unduh Berkas untuk Membuka</button>
+                        <p style="font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--lks-ink, #1e293b);">{{ $item['file_name'] }} ({{ DataSurat::fileSize($item['file_size']) }})</p>
+                        <p style="font-size: 12px; color: var(--lks-muted, #64748b); margin-bottom: 16px;">Buka atau unduh berkas lampiran surat ini.</p>
+                        <button type="button" class="lks-btn-primary" data-download-url="/berkas/{{ $item['file_id'] }}" style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; padding: 8px 18px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>Unduh Berkas untuk Membuka</button>
                     </div>
                 @else
                     <div style="padding: 24px; text-align: center; border: 1px dashed var(--lks-line, #e5eaf2); border-radius: 8px; color: var(--lks-muted, #64748b); font-style: italic;">Tidak ada berkas yang dilampirkan pada surat ini.</div>
@@ -300,8 +299,8 @@
                     <button type="button" class="lks-btn-primary" data-href="{{ $rolePrefix }}?tab=outgoing&reply={{ $item['id'] }}" style="display: inline-flex; align-items: center; gap: 6px;"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="m9 17-5-5 5-5"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>Balas Surat Ini</button>
                 @endif
                 @if (! $sent && ! $item['is_read'])
-                    {{-- Di sumber surat otomatis terbaca saat dibuka. TODO(Tahap 2): POST /lks/letters/{id}/read. --}}
-                    <button type="button" class="lks-btn-secondary" data-demo-action>Tandai dibaca</button>
+                    
+                    <button type="button" class="lks-btn-secondary" data-action-url="{{ $admin ? '/admin' : '/lks' }}/letters/{{ $item['id'] }}/read">Tandai dibaca</button>
                 @endif
                 <button type="button" class="lks-btn-secondary" data-close-dialog>Tutup</button>
             </div>

@@ -1,6 +1,6 @@
 // Interaksi form klien, dari lks/client-form.js: bagian, isian bersyarat, pratinjau, kelengkapan, dan foto.
-// TODO(Tahap 2): kirim ke POST /lks/clients; aturan akhir ada di shared/data-validation.js.
-import { notify, DEMO_SAVE_MESSAGE } from '../dashboard/toast.js';
+import { afterSuccess, send } from '../dashboard/api.js';
+import { notify } from '../dashboard/toast.js';
 
 const form = document.querySelector('#resident-form');
 
@@ -88,6 +88,7 @@ if (form) {
     const previewTag = page.querySelector('[data-resident-preview-tag]');
     const avatarIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="7" r="3"/><path d="M6 21v-4a6 6 0 0 1 12 0v4M9 21v-5m6 5v-5"/></svg>';
     let photoUrl = '';
+    let removePhoto = false;
 
     const el = (tag, className, text) => {
         const node = document.createElement(tag);
@@ -208,7 +209,7 @@ if (form) {
         else delete shownErrors[key];
     });
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
         refresh();
         const value = valueOf();
@@ -237,7 +238,22 @@ if (form) {
             return;
         }
         banner.hidden = true;
-        notify(DEMO_SAVE_MESSAGE);
+        const body = new FormData(form);
+        if (removePhoto) body.set('removePhoto', '1');
+        const submitter = event.submitter;
+        if (submitter) submitter.disabled = true;
+        try {
+            afterSuccess(await send(form.dataset.submitUrl, { body }));
+        } catch (error) {
+            if (submitter) submitter.disabled = false;
+            const serverErrors = Object.entries(error.errors || {});
+            serverErrors.forEach(([key, messages]) => showField(key, messages[0]));
+            const items = serverErrors.map(([, messages]) => el('li', '', messages[0]));
+            banner.replaceChildren(el('h2', '', 'Biodata belum disimpan'), ...(items.length ? [Object.assign(el('ul'), {})] : [el('p', '', error.message)]));
+            banner.querySelector('ul')?.append(...items);
+            banner.hidden = false;
+            banner.focus();
+        }
     });
 
     // Navigasi bagian.
@@ -291,6 +307,7 @@ if (form) {
         }
         if (photoUrl) URL.revokeObjectURL(photoUrl);
         photoUrl = URL.createObjectURL(file);
+        removePhoto = false;
         const image = el('img', 'lks-photo-preview-img');
         image.src = photoUrl;
         image.alt = 'Preview foto';
@@ -301,6 +318,7 @@ if (form) {
     photoRemove?.addEventListener('click', () => {
         if (photoUrl) URL.revokeObjectURL(photoUrl);
         photoUrl = '';
+        removePhoto = true;
         photoInput.value = '';
         photoPreview.innerHTML = placeholderMarkup;
         photoRemove.style.display = 'none';

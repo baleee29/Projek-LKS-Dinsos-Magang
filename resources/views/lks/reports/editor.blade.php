@@ -34,7 +34,7 @@
             </div>
             <div class="lks-actions">
                 <x-dashboard.status-badge :status="$report['status']" variant="lks" />
-                <button type="button" class="lks-button" data-demo-action>{!! $icon('save') !!}{{ $saveText }}</button>
+                <button type="button" class="lks-button" data-report-save>{!! $icon('save') !!}{{ $saveText }}</button>
             </div>
         </header>
 
@@ -45,7 +45,7 @@
             <p class="lks-report-note">Perubahan disimpan sebagai draf privat. Admin tetap melihat kiriman terakhir sampai Anda mengirim ulang laporan.</p>
         @endif
 
-        <form data-q-editor novalidate data-interim="{{ $period['interim'] ? '1' : '0' }}">
+        <form data-q-editor novalidate data-url="/lks/reports/{{ $report['id'] }}" data-version="{{ $report['version'] }}" data-interim="{{ $period['interim'] ? '1' : '0' }}">
             <div class="psm-error-summary q-errors" data-q-errors tabindex="-1" role="alert" hidden></div>
             <div class="q-section-stack lks-report-sections">
                 <section class="detail-card psm-form-card q-form-section lks-report-card" data-q-step="0">
@@ -106,7 +106,7 @@
                                 </aside>
                             </div>
                             <p class="field-error" data-upload-error tabindex="-1" role="alert" hidden></p>
-                            <div data-q-attachments style="margin-top: 14px;" data-saved="{{ collect($report['attachments'])->map(fn ($file) => ['name' => $file['name'], 'size' => $file['size'], 'type' => $file['type']])->toJson() }}"></div>
+                            <div data-q-attachments style="margin-top: 14px;" data-saved="{{ collect($report['attachments'])->map(fn ($file) => ['id' => $file['id'], 'url' => $file['url'], 'name' => $file['name'], 'size' => $file['size'], 'type' => $file['type']])->toJson() }}"></div>
                         </div>
                         <div class="lks-report-note" style="margin-top: 24px;">
                             <h3>Kelengkapan Laporan Semester</h3>
@@ -119,23 +119,23 @@
 
             <div class="psm-form-actions q-form-footer lks-report-actions" style="margin-top: 24px;">
                 <span data-save-state role="status"></span>
-                <button type="button" class="lks-button" data-demo-action>{!! $icon('save') !!}{{ $saveText }}</button>
+                <button type="button" class="lks-button" data-report-save>{!! $icon('save') !!}{{ $saveText }}</button>
                 <button type="button" class="lks-button lks-button-primary" data-preview aria-haspopup="dialog">{!! $icon('preview') !!}Pratinjau &amp; kirim</button>
             </div>
 
             <div class="lks-report-return" style="margin-top: 16px;">
                 <a href="/lks/reports">← Kembali ke daftar laporan</a>
                 @if ($report['status'] === 'Draf')
-                    <button type="button" class="psm-delete-button" data-demo-action data-confirm="Draf {{ $period['label'] }} milik {{ $organization['title'] }}, termasuk isian dan lampirannya, akan dihapus. Tindakan ini tidak dapat dibatalkan." data-confirm-title="Hapus draf laporan?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog">Hapus draf</button>
+                    <button type="button" class="psm-delete-button" data-action-url="/lks/reports/{{ $report['id'] }}" data-action-method="DELETE" data-confirm="Draf {{ $period['label'] }} milik {{ $organization['title'] }}, termasuk isian dan lampirannya, akan dihapus. Tindakan ini tidak dapat dibatalkan." data-confirm-title="Hapus draf laporan?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog">Hapus draf</button>
                 @endif
             </div>
         </form>
     </div>
-    {{-- preview() dari shared/reports.js. Kalimat "Draf sudah disimpan." dari sumber dibuang karena Tahap 1 belum menyimpan apa pun. --}}
+    {{-- preview() dari shared/reports.js. --}}
     <dialog class="q-dialog psm-preview-dialog" id="report-preview-dialog" aria-labelledby="report-preview-title">
         <h2 id="report-preview-title">Pratinjau laporan semester</h2>
         <div class="q-preview-body">
-            <p class="q-inline-note">Periksa isi dan kelengkapan berkas di bawah, kemudian lanjutkan ke konfirmasi pengiriman.</p>
+            <p class="q-inline-note">Draf sudah disimpan. Periksa isi dan kelengkapan berkas di bawah, kemudian lanjutkan ke konfirmasi pengiriman.</p>
             <section class="detail-card">
                 <h2>Informasi Laporan Semester</h2>
                 <dl class="field-grid">
@@ -155,7 +155,7 @@
         </div>
         <div class="psm-form-actions q-actions">
             <button type="button" class="text-button" data-close-dialog>Kembali mengedit</button>
-            <button type="button" class="export-button" data-demo-action data-confirm="{{ $organization['title'] }} akan mengirim {{ $period['label'] }} kepada Admin tanpa memerlukan persetujuan. Pastikan judul dan berkas lampiran sudah benar. Perubahan berikutnya tetap privat sampai dikirim ulang." data-confirm-title="Kirim laporan semester?" data-confirm-text="Ya, kirim laporan" data-confirm-safe @disabled($period['interim'])>Lanjutkan pengiriman</button>
+            <button type="button" class="export-button" data-report-send data-confirm="{{ $organization['title'] }} akan mengirim {{ $period['label'] }} kepada Admin tanpa memerlukan persetujuan. Pastikan judul dan berkas lampiran sudah benar. Perubahan berikutnya tetap privat sampai dikirim ulang." data-confirm-title="Kirim laporan semester?" data-confirm-text="Ya, kirim laporan" data-confirm-safe @disabled($period['interim'])>Lanjutkan pengiriman</button>
         </div>
     </dialog>
 @endsection

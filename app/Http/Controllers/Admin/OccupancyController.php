@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Support\ClientRecap;
-use App\Support\Demo\DemoClients;
-use App\Support\Demo\DemoOrganizations;
+use App\Support\Data\DataKlien;
+use App\Support\Data\DataLembaga;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -15,8 +15,8 @@ class OccupancyController extends Controller
     {
         return view('shared.clients.recap', ClientRecap::build(
             $request,
-            DemoClients::all(),
-            DemoOrganizations::raw(),
+            DataKlien::all(),
+            DataLembaga::raw(),
             admin: true,
             title: 'Seluruh LKS',
         ));
@@ -24,7 +24,7 @@ class OccupancyController extends Controller
 
     public function show(Request $request, string $id): View
     {
-        $client = DemoClients::find($id);
+        $client = DataKlien::find($id);
         abort_unless($client, 404);
 
         return view('shared.clients.detail', ClientRecap::detail($request, $client, admin: true));

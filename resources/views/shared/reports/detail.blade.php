@@ -44,12 +44,11 @@
             <div class="sr-detail-hero-actions">
                 <x-dashboard.status-badge :status="$report['status']" />
                 @if ($admin)
-                    {{-- TODO(Tahap 2): admin/report-download.js. --}}
-                    <button type="button" class="export-button" data-demo-download>Unduh PDF</button>
+                    <button type="button" class="export-button" data-export-url="/ekspor/laporan/{{ $report['id'] }}" data-export-format="pdf">Unduh PDF</button>
                 @else
                     <a class="export-button" href="/lks/edit/{{ $report['id'] }}">{{ $sent ? 'Perbarui laporan' : 'Lanjutkan draf' }}</a>
                     @unless ($sent)
-                        <button type="button" class="psm-delete-button" data-demo-action data-confirm="Draf {{ $period['label'] }} milik {{ $organization['title'] }}, termasuk isian dan lampirannya, akan dihapus. Tindakan ini tidak dapat dibatalkan." data-confirm-title="Hapus draf laporan?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog">Hapus draf</button>
+                        <button type="button" class="psm-delete-button" data-action-url="/lks/reports/{{ $report['id'] }}" data-action-method="DELETE" data-confirm="Draf {{ $period['label'] }} milik {{ $organization['title'] }}, termasuk isian dan lampirannya, akan dihapus. Tindakan ini tidak dapat dibatalkan." data-confirm-title="Hapus draf laporan?" data-confirm-text="Ya, hapus draf" aria-haspopup="dialog">Hapus draf</button>
                     @endunless
                 @endif
             </div>
@@ -83,7 +82,7 @@
                     @if (count($files))
                         <ul class="sr-detail-files">
                             @foreach ($files as $file)
-                                <li><span class="sr-detail-file-type" aria-hidden="true">{{ strtoupper(substr(pathinfo($file['name'], PATHINFO_EXTENSION), 0, 4)) ?: 'DOK' }}</span><div><strong>{{ $file['name'] }}</strong><small>{{ $file['type'] }} · {{ number_format(ceil($file['size'] / 1024), 0, ',', '.') }} KB</small></div><button type="button" class="sr-detail-button" data-demo-download aria-label="Lihat {{ $file['name'] }}">{!! $icon('eye') !!}Lihat</button></li>
+                                <li><span class="sr-detail-file-type" aria-hidden="true">{{ strtoupper(substr(pathinfo($file['name'], PATHINFO_EXTENSION), 0, 4)) ?: 'DOK' }}</span><div><strong>{{ $file['name'] }}</strong><small>{{ $file['type'] }} · {{ number_format(ceil($file['size'] / 1024), 0, ',', '.') }} KB</small></div><button type="button" class="sr-detail-button" data-download-url="{{ $file['url'] }}" aria-label="Lihat {{ $file['name'] }}">{!! $icon('eye') !!}Lihat</button></li>
                             @endforeach
                         </ul>
                     @else

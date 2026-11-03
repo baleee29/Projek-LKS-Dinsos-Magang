@@ -41,7 +41,8 @@
             </ol>
         </nav>
         <div class="lrf-layout">
-            <form id="resident-form" class="lrf-form" novalidate>
+            <form id="resident-form" class="lrf-form" novalidate data-submit-url="{{ $item ? '/lks/clients/'.$item['id'] : '/lks/clients' }}">
+                @if ($item)<input type="hidden" name="version" value="{{ $item['version'] }}">@endif
                 <div class="q-errors" id="resident-form-errors" role="alert" tabindex="-1" hidden></div>
                 @foreach ($sections as $section)
                     <fieldset class="lrf-card" id="lrf-section-{{ $section['key'] }}" data-section-fields="{{ implode(',', $section['fields']) }}">
@@ -58,7 +59,7 @@
                                     <div class="lks-photo-uploader">
                                         <div class="lks-photo-preview" id="client-photo-preview"><div class="lks-photo-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div></div>
                                         <div class="lks-photo-uploader-controls">
-                                            <input type="file" id="client-photo-input" accept="image/jpeg,image/png,image/webp" class="sr-only" style="width:1px;min-width:0;">
+                                            <input type="file" id="client-photo-input" name="photo" accept="image/jpeg,image/png,image/webp" class="sr-only" style="width:1px;min-width:0;">
                                             <div class="lks-photo-btn-row">
                                                 <label for="client-photo-input" class="lrf-secondary lks-button-upload" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;">Pilih Foto Profil</label>
                                                 <button type="button" class="lrf-secondary" id="client-photo-remove" style="display:none;">Hapus Foto</button>
@@ -122,7 +123,7 @@
             <h2 id="lrf-delete-title">Hapus klien?</h2>
             <p id="lrf-delete-description">Biodata <strong>{{ $item['name'] }}</strong> beserta foto dan berkasnya akan dihapus permanen dari sistem dan tidak lagi tampil di rekap klien maupun akun Admin.</p>
             <p class="lrf-dialog-note">Jika klien hanya berhenti menerima layanan, ubah Status Tinggal menjadi "Sudah keluar" agar riwayatnya tetap tersimpan.</p>
-            <div class="lrf-actions"><button class="lrf-secondary" type="button" data-close-dialog>Batal</button><button class="lrf-danger" type="button" data-demo-action>Ya, Hapus Klien</button></div>
+            <div class="lrf-actions"><button class="lrf-secondary" type="button" data-close-dialog>Batal</button><button class="lrf-danger" type="button" data-action-url="/lks/clients/{{ $item['id'] ?? '' }}" data-action-method="DELETE">Ya, Hapus Klien</button></div>
         </dialog>
     @endif
     <script type="application/json" id="client-form-schema">{!! $schemaJson !!}</script>

@@ -40,6 +40,7 @@ if (form) {
         image.addEventListener('load', () => URL.revokeObjectURL(image.src), { once: true });
         preview.replaceChildren(image);
         hasPhoto = true;
+        form.querySelector('#lm-remove-photo').value = '0';
         remove.hidden = false;
         uploadLabel.textContent = 'Ubah Foto Profil';
     });
@@ -53,6 +54,7 @@ if (form) {
         if (!accepted) return;
         hasPhoto = false;
         input.value = '';
+        form.querySelector('#lm-remove-photo').value = '1';
         error.hidden = true;
         placeholder();
     });

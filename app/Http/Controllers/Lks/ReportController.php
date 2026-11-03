@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Lks;
 
 use App\Http\Controllers\Controller;
-use App\Support\Demo\DemoClock;
-use App\Support\Demo\DemoOrganizations;
-use App\Support\Demo\DemoPaginator;
-use App\Support\Demo\DemoReports;
+use App\Support\Data\Kalender;
+use App\Support\Data\DataLembaga;
+use App\Support\Data\Halaman;
+use App\Support\Data\DataLaporan;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -31,8 +31,8 @@ class ReportController extends Controller
         return view('shared.reports.detail', [
             'admin' => false,
             'report' => $report,
-            'organization' => DemoOrganizations::own(),
-            'period' => DemoClock::period((int) $report['year'], (int) $report['quarter']),
+            'organization' => DataLembaga::own(),
+            'period' => Kalender::period((int) $report['year'], (int) $report['quarter']),
         ]);
     }
 
@@ -42,15 +42,15 @@ class ReportController extends Controller
 
         return view('lks.reports.editor', [
             'report' => $report,
-            'organization' => DemoOrganizations::own(),
-            'period' => DemoClock::period((int) $report['year'], (int) $report['quarter']),
+            'organization' => DataLembaga::own(),
+            'period' => Kalender::period((int) $report['year'], (int) $report['quarter']),
         ]);
     }
 
     private function listing(Request $request, string $forcedStatus): View
     {
-        $organization = DemoOrganizations::own();
-        $all = DemoReports::forOrganization($organization['id']);
+        $organization = DataLembaga::own();
+        $all = DataLaporan::forOrganization($organization['id']);
         $filters = [
             'q' => (string) $request->query('q', ''),
             'year' => (string) $request->query('year', ''),
@@ -72,7 +72,7 @@ class ReportController extends Controller
             ->sort(fn (array $a, array $b) => [$b['year'], $b['quarter']] <=> [$a['year'], $a['quarter']])
             ->values();
 
-        $calendarYear = (int) $filters['year'] ?: DemoClock::YEAR;
+        $calendarYear = (int) $filters['year'] ?: Kalender::year();
 
         return view('lks.reports.index', [
             'organization' => $organization,
@@ -82,31 +82,31 @@ class ReportController extends Controller
                 ? 'Lanjutkan draf, periksa kelengkapan, lalu kirim laporan semester ke Admin.'
                 : 'Kelola dan kirim laporan semester langsung ke Admin tanpa proses persetujuan.',
             'filters' => $filters,
-            'years' => $all->pluck('year')->push(DemoClock::YEAR)->unique()->sortDesc()->values(),
-            'statuses' => DemoReports::ACTIVE_STATUSES,
+            'years' => $all->pluck('year')->push(Kalender::year())->unique()->sortDesc()->values(),
+            'statuses' => DataLaporan::ACTIVE_STATUSES,
             'metrics' => [
                 ['Total Laporan', $yearScope->count(), 'Riwayat periode yang tercatat', 'file', ''],
                 ['Terkirim', $yearScope->where('status', 'Terkirim')->count(), 'Laporan sudah masuk ke Admin', 'shield', 'approved'],
                 ['Perubahan Belum Dikirim', $yearScope->where('hasDraftChanges', true)->count(), 'Draf pembaruan milik lembaga', 'info', 'revision'],
                 ['Draf Berjalan', $yearScope->where('status', 'Draf')->count(), 'Isian belum dikirim', 'edit', 'draft'],
             ],
-            'reports' => DemoPaginator::make($filtered, self::PER_PAGE),
+            'reports' => Halaman::make($filtered, self::PER_PAGE),
             'calendarYear' => $calendarYear,
             'semesters' => collect([1, 3])->map(fn (int $quarter) => [
                 'number' => $quarter === 1 ? 1 : 2,
-                'period' => DemoClock::period($calendarYear, $quarter),
+                'period' => Kalender::period($calendarYear, $quarter),
                 'existing' => $all->first(fn (array $item) => (int) $item['year'] === $calendarYear && ((int) $item['quarter'] <= 2) === ($quarter === 1)),
             ]),
-            'today' => DemoClock::TODAY,
-            'dialogYears' => [DemoClock::YEAR, DemoClock::YEAR - 1, DemoClock::YEAR - 2],
+            'today' => Kalender::today(),
+            'dialogYears' => [Kalender::year(), Kalender::year() - 1, Kalender::year() - 2],
         ]);
     }
 
     /** @return array<string, mixed> */
     private function owned(string $id): array
     {
-        $report = DemoReports::find($id);
-        abort_unless($report && $report['organizationId'] === DemoOrganizations::OWN_LKS, 404);
+        $report = DataLaporan::find($id);
+        abort_unless($report && $report['organizationId'] === DataLembaga::ownId(), 404);
 
         return $report;
     }
