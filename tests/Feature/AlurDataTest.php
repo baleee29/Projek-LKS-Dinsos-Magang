@@ -355,21 +355,41 @@ class AlurDataTest extends TestCase
     public function test_exports_follow_scope_and_filters(): void
     {
         $akun = $this->lks();
+        $lain = $this->lembagaLain()->id;
         $this->actingAs($akun);
-        $milik = KlienLks::where('lembaga_id', $akun->lembaga_id)->count();
-        $this->assertCount($milik, $this->getJson('/ekspor/klien?residence=')->assertOk()->json('rows'));
+        $klien = $this->getJson('/ekspor/klien?residence=')->assertOk()->assertJsonPath('kind', 'klien');
+        $this->assertCount(KlienLks::where('lembaga_id', $akun->lembaga_id)->count(), $klien->json('items'));
+        $this->assertSame([$akun->lembaga_id], collect($klien->json('organizations'))->pluck('id')->all());
+        $this->assertArrayHasKey('birthDate', $klien->json('items.0.data'));
+
         $this->getJson('/ekspor/lembaga')->assertForbidden();
-        $this->assertCount(PengurusLks::where('lembaga_id', $akun->lembaga_id)->count(), $this->getJson('/ekspor/pengurus?org='.$this->lembagaLain()->id)->json('rows'));
-        $this->getJson('/ekspor/surat')->assertOk();
-        $this->getJson('/ekspor/laporan')->assertOk();
+        $pengurus = $this->getJson('/ekspor/pengurus?org='.$lain)->assertOk();
+        $this->assertSame($akun->lembaga_id, $pengurus->json('org.id'));
+        $this->assertCount(PengurusLks::where('lembaga_id', $akun->lembaga_id)->count(), $pengurus->json('members'));
+        $this->assertCount(PengurusLks::where('lembaga_id', $akun->lembaga_id)->where('kategori', 'Staf')->count(), $this->getJson('/ekspor/pengurus?category=Staf')->json('members'));
+
+        $laporan = $this->getJson('/ekspor/laporan')->assertOk()->assertJsonPath('kind', 'laporanLks');
+        $this->assertCount(LaporanSemester::where('lembaga_id', $akun->lembaga_id)->count(), $laporan->json('items'));
+        $this->assertContains($laporan->json('items.0.quarter'), [1, 2]);
+        $this->assertCount(LaporanSemester::where('lembaga_id', $akun->lembaga_id)->where('status', 'Draf')->count(), $this->getJson('/ekspor/laporan?status=Draf')->json('items'));
+        $this->getJson('/ekspor/laporan/'.$laporan->json('items.0.id'))->assertForbidden();
+
+        $surat = $this->getJson('/ekspor/surat')->assertOk()->assertJsonPath('adminMode', false)->assertJsonPath('prefix', 'Surat_Masuk_LKS');
+        $this->assertSame([$akun->lembaga_id], collect($surat->json('items'))->pluck('organization_id')->unique()->values()->all());
 
         $this->actingAs($this->admin());
-        $this->assertCount(KlienLks::count(), $this->getJson('/ekspor/klien?residence=')->json('rows'));
-        $this->assertCount(Lembaga::count(), $this->getJson('/ekspor/lembaga')->json('rows'));
-        $laporan = $this->getJson('/ekspor/laporan')->json('rows');
-        $this->assertCount(LaporanSemester::where('status', 'Terkirim')->count(), $laporan);
-        $draf = LaporanSemester::where('status', 'Draf')->value('id');
-        $this->getJson('/ekspor/laporan/'.$draf)->assertNotFound();
+        $this->assertCount(KlienLks::count(), $this->getJson('/ekspor/klien?residence=')->json('items'));
+        $this->assertCount(Lembaga::count(), $this->getJson('/ekspor/lembaga')->json('items'));
+        $this->getJson('/ekspor/pengurus?org='.$lain)->assertOk()->assertJsonPath('org.id', $lain);
+        $this->getJson('/ekspor/pengurus')->assertNotFound();
+        $admin = $this->getJson('/ekspor/laporan')->assertJsonPath('kind', 'laporanAdmin');
+        $admin->assertJsonPath('context.year', '')->assertJsonPath('context.quarter', '');
+        $this->getJson('/ekspor/laporan?year=2026&quarter=all')->assertJsonPath('context.year', '2026')->assertJsonPath('context.quarter', 'all');
+        $this->assertCount(LaporanSemester::where('status', 'Terkirim')->count(), $admin->json('reports'));
+        $this->assertNotContains('Draf', collect($admin->json('reports'))->pluck('status')->all());
+        $this->getJson('/ekspor/laporan/'.LaporanSemester::where('status', 'Draf')->value('id'))->assertNotFound();
+        $this->getJson('/ekspor/laporan/'.LaporanSemester::where('status', 'Terkirim')->value('id'))->assertOk()->assertJsonPath('report.pillar', 'lks');
+        $this->getJson('/ekspor/surat?tab=outgoing&year=2026&month=3')->assertJsonPath('periodText', 'Maret 2026')->assertJsonPath('prefix', 'Surat_Keluar_LKS_Admin');
     }
 
     public function test_sample_passwords_are_hashed_and_seed_is_lks_only(): void
