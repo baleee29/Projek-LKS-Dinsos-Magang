@@ -8,7 +8,7 @@
 @endphp
 
 @section('content')
-    <x-dashboard.section-heading title="Notifikasi" :description="$admin ? 'Data masuk, pembaruan, penghapusan, dan perubahan status dari seluruh mitra.' : 'Pengajuan dan pembaruan status laporan organisasi Anda.'" :eyebrow="$admin ? 'Dinas Sosial Kota Banjarbaru' : $identity['organization'] ?? session('demo_role')">
+    <x-dashboard.section-heading title="Notifikasi" :description="$admin ? 'Data masuk, pembaruan, penghapusan, dan perubahan status dari seluruh mitra.' : 'Pengajuan dan pembaruan status laporan organisasi Anda.'" :eyebrow="$eyebrow">
         {{-- TODO(Tahap 2): POST /notifications/read-all. --}}
         <button class="text-button" type="button" id="mark-notifications-read" data-demo-action @disabled($unreadCount === 0)>Tandai semua dibaca</button>
     </x-dashboard.section-heading>

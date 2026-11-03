@@ -15,7 +15,7 @@ class ProfileController extends Controller
     {
         $organization = DemoOrganizations::own();
 
-        return view('shared.lks-profile', [
+        return view('lks.profile', [
             'admin' => false,
             'organization' => $organization,
             'memberCount' => DemoMembers::forOrganization($organization['id'])->count(),

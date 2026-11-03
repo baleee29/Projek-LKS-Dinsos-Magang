@@ -20,6 +20,7 @@
                                 Pilih Logo
                                 <input type="file" id="org-logo-file-input" accept="image/png,image/jpeg,image/webp" data-max-mb="2" data-preview="org-logo-preview-box" data-status="org-logo-status-text" style="display: none;">
                             </label>
+                            <button type="button" class="text-button" id="btn-remove-org-logo" style="font-size: 12px; padding: 6px 10px; color: #dc2626; display: none;">Hapus Logo</button>
                         </div>
                         <span id="org-logo-status-text" style="font-size: 11px; color: var(--muted, #64748b);">Belum ada logo dipilih</span>
                     </div>
@@ -56,8 +57,9 @@
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; color: #0284c7;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                         Titik Koordinat Sekretariat (Latitude &amp; Longitude)
                     </span>
+                    <button type="button" class="export-button" id="btn-detect-gps" style="font-size: 11px; padding: 4px 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">📍 Deteksi GPS Sekarang</button>
                 </div>
-                <p class="muted" style="font-size: 12px; margin: 0 0 10px 0;">Isi titik koordinat letak sekretariat.</p>
+                <p class="muted" style="font-size: 12px; margin: 0 0 10px 0;">Isi titik koordinat letak sekretariat atau klik 'Deteksi GPS Sekarang' saat berada di lokasi sekretariat untuk mengisi otomatis.</p>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <label style="font-size: 12px; display: flex; flex-direction: column; gap: 4px;">
                         <span>Latitude (Garis Lintang)</span>

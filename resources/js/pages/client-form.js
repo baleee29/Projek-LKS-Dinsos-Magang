@@ -1,5 +1,5 @@
 // Interaksi form klien, dari lks/client-form.js: bagian, isian bersyarat, pratinjau, kelengkapan, dan foto.
-// TODO(Tahap 2): kirim ke POST/PUT /lks/clients; aturan akhir ada di shared/data-validation.js.
+// TODO(Tahap 2): kirim ke POST /lks/clients; aturan akhir ada di shared/data-validation.js.
 import { notify, DEMO_SAVE_MESSAGE } from '../dashboard/toast.js';
 
 const form = document.querySelector('#resident-form');

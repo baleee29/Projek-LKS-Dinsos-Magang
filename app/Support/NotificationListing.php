@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Support\Demo\DemoNotifications;
+use App\Support\Demo\DemoOrganizations;
 use App\Support\Demo\DemoPaginator;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,7 @@ class NotificationListing
 
         return [
             'admin' => $role === 'admin',
+            'eyebrow' => $role === 'admin' ? 'Dinas Sosial Kota Banjarbaru' : DemoOrganizations::own()['title'],
             'all' => $all,
             'unreadCount' => $unread,
             'filters' => $filters,

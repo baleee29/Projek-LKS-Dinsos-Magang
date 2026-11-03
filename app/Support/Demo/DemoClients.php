@@ -114,7 +114,7 @@ class DemoClients extends DemoRepository
         ];
     }
 
-    /** @return array<int, array<string, mixed>> Bagian dan label form klien (lks/client-form-sections.js, data-schemas.js). */
+    /** @return array<string, array<int, string>> Pilihan filter rekap, dari shared/data-schemas.js. */
     public static function formOptions(): array
     {
         return [

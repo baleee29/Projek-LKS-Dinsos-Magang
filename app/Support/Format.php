@@ -95,9 +95,7 @@ class Format
             return 'Usia belum diketahui';
         }
 
-        return Carbon::parse($client['birthDate'])->diffInYears(Carbon::parse($today), true) >= 0
-            ? ((int) substr($today, 0, 4) - (int) substr($client['birthDate'], 0, 4) - (substr($today, 5) < substr($client['birthDate'], 5) ? 1 : 0)).' tahun'
-            : 'Usia belum diketahui';
+        return ((int) substr($today, 0, 4) - (int) substr($client['birthDate'], 0, 4) - (substr($today, 5) < substr($client['birthDate'], 5) ? 1 : 0)).' tahun';
     }
 
     /** @return array{has: bool, text: string, mapUrl: string, embedUrl: string} */
