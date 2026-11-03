@@ -1,0 +1,280 @@
+/* ===== Redesain: aksen zamrud LKS, struktur bermakna, dan interaksi (pillars/lks.js). ===== */
+
+/* Aksen untuk elemen interaktif mengikuti biru merek halaman. */
+.lks-section,
+.lks-hero,
+.lks-section-nav {
+    --lks-accent: var(--lks-primary);
+}
+
+/* Label bagian: teks bergaris, bukan pil. */
+.lks-section .eyebrow,
+.lks-registration-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--lks-primary);
+}
+.lks-section .eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--lks-accent);
+}
+.lks-registration-label .lks-icon {
+    display: none;
+}
+
+/* Fungsi: tiga kolom bergaris dengan angka besar, rata kiri. */
+#fungsi-lks .lks-section-intro,
+#fungsi-lks .lks-section-intro > p {
+    margin-inline: 0;
+    text-align: left;
+}
+.lks-function-list {
+    gap: 0 var(--lks-space-5);
+}
+.lks-function-list li {
+    display: block;
+    padding: var(--lks-space-4) 0 0;
+    border: 0;
+    border-top: 3px solid var(--lks-border);
+    border-radius: 0;
+    background: none;
+    transition: border-color 0.2s;
+}
+.lks-function-list li:hover {
+    border-top-color: var(--lks-accent);
+}
+.lks-function-number {
+    display: block;
+    min-width: 0;
+    min-height: 0;
+    margin-bottom: var(--lks-space-2);
+    padding: 0;
+    background: none;
+    color: var(--lks-accent);
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+/* Contoh layanan: satu sorotan besar dengan pemilih kelompok sasaran. */
+.lks-service-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: var(--lks-space-4);
+}
+.lks-service-picker button {
+    min-height: 44px;
+    padding: 10px 18px;
+    border: 1px solid var(--lks-border);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--lks-primary);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.lks-service-picker button:hover {
+    border-color: var(--lks-primary);
+}
+.lks-service-picker button[aria-selected="true"] {
+    border-color: var(--lks-primary);
+    background: var(--lks-primary);
+    color: #fff;
+}
+.lks-service-list.is-featured {
+    grid-template-columns: minmax(0, 1fr);
+}
+.lks-service-list.is-featured > li:not([hidden]) {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    animation: lks-fade 0.3s ease;
+}
+.lks-service-list.is-featured .lks-service-image {
+    height: 100%;
+    margin: 0;
+}
+.lks-service-list.is-featured .lks-service-image img {
+    height: 100%;
+    min-height: 280px;
+    object-fit: cover;
+}
+.lks-service-list.is-featured .lks-service-copy {
+    padding: clamp(1.5rem, 4vw, 3rem);
+}
+.lks-service-list.is-featured .lks-service-copy h3 {
+    font-size: 1.5rem;
+}
+
+/* Mencari bantuan: tiga langkah tersambung garis, rata kiri. */
+.lks-access-steps {
+    position: relative;
+    gap: 0 var(--lks-space-4);
+}
+.lks-access-steps::before {
+    content: "";
+    position: absolute;
+    top: 1.125rem;
+    left: 1.125rem;
+    right: 33%;
+    height: 2px;
+    background: var(--lks-border);
+}
+.lks-access-steps li {
+    position: relative;
+    padding: 0;
+    border: 0;
+    background: none;
+}
+.lks-access-steps li::before {
+    position: relative;
+    background: var(--lks-primary);
+    box-shadow: 0 0 0 6px var(--lks-soft);
+}
+.lks-access-actions {
+    justify-content: start;
+}
+
+/* Alur pendaftaran: garis waktu dengan daftar centang. */
+.lks-steps-progress {
+    display: grid;
+    gap: 8px;
+    margin-bottom: var(--lks-space-3);
+}
+.lks-steps-progress p {
+    margin: 0;
+    color: var(--lks-muted);
+    font-size: var(--lks-text-small);
+    font-weight: 600;
+}
+.lks-steps-bar {
+    display: block;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--lks-border);
+}
+.lks-steps-bar span {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--lks-accent);
+    transition: width 0.3s ease;
+}
+.lks-registration-steps.is-checklist,
+.lks-registration-steps {
+    position: relative;
+    gap: 0;
+}
+.lks-registration-steps::before {
+    content: "";
+    position: absolute;
+    top: 1.25rem;
+    bottom: 1.25rem;
+    left: 1.25rem;
+    width: 2px;
+    background: var(--lks-border);
+}
+.lks-registration-steps > li {
+    position: relative;
+    padding: 0 0 var(--lks-space-4);
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+.lks-registration-number {
+    position: relative;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--lks-primary);
+    box-shadow: inset 0 0 0 2px var(--lks-primary);
+    transition: background 0.2s, color 0.2s;
+}
+.lks-registration-steps > li.is-done .lks-registration-number {
+    background: var(--lks-primary);
+    color: #fff;
+    box-shadow: none;
+}
+.lks-registration-steps > li.is-done h3 {
+    color: var(--lks-muted);
+}
+.lks-step-toggle {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    margin: var(--lks-space-2) 0 0 var(--lks-space-2);
+    padding: 6px 12px;
+    border: 1px dashed var(--lks-border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--lks-muted);
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.lks-registration-steps > li > div > p + .lks-step-toggle {
+    margin-left: 0;
+}
+.lks-step-toggle:hover {
+    border-color: var(--lks-accent);
+    color: var(--lks-primary);
+}
+.lks-step-toggle[aria-pressed="true"] {
+    border-style: solid;
+    border-color: var(--lks-accent);
+    background: var(--lks-soft);
+    color: var(--lks-primary);
+}
+
+@keyframes lks-fade {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 760px) {
+    .lks-function-list {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--lks-space-4);
+    }
+    .lks-service-list.is-featured > li:not([hidden]) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .lks-service-list.is-featured .lks-service-image img {
+        min-height: 200px;
+    }
+    .lks-access-steps {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--lks-space-4);
+    }
+    .lks-access-steps::before {
+        display: none;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .lks-service-list.is-featured > li,
+    .lks-steps-bar span,
+    .lks-function-list li {
+        animation: none;
+        transition: none;
+    }
+}
+
+#akses-lks .lks-section-intro,
+#akses-lks .lks-section-intro > p {
+    margin-inline: 0;
+    text-align: left;
+}
+.lks-steps-column {
+    min-width: 0;
+}
+

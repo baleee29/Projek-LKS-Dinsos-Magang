@@ -4,6 +4,8 @@ Daftar singkat untuk mengganti data dummy Tahap 1 dengan backend sungguhan. "Sum
 
 **Cakupan:** dashboard Admin hanya mengelola LKS. Fitur Admin untuk PSM dan Karang Taruna (data anggota, pengaduan, data kelompok, surat pengajuan, surat balasan) sudah dihapus atas permintaan user, sehingga tidak dibangun di Tahap 2 kecuali diminta lagi. Kode lamanya tersimpan di git sampai commit `ac0dfb5`.
 
+Nama tabel, kolom, dan database yang dipakai ada di [rancangan-database.md](rancangan-database.md). Nama Inggris di dokumen ini merujuk ke tabel di project sumber, dan aturan database pengujian `sidaya_testing` di bagian 4 menjadi `sidaya_uji`.
+
 ## 1. Class dummy dan tabel penggantinya
 
 | Class `App\Support\Demo` | Tabel sumber |
@@ -16,7 +18,7 @@ Daftar singkat untuk mengganti data dummy Tahap 1 dengan backend sungguhan. "Sum
 | `DemoRegistrations` | `partner_registrations`, `partner_registration_files` (pilar LKS) |
 | `DemoAccounts`, `DemoAdminAccount` | `users` (role `lks` dan `admin`) |
 | `DemoNotifications` | `notifications` (notifikasi database Laravel per pengguna) |
-| `DemoLanding` | `LandingRegistry` dan `config/landing.php` sumber, ditambah view publik |
+| `DemoLanding`, `DemoLandingContents` | `App\Services\LandingContents` sumber dan tabel isian landing; `App\Support\LandingRegistry` sudah dipindahkan |
 | `DemoRegions` | `config/psm.php` sumber |
 | `DemoClock` | `now('Asia/Makassar')` dan `currentPeriod()` dari `shared/data.js` |
 | `DemoShell` | `auth()->user()` dan rekap `shared/workflow-summary.js` |
@@ -28,6 +30,7 @@ Lihat `routes/web.php` di sumber untuk middleware dan throttle.
 
 | Aksi di Tahap 1 | Endpoint sumber |
 | --- | --- |
+| Kirim pendaftaran LKS | `POST /pendaftaran/mitra` |
 | Login, logout | `POST /login`, `POST /logout` (`SessionController`) |
 | Ganti kata sandi | `PUT /account/password` |
 | Simpan Pengaturan Akun | `PUT /account/profile` |
@@ -82,12 +85,12 @@ Dari `AGENTS.md`, `docs/alur-sistem.md`, dan `docs/database.md` di sumber.
 - Filter berjalan di server lewat query string, bukan menyaring di browser.
 - Ringkasan Admin ditulis ulang untuk LKS: kartu tiga pilar diganti kartu Lembaga, Klien, dan Laporan, dan antrean pekerjaan berisi pendaftaran serta surat LKS.
 - Menu "Pendaftaran Mitra" dan "Buat Akun Mitra" menjadi "Pendaftaran LKS" dan "Buat Akun LKS". Pilihan pilar dihapus dari form akun, dan isian "Jenis mitra" dihapus dari notifikasi.
-- Kelola Landing Page tetap ada untuk halaman umum dan halaman LKS. Tab PSM, Karang Taruna, dan PUB dihapus.
+- Halaman publik yang dibangun hanya Beranda, Profil, Kontak, Pilar Sosial (hanya berisi LKS), dan LKS. Halaman PSM, Karang Taruna, dan PUB tidak dibawa, dan teksnya disesuaikan ke LKS.
+- Formulir pendaftaran LKS (`/pilar/pendaftaran-lks.html`) hanya memeriksa isian dan berkas di memori halaman. Tidak ada pengiriman ke server, database, localStorage, sessionStorage, atau IndexedDB. Teks yang menjanjikan penyimpanan diganti, dan layar akhir menyatakan pendaftaran belum dikirim. Di Tahap 2 sambungkan ke `POST /pendaftaran/mitra` lewat `shared/partner-registration-data.js`.
+- Kelola Landing Page membaca slot dari Blade publik lewat `LandingRegistry`, dengan tab Kontak Dinas Sosial, Beranda, Profil, Kontak, LKS, dan Footer. Simpan dan unggah masih dummy.
 - Tautan sumber `#members?pillar=lks` dan `#organizations` tidak punya rute, jadi diarahkan ke Data LKS.
 - Tab, filter kategori, dan paginasi tetap `<button>` seperti sumber karena CSS menargetkan elemen itu. Navigasinya lewat `data-href`.
 - Beberapa `min-width: 0` ditambahkan langsung di markup Buat Akun LKS dan form klien untuk menghilangkan horizontal scroll, tanpa mengubah file CSS sumber.
-- Link publik pada halaman login dan footer kembali ke `/login`, karena halaman publik di luar cakupan.
-- Slot Kelola Landing Page berasal dari data dummy, dan tautan pratinjaunya dinonaktifkan.
 - Dialog pratinjau laporan tidak memuat kalimat "Draf sudah disimpan." dari sumber, karena Tahap 1 belum menyimpan apa pun. Kembalikan kalimat itu saat penyimpanan tersambung.
 - Surat tidak otomatis terbaca saat dibuka seperti di sumber; Tahap 1 memakai tombol Tandai dibaca dengan toast netral.
 - Berkas dummy tidak punya isi, jadi dialog surat selalu memakai tampilan "pratinjau tidak didukung". Pratinjau PDF dan gambar dari `lks/letters-actions.js` perlu dipasang di Tahap 2.
@@ -100,9 +103,11 @@ Daftar ini dibuat dari kode. Perbarui dengan `grep -rn "TODO(Tahap 2)" app resou
 - `app/Http/Controllers/Auth/ChangePasswordController.php:13`: tambahkan PUT /account/password dari AccountPasswordController sumber.
 - `app/Http/Controllers/Auth/DemoSessionController.php:14`: ganti dengan SessionController sumber (Auth::attempt, throttle, pemeriksaan akun aktif).
 - `app/Http/Middleware/EnsureDemoRole.php:12`: ganti dengan middleware auth, EnsureActiveAccount, EnsurePasswordChanged,
+- `app/Providers/AppServiceProvider.php:26`: ganti dengan App\Services\LandingContents dari sumber.
 - `app/Support/Demo/DemoClientSchema.php:9`: pindahkan ke FormRequest dengan aturan dari shared/data-validation.js.
 - `app/Support/Demo/DemoClock.php:8`: ganti dengan now('Asia/Makassar') dan currentPeriod() dari shared/data.js.
-- `app/Support/Demo/DemoLanding.php:9`: pindahkan LandingRegistry dan view publik, lalu hapus class ini.
+- `app/Support/Demo/DemoLanding.php:10`: gabungkan dengan isian tersimpan seperti LandingContentController sumber.
+- `app/Support/Demo/DemoLandingContents.php:8`: ganti dengan App\Services\LandingContents dari sumber, yang membaca isian Admin dari database.
 - `app/Support/Demo/DemoPaginator.php:12`: ganti dengan $query->paginate($perPage)->withQueryString().
 - `app/Support/Demo/DemoRegions.php:8`: pindahkan dari config/psm.php sumber.
 - `app/Support/Demo/DemoRepository.php:13`: ganti turunan class ini dengan query Eloquent.
@@ -115,6 +120,7 @@ Daftar ini dibuat dari kode. Perbarui dengan `grep -rn "TODO(Tahap 2)" app resou
 - `resources/js/pages/landing-content.js:2`: PUT dan DELETE /admin/landing-content, POST untuk unggah foto.
 - `resources/js/pages/partner-accounts.js:2`: POST /admin/partner-accounts dan POST /admin/partner-accounts/{id}/reset-password.
 - `resources/js/pages/report-editor.js:2`: unggah lewat shared/reports-attachments.js.
+- `resources/js/public/registrations/lks.js:3`: kirim lewat shared/partner-registration-data.js; hasilnya disampaikan Admin melalui WhatsApp.
 - `resources/views/admin/account.blade.php:19`: PUT /account/profile.
 - `resources/views/admin/organizations/index.blade.php:14`: ekspor dari admin/partner-export-lks.js.
 - `resources/views/admin/organizations/show.blade.php:13`: ekspor dari lks/staff-export.js.
@@ -122,11 +128,12 @@ Daftar ini dibuat dari kode. Perbarui dengan `grep -rn "TODO(Tahap 2)" app resou
 - `resources/views/admin/registrations/show.blade.php:62`: POST /admin/partner-registrations/{id}/review. Alasan penolakan wajib minimal 10 karakter.
 - `resources/views/admin/reports/index.blade.php:65`: ekspor dari shared/report-recap-export.js.
 - `resources/views/auth/change-password.blade.php:23`: kirim ke PUT /account/password (AccountPasswordController sumber).
-- `resources/views/auth/login.blade.php:97`: form ini memakai autentikasi sungguhan (SessionController sumber).
+- `resources/views/auth/login.blade.php:85`: form ini memakai autentikasi sungguhan (SessionController sumber).
 - `resources/views/lks/members/index.blade.php:22`: ekspor dari lks/staff-export.js.
 - `resources/views/lks/profile-dialog.blade.php:1`: PUT /organization/profile, POST /organization/logo, POST /organization/coordinates.
 - `resources/views/lks/reports/index.blade.php:13`: ekspor dari lks/reports-export.js.
 - `resources/views/lks/reports/new-report-dialog.blade.php:1`: POST /laporan-triwulan.
+- `resources/views/public/registration-lks.blade.php:86`: kirim ke POST /pendaftaran/mitra lewat shared/partner-registration-data.js.
 - `resources/views/shared/clients/recap.blade.php:15`: ekspor dari lks/resident-export.js.
 - `resources/views/shared/letters.blade.php:176`: ekspor dari lks/letters-export.js.
 - `resources/views/shared/letters.blade.php:303`: POST /lks/letters/{id}/read.
@@ -135,4 +142,4 @@ Daftar ini dibuat dari kode. Perbarui dengan `grep -rn "TODO(Tahap 2)" app resou
 - `resources/views/shared/notifications/index.blade.php:12`: POST /notifications/read-all.
 - `resources/views/shared/reports/detail.blade.php:47`: admin/report-download.js.
 - `resources/views/shared/reports/table.blade.php:28`: admin/report-download.js.
-- `routes/web.php:11`: rute masuk demo diganti SessionController dengan middleware guest dan throttle.
+- `routes/web.php:17`: rute masuk demo diganti SessionController dengan middleware guest dan throttle.

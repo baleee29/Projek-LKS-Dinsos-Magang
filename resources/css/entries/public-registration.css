@@ -1,0 +1,11 @@
+/* Urutan mengikuti halaman public/registrations/lks.blade.php di sumber. Jangan diubah: urutan memengaruhi hasil. */
+@import "../shared/brand.css";
+@import "../shared/numeric-input.css";
+@import "../public/shared/base.css";
+@import "../public/shared/navigation.css";
+@import "../public/shared/footer.css";
+@import "../public/shared/content.css";
+@import "../public/registrations/lks/intro-form.css";
+@import "../public/registrations/lks/documents.css";
+@import "../public/registrations/lks/review-dialogs.css";
+@import "../public/registrations/lks/requirements.css";

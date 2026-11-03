@@ -1,0 +1,42 @@
+[
+    {
+        "asset": "logo-kota-banjarbaru.png",
+        "source": "User-provided image supplied during development on 2026-10-26 (3.png)",
+        "source_sha256": "6fdf40920412e5745c1d335b06fae9e4f91e155e2f32b75e4176fc27200323de",
+        "sha256": "f03a6b477decce1687f6377681c19e3a8b370f489a7ee10097d9babd8c2af9f3",
+        "width": 131,
+        "height": 176,
+        "usage": "Lambang Kota Banjarbaru di header publik",
+        "modifications": "Outer white background made transparent by flood fill from the four corners (threshold 60), cropped to content, resized to 176px high with Pillow LANCZOS."
+    },
+    {
+        "asset": "logo-dinsos-banjarbaru.png",
+        "source": "User-provided image supplied during development on 2026-10-26 (1.jpg)",
+        "source_sha256": "56138d7d8a0fe446a0e83b752e79fc0a4b8d0cf611738c22ae8e46330a6ac860",
+        "sha256": "d7a52c282e47a1c11aab99b3014d3456c48c1d9da894ea51badf63c5b2f02bdb",
+        "width": 174,
+        "height": 176,
+        "usage": "Logo Dinas Sosial Kota Banjarbaru di header publik",
+        "modifications": "Outer background made transparent by flood fill from the four corners (threshold 60), cropped to content, resized to 176px high with Pillow LANCZOS."
+    },
+    {
+        "asset": "logo-banjarbaru-emas.png",
+        "source": "User-provided image supplied during development on 2026-10-26 (2.jpg)",
+        "source_sha256": "bffba0487b03436deca4b0de4f7f769d2be1ba7691bc2433901379d35d9bb225",
+        "sha256": "c2f78070301e49c21f44de18319a361e50b2dcc394e4e995af1dcc024f5b9e6e",
+        "width": 122,
+        "height": 176,
+        "usage": "Logo Banjarbaru Emas di header publik",
+        "modifications": "Outer background made transparent by flood fill from the four corners (threshold 60), cropped to content, resized to 176px high with Pillow LANCZOS."
+    },
+    {
+        "asset": "logo-pemberdayaan-sosial.png",
+        "source": "User-provided image supplied during development on 2026-10-26 (1.png)",
+        "source_sha256": "77fe1222dd2e4f80ad933cc01d12a8428a7507cfb39baf688ae1d24ebb5fa545",
+        "sha256": "13f86bfc1fb5d5fa7b805cf26d797667c1b5c8741019664d0bf34181a22c3a7e",
+        "width": 153,
+        "height": 176,
+        "usage": "Logo Pemberdayaan Sosial Kota Banjarbaru di header publik",
+        "modifications": "Outer white background made transparent by flood fill from the four corners (threshold 60), wordmark text below the emblem removed (illegible at header size), cropped to content, resized to 176px high with Pillow LANCZOS."
+    }
+]

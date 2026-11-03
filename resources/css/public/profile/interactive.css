@@ -1,0 +1,154 @@
+/* ===== Profil interaktif: setiap gerak menjawab tindakan pengunjung (klik, sorot, gulir). ===== */
+
+/* Lapis: lingkaran dapat diklik; lapis yang tidak dipilih meredup di daftar. */
+.profile-page .profile-ring {
+    cursor: pointer;
+    transition: outline-color 0.2s, background-color 0.2s;
+    outline: 3px solid transparent;
+    outline-offset: 3px;
+}
+.profile-page .profile-ring.is-active {
+    outline-color: var(--pf-kunyit);
+}
+.profile-page .profile-ring-label {
+    transition: color 0.2s;
+}
+.profile-page .profile-layer {
+    transition: border-color 0.2s;
+}
+.profile-page .profile-layer h3,
+.profile-page .profile-layer p {
+    transition: color 0.2s;
+}
+.profile-page .profile-layer[aria-pressed="false"] h3 {
+    color: var(--pf-muted);
+}
+.profile-page .profile-layer[aria-pressed="false"] p {
+    color: #8394a7;
+}
+
+/* Bentuk dukungan: garis alur terisi sampai langkah yang dipilih. */
+.profile-page .profile-support-tabs::after {
+    content: "";
+    position: absolute;
+    top: 23px;
+    left: 12.5%;
+    width: calc(75% * var(--profile-step, 0) / var(--profile-steps, 1));
+    height: 2px;
+    background: var(--pf-night);
+    transition: width 0.35s ease;
+}
+.profile-page .profile-support-tabs button {
+    z-index: 1;
+}
+.profile-page .profile-support-tabs button::before {
+    transition: background-color 0.25s, border-color 0.25s, color 0.25s, transform 0.25s;
+}
+.profile-page .profile-support-tabs button:hover::before {
+    transform: scale(1.08);
+}
+
+/* Tentang SiDaya: satu garis bawah yang bergeser ke tab terpilih. */
+.profile-page .profile-sidaya-tabs {
+    position: relative;
+}
+.profile-page .profile-sidaya-tabs button::after,
+.profile-page .profile-sidaya-tabs button[aria-selected="true"]::after {
+    background: transparent;
+}
+.profile-page .profile-sidaya-tabs::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--profile-ind-y, 0px) - 2px);
+    left: 0;
+    width: var(--profile-ind-w, 0px);
+    height: 3px;
+    background: var(--pf-kunyit);
+    transform: translateX(var(--profile-ind-x, 0px));
+    transition:
+        transform 0.3s ease,
+        width 0.3s ease,
+        top 0.3s ease;
+}
+.profile-page .profile-panels .profile-panel:not([hidden]) {
+    animation: profile-fade 0.3s ease;
+}
+
+/* Tugas dan fungsi: akordeon membuka dengan tinggi yang bergerak (peramban yang mendukung). */
+.profile-page .profile-duty {
+    interpolate-size: allow-keywords;
+}
+.profile-page .profile-duty::details-content {
+    height: 0;
+    overflow: hidden;
+    transition:
+        height 0.3s ease,
+        content-visibility 0.3s allow-discrete;
+}
+.profile-page .profile-duty[open]::details-content {
+    height: auto;
+}
+.profile-page .profile-duty summary .profile-duty-title {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+    transition: text-decoration-color 0.2s;
+}
+.profile-page .profile-duty summary:hover .profile-duty-title,
+.profile-page .profile-duty[open] .profile-duty-title {
+    text-decoration-color: var(--pf-kunyit);
+}
+
+/* Pilar: kolom yang disorot menonjol, kolom lain meredup; panah tautan bergerak. */
+.profile-page .profile-pillar-card {
+    transition: opacity 0.2s;
+}
+.profile-page .profile-pillar-link .profile-icon {
+    transition: transform 0.2s;
+}
+.profile-page .profile-pillar-card:hover .profile-pillar-link .profile-icon,
+.profile-page .profile-pillar-card:focus-within .profile-pillar-link .profile-icon {
+    transform: translateX(4px);
+}
+@media (hover: hover) {
+    .profile-page .profile-pillars-grid:hover .profile-pillar-card:not(:hover) {
+        opacity: 0.5;
+    }
+}
+
+/* Bilah bagian: garis kemajuan baca. */
+.profile-page .profile-progress {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 3px;
+    background: var(--pf-kunyit);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+@media (max-width: 600px) {
+    .profile-page .profile-support-tabs::after {
+        display: none;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .profile-page .profile-support-tabs::after,
+    .profile-page .profile-sidaya-tabs::after,
+    .profile-page .profile-duty::details-content,
+    .profile-page .profile-ring,
+    .profile-page .profile-pillar-card {
+        transition: none;
+    }
+    .profile-page .profile-panels .profile-panel:not([hidden]) {
+        animation: none;
+    }
+}
+
+/* Bilah bagian: penanda aktif cukup garis bawah kunyit, tanpa latar pil (kontras teks navy). */
+.profile-page .profile-sectionbar a[aria-current="true"] {
+    background: none;
+}
+

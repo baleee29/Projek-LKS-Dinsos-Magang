@@ -1,0 +1,192 @@
+/* ===== Hero Profil interaktif: galeri foto yang dapat dipilih dan jalur cepat dengan garis kunyit. ===== */
+.profile-page .profile-hero .ph-visual .ph-photo-main img {
+    transition: opacity 0.18s ease;
+}
+.profile-page .profile-hero .ph-visual .ph-photo-main.is-swapping img {
+    opacity: 0;
+}
+.profile-page .profile-hero-caption {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    padding: 6px 12px;
+    border-left: 3px solid var(--pf-kunyit);
+    border-radius: 0 4px 4px 0;
+    background: rgb(16 42 67 / 88%);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+.profile-page .profile-hero .ph-visual .ph-photo-a img,
+.profile-page .profile-hero .ph-visual .ph-photo-b img {
+    transition:
+        opacity 0.2s,
+        transform 0.3s ease;
+}
+.profile-page .profile-hero .ph-visual.is-interactive .ph-photo-a img,
+.profile-page .profile-hero .ph-visual.is-interactive .ph-photo-b img {
+    opacity: 0.72;
+}
+.profile-page .profile-hero .ph-visual.is-interactive .ph-photo-a:hover img,
+.profile-page .profile-hero .ph-visual.is-interactive .ph-photo-b:hover img,
+.profile-page .profile-hero .ph-visual.is-interactive :is(.ph-photo-a, .ph-photo-b):focus-within img {
+    opacity: 1;
+    transform: scale(1.04);
+}
+.profile-page .profile-hero-thumb {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    cursor: pointer;
+}
+.profile-page .profile-hero-thumb:focus-visible {
+    outline: 3px solid var(--pf-kunyit);
+    outline-offset: -3px;
+}
+
+/* Jalur cepat: garis kunyit tumbuh dari kiri saat disorot atau difokus. */
+.profile-page .profile-hero .ph-paths a {
+    position: relative;
+}
+.profile-page .profile-hero .ph-paths a::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background: var(--pf-kunyit);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+.profile-page .profile-hero .ph-paths li:not(:first-child) a::before {
+    left: 1.25rem;
+}
+.profile-page .profile-hero .ph-paths a:is(:hover, :focus-visible)::before {
+    transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .profile-page .profile-hero .ph-visual .ph-photo img,
+    .profile-page .profile-hero .ph-paths a::before {
+        transition: none;
+    }
+}
+
+/* ===== Hero Profil: foto geser yang lebih besar dan pita ukiran sasirangan seperti di beranda. ===== */
+.profile-page .profile-hero.ph {
+    padding-bottom: 28px;
+}
+.profile-page .profile-hero.ph::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: auto 0 0;
+    height: 28px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='28'%3E%3Cpath d='M0 28 16 6 32 28Z' fill='%23e0a526'/%3E%3Cpath d='M8 28 16 17 24 28Z' fill='%23102a43'/%3E%3Ccircle cx='16' cy='2' r='1.6' fill='%23cfd9e5'/%3E%3C/svg%3E");
+    background-size: 32px 28px;
+    background-repeat: repeat-x;
+    pointer-events: none;
+}
+.profile-page .profile-hero .ph-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+}
+.profile-page .profile-hero .ph-visual.is-carousel {
+    display: block;
+    min-width: 0;
+}
+.profile-page .profile-slides {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    border-radius: 6px;
+}
+.profile-page .profile-slides::-webkit-scrollbar {
+    display: none;
+}
+.profile-page .profile-slides:focus-visible {
+    outline: 3px solid var(--pf-kunyit);
+    outline-offset: 4px;
+}
+.profile-page .profile-hero .ph-visual.is-carousel .ph-photo {
+    display: block;
+    flex: 0 0 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 0;
+    scroll-snap-align: start;
+    animation: none;
+}
+.profile-page .profile-hero .ph-visual.is-carousel .ph-photo img {
+    opacity: 1;
+    transform: none;
+}
+.profile-page .profile-hero-caption {
+    bottom: 16px;
+    left: 16px;
+    font-size: 15px;
+}
+.profile-page .profile-slide-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+}
+.profile-page .profile-slide-arrow {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgb(207 217 229 / 35%);
+    border-radius: 50%;
+    background: none;
+    color: #fff;
+    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.profile-page .profile-slide-arrow[data-direction="prev"] .profile-icon {
+    transform: rotate(180deg);
+}
+.profile-page .profile-slide-arrow:hover {
+    border-color: var(--pf-kunyit);
+    background: var(--pf-kunyit);
+    color: var(--pf-night);
+}
+.profile-page .profile-slide-arrow:focus-visible,
+.profile-page .profile-slide-dots button:focus-visible {
+    outline: 3px solid var(--pf-kunyit);
+    outline-offset: 3px;
+}
+.profile-page .profile-slide-dots {
+    display: flex;
+    gap: 8px;
+}
+.profile-page .profile-slide-dots button {
+    width: 28px;
+    height: 6px;
+    padding: 0;
+    border: 0;
+    border-radius: 3px;
+    background: rgb(207 217 229 / 35%);
+    transition: width 0.25s, background-color 0.25s;
+}
+.profile-page .profile-slide-dots button[aria-current="true"] {
+    width: 48px;
+    background: var(--pf-kunyit);
+}
+
+@media (max-width: 900px) {
+    .profile-page .profile-hero .ph-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .profile-page .profile-slide-arrow,
+    .profile-page .profile-slide-dots button {
+        transition: none;
+    }
+}

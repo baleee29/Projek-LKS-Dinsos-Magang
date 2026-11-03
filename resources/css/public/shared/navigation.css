@@ -1,0 +1,223 @@
+﻿/* Shared navigation for public Sidaya pages. */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    color: #fff;
+    background: var(--brand-navigation-gradient);
+    box-shadow: 0 1px 4px rgb(16 42 67 / 10%);
+    font:
+        500 14px/1.5 "Plus Jakarta Sans",
+        Arial,
+        sans-serif;
+    letter-spacing: 0;
+}
+.site-header *,
+.site-footer * {
+    box-sizing: border-box;
+}
+.site-header .container,
+.site-footer .container {
+    width: calc(100% - 64px);
+    max-width: 1216px;
+    margin-inline: auto;
+}
+.site-header .header-inner {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+.site-header a {
+    color: inherit;
+    text-decoration: none;
+}
+.site-header .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    color: #fff;
+}
+.brand-mark {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(255 255 255 / 25%);
+    border-radius: 8px;
+    background: rgb(255 255 255 / 10%);
+    font-size: 20px;
+    font-weight: 700;
+}
+.brand-copy {
+    display: grid;
+    gap: 2px;
+}
+.brand-name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+}
+.brand-subtitle {
+    color: #e4edf5;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0.015em;
+}
+.site-header .main-navigation {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+}
+.site-header .nav-link {
+    padding: 8px 14px;
+    border-radius: 6px;
+    color: #fff;
+    white-space: nowrap;
+}
+.site-header .nav-link:hover,
+.site-header .nav-link.is-current {
+    background: rgb(255 255 255 / 12%);
+}
+.site-header .nav-link.is-current {
+    font-weight: 700;
+}
+.site-header .nav-divider {
+    width: 1px;
+    height: 20px;
+    margin-inline: 8px;
+    background: rgb(255 255 255 / 30%);
+}
+.site-header .nav-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 20px;
+    border: 1px solid rgb(255 255 255 / 25%);
+    border-radius: 8px;
+    background: #102a43;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+.site-header .nav-login:hover {
+    background: #1e3a5f;
+    transform: none;
+}
+.site-header .menu-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+}
+.site-header .menu-toggle span {
+    display: block;
+    height: 2px;
+    width: 24px;
+    margin-block: 5px;
+    background: #fff;
+}
+.site-header :is(a, button):focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+.site-header .menu-toggle:hover {
+    background: rgb(255 255 255 / 12%);
+}
+@media (max-width: 900px) {
+    .site-header .header-inner {
+        flex-wrap: wrap;
+        gap: 0 16px;
+    }
+    .site-header .brand {
+        min-height: 40px;
+        margin-block: 20px;
+    }
+    .site-header .menu-toggle:not([hidden]) {
+        display: block;
+    }
+    .site-header .menu-toggle {
+        margin-block: 18px;
+    }
+    .site-header .main-navigation {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 0 0 20px;
+    }
+    .js .site-header .main-navigation:not(.is-open) {
+        display: none;
+    }
+    .site-header .nav-link {
+        padding: 12px 14px;
+    }
+    .site-header .nav-divider {
+        display: none;
+    }
+    .site-header .nav-login {
+        align-self: start;
+        margin-top: 8px;
+    }
+}
+@media (max-width: 600px) {
+    .site-header .container,
+    .site-footer .container {
+        width: calc(100% - 40px);
+    }
+    .site-header .brand {
+        gap: 10px;
+    }
+    .brand-subtitle {
+        font-size: 10px;
+    }
+    .brand-mark {
+        width: 36px;
+        height: 36px;
+    }
+}
+@media print {
+    .site-header {
+        position: static;
+    }
+}
+
+/* Logo Dinas Sosial dan Banjarbaru Emas di samping nama situs (menggantikan huruf awal). */
+.brand-logos {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 8px;
+}
+.brand-logos img {
+    display: block;
+    width: auto;
+    height: 48px;
+}
+@media (max-width: 600px) {
+    .brand-logos {
+        gap: 6px;
+    }
+    .brand-logos img {
+        height: 38px;
+    }
+}
+@media (max-width: 400px) {
+    .brand-logos {
+        gap: 4px;
+    }
+    .brand-logos img {
+        height: 32px;
+    }
+}

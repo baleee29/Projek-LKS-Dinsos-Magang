@@ -1,0 +1,168 @@
+/* Sticky section navigation shared by the pillar pages; section-nav.js sets the offsets.
+   Without JavaScript the bar still sticks below the 80px header. */
+[data-section-nav] {
+    position: sticky;
+    top: var(--site-header-height, 80px);
+    z-index: 40;
+    transition: box-shadow 180ms ease;
+}
+
+[data-section-nav].is-stuck {
+    box-shadow: 0 6px 18px rgb(26 32 44 / 8%);
+}
+
+html.has-section-nav {
+    scroll-padding-top: calc(
+        var(--site-header-height, 80px) + var(--section-nav-height, 3.75rem) +
+            1rem
+    );
+}
+
+/* One scrollable row instead of several wrapped rows that would cover the page. */
+:root [data-section-nav] > .container {
+    flex-wrap: nowrap;
+}
+
+:root [data-section-nav] [data-section-links] {
+    position: relative;
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+}
+
+:root [data-section-nav] [data-section-links]::-webkit-scrollbar {
+    display: none;
+}
+
+:root [data-section-nav] [data-section-links] > a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+[data-section-nav].can-scroll-end [data-section-links] {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+}
+
+[data-section-nav].can-scroll-start [data-section-links] {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 2.5rem);
+    mask-image: linear-gradient(to right, transparent, #000 2.5rem);
+}
+
+[data-section-nav].can-scroll-start.can-scroll-end [data-section-links] {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 2.5rem, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 2.5rem, #000 calc(100% - 2.5rem), transparent);
+}
+
+[data-section-nav] .section-nav-action {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.section-nav-progress {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background: var(--brand-primary);
+    transform: scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+}
+
+@media (max-width: 37.5rem) {
+    /* The registration shortcut stays in the page; the bar keeps only section links. */
+    :root [data-section-nav] .section-nav-action {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-section-nav] {
+        transition: none;
+    }
+}
+
+@media print {
+    [data-section-nav] {
+        position: static;
+        box-shadow: none;
+    }
+
+    .section-nav-progress {
+        display: none;
+    }
+}
+
+/* Gaya bilah bagian disamakan dengan Profil: latar putih, tautan abu-abu,
+   tautan aktif navy dengan garis bawah kunyit, dan garis kemajuan baca kunyit. */
+:root body main [data-section-nav] {
+    border-bottom: 1px solid #d9e2ec;
+    background: #fff;
+}
+:root body main [data-section-nav] [data-section-links] {
+    gap: 4px;
+}
+:root body main [data-section-nav] [data-section-links] > a {
+    position: relative;
+    padding: 14px 16px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: #526378;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+:root body main [data-section-nav] [data-section-links] > a:hover {
+    background: none;
+    color: #102a43;
+}
+:root body main [data-section-nav] [data-section-links] > a[aria-current] {
+    background: none;
+    color: #102a43;
+    font-weight: 600;
+    box-shadow: inset 0 -3px 0 #e0a526;
+}
+:root body main [data-section-nav] [data-section-links] > a:focus-visible {
+    outline: 3px solid #e0a526;
+    outline-offset: -3px;
+}
+:root body main [data-section-nav] .section-nav-progress {
+    height: 3px;
+    background: #e0a526;
+}
+@media (prefers-reduced-motion: reduce) {
+    :root body main [data-section-nav] [data-section-links] > a {
+        transition: none;
+    }
+}
+/* Tombol aksi di kanan bilah (Daftar LKS, Pendaftaran Kelompok): satu bentuk navy. */
+:root body main [data-section-nav] .section-nav-action {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 8px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: #102a43;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+:root body main [data-section-nav] .section-nav-action:hover {
+    background: #1e3a5f;
+    color: #fff;
+}
+:root body main [data-section-nav] .section-nav-action:focus-visible {
+    outline: 3px solid #e0a526;
+    outline-offset: 3px;
+}

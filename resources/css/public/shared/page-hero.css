@@ -1,0 +1,506 @@
+/* Hero halaman publik (Profil, PSM, Karang Taruna, PUB), turunan hero LKS: biru tua, kolase foto, fakta bergantian, jalur cepat. */
+.ph {
+    position: relative;
+    overflow: hidden;
+    padding-block: 2rem 0;
+    background:
+        radial-gradient(60rem 30rem at 85% 10%, rgb(109 139 173 / 35%), transparent 60%),
+        radial-gradient(40rem 24rem at 0% 100%, rgb(72 98 132 / 45%), transparent 60%),
+        linear-gradient(160deg, #15253a 0%, #223a58 55%, #304a6b 100%);
+    color: #eaf0f7;
+}
+.ph::after {
+    /* Halus: pola titik agar latar tidak datar. */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgb(255 255 255 / 7%) 1px, transparent 1px);
+    background-size: 22px 22px;
+    pointer-events: none;
+}
+.ph .container {
+    position: relative;
+    z-index: 1;
+}
+.ph .breadcrumbs ol,
+.ph .breadcrumbs a {
+    color: #b8c8dc;
+}
+.ph .breadcrumbs [aria-current] {
+    color: #fff;
+}
+.ph .ph-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(2rem, 4vw, 3rem);
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+.ph-kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 1.5rem;
+    color: #b8c8dc;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.ph-kicker span {
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgb(255 255 255 / 12%);
+    color: #fff;
+}
+.ph .ph-copy h1 {
+    max-width: 14ch;
+    color: #fff;
+    font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+}
+.ph .ph-copy h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg, #c3def2, #8fb3d9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.ph .ph-lead {
+    max-width: 34rem;
+    color: #d3dfec;
+    font-size: 1.0625rem;
+}
+.ph .ph-actions {
+    margin-top: 2.5rem;
+}
+.ph .ph-primary {
+    border: 1px solid #fff;
+    background: #fff;
+    color: #15253a;
+    font-weight: 700;
+}
+.ph .ph-primary:hover {
+    background: #e8eef7;
+}
+.ph .ph-ghost {
+    border: 1px solid rgb(255 255 255 / 35%);
+    background: transparent;
+    color: #fff;
+}
+.ph .ph-ghost:hover {
+    border-color: #fff;
+    background: rgb(255 255 255 / 8%);
+}
+.ph .ph-caption {
+    max-width: 34rem;
+    color: #9fb3ca;
+}
+
+
+/* Dasar tata letak (setara aturan dasar hero LKS). */
+.ph-layout { display: grid; align-items: center; }
+.ph-copy { min-width: 0; }
+.ph-copy h1 { margin: 0; text-wrap: balance; }
+.ph-lead { margin: 1.5rem 0 0; line-height: 1.7; }
+.ph-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+.ph-actions .button { display: inline-flex; align-items: center; gap: 0.5rem; }
+.ph-actions .ph-icon, .ph-paths .ph-icon { width: 1.125rem; height: 1.125rem; flex: none; }
+.ph-caption { margin: 1rem 0 0; font-size: 0.75rem; line-height: 1.65; }
+.ph-note h2 { margin: 0; border-bottom: 1px solid #dce4ec; line-height: 1.5; }
+.ph-facts { display: grid; margin: 0; }
+.ph-facts dd { margin: 0.125rem 0 0; color: #596b80; line-height: 1.6; }
+
+/* Kolase foto. */
+.ph-visual {
+    position: relative;
+    min-height: 26rem;
+}
+.ph-photo {
+    position: absolute;
+    margin: 0;
+    overflow: hidden;
+    border: 4px solid rgb(255 255 255 / 92%);
+    border-radius: 18px;
+    box-shadow: 0 24px 48px rgb(8 16 28 / 35%);
+    transition: transform 0.4s ease;
+}
+.ph-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ph-photo-main {
+    top: 0;
+    right: 0;
+    width: 78%;
+    height: 62%;
+    z-index: 2;
+}
+.ph-photo-a {
+    top: 44%;
+    left: 0;
+    width: 46%;
+    height: 38%;
+    transform: rotate(-4deg);
+    z-index: 1;
+}
+.ph-photo-b {
+    top: 8%;
+    left: 4%;
+    width: 30%;
+    height: 30%;
+    transform: rotate(5deg);
+    z-index: 1;
+}
+.ph-visual:hover .ph-photo-a {
+    transform: rotate(-6deg) translate(-6px, 4px);
+}
+.ph-visual:hover .ph-photo-b {
+    transform: rotate(7deg) translate(-4px, -4px);
+}
+
+/* Kartu fakta mengambang di atas kolase. */
+.ph .ph-note {
+    position: absolute;
+    right: 4%;
+    bottom: 0;
+    z-index: 3;
+    width: min(22rem, 70%);
+    padding: 1.125rem 1.25rem;
+    border: 0;
+    border-radius: 16px;
+    background: #fff;
+    color: #1a202c;
+    box-shadow: 0 20px 40px rgb(8 16 28 / 30%);
+}
+.ph .ph-note h2 {
+    padding: 0 0 10px;
+    color: #596b80;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.ph .ph-facts {
+    gap: 10px;
+    margin-top: 10px;
+}
+.ph .ph-facts > div {
+    padding: 0;
+    background: none;
+}
+.ph .ph-facts dt {
+    color: #304a6b;
+    font-size: 1rem;
+    font-weight: 700;
+}
+.ph .ph-facts dd {
+    font-size: 0.8125rem;
+}
+/* Mode bergantian (diaktifkan oleh shared/page-hero.js). */
+.ph-fact-tabs {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+.ph-fact-tabs button {
+    flex: 1;
+    min-height: 34px;
+    padding: 6px 8px;
+    border: 1px solid #dce4ec;
+    border-radius: 8px;
+    background: #fff;
+    color: #596b80;
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.ph-fact-tabs button[aria-selected="true"] {
+    border-color: #304a6b;
+    background: #304a6b;
+    color: #fff;
+}
+.ph-facts.is-rotating > div[hidden] {
+    display: none;
+}
+.ph-facts.is-rotating > div {
+    min-height: 5.5rem;
+    animation: ph-fade 0.35s ease;
+}
+
+/* Tiga jalur cepat di dasar hero. */
+.ph-paths {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgb(255 255 255 / 14%);
+    list-style: none;
+}
+.ph-paths li + li {
+    border-left: 1px solid rgb(255 255 255 / 14%);
+}
+.ph-paths a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2px 12px;
+    padding: 1.25rem 1.25rem 1.5rem;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ph-paths li:first-child a {
+    padding-left: 0;
+}
+.ph-paths a span {
+    font-size: 1rem;
+    font-weight: 700;
+}
+.ph-paths a small {
+    grid-column: 1;
+    color: #a9bdd4;
+    font-size: 0.8125rem;
+}
+.ph-paths a .ph-icon {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #8fb3d9;
+    transition: transform 0.2s;
+}
+.ph-paths a:hover {
+    background: rgb(255 255 255 / 6%);
+}
+.ph-paths a:hover .ph-icon {
+    transform: translateX(4px);
+    color: #fff;
+}
+
+/* Muncul bertahap saat halaman dibuka. */
+.ph .ph-copy > *,
+.ph-visual > * {
+    animation: ph-rise 0.6s ease both;
+}
+.ph .ph-copy > :nth-child(2) { animation-delay: 0.06s; }
+.ph .ph-copy > :nth-child(3) { animation-delay: 0.12s; }
+.ph .ph-copy > :nth-child(4) { animation-delay: 0.18s; }
+.ph-visual > :nth-child(2) { animation-delay: 0.15s; }
+.ph-visual > :nth-child(3) { animation-delay: 0.25s; }
+.ph-visual > :nth-child(4) { animation-delay: 0.35s; }
+@keyframes ph-rise {
+    from { opacity: 0; translate: 0 14px; }
+    to { opacity: 1; translate: 0 0; }
+}
+
+@media (max-width: 900px) {
+    .ph .ph-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ph-visual {
+        min-height: 22rem;
+    }
+}
+@media (max-width: 600px) {
+    .ph-visual {
+        min-height: 0;
+        display: grid;
+        gap: 12px;
+    }
+    .ph-photo,
+    .ph .ph-note {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        transform: none;
+    }
+    .ph-photo-main {
+        height: 13rem;
+    }
+    .ph-photo-a,
+    .ph-photo-b {
+        display: none;
+    }
+    .ph-paths {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .ph-paths li + li {
+        border-left: 0;
+        border-top: 1px solid rgb(255 255 255 / 14%);
+    }
+    .ph-paths a,
+    .ph-paths li:first-child a {
+        padding-inline: 0;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ph .ph-copy > *,
+    .ph-visual > *,
+    .ph-facts.is-rotating > div {
+        animation: none;
+    }
+    .ph-photo,
+    .ph-paths a .ph-icon {
+        transition: none;
+    }
+}
+
+.ph .breadcrumbs ol { margin-bottom: 0; }
+.ph-fact-tabs button { white-space: nowrap; padding-inline: 6px; }
+.ph-paths a:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+.ph-note-status { margin: 0 0 1rem; padding: 0.75rem 1rem; border-radius: 10px; background: rgb(255 255 255 / 12%); color: #fff; font-size: 0.875rem; }
+
+/* Jejak navigasi di dalam hero (dipakai Profil). */
+.ph .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.8125rem;
+}
+.ph .breadcrumbs li + li::before {
+    content: "/";
+    margin-right: 0.5rem;
+    color: #8fa6c0;
+}
+.ph .breadcrumbs a {
+    color: #b8c8dc;
+    text-decoration: none;
+}
+.ph .breadcrumbs a:hover {
+    color: #fff;
+}
+.ph .breadcrumbs [aria-current] {
+    color: #fff;
+}
+/* Tombol hero tidak boleh tertimpa gaya tombol halaman. */
+.ph .ph-actions .ph-primary {
+    border: 1px solid #fff;
+    background: #fff;
+    color: #15253a;
+    font-weight: 700;
+}
+.ph .ph-actions .ph-ghost {
+    border: 1px solid rgb(255 255 255 / 35%);
+    background: transparent;
+    color: #fff;
+}
+.ph .ph-actions .ph-ghost:hover {
+    border-color: #fff;
+    background: rgb(255 255 255 / 8%);
+}
+
+/* Bilah jejak navigasi di atas hero: biru tua yang menyambung dengan hero, bukan putih. */
+:is(.psm-breadcrumb-bar, .kt-breadcrumb-bar, .pub-breadcrumb-bar) {
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    background: #15253a;
+}
+:is(.psm-breadcrumb-bar, .kt-breadcrumb-bar, .pub-breadcrumb-bar) .breadcrumbs :is(ol, li) {
+    color: #8fa6c0;
+}
+:is(.psm-breadcrumb-bar, .kt-breadcrumb-bar, .pub-breadcrumb-bar) .breadcrumbs a {
+    color: #b8c8dc;
+}
+:is(.psm-breadcrumb-bar, .kt-breadcrumb-bar, .pub-breadcrumb-bar) .breadcrumbs a:hover {
+    color: #fff;
+}
+:is(.psm-breadcrumb-bar, .kt-breadcrumb-bar, .pub-breadcrumb-bar) .breadcrumbs [aria-current] {
+    color: #fff;
+    font-weight: 600;
+}
+.pub-page main .pub-breadcrumb-bar {
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    background: #15253a;
+}
+.pub-page main .pub-breadcrumb-bar .breadcrumbs :is(ol, li) {
+    color: #8fa6c0;
+}
+.pub-page main .pub-breadcrumb-bar .breadcrumbs a {
+    color: #b8c8dc;
+}
+.pub-page main .pub-breadcrumb-bar .breadcrumbs [aria-current="page"] {
+    color: #fff;
+}
+
+/* Jejak navigasi di dalam hero menang atas gaya jejak navigasi halaman (mis. .pub-page main .breadcrumbs). */
+body main .ph .breadcrumbs {
+    padding: 0;
+    border: 0;
+    background: none;
+}
+body main .ph .breadcrumbs ol {
+    margin: 0;
+    padding: 0;
+    color: #8fa6c0;
+    font-size: 0.8125rem;
+}
+body main .ph .breadcrumbs li {
+    color: #8fa6c0;
+}
+body main .ph .breadcrumbs a {
+    color: #b8c8dc;
+}
+body main .ph .breadcrumbs a:hover {
+    color: #fff;
+}
+body main .ph .breadcrumbs [aria-current] {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Jarak atas hero seragam di semua halaman (PUB punya padding sendiri). */
+body main section.ph {
+    padding-top: 1.5rem;
+}
+.pub-page main .pub-hero.ph {
+    padding-top: 1.5rem;
+}
+body main .ph .breadcrumbs a:visited {
+    color: #b8c8dc;
+}
+
+/* Pita ukiran sasirangan (gigi haruan) di dasar hero halaman pilar, sama dengan Beranda, Profil, dan Pilar Sosial. */
+:is(.kt-hero, .psm-hero, .pub-hero).ph {
+    padding-bottom: 28px;
+}
+:is(.kt-hero, .psm-hero, .pub-hero).ph::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    height: 28px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='28'%3E%3Cpath d='M0 28 16 6 32 28Z' fill='%23e0a526'/%3E%3Cpath d='M8 28 16 17 24 28Z' fill='%23102a43'/%3E%3Ccircle cx='16' cy='2' r='1.6' fill='%23cfd9e5'/%3E%3C/svg%3E");
+    background-size: 32px 28px;
+    background-repeat: repeat-x;
+    pointer-events: none;
+}
+
+/* Motif sasirangan kuning di latar hero publik (Beranda, Profil, Pilar Sosial, PSM, Karang Taruna, PUB).
+ * :is(#beranda, body) menyamakan spesifisitas dengan penimpaan per halaman. Gradasi navy dari kiri menjaga kontras teks. */
+:is(#beranda, body) main section.ph {
+    background-color: #102a43;
+    background-image:
+        linear-gradient(90deg, #102a43 0%, rgb(16 42 67 / 94%) 35%, rgb(16 42 67 / 55%) 70%, rgb(16 42 67 / 30%) 100%),
+        url("/assets/images/branding/sasirangan-motif.svg");
+    background-size: auto, 168px 120px;
+    background-repeat: no-repeat, repeat;
+}
+:is(.kt-hero, .psm-hero, .pub-hero).ph::after {
+    display: none;
+}
+@media (max-width: 900px) {
+    :is(#beranda, body) main section.ph {
+        background-image:
+            linear-gradient(180deg, rgb(16 42 67 / 92%) 0%, rgb(16 42 67 / 80%) 100%),
+            url("/assets/images/branding/sasirangan-motif.svg");
+    }
+}

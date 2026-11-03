@@ -1,0 +1,440 @@
+/* Public LKS registration: introduction, document cards, review, and previews. */
+.lks-registration-page {
+    --lksr-canvas: #f9f9ff;
+    --lksr-surface: #fff;
+    --lksr-field: #f1f3ff;
+    --lksr-soft: #e8eeff;
+    --lksr-note: #e3e8f9;
+    --lksr-line: #dde2f3;
+    --lksr-active: #d3e4ff;
+    --lksr-primary: #486284;
+    --lksr-primary-hover: #304a6b;
+    --lksr-ink: #161c27;
+    --lksr-muted: #636975;
+    --lksr-danger: #ba1a1a;
+    --lksr-shadow: 0 1px 2px rgb(53 79 112 / 5%);
+}
+
+.lks-registration-page main {
+    background: var(--lksr-canvas);
+    color: var(--lksr-ink);
+    font-size: 14px;
+    line-height: 1.7;
+    letter-spacing: normal;
+    overflow-wrap: anywhere;
+}
+
+.lks-registration-page .lksr-shell {
+    width: calc(100% - 64px);
+    max-width: 1240px;
+    margin-inline: auto;
+}
+
+.lks-registration-page .lksr-icon {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.lks-registration-page .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+/* Hero, breadcrumbs, and the simulation notice. */
+.lks-registration-page .lksr-hero {
+    padding-block: 40px;
+    background: var(--lksr-field);
+}
+
+.lks-registration-page .lksr-hero-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-bottom: 24px;
+}
+
+.lks-registration-page .lksr-hero-top .breadcrumbs ol {
+    gap: 8px;
+    margin: 0;
+    color: var(--lksr-muted);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.lks-registration-page .lksr-hero-top .breadcrumbs li + li::before {
+    margin-right: 8px;
+    color: #a8afbe;
+}
+
+.lks-registration-page .lksr-hero-top .breadcrumbs [aria-current] {
+    color: var(--lksr-ink);
+    font-weight: 700;
+}
+
+.lks-registration-page .lksr-hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.lks-registration-page .lksr-hero-actions .lksr-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.lks-registration-page .lksr-page-heading {
+    min-width: 0;
+}
+
+.lks-registration-page .lksr-page-heading .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 10px;
+    padding: 4px 12px;
+    border-radius: 24px;
+    background: var(--lksr-active);
+    color: var(--lksr-primary-hover);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.lks-registration-page .lksr-page-heading .eyebrow .lksr-icon {
+    width: 15px;
+    height: 15px;
+}
+
+.lks-registration-page .lksr-page-heading h1 {
+    margin: 0;
+    color: var(--lksr-primary);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.035em;
+}
+
+.lks-registration-page .lksr-page-heading p:not(.eyebrow) {
+    max-width: 900px;
+    margin-top: 8px;
+    color: var(--lksr-muted);
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+.lks-registration-page .lksr-demo-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin: 24px 0 0;
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--lksr-note);
+    color: var(--lksr-muted);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.lks-registration-page .lksr-demo-note > .lksr-icon {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--lksr-primary);
+    color: #fff;
+}
+
+.lks-registration-page .lksr-demo-note strong {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--lksr-ink);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Main form and three independent white cards. */
+.lks-registration-page .lksr-section {
+    padding-block: 64px;
+}
+
+.lks-registration-page .lksr-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 40px;
+}
+
+.lks-registration-page .lksr-main-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 40px;
+    margin: 0;
+}
+
+.lks-registration-page .lksr-sidebar {
+    display: grid;
+    min-width: 0;
+    gap: 24px;
+}
+
+.lks-registration-page .lksr-card {
+    min-width: 0;
+    margin: 0;
+    padding: 40px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--lksr-surface);
+    box-shadow: var(--lksr-shadow);
+}
+
+.lks-registration-page .lksr-fieldset {
+    min-width: 0;
+    scroll-margin-top: 124px;
+}
+
+.lks-registration-page .lksr-fieldset legend {
+    float: left;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin: 0 0 4px;
+    padding: 0;
+    color: var(--lksr-primary);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: -0.025em;
+}
+
+.lks-registration-page .lksr-section-letter,
+.lks-registration-page .lksr-document-number {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--lksr-primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.lks-registration-page .lksr-section-description {
+    clear: both;
+    margin: 0 0 24px;
+    padding-left: 41px;
+    color: var(--lksr-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.lks-registration-page .lksr-required {
+    color: var(--lksr-danger);
+}
+
+.lks-registration-page .lksr-field-grid,
+.lks-registration-page .lksr-doc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 16px;
+}
+
+.lks-registration-page .lksr-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 6px;
+}
+
+.lks-registration-page .lksr-field-wide {
+    grid-column: 1 / -1;
+}
+
+.lks-registration-page .lksr-field label {
+    color: var(--lksr-ink);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.lks-registration-page .lksr-field label > span {
+    color: var(--lksr-danger);
+}
+
+.lks-registration-page .lksr-field label > .lksr-optional {
+    color: var(--lksr-muted);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.lks-registration-page
+    .lksr-field
+    :is(input:not([type="file"]), select, textarea) {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: var(--lksr-field);
+    color: var(--lksr-ink);
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    transition:
+        background 150ms ease,
+        border-color 150ms ease;
+}
+
+.lks-registration-page .lksr-field textarea {
+    min-height: 116px;
+    resize: vertical;
+}
+
+.lks-registration-page .lksr-field input::placeholder,
+.lks-registration-page .lksr-field textarea::placeholder {
+    color: var(--lksr-muted);
+    opacity: 0.9;
+}
+
+.lks-registration-page
+    .lksr-field
+    :is(input:not([type="file"]), select, textarea):focus {
+    border-color: var(--lksr-primary);
+    background: var(--lksr-surface);
+}
+
+.lks-registration-page .lksr-field [aria-invalid="true"] {
+    border-color: var(--lksr-danger);
+}
+
+.lks-registration-page .lksr-field-help {
+    margin: 0;
+    color: var(--lksr-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.lks-registration-page .lksr-field-error {
+    margin: 0;
+    color: var(--lksr-danger);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Service choices share the identity fields' colors and spacing. */
+.lks-registration-page .lksr-choice-group {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    scroll-margin-top: 124px;
+}
+
+.lks-registration-page .lksr-fieldset .lksr-choice-group > legend {
+    float: none;
+    display: block;
+    width: auto;
+    margin: 0 0 6px;
+    padding: 0;
+    color: var(--lksr-ink);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: normal;
+}
+
+.lks-registration-page .lksr-choice-group > .lksr-field-help {
+    margin-bottom: 10px;
+}
+
+.lks-registration-page .lksr-choice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.lks-registration-page #lks-jenis-kegiatan .lksr-choice-grid {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.lks-registration-page .lksr-choice-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    min-width: 0;
+    min-height: 44px;
+    margin: 0;
+    padding: 11px 12px;
+    border: 1px solid var(--lksr-line);
+    border-radius: 8px;
+    background: var(--lksr-field);
+    color: var(--lksr-ink);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.55;
+    cursor: pointer;
+    transition: background 150ms ease, border-color 150ms ease;
+}
+
+.lks-registration-page .lksr-choice-option:hover,
+.lks-registration-page .lksr-choice-option:has(input:checked) {
+    border-color: var(--lksr-primary);
+    background: var(--lksr-soft);
+}
+
+.lks-registration-page .lksr-choice-option input[type="checkbox"] {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    margin: 1px 0 0;
+    padding: 0;
+    accent-color: var(--lksr-primary);
+    cursor: pointer;
+}
+
+.lks-registration-page .lksr-choice-option span {
+    min-width: 0;
+    color: inherit;
+}
+
+.lks-registration-page .lksr-choice-option:has(input:focus-visible),
+.lks-registration-page .lksr-choice-group:focus-visible {
+    outline: 2px solid var(--lksr-primary);
+    outline-offset: 3px;
+}
+
+.lks-registration-page .lksr-choice-group[aria-invalid="true"] .lksr-choice-option {
+    border-color: var(--lksr-danger);
+}
+
+.lks-registration-page .lksr-choice-group > .lksr-field-error {
+    margin-top: 6px;
+}
+
+@media (max-width: 600px) {
+    .lks-registration-page .lksr-choice-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+

@@ -1,0 +1,62 @@
+﻿{
+    "project_title":  "Sidaya LKS Public Portal",
+    "project_id":  "7946213390652083290",
+    "screen_id":  "7c4ff0c572fd4b5b8937bed9f95ee162",
+    "source_code":  "tmp/stitch-lks/reference/code.html",
+    "download_method":  "curl.exe -L --fail",
+    "downloaded_utc":  "2026-10-05T12:21:12.0698979Z",
+    "images":  [
+                   {
+                       "name":  "social-visit",
+                       "path":  "public/assets/images/lks/social-visit.jpg",
+                       "source_url":  "https://lh3.googleusercontent.com/aida-public/AB6AXuAIuh9vhg1yn9zk01pU94L_G1gOHm6fK1z3EKBTX6NJ6CH2qIv9VN3qBiNSjCw5qXfNP8AgZ1hmR7TAhPOpOLehO_w8sAANL_NURvDkVeq_3ncP56qxPT15mm4xtMWqfzLy2zxVcPOtg1aNzMT9x1EeNTkIYDAk0o0XhMlDZGb5QjDFCXuwyP-Ejkey8dpKFcZWCmfkZytpEPy9gn4nYQEMnKgnNJDqMWiwp1FCop5ofd8h6XV8Ylea",
+                       "mime_type":  "image/jpeg",
+                       "width":  512,
+                       "height":  279,
+                       "bytes":  56710,
+                       "sha256":  "6ec4b2c7863fd04dfedc8e39632f86a13a7ef6c1635d7aec5bd308a4a8ac7a6d",
+                       "usage":  "Illustrative Stitch image; not documentation of actual Banjarbaru LKS activities.",
+                       "recommended_alt":  "Ilustrasi pendamping sosial berbincang dengan keluarga lanjut usia saat kunjungan rumah.",
+                       "recommended_caption":  "Gambar ilustrasi dari referensi desain Stitch."
+                   },
+                   {
+                       "name":  "child-support",
+                       "path":  "public/assets/images/lks/child-support.jpg",
+                       "source_url":  "https://lh3.googleusercontent.com/aida-public/AB6AXuAr4Hl35P1fbxtcha0A3crNONEeX6Vu7vcI4wKAMYabRtMETvqJeJ_iF7EimK4Yna2qzREH3LnZGuVSWxAtXXIu0NUGHD_T597eHHcPAnXETgEUnAUi-GPsLu89dUf-B4tbrny-bx6Hk8yO95LovXqgHzqPjcY5zsKegVBzt2HpU0OcDGpgLY66JykZV-l566_o1Mwoq4t4i3CcWzPbQlEpFFDsEpK7ovAniZj6h2n1QteULU61eYO6",
+                       "mime_type":  "image/jpeg",
+                       "width":  512,
+                       "height":  279,
+                       "bytes":  62399,
+                       "sha256":  "b1baf4c9a4f2951711014f9ebd1a9809d9603a53478265481e60436bd95e2056",
+                       "usage":  "Illustrative Stitch image; not documentation of actual Banjarbaru LKS activities.",
+                       "recommended_alt":  "Ilustrasi pendamping membacakan buku dan menemani anak bermain di ruang belajar.",
+                       "recommended_caption":  "Gambar ilustrasi dari referensi desain Stitch."
+                   },
+                   {
+                       "name":  "elderly-care",
+                       "path":  "public/assets/images/lks/elderly-care.jpg",
+                       "source_url":  "https://lh3.googleusercontent.com/aida-public/AB6AXuDK6savcryHKPEYkCPS1h5cDW1o_QkA6k7pK5kQJzat3_UocT31swpFPKzorfYxhAk-S_kMnbW8eLdV0y5hN3SXGcrCzlHjLayDRm2V-zy-qlCT1eEM5x43c5JW0B8h4KpQMSuPCYeDyreVJs41ncbkWElanzEuNl4wutaX6o_xnJJRY7uPoslp-RYhls8lcAh9u_nvZjJWjFb6jm5q3gky8kfqXU1nASHCmeih_2NpMEeBp_48KGI3",
+                       "mime_type":  "image/jpeg",
+                       "width":  512,
+                       "height":  279,
+                       "bytes":  53494,
+                       "sha256":  "8b0b4d4482fa458b0976a957a4632bffec3fc8667d679cd48365a77bece695a1",
+                       "usage":  "Illustrative Stitch image; not documentation of actual Banjarbaru LKS activities.",
+                       "recommended_alt":  "Ilustrasi pendamping membantu pemeriksaan tekanan darah seorang perempuan lanjut usia.",
+                       "recommended_caption":  "Gambar ilustrasi dari referensi desain Stitch."
+                   },
+                   {
+                       "name":  "inclusive-workshop",
+                       "path":  "public/assets/images/lks/inclusive-workshop.jpg",
+                       "source_url":  "https://lh3.googleusercontent.com/aida-public/AB6AXuARrbXceK68wfqG6T7HYt6oQYr7Nayb1ThgiVLm_O3RVf_ccYx669SDFn7Y8aGMKfnxKvwmtOo_degjrZgFwsagoCTGDOTa_vNPicE3MVWYlv5YExEN5sNtXjMPg39-hceN7Mg1JGkVvlHttpvoU7YFj_2MJRJd94ohBJUIKxPTUEbFdcBQxbHrJA11tLG2ZS6QHmSZm93gfX6GvkBwtq-Md8UCb6axqINg6gEg38-n6vpbXoJGZopU",
+                       "mime_type":  "image/jpeg",
+                       "width":  512,
+                       "height":  279,
+                       "bytes":  67786,
+                       "sha256":  "3a4c6b14ad6e1cce35de4cd34995ad25d51824a4e36a35ab750432e28a05e62b",
+                       "usage":  "Illustrative Stitch image; not documentation of actual Banjarbaru LKS activities.",
+                       "recommended_alt":  "Ilustrasi peserta, termasuk pengguna kursi roda, belajar membuat kerajinan bersama pendamping.",
+                       "recommended_caption":  "Gambar ilustrasi dari referensi desain Stitch."
+                   }
+               ]
+}

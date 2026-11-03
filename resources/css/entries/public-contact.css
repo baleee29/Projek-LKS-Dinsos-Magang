@@ -1,0 +1,8 @@
+/* Urutan mengikuti halaman public/contact.blade.php di sumber. Jangan diubah: urutan memengaruhi hasil. */
+@import "../shared/brand.css";
+@import "../public/shared/base.css";
+@import "../public/shared/navigation.css";
+@import "../public/shared/footer.css";
+@import "../public/shared/content.css";
+@import "../public/contact.css";
+@import "../public/shared/card-accent.css";

@@ -25,7 +25,7 @@
             <x-dashboard.topbar :title="View::yieldContent('title', 'Ringkasan')" :identity="$identity" />
             <main class="dashboard-content" id="main-content" tabindex="-1">
                 <div class="demo-banner">
-                    <x-dashboard.icon name="info" /><span><strong>Pusat Layanan SiDaya</strong> — <span id="storage-description">Sistem Informasi dan Pelaporan Pilar Sosial Kota Banjarbaru.</span></span>
+                    <x-dashboard.icon name="info" /><span><strong>Pusat Layanan SiDaya</strong> — <span id="storage-description">Sistem Informasi dan Pelaporan LKS Kota Banjarbaru.</span></span>
                 </div>
                 <div>
                     <div id="view-content">

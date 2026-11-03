@@ -1,0 +1,49 @@
+/* Section rhythm for the public pages, matching the home page: bands alternate white and paper, and a short gold
+   rule sits above each section heading, echoing the gold edge on the cards (card-accent.css). Dark call-to-action
+   bands keep their own white labels. */
+
+/* Profile hides its eyebrows (screen-reader only), so the rule sits above the title, as on the home page. */
+.profile-page main h2::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 0 0 16px;
+    border-radius: 2px;
+    background: #e0a526;
+}
+
+/* LKS eyebrows already lead with a short line; it turns gold. */
+main .lks-section .eyebrow::before {
+    width: 28px;
+    height: 3px;
+    border-radius: 2px;
+    background: #e0a526;
+}
+
+/* PSM, Karang Taruna and PUB eyebrows are plain blocks: the rule goes above them. */
+:is(.psm-section, .kt-section, .pub-section) .eyebrow:not(:is(.psm-cta-copy, .kt-cta-copy) .eyebrow)::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    margin: 0 0 12px;
+    border-radius: 2px;
+    background: #e0a526;
+}
+:is(.psm-faq-heading, .kt-faq-heading, .pub-section-heading) .eyebrow::before {
+    margin-inline: auto;
+}
+
+/* Karang Taruna had two paper bands in a row (track record, then "start from your area"); restore the alternation. */
+main #berpartisipasi.kt-section {
+    background: #fff;
+}
+main #faq.kt-section {
+    background: #f8fafd;
+}
+
+/* PUB's "soft" sections were white like the rest, so the page had no bands at all. */
+.pub-page main .pub-section.pub-section-soft {
+    background: #f8fafd;
+}

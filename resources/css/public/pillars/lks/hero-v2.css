@@ -1,0 +1,398 @@
+/* ===== Hero LKS v2: biru tua, kolase foto, fakta bergantian, dan jalur cepat. ===== */
+.lks-page .lks-hero-v2 {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--lks-space-4) 0;
+    background:
+        radial-gradient(60rem 30rem at 85% 10%, rgb(109 139 173 / 35%), transparent 60%),
+        radial-gradient(40rem 24rem at 0% 100%, rgb(72 98 132 / 45%), transparent 60%),
+        linear-gradient(160deg, #15253a 0%, #223a58 55%, #304a6b 100%);
+    color: #eaf0f7;
+}
+.lks-page .lks-hero-v2::after {
+    /* Halus: pola titik agar latar tidak datar. */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgb(255 255 255 / 7%) 1px, transparent 1px);
+    background-size: 22px 22px;
+    pointer-events: none;
+}
+.lks-hero-v2 .container {
+    position: relative;
+    z-index: 1;
+}
+.lks-page .lks-hero-v2 .breadcrumbs ol,
+.lks-page .lks-hero-v2 .breadcrumbs a {
+    color: #b8c8dc;
+}
+.lks-page .lks-hero-v2 .breadcrumbs [aria-current] {
+    color: #fff;
+}
+.lks-hero-v2 .lks-hero-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(2rem, 4vw, 3rem);
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+.lks-hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 var(--lks-space-3);
+    color: #b8c8dc;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.lks-hero-kicker span {
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgb(255 255 255 / 12%);
+    color: #fff;
+}
+.lks-hero-v2 .lks-hero-copy h1 {
+    max-width: 14ch;
+    color: #fff;
+    font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+}
+.lks-hero-v2 .lks-hero-copy h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg, #c3def2, #8fb3d9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.lks-hero-v2 .lks-lead {
+    max-width: 34rem;
+    color: #d3dfec;
+    font-size: 1.0625rem;
+}
+.lks-hero-v2 .lks-actions {
+    margin-top: var(--lks-space-5);
+}
+.lks-hero-v2 .lks-hero-primary {
+    border: 1px solid #fff;
+    background: #fff;
+    color: #15253a;
+    font-weight: 700;
+}
+.lks-hero-v2 .lks-hero-primary:hover {
+    background: #e8eef7;
+}
+.lks-hero-v2 .lks-hero-ghost {
+    border: 1px solid rgb(255 255 255 / 35%);
+    background: transparent;
+    color: #fff;
+}
+.lks-hero-v2 .lks-hero-ghost:hover {
+    border-color: #fff;
+    background: rgb(255 255 255 / 8%);
+}
+.lks-hero-v2 .lks-demo-caption {
+    max-width: 34rem;
+    color: #9fb3ca;
+}
+
+/* Kolase foto. */
+.lks-hero-visual {
+    position: relative;
+    min-height: 26rem;
+}
+.lks-hero-photo {
+    position: absolute;
+    margin: 0;
+    overflow: hidden;
+    border: 4px solid rgb(255 255 255 / 92%);
+    border-radius: 18px;
+    box-shadow: 0 24px 48px rgb(8 16 28 / 35%);
+    transition: transform 0.4s ease;
+}
+.lks-hero-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.lks-hero-photo-main {
+    top: 0;
+    right: 0;
+    width: 78%;
+    height: 62%;
+    z-index: 2;
+}
+.lks-hero-photo-a {
+    top: 44%;
+    left: 0;
+    width: 46%;
+    height: 38%;
+    transform: rotate(-4deg);
+    z-index: 1;
+}
+.lks-hero-photo-b {
+    top: 8%;
+    left: 4%;
+    width: 30%;
+    height: 30%;
+    transform: rotate(5deg);
+    z-index: 1;
+}
+.lks-hero-visual:hover .lks-hero-photo-a {
+    transform: rotate(-6deg) translate(-6px, 4px);
+}
+.lks-hero-visual:hover .lks-hero-photo-b {
+    transform: rotate(7deg) translate(-4px, -4px);
+}
+
+/* Kartu fakta mengambang di atas kolase. */
+.lks-hero-v2 .lks-hero-note {
+    position: absolute;
+    right: 4%;
+    bottom: 0;
+    z-index: 3;
+    width: min(22rem, 70%);
+    padding: 1.125rem 1.25rem;
+    border: 0;
+    border-radius: 16px;
+    background: #fff;
+    color: var(--lks-ink);
+    box-shadow: 0 20px 40px rgb(8 16 28 / 30%);
+}
+.lks-hero-v2 .lks-hero-note h2 {
+    padding: 0 0 10px;
+    color: var(--lks-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.lks-hero-v2 .lks-hero-facts {
+    gap: 10px;
+    margin-top: 10px;
+}
+.lks-hero-v2 .lks-hero-facts > div {
+    padding: 0;
+    background: none;
+}
+.lks-hero-v2 .lks-hero-facts dt {
+    color: var(--lks-primary-hover);
+    font-size: 1rem;
+    font-weight: 700;
+}
+.lks-hero-v2 .lks-hero-facts dd {
+    font-size: 0.8125rem;
+}
+/* Mode bergantian (diaktifkan oleh pillars/lks.js). */
+.lks-fact-tabs {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+.lks-fact-tabs button {
+    flex: 1;
+    min-height: 34px;
+    padding: 6px 8px;
+    border: 1px solid var(--lks-border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--lks-muted);
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.lks-fact-tabs button[aria-selected="true"] {
+    border-color: var(--lks-primary-hover);
+    background: var(--lks-primary-hover);
+    color: #fff;
+}
+.lks-hero-facts.is-rotating > div[hidden] {
+    display: none;
+}
+.lks-hero-facts.is-rotating > div {
+    min-height: 5.5rem;
+    animation: lks-fade 0.35s ease;
+}
+
+/* Tiga jalur cepat di dasar hero. */
+.lks-hero-paths {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgb(255 255 255 / 14%);
+    list-style: none;
+}
+.lks-hero-paths li + li {
+    border-left: 1px solid rgb(255 255 255 / 14%);
+}
+.lks-hero-paths a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2px 12px;
+    padding: 1.25rem 1.25rem 1.5rem;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.lks-hero-paths li:first-child a {
+    padding-left: 0;
+}
+.lks-hero-paths a span {
+    font-size: 1rem;
+    font-weight: 700;
+}
+.lks-hero-paths a small {
+    grid-column: 1;
+    color: #a9bdd4;
+    font-size: 0.8125rem;
+}
+.lks-hero-paths a .lks-icon {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #8fb3d9;
+    transition: transform 0.2s;
+}
+.lks-hero-paths a:hover {
+    background: rgb(255 255 255 / 6%);
+}
+.lks-hero-paths a:hover .lks-icon {
+    transform: translateX(4px);
+    color: #fff;
+}
+
+/* Muncul bertahap saat halaman dibuka. */
+.lks-hero-v2 .lks-hero-copy > *,
+.lks-hero-visual > * {
+    animation: lks-rise 0.6s ease both;
+}
+.lks-hero-v2 .lks-hero-copy > :nth-child(2) { animation-delay: 0.06s; }
+.lks-hero-v2 .lks-hero-copy > :nth-child(3) { animation-delay: 0.12s; }
+.lks-hero-v2 .lks-hero-copy > :nth-child(4) { animation-delay: 0.18s; }
+.lks-hero-visual > :nth-child(2) { animation-delay: 0.15s; }
+.lks-hero-visual > :nth-child(3) { animation-delay: 0.25s; }
+.lks-hero-visual > :nth-child(4) { animation-delay: 0.35s; }
+@keyframes lks-rise {
+    from { opacity: 0; translate: 0 14px; }
+    to { opacity: 1; translate: 0 0; }
+}
+
+@media (max-width: 900px) {
+    .lks-hero-v2 .lks-hero-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .lks-hero-visual {
+        min-height: 22rem;
+    }
+}
+@media (max-width: 600px) {
+    .lks-hero-visual {
+        min-height: 0;
+        display: grid;
+        gap: 12px;
+    }
+    .lks-hero-photo,
+    .lks-hero-v2 .lks-hero-note {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        transform: none;
+    }
+    .lks-hero-photo-main {
+        height: 13rem;
+    }
+    .lks-hero-photo-a,
+    .lks-hero-photo-b {
+        display: none;
+    }
+    .lks-hero-paths {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .lks-hero-paths li + li {
+        border-left: 0;
+        border-top: 1px solid rgb(255 255 255 / 14%);
+    }
+    .lks-hero-paths a,
+    .lks-hero-paths li:first-child a {
+        padding-inline: 0;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .lks-hero-v2 .lks-hero-copy > *,
+    .lks-hero-visual > *,
+    .lks-hero-facts.is-rotating > div {
+        animation: none;
+    }
+    .lks-hero-photo,
+    .lks-hero-paths a .lks-icon {
+        transition: none;
+    }
+}
+.lks-fact-tabs button {
+    white-space: nowrap;
+    padding-inline: 6px;
+}
+
+/* Tombol Daftar LKS di bilah bagian: teks putih, tidak ikut warna tautan bagian. */
+.lks-page .lks-section-nav .lks-nav-register,
+.lks-page .lks-section-nav .lks-nav-register:visited {
+    border: 1px solid var(--lks-primary);
+    background: var(--lks-primary);
+    color: #fff;
+    font-weight: 700;
+}
+.lks-page .lks-section-nav .lks-nav-register:hover,
+.lks-page .lks-section-nav .lks-nav-register:focus-visible {
+    border-color: var(--lks-primary-hover);
+    background: var(--lks-primary-hover);
+    color: #fff;
+}
+
+/* Pita ukiran sasirangan (gigi haruan) di dasar hero, sama dengan halaman publik lainnya. */
+.lks-page .lks-hero {
+    position: relative;
+    padding-bottom: calc(var(--lks-space-6) + 28px);
+}
+.lks-page .lks-hero::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 28px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='28'%3E%3Cpath d='M0 28 16 6 32 28Z' fill='%23e0a526'/%3E%3Cpath d='M8 28 16 17 24 28Z' fill='%23102a43'/%3E%3Ccircle cx='16' cy='2' r='1.6' fill='%23cfd9e5'/%3E%3C/svg%3E");
+    background-size: 32px 28px;
+    background-repeat: repeat-x;
+    pointer-events: none;
+}
+@media (max-width: 37.5rem) {
+    .lks-page .lks-hero {
+        padding-bottom: calc(var(--lks-space-4) + 28px);
+    }
+}
+
+/* Motif sasirangan kuning di latar hero, sama dengan halaman publik lainnya. */
+.lks-page .lks-hero-v2 {
+    background:
+        linear-gradient(90deg, #102a43 0%, rgb(16 42 67 / 94%) 35%, rgb(16 42 67 / 55%) 70%, rgb(16 42 67 / 30%) 100%),
+        url("/assets/images/branding/sasirangan-motif.svg") 0 0 / 168px 120px repeat,
+        #102a43;
+}
+.lks-page .lks-hero-v2::after {
+    display: none;
+}
+@media (max-width: 37.5rem) {
+    .lks-page .lks-hero-v2 {
+        background:
+            linear-gradient(180deg, rgb(16 42 67 / 92%) 0%, rgb(16 42 67 / 80%) 100%),
+            url("/assets/images/branding/sasirangan-motif.svg") 0 0 / 168px 120px repeat,
+            #102a43;
+    }
+}

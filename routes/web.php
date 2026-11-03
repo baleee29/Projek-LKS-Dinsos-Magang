@@ -6,7 +6,14 @@ use App\Http\Controllers\Admin;
 use App\Http\Controllers\Lks;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => redirect()->route('login'));
+// Halaman publik memakai URL sumber. Hanya halaman umum dan LKS; pilar lain tidak dibawa.
+Route::view('/', 'public.home');
+Route::view('/index.html', 'public.home');
+Route::view('/profil.html', 'public.profile');
+Route::view('/kontak.html', 'public.contact');
+Route::view('/pilar-sosial.html', 'public.pillars');
+Route::view('/pilar/lks.html', 'public.lks');
+Route::view('/pilar/pendaftaran-lks.html', 'public.registration-lks');
 
 // TODO(Tahap 2): rute masuk demo diganti SessionController dengan middleware guest dan throttle.
 Route::get('/login', [DemoSessionController::class, 'create'])->name('login');
