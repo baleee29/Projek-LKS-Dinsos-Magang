@@ -10,8 +10,8 @@
 @section('content')
     <section class="lks-workspace lks-report-view">
         <x-dashboard.lks-heading :title="$pageTitle" :description="$description" group="Pelaporan">
-            <button class="lks-button" type="button" data-export-url="/ekspor/laporan" data-export-format="pdf"><x-dashboard.lks-icon name="download" />Unduh PDF</button>
-            <button class="lks-button" type="button" data-export-url="/ekspor/laporan" data-export-format="xlsx"><x-dashboard.lks-icon name="download" />Unduh Excel</button>
+            <button class="lks-button" type="button" data-export-url="/ekspor/laporan{{ $forcedStatus ? '?status='.$forcedStatus : '' }}" data-export-format="pdf"><x-dashboard.lks-icon name="download" />Unduh PDF</button>
+            <button class="lks-button" type="button" data-export-url="/ekspor/laporan{{ $forcedStatus ? '?status='.$forcedStatus : '' }}" data-export-format="xlsx"><x-dashboard.lks-icon name="download" />Unduh Excel</button>
             <a class="lks-button" href="/assets/documents/Template_Laporan_LKS.pdf" download="Template_Laporan_LKS.pdf" target="_blank" rel="noopener" title="Unduh format template laporan semester LKS"><x-dashboard.lks-icon name="file" />Template Laporan</a>
             <button class="lks-button lks-button-primary" type="button" data-open-dialog="new-report-dialog"><x-dashboard.lks-icon name="plus" />Buat Laporan Baru</button>
         </x-dashboard.lks-heading>

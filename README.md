@@ -71,6 +71,7 @@ Tes berjalan di database `sidaya_uji` dan menghapus isinya. `tests/TestCase.php`
 | `resources/css/` | Salinan CSS sumber. Urutan muat ada di `entries/`; jangan diubah karena memengaruhi hasil. |
 | `resources/js/dashboard/` | Perilaku bersama: shell, dialog, filter, form, pengiriman (`api.js`), ekspor, dan toast. |
 | `resources/js/pages/` | Modul khusus halaman. |
+| `public/assets/ekspor/` | Modul ekspor PDF dan Excel dari sumber, dimuat saat dipakai. |
 | `resources/views/` | `layouts/`, `components/dashboard/`, `auth/`, `admin/`, `lks/`, `public/`, dan `shared/`. |
 
 ## Perilaku aksi
