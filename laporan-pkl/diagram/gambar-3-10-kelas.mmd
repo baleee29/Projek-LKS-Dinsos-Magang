@@ -1,0 +1,39 @@
+classDiagram
+    direction TB
+    class Lembaga { +uuid id
+      +string nama
+      +int versi }
+    class Pengguna { +bigint id
+      +string email
+      +string peran
+      +bool aktif }
+    class PendaftaranLks { +uuid id
+      +string nama_lembaga
+      +string status }
+    class BerkasPendaftaran { +uuid id
+      +string kunci_berkas }
+    class PengurusLks { +uuid id
+      +string nama
+      +string kategori }
+    class KlienLks { +uuid id
+      +string kode
+      +string nama }
+    class LaporanSemester { +uuid id
+      +int tahun
+      +int semester
+      +string status }
+    class SuratLks { +uuid id
+      +string arah
+      +string perihal }
+    class BerkasTersimpan { +uuid id
+      +string jenis_sumber
+      +string sha256 }
+    Lembaga "1" --> "*" Pengguna
+    Lembaga "1" --> "*" PengurusLks
+    Lembaga "1" --> "*" KlienLks
+    Lembaga "1" --> "*" LaporanSemester
+    Lembaga "1" --> "*" SuratLks
+    Lembaga "0..1" --> "*" PendaftaranLks
+    PendaftaranLks "1" --> "*" BerkasPendaftaran
+    BerkasPendaftaran "1" --> "1" BerkasTersimpan
+    SuratLks "*" --> "0..1" BerkasTersimpan

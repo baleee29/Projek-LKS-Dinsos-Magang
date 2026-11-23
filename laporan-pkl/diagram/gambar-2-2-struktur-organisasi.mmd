@@ -1,0 +1,17 @@
+flowchart LR
+    KD["Kepala Dinas"]
+    KD --- PS["Pekerja Sosial Ahli Muda"]
+    KD --- SEK["Sekretaris"]
+    SEK --- SB1["Sub Bagian Umum dan Kepegawaian"]
+    SEK --- SB2["Sub Bagian Perencanaan dan Keuangan"]
+    KD --- B1["Bidang Perlindungan Sosial<br/>dan Jaminan Sosial"]
+    B1 --- S11["Seksi Perlindungan Sosial Korban<br/>Bencana Alam dan Bencana Sosial"]
+    B1 --- S12["Seksi Jaminan Sosial dan<br/>Fakir Miskin Perkotaan"]
+    KD --- B2["Bidang Rehabilitasi Sosial"]
+    B2 --- S21["Seksi Rehabilitasi Sosial Anak dan<br/>Korban Penyalahgunaan NAPZA<br/>dan Rehabilitasi Tuna Sosial"]
+    B2 --- S22["Seksi Rehabilitasi Lanjut Usia<br/>dan Disabilitas"]
+    KD --- B3["Bidang Pemberdayaan Sosial"]:::tempat
+    B3 --- S31["Seksi Pemberdayaan Kepahlawanan"]
+    B3 --- S32["Seksi Pemberdayaan Sosial<br/>dan Kelembagaan Masyarakat"]:::tempat
+    KD --- UPTD["Unit Pelaksana Teknis Daerah"]
+    classDef tempat fill:#e6e6e6,stroke:#000000,font-weight:bold

@@ -1,0 +1,14 @@
+flowchart TD
+    A(["Mulai"]):::lks --> B["Menyiapkan formulir dan dokumen"]:::lks
+    B --> C["Menyerahkan berkas ke kantor<br/>atau mengirim lewat WhatsApp"]:::lks
+    C --> E["Memeriksa kelengkapan berkas"]
+    E --> F{"Berkas lengkap?"}
+    F -->|Tidak| G["Menghubungi pengurus<br/>lewat telepon atau WhatsApp"]
+    G --> H["Melengkapi berkas"]:::lks
+    H --> E
+    F -->|Ya| I["Mencatat data lembaga<br/>di lembar kerja"]
+    I --> J["Mengarsipkan berkas fisik"]
+    J --> K["Memproses tanda pendaftaran"]
+    K --> N["Menerima hasil pendaftaran"]:::lks
+    N --> O(["Selesai"]):::lks
+    classDef lks fill:#d9d9d9,stroke:#000000

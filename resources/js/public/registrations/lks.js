@@ -12,6 +12,8 @@ import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
         "lks-nama",
         "lks-ketua",
         "lks-whatsapp",
+        "lks-kecamatan",
+        "lks-kelurahan",
         "lks-izin",
         "lks-rekening",
         "lks-fokus",
@@ -123,6 +125,18 @@ import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
 
     let requestId = null;
 
+    // Pilihan kelurahan mengikuti kecamatan.
+    const localities = JSON.parse(controls["lks-kecamatan"]?.dataset.localities || "{}");
+    function fillVillages() {
+        const select = controls["lks-kelurahan"];
+        select.replaceChildren(
+            select.options[0],
+            ...(localities[controls["lks-kecamatan"].value] || []).map((name) => new Option(name, name)),
+        );
+        select.value = "";
+    }
+    controls["lks-kecamatan"]?.addEventListener("change", fillVillages);
+
     function values() {
         return {
             ...Object.fromEntries(
@@ -174,6 +188,10 @@ import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
         if (!isWhatsAppNumber(currentValues["lks-whatsapp"]))
             errors["lks-whatsapp"] =
                 "Isi nomor WhatsApp yang bisa dihubungi dengan awalan 08, 62, atau +62.";
+        if (!localities[currentValues["lks-kecamatan"]])
+            errors["lks-kecamatan"] = "Pilih kecamatan lembaga.";
+        if (!(localities[currentValues["lks-kecamatan"]] || []).includes(currentValues["lks-kelurahan"]))
+            errors["lks-kelurahan"] = "Pilih kelurahan lembaga.";
         if (currentValues["lks-izin"].length > 150)
             errors["lks-izin"] =
                 "Nomor izin operasional lama maksimal 150 karakter.";
@@ -554,6 +572,9 @@ import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
         controls["lks-nama"].value = "LKS Harapan Mulia Banjarbaru";
         controls["lks-ketua"].value = "Hj. Nurhayati, S.Sos";
         controls["lks-whatsapp"].value = "0800 0000 9876";
+        controls["lks-kecamatan"].value = "Cempaka";
+        fillVillages();
+        controls["lks-kelurahan"].value = "Bangkal";
         controls["lks-izin"].value = "DEMO-00123/2020";
         controls["lks-rekening"].value =
             "Bank Contoh - 000.00.00.00000 a.n Yayasan Harapan Mulia";
@@ -591,6 +612,7 @@ import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
             "ringkasan-nama": currentValues["lks-nama"],
             "ringkasan-ketua": currentValues["lks-ketua"],
             "ringkasan-whatsapp": currentValues["lks-whatsapp"],
+            "ringkasan-wilayah": "Kel. " + currentValues["lks-kelurahan"] + ", Kec. " + currentValues["lks-kecamatan"],
             "ringkasan-izin": currentValues["lks-izin"] || "Tidak diisi",
             "ringkasan-rekening":
                 currentValues["lks-rekening"] || "Tidak diisi",
@@ -749,6 +771,7 @@ import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
             .forEach((dialog) => dialog.close());
         closeFilePreview();
         form.reset();
+        fillVillages();
         validationAttempted = false;
         reviewedData = null;
         submitButton.textContent = "Periksa Data";
@@ -759,6 +782,7 @@ import { isWhatsAppNumber, lksChoiceOptions } from './lks-rules.js';
             "ringkasan-nama",
             "ringkasan-ketua",
             "ringkasan-whatsapp",
+            "ringkasan-wilayah",
             "ringkasan-izin",
             "ringkasan-fokus",
             ...Object.keys(choiceLabels).map(

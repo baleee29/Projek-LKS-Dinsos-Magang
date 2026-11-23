@@ -1,0 +1,12 @@
+flowchart TD
+    A(["Mulai"]) --> B["Meminta rekap pengurus<br/>dan klien kepada LKS"]
+    B --> C["Membaca buku induk atau<br/>lembar kerja lembaga"]:::lks
+    C --> E["Mengirim data dalam<br/>format masing-masing"]:::lks
+    E --> F["Menerima berkas dari tiap lembaga"]
+    F --> G["Menyalin data ke<br/>lembar kerja gabungan"]
+    G --> H{"Data lengkap?"}
+    H -->|Tidak| I["Menanyakan kekurangan<br/>kepada pengurus"]
+    I --> C
+    H -->|Ya| J["Menyimpan rekap<br/>di komputer petugas"]
+    J --> K(["Selesai"])
+    classDef lks fill:#d9d9d9,stroke:#000000

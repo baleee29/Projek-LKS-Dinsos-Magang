@@ -44,6 +44,26 @@
                 <p class="q-field-error" id="m-contact-error" hidden></p>
             </div>
             <div class="psm-field">
+                <label for="m-district">Kecamatan</label>
+                <select id="m-district" name="district" data-label="Kecamatan" aria-describedby="m-district-error" aria-invalid="false" data-localities='@json(\App\Support\Data\Wilayah::LOCALITIES)' required>
+                    <option value="">Pilih kecamatan</option>
+                    @foreach (\App\Support\Data\Wilayah::districts() as $kecamatan)
+                        <option @selected($org['district'] === $kecamatan)>{{ $kecamatan }}</option>
+                    @endforeach
+                </select>
+                <p class="q-field-error" id="m-district-error" hidden></p>
+            </div>
+            <div class="psm-field">
+                <label for="m-village">Kelurahan</label>
+                <select id="m-village" name="village" data-label="Kelurahan" aria-describedby="m-village-error" aria-invalid="false" required>
+                    <option value="">Pilih kelurahan</option>
+                    @foreach ($org['district'] ? \App\Support\Data\Wilayah::villages($org['district']) : [] as $kelurahan)
+                        <option @selected($org['village'] === $kelurahan)>{{ $kelurahan }}</option>
+                    @endforeach
+                </select>
+                <p class="q-field-error" id="m-village-error" hidden></p>
+            </div>
+            <div class="psm-field">
                 <label for="m-address">Alamat sekretariat</label>
                 <textarea id="m-address" name="address" rows="4" maxlength="3000" aria-describedby="m-address-error" aria-invalid="false">{{ $org['address'] }}</textarea>
                 <p class="q-field-error" id="m-address-error" hidden></p>

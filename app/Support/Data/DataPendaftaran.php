@@ -25,6 +25,8 @@ class DataPendaftaran
             'organization_name' => $pendaftaran->nama_lembaga,
             'leader_name' => $pendaftaran->nama_ketua,
             'whatsapp' => $pendaftaran->whatsapp,
+            'district' => (string) $pendaftaran->kecamatan,
+            'village' => (string) $pendaftaran->kelurahan,
             'license_number' => (string) $pendaftaran->nomor_izin,
             'bank_account' => (string) $pendaftaran->rekening_bank,
             'focus_area' => $pendaftaran->bidang_fokus,

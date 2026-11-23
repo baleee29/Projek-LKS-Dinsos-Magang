@@ -20,18 +20,27 @@
                     @endforeach
                 </select>
             </label>
+            <label>Kecamatan
+                <select name="district">
+                    <option value="">Semua kecamatan</option>
+                    @foreach ($districts as $value)
+                        <option @selected($filters['district'] === $value)>{{ $value }}</option>
+                    @endforeach
+                </select>
+            </label>
             <button type="button" class="admin-registration-button" data-href="{{ request()->fullUrl() }}">Perbarui</button>
         </form>
         @if ($rows->count())
             <div class="admin-registration-table">
                 <table class="q-table-numbered">
-                    <thead><tr><th scope="col" class="q-col-number">No.</th><th>Lembaga</th><th>Ketua / kontak</th><th>Dikirim</th><th>Status</th><th>Detail</th></tr></thead>
+                    <thead><tr><th scope="col" class="q-col-number">No.</th><th>Lembaga</th><th>Ketua / kontak</th><th>Wilayah</th><th>Dikirim</th><th>Status</th><th>Detail</th></tr></thead>
                     <tbody>
                         @foreach ($rows as $index => $row)
                             <tr>
                                 <td class="q-col-number" data-label="No.">{{ $rows->firstItem() + $index }}</td>
                                 <td><strong>{{ $row['organization_name'] }}</strong></td>
                                 <td>{{ $row['leader_name'] }}<small>{{ $row['whatsapp'] ?: 'Kontak belum dicatat' }}</small></td>
+                                <td>{{ $row['district'] ?: 'Belum dicatat' }}<small>{{ $row['village'] }}</small></td>
                                 <td>{{ Format::dateTime($row['created_at']) }}</td>
                                 <td>@include('admin.registrations.status', ['status' => $row['status']])</td>
                                 <td><a class="admin-registration-button" href="/admin/registration/{{ $row['id'] }}">Periksa</a></td>

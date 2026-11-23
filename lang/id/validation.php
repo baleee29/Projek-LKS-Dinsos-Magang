@@ -34,11 +34,11 @@ return [
         'numbers' => ':attribute harus memuat angka.',
     ],
     'attributes' => [
-        'title' => 'Nama', 'chair' => 'Penanggung jawab', 'contact' => 'Kontak', 'address' => 'Alamat', 'legal' => 'Legalitas', 'logo' => 'Logo', 'photo' => 'Foto',
+        'district' => 'Kecamatan', 'village' => 'Kelurahan', 'title' => 'Nama', 'chair' => 'Penanggung jawab', 'contact' => 'Kontak', 'address' => 'Alamat', 'legal' => 'Legalitas', 'logo' => 'Logo', 'photo' => 'Foto',
         'nik' => 'NIK', 'birthPlace' => 'Tempat lahir', 'birthDate' => 'Tanggal lahir', 'gender' => 'Jenis kelamin', 'ktpAddress' => 'Alamat KTP',
         'category' => 'Kategori', 'position' => 'Jabatan', 'joined' => 'Tanggal bergabung', 'notes' => 'Catatan', 'code' => 'Kode klien', 'name' => 'Nama', 'educationStatus' => 'Status pendidikan', 'approximateAge' => 'Perkiraan usia', 'exitDate' => 'Tanggal keluar', 'exitReason' => 'Alasan keluar', 'guardianName' => 'Nama wali', 'guardianRelationship' => 'Hubungan dengan klien', 'schoolName' => 'Nama sekolah', 'educationLevel' => 'Jenjang',
         'email' => 'Email', 'password' => 'Kata sandi', 'current_password' => 'Kata sandi saat ini', 'username' => 'Username', 'whatsapp' => 'Nomor WhatsApp',
         'subject' => 'Perihal', 'letter_date' => 'Tanggal surat', 'letter_number' => 'Nomor surat', 'file' => 'Berkas', 'organization_id' => 'LKS penerima', 'image' => 'Foto',
-        'lks-nama' => 'Nama yayasan atau LKS', 'lks-ketua' => 'Nama pengisi data', 'lks-whatsapp' => 'Nomor WhatsApp', 'lks-fokus' => 'Fokus pelayanan', 'lks-izin' => 'Nomor izin', 'lks-rekening' => 'Rekening',
+        'lks-nama' => 'Nama yayasan atau LKS', 'lks-ketua' => 'Nama pengisi data', 'lks-whatsapp' => 'Nomor WhatsApp', 'lks-fokus' => 'Fokus pelayanan', 'lks-kecamatan' => 'Kecamatan', 'lks-kelurahan' => 'Kelurahan', 'lks-izin' => 'Nomor izin', 'lks-rekening' => 'Rekening',
     ],
 ];

@@ -114,6 +114,7 @@ class DataContohSeeder extends Seeder
         foreach (DemoRegistrations::raw() as $baris) {
             $pendaftaran = new PendaftaranLks([
                 'nama_lembaga' => $baris['organization_name'], 'nama_ketua' => $baris['leader_name'], 'whatsapp' => $baris['whatsapp'],
+                'kecamatan' => $baris['district'], 'kelurahan' => $baris['village'],
                 'nomor_izin' => $baris['sk_number'], 'bidang_fokus' => $baris['focus_area'],
                 'prioritas_pelayanan' => ['Keterlantaran'], 'jenis_pelayanan' => ['Rehabilitasi Sosial'], 'sasaran_pelayanan' => ['Perseorangan'],
                 'jenis_kegiatan' => ['Unit pelayanan sosial untuk anak'], 'sifat_pelayanan' => ['Dalam LKS'],

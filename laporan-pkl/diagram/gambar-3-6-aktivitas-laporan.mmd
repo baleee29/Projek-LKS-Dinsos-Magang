@@ -1,0 +1,13 @@
+flowchart TD
+    A(["Mulai"]) --> B["LKS membuka periode semester"]
+    B --> C["LKS mengisi laporan dan lampiran"]
+    C --> D{"Tombol"}
+    D -->|Simpan draf| E{"Status saat ini"}
+    E -->|Draf| F["Menyimpan ke isi laporan"]
+    E -->|Terkirim| G["Menyimpan ke draf privat"]
+    F --> C
+    G --> C
+    D -->|Kirim| H["Menyalin isi, mengubah status<br/>menjadi Terkirim, dan mencatat riwayat"]
+    H --> I["Mengirim notifikasi ke Admin"]
+    I --> J["Admin membaca dan mengunduh"]
+    J --> Z(["Selesai"])

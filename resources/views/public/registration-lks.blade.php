@@ -427,6 +427,40 @@
                                         ></p>
                                     </div>
                                     <div class="lksr-field">
+                                        <label for="lks-kecamatan">Kecamatan <span class="lksr-required" aria-hidden="true" >*</span ></label>
+                                        <select
+                                            id="lks-kecamatan"
+                                            name="lks-kecamatan"
+                                            required
+                                            data-localities='@json(\App\Support\Data\Wilayah::LOCALITIES)'
+                                            aria-describedby="help-lks-kecamatan err-lks-kecamatan"
+                                        >
+                                            <option value="">Pilih kecamatan</option>
+                                            @foreach (\App\Support\Data\Wilayah::districts() as $kecamatan)
+                                                <option>{{ $kecamatan }}</option>
+                                            @endforeach
+                                        </select>
+                                        <p class="lksr-field-help" id="help-lks-kecamatan">
+                                            Kecamatan letak sekretariat lembaga di Kota Banjarbaru.
+                                        </p>
+                                        <p class="lksr-field-error" id="err-lks-kecamatan" hidden></p>
+                                    </div>
+                                    <div class="lksr-field">
+                                        <label for="lks-kelurahan">Kelurahan <span class="lksr-required" aria-hidden="true" >*</span ></label>
+                                        <select
+                                            id="lks-kelurahan"
+                                            name="lks-kelurahan"
+                                            required
+                                            aria-describedby="help-lks-kelurahan err-lks-kelurahan"
+                                        >
+                                            <option value="">Pilih kelurahan</option>
+                                        </select>
+                                        <p class="lksr-field-help" id="help-lks-kelurahan">
+                                            Pilih kecamatan terlebih dahulu.
+                                        </p>
+                                        <p class="lksr-field-error" id="err-lks-kelurahan" hidden></p>
+                                    </div>
+                                    <div class="lksr-field">
                                         <label for="lks-izin">
                                             Nomor Izin Operasional Lama
                                             <span class="lksr-optional"
@@ -2959,6 +2993,10 @@
                                     <dd id="ringkasan-whatsapp"></dd>
                                 </div>
                                 <div>
+                                    <dt>Wilayah</dt>
+                                    <dd id="ringkasan-wilayah"></dd>
+                                </div>
+                                <div>
                                     <dt>Nomor Izin Operasional Lama</dt>
                                     <dd id="ringkasan-izin"></dd>
                                 </div>
@@ -3029,9 +3067,9 @@
                                 <path d="m7 12 3 3 7-7" />
                             </svg>
                         </span>
-                        <p class="eyebrow">Pemeriksaan Selesai</p>
+                        <p class="eyebrow">Pendaftaran Terkirim</p>
                         <h2 id="success-title" tabindex="-1">
-                            Pendaftaran Belum Dikirim (Mode Demo)
+                            Pendaftaran Berhasil Dikirim
                         </h2>
                         <p>
                             Pendaftaran sudah masuk dan menunggu verifikasi Admin Dinas Sosial. Hasilnya disampaikan melalui WhatsApp.

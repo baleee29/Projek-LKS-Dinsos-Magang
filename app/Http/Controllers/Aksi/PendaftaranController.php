@@ -9,6 +9,7 @@ use App\Models\PendaftaranLks;
 use App\Services\Pemberitahu;
 use App\Services\PenyimpananBerkas;
 use App\Support\Data\Kalender;
+use App\Support\Data\Wilayah;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -63,6 +64,9 @@ class PendaftaranController extends Controller
             'lks-nama' => ['required', 'string', 'max:150'],
             'lks-ketua' => ['required', 'string', 'max:150'],
             'lks-whatsapp' => ['required', 'string', 'max:30'],
+            'lks-kecamatan' => ['required', Rule::in(Wilayah::districts())],
+            // Kelurahan harus berada di kecamatan yang dipilih.
+            'lks-kelurahan' => ['required', Rule::in(Wilayah::villages((string) $request->input('lks-kecamatan')))],
             'lks-izin' => ['nullable', 'string', 'max:150'],
             'lks-rekening' => ['nullable', 'string', 'max:150'],
             'lks-fokus' => ['required', 'string', 'max:2000'],
@@ -90,6 +94,8 @@ class PendaftaranController extends Controller
                 'nama_lembaga' => $data['lks-nama'],
                 'nama_ketua' => $data['lks-ketua'],
                 'whatsapp' => $data['lks-whatsapp'],
+                'kecamatan' => $data['lks-kecamatan'],
+                'kelurahan' => $data['lks-kelurahan'],
                 'nomor_izin' => $data['lks-izin'] ?? null,
                 'rekening_bank' => $data['lks-rekening'] ?? null,
                 'bidang_fokus' => $data['lks-fokus'],
@@ -140,6 +146,7 @@ class PendaftaranController extends Controller
                 // Baris lembaga dibuat saat diterima. Akun dibuat terpisah di menu Buat Akun LKS.
                 $perubahan['lembaga_id'] = Lembaga::create([
                     'nama' => $pendaftaran->nama_lembaga, 'ketua' => $pendaftaran->nama_ketua, 'kontak' => $pendaftaran->whatsapp,
+                    'kecamatan' => $pendaftaran->kecamatan, 'kelurahan' => $pendaftaran->kelurahan,
                     'legalitas' => $pendaftaran->nomor_izin, 'terdaftar_sejak' => Kalender::today(),
                 ])->id;
             }
