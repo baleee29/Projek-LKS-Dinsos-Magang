@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Lembaga;
 use App\Services\Pemberitahu;
 use App\Services\PenyimpananBerkas;
+use App\Support\Data\Wilayah;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class ProfilLembagaController extends Controller
 {
@@ -19,6 +21,9 @@ class ProfilLembagaController extends Controller
             'title' => ['required', 'string', 'max:150'],
             'chair' => ['required', 'string', 'max:150'],
             'contact' => ['nullable', 'string', 'max:40'],
+            'district' => ['required', Rule::in(Wilayah::districts())],
+            // Kelurahan harus berada di kecamatan yang dipilih.
+            'village' => ['required', Rule::in(Wilayah::villages((string) $request->input('district')))],
             'address' => ['nullable', 'string', 'max:3000'],
             'legal' => ['nullable', 'string', 'max:3000'],
             'latitude' => ['nullable', 'numeric', 'between:-90,90'],
@@ -32,7 +37,7 @@ class ProfilLembagaController extends Controller
             abort_unless($lembaga->versi === (int) $data['version'], 409, 'Profil berubah. Muat ulang sebelum menyimpan.');
             $logoLama = $lembaga->logo_berkas_id;
             $lembaga->fill([
-                'nama' => $data['title'], 'ketua' => $data['chair'], 'kontak' => $data['contact'] ?? null, 'alamat' => $data['address'] ?? null,
+                'nama' => $data['title'], 'ketua' => $data['chair'], 'kontak' => $data['contact'] ?? null, 'kecamatan' => $data['district'], 'kelurahan' => $data['village'], 'alamat' => $data['address'] ?? null,
                 'legalitas' => $data['legal'] ?? null, 'lintang' => $data['latitude'] ?? null, 'bujur' => $data['longitude'] ?? null, 'versi' => $lembaga->versi + 1,
             ]);
             if ($request->hasFile('logo')) {

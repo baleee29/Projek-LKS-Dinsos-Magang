@@ -8,7 +8,7 @@
     use App\Support\Data\DataPendaftaran;
     $pending = $row['status'] === 'Menunggu Verifikasi';
     $approved = $row['status'] === 'Disetujui';
-    $fields = ['Nama Yayasan / LKS' => $row['organization_name'], 'Nama Pengisi Data' => $row['leader_name'], 'Nomor WhatsApp yang Bisa Dihubungi' => $row['whatsapp'], 'Nomor Izin Operasional Lama' => $row['license_number'], 'Rekening Bank' => $row['bank_account'], 'Fokus Pelayanan / Bidang Garap' => $row['focus_area'], 'Prioritas Pelayanan' => implode(', ', $row['service_priorities']), 'Jenis Pelayanan' => implode(', ', $row['service_types']), 'Sasaran Pelayanan' => implode(', ', $row['service_targets']), 'Jenis Kegiatan' => implode(', ', $row['activity_types']), 'Sifat Pelayanan' => implode(', ', $row['service_scopes'])];
+    $fields = ['Nama Yayasan / LKS' => $row['organization_name'], 'Nama Pengisi Data' => $row['leader_name'], 'Nomor WhatsApp yang Bisa Dihubungi' => $row['whatsapp'], 'Kecamatan' => $row['district'], 'Kelurahan' => $row['village'], 'Nomor Izin Operasional Lama' => $row['license_number'], 'Rekening Bank' => $row['bank_account'], 'Fokus Pelayanan / Bidang Garap' => $row['focus_area'], 'Prioritas Pelayanan' => implode(', ', $row['service_priorities']), 'Jenis Pelayanan' => implode(', ', $row['service_types']), 'Sasaran Pelayanan' => implode(', ', $row['service_targets']), 'Jenis Kegiatan' => implode(', ', $row['activity_types']), 'Sifat Pelayanan' => implode(', ', $row['service_scopes'])];
     $paths = [
         'info' => '<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/>',
         'back' => '<path d="M20 12H4m7-7-7 7 7 7"/>',

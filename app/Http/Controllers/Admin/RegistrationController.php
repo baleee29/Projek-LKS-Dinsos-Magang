@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Support\Data\DataLembaga;
 use App\Support\Data\Halaman;
+use App\Support\Data\Wilayah;
 use App\Support\KeamananAkun;
 use App\Support\Data\DataPendaftaran;
 use Illuminate\Http\Request;
@@ -17,16 +18,19 @@ class RegistrationController extends Controller
         $filters = [
             'q' => (string) $request->query('q', ''),
             'status' => (string) $request->query('status', ''),
+            'district' => (string) $request->query('district', ''),
         ];
         $query = mb_strtolower(trim($filters['q']));
 
         $rows = DataPendaftaran::all()->sortByDesc('created_at')->filter(fn (array $row) => (! $filters['status'] || $row['status'] === $filters['status'])
+            && (! $filters['district'] || $row['district'] === $filters['district'])
             && (! $query || collect([$row['organization_name'], $row['leader_name'], $row['whatsapp']])
                 ->contains(fn ($value) => str_contains(mb_strtolower((string) $value), $query))))->values();
 
         return view('admin.registrations.index', [
             'filters' => $filters,
             'statuses' => ['Menunggu Verifikasi', 'Disetujui', 'Ditolak'],
+            'districts' => Wilayah::districts(),
             'rows' => Halaman::make($rows, 10),
         ]);
     }

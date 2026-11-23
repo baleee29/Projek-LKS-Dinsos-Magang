@@ -10,6 +10,15 @@ if (dialog) {
     const preview = dialog.querySelector('#org-logo-preview-box');
     const remove = dialog.querySelector('#btn-remove-org-logo');
     const status = dialog.querySelector('#org-logo-status-text');
+    const district = dialog.querySelector('#m-district');
+    const village = dialog.querySelector('#m-village');
+    const localities = JSON.parse(district.dataset.localities);
+
+    district.addEventListener('change', () => {
+        const first = village.options[0];
+        village.replaceChildren(first, ...(localities[district.value] || []).map((name) => new Option(name, name)));
+        village.value = '';
+    });
 
     detect?.addEventListener('click', () => {
         if (!navigator.geolocation) {

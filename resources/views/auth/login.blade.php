@@ -26,7 +26,7 @@
                     Selamat datang<br>kembali di SiDaya.
                 </h2>
                 <p class="intro-description">
-                    Satu ruang untuk PSM, LKS, dan Karang Taruna bergerak
+                    Satu ruang untuk Dinas Sosial dan LKS bergerak
                     bersama.
                 </p>
                 <div class="login-crew" aria-hidden="true">
@@ -76,9 +76,8 @@
                     <p class="form-eyebrow">AKUN SiDaya</p>
                     <h1 id="login-title">Masuk ke akun Anda</h1>
                     <p class="login-description">
-                        Gunakan email dan kata sandi sesuai akun Admin, PSM,
-                        LKS, atau Karang Taruna. SiDaya akan membuka dashboard
-                        akun tersebut.
+                        Gunakan email dan kata sandi sesuai akun Admin atau
+                        LKS. SiDaya akan membuka dashboard akun tersebut.
                     </p>
                 </header>
                 <form id="login-form" method="post" action="{{ route('login.store') }}" novalidate>

@@ -22,7 +22,7 @@ class Wilayah
     /** @return array<int, string> */
     public static function villages(?string $district = null): array
     {
-        return $district
+        return $district !== null && $district !== ''
             ? (self::LOCALITIES[$district] ?? [])
             : array_merge(...array_values(self::LOCALITIES));
     }

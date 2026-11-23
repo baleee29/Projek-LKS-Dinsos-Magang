@@ -1,0 +1,16 @@
+flowchart TD
+    A(["Mulai"]) --> B{"Aksi Admin"}
+    B -->|Buat akun| C{"Dari<br/>pendaftaran?"}
+    C -->|Ya| D{"Berakun?"}
+    D -->|Ya| E["Menolak akun ganda"]
+    D -->|Tidak| F["Memakai lembaga<br/>dari pendaftaran"]
+    C -->|Tidak| G["Membuat lembaga baru"]
+    F --> H["Menyimpan akun dengan<br/>kata sandi sementara"]
+    G --> H
+    B -->|Reset sandi| J["Menyimpan sandi baru<br/>dan mengakhiri sesi"]
+    B -->|Cabut akun| M["Menonaktifkan akun<br/>dan mengakhiri sesi"]
+    H --> I["Menampilkan sandi sekali<br/>untuk WhatsApp"]
+    J --> I
+    E --> Z(["Selesai"])
+    I --> Z
+    M --> Z

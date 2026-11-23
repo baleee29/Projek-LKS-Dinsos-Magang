@@ -1,0 +1,16 @@
+flowchart TD
+    A(["Mulai"]) --> B["Mengisi email atau username<br/>dan kata sandi"]
+    B --> C{"Cocok?"}
+    C -->|Tidak| D["Menampilkan pesan kesalahan<br/>dan membatasi percobaan"]
+    D --> B
+    C -->|Ya| E{"Aktif?"}
+    E -->|Tidak| F["Menolak akun yang dicabut"]
+    F --> Z(["Selesai"])
+    E -->|Ya| G{"Ganti sandi?"}
+    G -->|Ya, hanya Admin| H["Mengganti kata sandi"]
+    H --> I
+    G -->|Tidak| I{"Peran"}
+    I -->|admin| J["Membuka dasbor Admin"]
+    I -->|lks| K["Membuka dasbor LKS"]
+    J --> Z
+    K --> Z

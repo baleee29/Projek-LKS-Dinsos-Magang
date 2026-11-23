@@ -30,7 +30,7 @@ class AlurDataTest extends TestCase
     /** @return array<string, mixed> */
     private function isianPendaftaran(): array
     {
-        $isian = ['lks-nama' => 'LKS Uji Coba', 'lks-ketua' => 'Pengisi Uji', 'lks-whatsapp' => '081234567890', 'lks-izin' => 'IZIN-1', 'lks-rekening' => 'BNI 123', 'lks-fokus' => 'Pengasuhan anak', 'request_id' => (string) Str::uuid()];
+        $isian = ['lks-nama' => 'LKS Uji Coba', 'lks-ketua' => 'Pengisi Uji', 'lks-whatsapp' => '081234567890', 'lks-kecamatan' => 'Cempaka', 'lks-kelurahan' => 'Bangkal', 'lks-izin' => 'IZIN-1', 'lks-rekening' => 'BNI 123', 'lks-fokus' => 'Pengasuhan anak', 'request_id' => (string) Str::uuid()];
         foreach (PendaftaranController::CHOICES as $grup => $pilihan) {
             $isian[$grup] = [$pilihan[0]];
         }
@@ -124,15 +124,56 @@ class AlurDataTest extends TestCase
         $lain = $this->lembagaLain();
         $this->actingAs($akun);
 
-        $isian = ['title' => 'Nama Baru', 'chair' => 'Ketua Baru', 'version' => $lembaga->versi, 'id' => $lain->id, 'lembaga_id' => $lain->id, 'logo' => UploadedFile::fake()->image('logo.png', 100, 100)];
+        $isian = ['title' => 'Nama Baru', 'chair' => 'Ketua Baru', 'district' => 'Cempaka', 'village' => 'Bangkal', 'version' => $lembaga->versi, 'id' => $lain->id, 'lembaga_id' => $lain->id, 'logo' => UploadedFile::fake()->image('logo.png', 100, 100)];
         $this->post('/lks/profile', $isian, ['Accept' => 'application/json'])->assertOk();
         $this->assertSame('Nama Baru', $lembaga->fresh()->nama);
         $this->assertNotSame('Nama Baru', $lain->fresh()->nama);
         $this->assertNotNull($lembaga->fresh()->logo_berkas_id);
 
         // Versi lama ditolak sebagai konflik.
-        $this->post('/lks/profile', ['title' => 'Bentrok', 'chair' => 'X', 'version' => $lembaga->versi], ['Accept' => 'application/json'])->assertConflict();
+        $this->post('/lks/profile', ['title' => 'Bentrok', 'chair' => 'X', 'district' => 'Cempaka', 'village' => 'Bangkal', 'version' => $lembaga->versi], ['Accept' => 'application/json'])->assertConflict();
         $this->assertSame('Nama Baru', $lembaga->fresh()->nama);
+    }
+
+    public function test_region_from_registration_reaches_institution_and_admin_filters(): void
+    {
+        // Wilayah wajib dan kelurahan harus berada di kecamatan yang dipilih.
+        $this->post('/pendaftaran/mitra', ['lks-kecamatan' => ''] + $this->isianPendaftaran(), ['Accept' => 'application/json'])->assertUnprocessable()->assertJsonValidationErrors('lks-kecamatan');
+        $this->post('/pendaftaran/mitra', ['lks-kelurahan' => 'Komet'] + $this->isianPendaftaran(), ['Accept' => 'application/json'])->assertJsonValidationErrors('lks-kelurahan');
+        $this->post('/pendaftaran/mitra', ['lks-kecamatan' => 'Kota Lain'] + $this->isianPendaftaran(), ['Accept' => 'application/json'])->assertJsonValidationErrors('lks-kecamatan');
+
+        $this->post('/pendaftaran/mitra', $this->isianPendaftaran(), ['Accept' => 'application/json'])->assertCreated();
+        $pendaftaran = PendaftaranLks::where('nama_lembaga', 'LKS Uji Coba')->firstOrFail();
+        $this->assertSame('Bangkal', $pendaftaran->kelurahan);
+
+        // Daftar dan detail pendaftaran dapat difilter dan menampilkan wilayah.
+        $this->actingAs($this->admin());
+        $this->get('/admin/registrations/lks?district=Cempaka')->assertSee('LKS Uji Coba');
+        $this->get('/admin/registrations/lks?district=Liang%20Anggang')->assertDontSee('LKS Uji Coba');
+        $this->get('/admin/registration/'.$pendaftaran->id)->assertSee('Bangkal');
+
+        // Saat diterima, lembaga langsung punya wilayah dan muncul pada filter.
+        $this->postJson("/admin/registration/{$pendaftaran->id}/review", ['status' => 'Disetujui'])->assertOk();
+        $lembaga = Lembaga::findOrFail($pendaftaran->fresh()->lembaga_id);
+        $this->assertSame('Cempaka', $lembaga->kecamatan);
+        $this->assertSame('Bangkal', $lembaga->kelurahan);
+        $this->get('/admin/organizations/lks?district=Cempaka&village=Bangkal')->assertSee('LKS Uji Coba');
+        $this->get('/admin/organizations/lks?district=Liang%20Anggang')->assertDontSee('LKS Uji Coba');
+    }
+
+    public function test_profile_region_is_required_and_must_match(): void
+    {
+        $akun = $this->lks();
+        $lembaga = $akun->lembaga;
+        $this->actingAs($akun);
+        $this->get('/lks/profile')->assertOk()->assertSee('Pilih kecamatan');
+
+        $dasar = ['title' => $lembaga->nama, 'chair' => 'Ketua', 'version' => $lembaga->versi];
+        $this->postJson('/lks/profile', $dasar)->assertUnprocessable()->assertJsonValidationErrors(['district', 'village']);
+        $this->postJson('/lks/profile', $dasar + ['district' => 'Cempaka', 'village' => 'Komet'])->assertJsonValidationErrors('village');
+        $this->postJson('/lks/profile', $dasar + ['district' => 'Kota Lain', 'village' => 'Bangkal'])->assertJsonValidationErrors('district');
+        $this->postJson('/lks/profile', $dasar + ['district' => 'Cempaka', 'village' => 'Palam'])->assertOk();
+        $this->assertSame('Palam', $lembaga->fresh()->kelurahan);
     }
 
     /** @return array<string, mixed> */
